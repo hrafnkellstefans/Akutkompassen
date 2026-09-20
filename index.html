@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-v="ak-v10s2b"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-v="ak-v10s2c"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -378,7 +378,7 @@ function tagsFor(d,withArea){
   return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${d.id}</span>${d.tier===2?'<span class="tag t2">andra linjen</span>':''}${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
 }
 function favBtn(d){return '';}
-function srcLink(d){return d.kind==='gl'?`<a href="${d.url}" target="_blank" rel="noopener">${d.txt?'Källa':'Öppna riktlinjen'} ↗</a>`:`<a href="${d.url}" target="_blank" rel="noopener">DocPlus ↗</a>`;}
+function srcLink(d){return d.kind==='gl'?`<a href="${d.url}" target="_blank" rel="noopener">${d.txt?'Källa':(d.fmt==='pdf'?'Öppna PDF':'Öppna fulltext')} ↗</a>`:`<a href="${d.url}" target="_blank" rel="noopener">DocPlus ↗</a>`;}
 function kindLabel(d){return d.kind==='gl'?'riktlinje':'PM';}
 function saveBtn(d){const on=favs.has(d.id);return `<button class="save${on?' on':''}" data-fav="${d.id}" aria-pressed="${on}">${on?'★ Sparad':'☆ Spara'}</button>`;}
 function bindFav(el){el.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);store.set('favs',[...favs]);
