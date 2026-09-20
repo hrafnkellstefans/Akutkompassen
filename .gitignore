@@ -1,2 +1,4 @@
 _pipeline_*.zip
 .DS_Store
+
+node_modules/
