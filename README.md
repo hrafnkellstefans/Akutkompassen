@@ -1,28 +1,26 @@
-# Akutkompassen – webbapp
+# Akutkompassen – webbapp (v10, version ak-v10s2b)
 
-Allt som behövs ligger i den här mappen:
+Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per område (`ak_*.json`). Den öppnar direkt, hämtar PM-texten i bakgrunden och fungerar offline efter första besöket. Internationella riktlinjer visas som länkar till utgivaren – ingen upphovsrättsskyddad text lagras i appen.
 
 | Fil | Vad |
 |---|---|
-| `index.html` | Hela appen (PM-text, sök, läsare) i en fil |
-| `manifest.webmanifest` | Gör att den kan installeras som app med ikon |
-| `sw.js` | Gör att appen fungerar offline efter första besöket |
-| `icon-*.png`, `apple-touch-icon.png`, `favicon.png` | Ikoner (din logga) |
+| `index.html` | Appen (gränssnitt, sök, läsare) – liten fil |
+| `ak_index.json` | Register över alla dokument (titel, år, område, länk) |
+| `ak_<OMRÅDE>.json` | PM-text per område, hämtas när den behövs |
+| `manifest.webmanifest` | Installerbar som app med ikon |
+| `sw.js` | Offline-stöd (service worker). `VERSION` ändras vid varje släpp |
+| `icon-*.png`, `apple-touch-icon.png`, `favicon.png` | Ikoner |
 
-## Publicera på GitHub Pages (en gång)
+## Publicera / uppdatera på GitHub Pages
 
-1. Skapa konto på https://github.com (gratis).
-2. Klicka **+** uppe till höger → **New repository**. Namn: `akutkompassen`. Välj **Public**. Bocka i **Add a README file**. **Create repository**.
-3. I det nya repot: **Add file → Upload files**. Dra in alla filer i den här mappen (inte mappen själv). **Commit changes**.
-4. **Settings** (fliken högst upp) → **Pages** i vänstermenyn → under *Build and deployment* välj **Source: Deploy from a branch**, **Branch: main / (root)** → **Save**.
-5. Vänta 1–2 minuter, ladda om sidan – adressen visas högst upp: `https://<ditt-användarnamn>.github.io/akutkompassen/`
+1. Öppna repot `Akutkompassen` på github.com → **Add file → Upload files**.
+2. Klicka **choose your files**, markera **alla filer** i den här mappen (⌘A i filväljaren – zip-filen kan vara med, den skadar inte) → **Öppna**. **Commit changes.**
+3. Vänta 1–2 minuter. Adressen är oförändrad: https://hrafnkellstefans.github.io/Akutkompassen/
 
-Skicka den adressen till chefen. På iPhone: öppna i Safari → Dela → **Lägg till på hemskärmen**. Den får din logga som ikon och öppnas i helskärm.
+Alla telefoner hämtar nya versionen automatiskt nästa gång appen öppnas med nät (versionen styrs av `VERSION` i `sw.js` och `ak_index.json`).
 
-## Uppdatera appen
-
-Ladda upp en ny `index.html` på samma sätt (Add file → Upload files, den ersätter den gamla). Ändra `VERSION` i `sw.js` (t.ex. `ak-v2`) så att alla telefoner hämtar den nya versionen.
+Tips: enklast att ta bort gamla filer först är att i repot klicka på `index.html` → papperskorgen → commit, och sedan ladda upp allt nytt. Gamla `index.html` från v9 (5 MB) behövs inte längre.
 
 ## Obs
 
-Repot är publikt (krav för gratis GitHub Pages). Innehållet är text ur offentliga DocPlus-PDF:er samt ditt urval – inga patientdata, inga interna dokument. Vill du ha det privat kostar GitHub Pro ca 4 USD/mån och ger Pages på privata repon.
+Repot är publikt. Innehållet är text ur offentliga DocPlus-PDF:er (Region Uppsala) samt titlar/länkar – inga patientdata, inga interna dokument, ingen text ur läroböcker eller internationella riktlinjer.
