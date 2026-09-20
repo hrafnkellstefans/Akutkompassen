@@ -11,15 +11,15 @@ Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per o
 | `sw.js` | Offline-stöd (service worker). `VERSION` ändras vid varje släpp |
 | `icon-*.png`, `apple-touch-icon.png`, `favicon.png` | Ikoner |
 
-## Publicera / uppdatera på GitHub Pages
+## Publicera / uppdatera (GitHub Desktop)
 
-1. Öppna repot `Akutkompassen` på github.com → **Add file → Upload files**.
-2. Klicka **choose your files**, markera **alla filer** i den här mappen (⌘A i filväljaren – zip-filen kan vara med, den skadar inte) → **Öppna**. **Commit changes.**
-3. Vänta 1–2 minuter. Adressen är oförändrad: https://hrafnkellstefans.github.io/Akutkompassen/
+Den här mappen (`Documents/GitHub/Akutkompassen`) är en klon av repot. Claude skriver nya byggen direkt hit.
 
-Alla telefoner hämtar nya versionen automatiskt nästa gång appen öppnas med nät (versionen styrs av `VERSION` i `sw.js` och `ak_index.json`).
+1. Öppna GitHub Desktop – ändrade filer listas under **Changes**.
+2. Skriv en kort rad i **Summary** (t.ex. `v10 steg 3`) → **Commit to main**.
+3. Klicka **Push origin**. Efter 1–2 minuter är https://hrafnkellstefans.github.io/Akutkompassen/ uppdaterad; telefoner hämtar nya versionen nästa gång appen öppnas med nät.
 
-Tips: enklast att ta bort gamla filer först är att i repot klicka på `index.html` → papperskorgen → commit, och sedan ladda upp allt nytt. Gamla `index.html` från v9 (5 MB) behövs inte längre.
+Ångra ett släpp: fliken **History** → högerklicka på committen → **Revert changes in commit** → Push origin.
 
 ## Obs
 
