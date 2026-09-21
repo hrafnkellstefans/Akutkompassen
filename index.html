@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-v="ak-v10s2c"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-v="ak-v10s2d"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,7 +47,7 @@ button{font:inherit;color:inherit}
 h1,h2,h3,h4{text-wrap:balance}
 
 /* header */
-header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand-ink);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand-ink);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .hwrap{max-width:720px;margin:0 auto;padding:12px 16px 4px;display:flex;flex-direction:column;align-items:center;gap:10px}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer;border:0;background:transparent;padding:0;text-align:left;justify-content:center}
 .brand .logo{width:44px;height:44px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
@@ -149,7 +149,7 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .pane{width:min(860px,100%);height:100%;height:100dvh;background:var(--surface);display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.25)}
 .pane>*{flex:none}
 .pane>.pbody{flex:1 1 auto;min-height:0}
-.ph{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.ph{padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
 .ph .t{flex:1;min-width:0}
 .ph b{font-size:17px;font-weight:600}
 .ph .x{border:0;background:var(--surface2);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:18px;flex:none}
@@ -157,7 +157,7 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .pnav button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:6px;min-width:34px;height:30px;padding:0 8px;font-family:"IBM Plex Mono",monospace;font-size:12px;cursor:pointer}
 .pnav button.cur{background:var(--surface2);font-weight:600}
 .pnav button.hot{border-color:var(--accent);color:var(--accent);font-weight:600}
-.pbody{overflow:auto;padding:6px 20px 70px;font-size:16.5px;line-height:1.6;-webkit-overflow-scrolling:touch}
+.pbody{overflow:auto;padding:6px 20px max(70px,calc(24px + env(safe-area-inset-bottom)));font-size:16.5px;line-height:1.6;-webkit-overflow-scrolling:touch}
 @media (max-width:700px){.pbody{padding:6px 16px 70px}}
 .pbody .page{padding:18px 0 22px;border-bottom:1px dashed var(--line)}
 .pbody .page h5{margin:0 0 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
@@ -248,7 +248,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 // ---------- storage ----------
 const store={get(k,d){try{const v=localStorage.getItem('ak.'+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem('ak.'+k,JSON.stringify(v));}catch(e){}}};
-let favs=new Set(store.get('favs',[])), recents=store.get('recent',[]);
+let favs=new Set(store.get('favs',[]).filter(id=>BYID.has(id))), recents=store.get('recent',[]).filter(id=>BYID.has(id));
 
 // ---------- tokenizer ----------
 function norm(s){return s.toLowerCase().replace(/é|è|ë/g,'e').replace(/ü/g,'y').replace(/[^a-z0-9åäöµ]+/g,' ').trim();}
@@ -300,7 +300,7 @@ function expand(w){
 function parseQuery(q){const phrases=[];q=q.replace(/"([^"]+)"/g,(m,p)=>{phrases.push(norm(p));return ' ';});return {terms:toks(q),phrases};}
 function search(qs){
   const {terms,phrases}=parseQuery(qs);
-  if(!terms.length&&!phrases.length) return null;
+  if(!terms.length&&!phrases.length) return (qs&&qs.trim()) ? {groups:[],terms,phrases,empty:true} : null;
   reindex(); const exp=terms.map(expand); const k1=1.4,b=.6; const res=[];
   for(const ch of chunks){
     let s=0,matched=0;
@@ -317,11 +317,16 @@ function search(qs){
   const byDoc=new Map();
   for(const ch of res){const g=byDoc.get(ch.d)||{d:DOCS[ch.d],hits:[],score:0};g.hits.push(ch);byDoc.set(ch.d,g);}
   const groups=[];
-  // documents without loaded text (link-only riktlinjer, or shards not yet fetched): match on title + society
-  DOCS.forEach(d=>{ if(byDoc.has(d.di)||d.chunks.length) return; let m=0; for(const w of terms){for(const t of d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){m++;break;}}}
-    if(terms.length&&m===terms.length) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true}); });
+  // title + society match for riktlinjer (no body text) and PM whose body did not hit
+  DOCS.forEach(d=>{
+    if(byDoc.has(d.di)) return;
+    const hay=norm(d.t+' '+(d.soc||''));
+    if(phrases.length && !phrases.every(p=>hay.includes(p))) return;
+    let m=0; for(const w of terms){for(const t of d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){m++;break;}}}
+    if(terms.length ? m===terms.length : phrases.length) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true});
+  });
   byDoc.forEach(g=>{
-    if(g.titleOnly){ g.score=8*terms.length*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1); groups.push(g); return; }
+    if(g.titleOnly){ g.score=8*Math.max(1,terms.length)*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1); groups.push(g); return; }
     g.hits.sort((a,b)=>b.score-a.score);
     const top=g.hits[0].score;
     let titleBoost=0; for(const w of terms){for(const t of g.d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){titleBoost+=1;break;}}}
@@ -336,7 +341,7 @@ function hl(text,terms,phrases){
   phrases.forEach(p=>pats.push(p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/ /g,'\\s+')));
   terms.forEach(w=>{if(w.length>=3)pats.push('[a-zåäö]*'+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[a-zåäö]*');});
   if(!pats.length) return h;
-  return h.replace(new RegExp('('+pats.join('|')+')','gi'),'<mark>$1</mark>');
+  return h.replace(new RegExp('('+pats.join('|')+')','giu'),'<mark>$1</mark>');
 }
 
 // ---------- structured text → HTML ----------
@@ -448,7 +453,7 @@ function renderArea(main){
   setStat(state.kind==='gl'?`${glS.length} riktlinjer`:state.kind==='pm'?`${pmS.length} PM`:`${pmS.length} PM · ${glS.length} riktlinjer`);
   const sub=state.kind==='gl'?`${glS.length} riktlinjer`:`${nc} kärn-PM · ${pmS.length-nc} andra linjen${glS.length?` · ${glS.length} riktlinjer`:''}`;
   main.innerHTML=`<div class="crumb"><button data-back>‹ Start</button><div><h2>${esc(AREAS[state.area])}</h2><div class="sub">${sub}</div></div></div>`;
-  main.querySelector('[data-back]').onclick=()=>{state.area=null;update();};
+  main.querySelector('[data-back]').onclick=()=>{state.area=null;state.kind=null;syncChips();update();};
   if(!shown.length){main.insertAdjacentHTML('beforeend','<div class="empty">Inga dokument matchar valda filter.</div>');return;}
   const H=t=>{const h=document.createElement('h4');h.style.cssText='margin:16px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)';h.textContent=t;main.appendChild(h);};
   let cur=null;
@@ -466,10 +471,12 @@ function renderSearch(main,r){
   const shown=groups.filter(g=>!state.area||g.d.a===state.area);
   const nHits=shown.reduce((a,g)=>a+g.hits.length,0);
   setStat(`${shown.length} dokument · ${nHits} träffar`);
-  let h=`<p class="hint">${r.terms.length?`Söker på ${r.terms.map(t=>`<b>${esc(t)}</b>`).join(', ')}${r.phrases.length?` + frasen ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`:''} – böjningar och sammansatta ord matchas också.`:`Frassökning: ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`}${state.area?` <button class="chip on" data-unarea>${esc(AREAS[state.area])} ×</button>`:''}</p>`;
+  let h=`<p class="hint">${r.empty?`Inga sökbara ord i “${esc(state.q.trim())}”.`:r.terms.length?`Söker på ${r.terms.map(t=>`<b>${esc(t)}</b>`).join(', ')}${r.phrases.length?` + frasen ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`:''} – böjningar och sammansatta ord matchas också.`:`Frassökning: ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`}${state.area?` <button class="chip on" data-unarea>${esc(AREAS[state.area])} ×</button>`:''}</p>`;
   main.innerHTML=h;
   const ua=main.querySelector('[data-unarea]'); if(ua)ua.onclick=()=>{state.area=null;update();};
-  if(!shown.length){main.insertAdjacentHTML('beforeend',`<div class="empty">Inga träffar i de ${DOCS.filter(docPass).length} valda dokumenten. Prova färre eller andra ord, eller ta bort filter.</div>`);return;}
+  if(!shown.length){main.insertAdjacentHTML('beforeend', r.empty
+    ? `<div class="empty">Inga sökbara ord – småord som “och”, “vid”, “för” ignoreras. Prova ett mer specifikt ord.</div>`
+    : `<div class="empty">Inga träffar i de ${DOCS.filter(docPass).length} valda dokumenten. Prova färre eller andra ord, eller ta bort filter.</div>`);return;}
   shown.forEach(g=>{
     const d=g.d,key=d.id,exp=state.expanded.has(key);
     const el=document.createElement('div');el.className='doc'+(d.tier===2?' tier2':'')+(d.kind==='gl'?' gl':'');
@@ -480,7 +487,10 @@ function renderSearch(main,r){
     el.innerHTML=`<div class="dh"><div class="t"><b>${esc(d.t)}</b><div class="meta">${tagsFor(d,true)}</div></div><span class="score">${g.titleOnly?'titel':g.hits.length+' träff'+(g.hits.length>1?'ar':'')}</span>${favBtn(d)}</div><div class="hits">${hits}</div>${g.hits.length>3?`<button class="more">${exp?'Visa färre':`Visa alla ${g.hits.length} träffar`}</button>`:''}<div class="actions">${d.txt?`<button data-act="open">Öppna ${kindLabel(d)} med markeringar</button>`:''}${srcLink(d)}${saveBtn(d)}</div>`;
     el.querySelector('.dh').onclick=()=>openReader(d,r.terms,r.phrases);
     const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>openReader(d,r.terms,r.phrases);
-    el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>openReader(d,r.terms,r.phrases,g.hits[+x.dataset.i].pg));
+    el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>{
+      const hit=x.dataset.i!=null&&g.hits[+x.dataset.i];
+      openReader(d,r.terms,r.phrases,hit?hit.pg:undefined);
+    });
     const m=el.querySelector('.more'); if(m)m.onclick=()=>{exp?state.expanded.delete(key):state.expanded.add(key);update();};
     bindFav(el); main.appendChild(el);
   });
@@ -497,6 +507,7 @@ function update(){
 
 // ---------- reader ----------
 function openReader(d,terms,phrases,page){
+  if(!d) return;
   if(!d.txt){ window.open(d.url,'_blank','noopener'); return; }
   if(!d.loaded){ setStat('Hämtar text…'); loadArea(d.a).then(()=>{ if(d.loaded) openReader(d,terms,phrases,page); else setStat('Kunde inte hämta texten – kontrollera uppkopplingen.'); }); return; }
   recents=[d.id,...recents.filter(x=>x!==d.id)].slice(0,8); store.set('recent',recents);
@@ -514,7 +525,7 @@ function openReader(d,terms,phrases,page){
   body.onscroll=()=>{let cur=null;for(const sec of body.querySelectorAll('.page')){if(sec.offsetTop-body.offsetTop<=body.scrollTop+40)cur=sec.id.slice(2);else break;}nav.querySelectorAll('button').forEach(b=>{const on=b.dataset.pg===cur;b.classList.toggle('cur',on);if(on)b.scrollIntoView({inline:'center',block:'nearest'});});};
   $('reader').hidden=false; document.body.style.overflow='hidden';
   const target=page||[...hot][0]; if(target){requestAnimationFrame(()=>{const s=$('pg'+target);if(s)body.scrollTop=s.offsetTop-body.offsetTop-6;});} else body.scrollTop=0;
-  try{history.pushState({reader:1},'');}catch(e){}
+  try{ if(history.state&&history.state.reader) history.replaceState({reader:1},''); else history.pushState({reader:1},''); }catch(e){}
 }
 function closeReader(){if($('reader').hidden)return;$('reader').hidden=true;document.body.style.overflow='';if(!state.q&&!state.area)update();}
 $('rclose').onclick=()=>{closeReader();try{if(history.state&&history.state.reader)history.back();}catch(e){}};

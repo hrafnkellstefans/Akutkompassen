@@ -1,6 +1,6 @@
 // Akutkompassen service worker – app shell + data shards, works offline after first visit.
 // Bump VERSION on every release (build.py does this).
-const VERSION = 'ak-v10s2c';
+const VERSION = 'ak-v10s2d';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
