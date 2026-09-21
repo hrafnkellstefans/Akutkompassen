@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-v="ak-v10s2c"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-v="ak-v10s2d"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -157,7 +157,7 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .pnav button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:6px;min-width:34px;height:30px;padding:0 8px;font-family:"IBM Plex Mono",monospace;font-size:12px;cursor:pointer}
 .pnav button.cur{background:var(--surface2);font-weight:600}
 .pnav button.hot{border-color:var(--accent);color:var(--accent);font-weight:600}
-.pbody{overflow:auto;padding:6px 20px 70px;font-size:16.5px;line-height:1.6;-webkit-overflow-scrolling:touch}
+.pbody{overflow:auto;padding:6px 20px 70px;font-size:16.5px;line-height:1.6;-webkit-overflow-scrolling:touch;position:relative}
 @media (max-width:700px){.pbody{padding:6px 16px 70px}}
 .pbody .page{padding:18px 0 22px;border-bottom:1px dashed var(--line)}
 .pbody .page h5{margin:0 0 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
@@ -193,11 +193,18 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
 
 .tag.soc{background:var(--brand-field);color:var(--brand-ink);border:1px solid var(--brand-line)}
 .doc.gl{border-left:3px solid var(--brand-line)}
-.filters .chip.kind.on{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff}
+.filters .chip.kind.on{background:var(--brand-ink);border-color:var(--brand-ink);color:var(--brand)}
 .acard .socs{font-size:11px;color:var(--muted);line-height:1.3}
 .acard.gl .nm::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brand-ink);margin:0 6px 2px 0;opacity:.7}
 #boot{max-width:720px;margin:40px auto;text-align:center;color:var(--muted);font-size:14px}
-.tag.lnk{background:#eef1f5;color:#556}.hit.tonly{color:var(--muted);font-style:italic}</style>
+.tag.lnk{background:#eef1f5;color:#556}.hit.tonly{color:var(--muted);font-style:italic;display:block}
+.reader-note{margin:0;padding:8px 16px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line)}
+.sect{flex-wrap:wrap}
+@media (pointer:coarse){
+  .filters .chip,.hint .chip,.actions a,.actions button,.crumb button,.pnav button,.ph .x,.search .clr{min-height:44px;min-width:44px}
+  .actions a,.actions button{display:inline-flex;align-items:center;justify-content:center}
+}
+</style>
 
 </head><body><header>
 <div class="hwrap">
@@ -207,7 +214,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
   </button>
   <label class="search" id="sbox">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input id="q" type="search" placeholder="Sök i PM och riktlinjer – t.ex. insulin DKA, HINTS, tranexamsyra…" autocomplete="off" enterkeyhint="search">
+    <input id="q" type="search" aria-label="Sök i PM och riktlinjer" placeholder="Sök i PM och riktlinjer – t.ex. insulin DKA, HINTS, tranexamsyra…" autocomplete="off" enterkeyhint="search">
     <button class="clr" id="clr" aria-label="Rensa sökning">×</button>
     <kbd>/</kbd>
   </label>
@@ -216,7 +223,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
   <button class="chip star" data-f="fav">★ Sparade</button>
   <button class="chip kind" data-k="pm">PM</button>
   <button class="chip kind" data-k="gl">Riktlinjer</button>
-  <span class="stat" id="stat"></span><span class="stat" id="ldst" hidden></span>
+  <span class="stat" id="stat" role="status"></span><span class="stat" id="ldst" role="status" hidden></span><button class="chip" id="retry-load" hidden>Försök igen</button>
 </div>
 </header>
 
@@ -226,19 +233,22 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
   </aside>
   <main class="main" id="main"><div id="boot">Laddar…</div></main>
 </div>
-<footer>PM: texten är hämtad från de offentliga DocPlus-PDF:erna (Region Uppsala). Internationella riktlinjer visas som länkar till utgivaren (ingen text lagras här). Personligt urval av Kjell Stefansson, ST-läkare akutsjukvård – ersätter inte DocPlus. Sökningen sker helt lokalt i webbläsaren; inget skickas någonstans. ⚠ = PM ≥ 4 år gammalt eller med utgången giltighet.</footer>
+<footer>PM: texten är hämtad från de offentliga DocPlus-PDF:erna (Region Uppsala). Internationella riktlinjer visas som länkar till utgivaren (ingen text lagras här). Personligt urval av Kjell Stefansson, ST-läkare akutsjukvård – ersätter inte DocPlus. Sökorden behandlas lokalt i webbläsaren. Källänkar öppnas hos utgivaren och kräver internet. ⚠ = PM vars angivna årtal är minst fyra kalenderår äldre än innevarande år, eller som har utgången giltighet enligt registret. Ålder innebär inte i sig att innehållet är inaktuellt.</footer>
 
-<div class="reader" id="reader" hidden><div class="pane" role="dialog" aria-modal="true">
+<div class="reader" id="reader" hidden><div class="pane" role="dialog" aria-modal="true" aria-labelledby="rtitle" aria-describedby="reader-note">
   <div class="ph"><div class="t"><b id="rtitle"></b><div class="meta" id="rmeta"></div></div><button class="x" id="rclose" aria-label="Stäng">×</button></div>
   <div class="actions" id="ract"></div>
-  <div class="pnav" id="pnav"></div>
+  <p class="reader-note" id="reader-note">Textversion från DocPlus. Bilder och flödesscheman kan saknas. Kontrollera originalet för fullständigt innehåll och aktuell version.</p>
+  <nav class="pnav" id="pnav" aria-label="Sidor i dokumentet"></nav>
   <div class="pbody" id="pbody"></div>
 </div></div>
 
 <script type="application/json" id="data"></script>
 <script>
 (async function(){
-const DATA = await (await fetch('ak_index.json?v='+encodeURIComponent(document.documentElement.dataset.v||''),{cache:'no-cache'})).json();
+const response = await fetch('ak_index.json?v='+encodeURIComponent(document.documentElement.dataset.v||''),{cache:'no-cache'});
+if(!response.ok) throw new Error('HTTP '+response.status);
+const DATA = await response.json();
 const AREAS = DATA.areas, DOCS = DATA.docs, UPDATED = DATA.updated, SHARDS = DATA.shards;
 const ORDER = Object.keys(AREAS); const NPM=DOCS.filter(d=>d.kind!=='gl').length, NGL=DOCS.filter(d=>d.kind==='gl').length; const T0=performance.now();
 const BYID = new Map(DOCS.map(d=>[d.id,d]));
@@ -248,7 +258,8 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 // ---------- storage ----------
 const store={get(k,d){try{const v=localStorage.getItem('ak.'+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem('ak.'+k,JSON.stringify(v));}catch(e){}}};
-let favs=new Set(store.get('favs',[])), recents=store.get('recent',[]);
+const storedFavs=store.get('favs',[]), storedRecents=store.get('recent',[]);
+let favs=new Set((Array.isArray(storedFavs)?storedFavs:[]).filter(id=>BYID.has(id))), recents=(Array.isArray(storedRecents)?storedRecents:[]).filter(id=>BYID.has(id));
 
 // ---------- tokenizer ----------
 function norm(s){return s.toLowerCase().replace(/é|è|ë/g,'e').replace(/ü/g,'y').replace(/[^a-z0-9åäöµ]+/g,' ').trim();}
@@ -256,9 +267,11 @@ function toks(s){return norm(s).split(' ').filter(t=>t.length>1&&!STOP.has(t));}
 
 // ---------- index ----------
 const chunks=[]; const df=new Map(); let N=0, avg=1, TERMS=[], dirty=false;
+const currentYear=new Date().getFullYear();
 DOCS.forEach((d,di)=>{
-  d.di=di; d.old = d.kind!=='gl' && (d.yr && +d.yr<2022 || /utgick|utgått/i.test(d.note||''));
-  d.fresh = d.yr && +d.yr>=2025; d.chunks=[]; d.loaded=false; d.tt=new Set(toks(d.t+' '+(d.soc||'')));
+  d.di=di; d.expired=d.kind!=='gl' && /utgick|utgått/i.test(d.note||'');
+  d.old = d.kind!=='gl' && (d.yr && +d.yr<=currentYear-4 || d.expired);
+  d.fresh = d.yr && +d.yr>=currentYear-1; d.chunks=[]; d.loaded=false; d.tt=new Set(toks(d.t+' '+(d.soc||'')));
 });
 function addText(d,c){
   if(d.loaded) return; d.loaded=true;
@@ -271,18 +284,31 @@ function addText(d,c){
 }
 function reindex(){ if(!dirty) return; N=chunks.length; avg=N?chunks.reduce((a,c)=>a+c.len,0)/N:1; TERMS=[...df.keys()]; dirty=false; }
 // ---------- shards (one JSON per area, loaded on demand + prefetched in the background) ----------
-const loadedAreas=new Set(), loading=new Map(); let prefetchDone=false;
+const loadedAreas=new Set(), failedAreas=new Set(), loading=new Map(); let prefetchDone=false;
 function loadArea(a){
   if(!SHARDS[a]||loadedAreas.has(a)) return Promise.resolve();
   if(loading.has(a)) return loading.get(a);
   const p=fetch(SHARDS[a]+'?v='+encodeURIComponent(DATA.v)).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(j=>{
     Object.entries(j.docs).forEach(([id,c])=>{const d=BYID.get(id);if(d)addText(d,c);});
-    loadedAreas.add(a); loading.delete(a); setLoadStat();
-  }).catch(e=>{loading.delete(a);console.warn('shard',a,e);});
+    loadedAreas.add(a); failedAreas.delete(a); loading.delete(a); setLoadStat();
+  }).catch(e=>{loading.delete(a);failedAreas.add(a);setLoadStat();console.warn('shard',a,e);});
   loading.set(a,p); return p;
 }
-function setLoadStat(){const el=$('ldst');if(!el)return;const n=loadedAreas.size,t=Object.keys(SHARDS).length;el.textContent=n<t?`Hämtar PM-text för sökning… ${n}/${t} områden`:'';el.hidden=n>=t;}
-async function prefetchAll(){for(const a of ORDER){if(SHARDS[a]&&!loadedAreas.has(a)){await loadArea(a);if(state.q)update();}}prefetchDone=true;setLoadStat();if(!state.q&&!state.area&&$('reader').hidden)update();}
+function setLoadStat(){
+  const el=$('ldst');if(!el)return;
+  const n=loadedAreas.size,t=Object.keys(SHARDS).length;
+  el.textContent=n>=t?'':failedAreas.size?`Sökningen är ofullständig. PM-text saknas för ${t-n} områden.`:`Hämtar PM-text för sökning… ${n}/${t} områden`;
+  el.hidden=n>=t;
+  const retry=$('retry-load'); if(retry) retry.hidden=!failedAreas.size;
+}
+async function prefetchAll(){
+  if(prefetchDone)return; prefetchDone=true;
+  try{for(const a of ORDER){if(SHARDS[a]&&!loadedAreas.has(a)){await loadArea(a);if(state.q)update();}}}
+  finally{prefetchDone=false;setLoadStat();}
+  if(!state.q&&!state.area&&$('reader').hidden)update();
+}
+$('retry-load').onclick=()=>prefetchAll();
+window.addEventListener('online',()=>{if(failedAreas.size)prefetchAll();});
 function idf(w){const n=df.get(w)||0;return Math.log(1+(N-n+.5)/(n+.5));}
 function expand(w){
   const out=new Map();
@@ -317,11 +343,15 @@ function search(qs){
   const byDoc=new Map();
   for(const ch of res){const g=byDoc.get(ch.d)||{d:DOCS[ch.d],hits:[],score:0};g.hits.push(ch);byDoc.set(ch.d,g);}
   const groups=[];
-  // documents without loaded text (link-only riktlinjer, or shards not yet fetched): match on title + society
-  DOCS.forEach(d=>{ if(byDoc.has(d.di)||d.chunks.length) return; let m=0; for(const w of terms){for(const t of d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){m++;break;}}}
-    if(terms.length&&m===terms.length) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true}); });
+  // Search titles even after a PM's full text has loaded; quoted phrases must match too.
+  DOCS.forEach(d=>{
+    if(byDoc.has(d.di)) return;
+    const title=norm(d.t+' '+(d.soc||''));
+    const matchesTerms=!terms.length||terms.every(w=>[...d.tt].some(t=>t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))));
+    if(matchesTerms&&phrases.every(p=>title.includes(p))) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true});
+  });
   byDoc.forEach(g=>{
-    if(g.titleOnly){ g.score=8*terms.length*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1); groups.push(g); return; }
+    if(g.titleOnly){ g.score=8*(terms.length+phrases.length)*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1); groups.push(g); return; }
     g.hits.sort((a,b)=>b.score-a.score);
     const top=g.hits[0].score;
     let titleBoost=0; for(const w of terms){for(const t of g.d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){titleBoost+=1;break;}}}
@@ -374,11 +404,11 @@ function docPass(d){
 }
 function yrClass(d){return d.old?'old':(d.fresh?'':'mid');}
 function tagsFor(d,withArea){
-  if(d.kind==='gl') return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.txt?'':'<span class="tag lnk">länk</span>'}<span class="tag yr ${+d.yr<2020?'old':(+d.yr>=2025?'':'mid')}">${d.yr||'–'}</span><span>${d.np} s</span>`;
-  return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${d.id}</span>${d.tier===2?'<span class="tag t2">andra linjen</span>':''}${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
+  if(d.kind==='gl') return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.txt?'':'<span class="tag lnk">länk</span>'}<span class="tag yr ${+d.yr<currentYear-6?'old':(+d.yr>=currentYear-1?'':'mid')}">${d.yr||'–'}</span><span>${d.np} s</span>`;
+  return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${d.id}</span>${d.tier===2?'<span class="tag t2">andra linjen</span>':''}${d.old?`<span class="tag warn">${d.expired?'⚠ Utgången giltighet enligt registret':'⚠ Äldre PM'} – kontrollera aktuell version i DocPlus</span>`:''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
 }
 function favBtn(d){return '';}
-function srcLink(d){return d.kind==='gl'?`<a href="${d.url}" target="_blank" rel="noopener">${d.txt?'Källa':(d.fmt==='pdf'?'Öppna PDF':'Öppna fulltext')} ↗</a>`:`<a href="${d.url}" target="_blank" rel="noopener">DocPlus ↗</a>`;}
+function srcLink(d){return d.kind==='gl'?`<a href="${esc(d.url)}" target="_blank" rel="noopener">${d.txt?'Källa':(d.fmt==='pdf'?'Öppna PDF':'Öppna fulltext')} ↗</a>`:`<a href="${esc(d.url)}" target="_blank" rel="noopener">DocPlus ↗</a>`;}
 function kindLabel(d){return d.kind==='gl'?'riktlinje':'PM';}
 function saveBtn(d){const on=favs.has(d.id);return `<button class="save${on?' on':''}" data-fav="${d.id}" aria-pressed="${on}">${on?'★ Sparad':'☆ Spara'}</button>`;}
 function bindFav(el){el.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);store.set('favs',[...favs]);
@@ -404,14 +434,15 @@ function renderHome(main){
   const docs=DOCS.filter(docPass);
   const counts={total:0}; docs.forEach(d=>{counts[d.a]=(counts[d.a]||0)+1;counts.total++;});
   renderAreas(counts);
-  setStat(`${NPM} PM · ${NGL} riktlinjer · ${UPDATED}`);
-  let h='';
+  setStat(`${docs.filter(d=>d.kind!=='gl').length} PM · ${docs.filter(d=>d.kind==='gl').length} riktlinjer · ${UPDATED}`);
+  let h=state.fav&&!docs.length?'<div class="empty">Inga sparade dokument matchar valda filter. Öppna ett område och välj Spara på ett dokument.</div>':'';
   if(favs.size){
-    const fl=DOCS.filter(d=>favs.has(d.id)).sort((a,b)=>a.t.localeCompare(b.t,'sv'));
-    h+=`<div class="sect"><h3>★ Sparade PM</h3><span style="font-size:12px;color:var(--muted)">${fl.length}</span></div><div class="recent">`+fl.map(d=>`<button class="rrow" data-open="${d.id}"><span class="t">${esc(d.t)}</span><span class="a">${esc(AREAS[d.a])}${d.kind==='gl'?' · '+esc(d.soc):''} · ${d.yr||'–'}</span></button>`).join('')+`</div>`;
+    const fl=docs.filter(d=>favs.has(d.id)).sort((a,b)=>a.t.localeCompare(b.t,'sv'));
+    h+=`<div class="sect"><h3>★ Sparade dokument</h3><span style="font-size:12px;color:var(--muted)">${fl.length}</span></div><div class="recent">`+fl.map(d=>`<button class="rrow" data-open="${d.id}"><span class="t">${esc(d.t)}</span><span class="a">${esc(AREAS[d.a])}${d.kind==='gl'?' · '+esc(d.soc):''} · ${d.yr||'–'}</span></button>`).join('')+`</div>`;
   }
-  if(recents.length){
-    h+=`<div class="sect"><h3>Senast öppnade</h3><button data-clear-recent>Rensa</button></div><div class="recent">`+recents.slice(0,5).map(id=>{const d=DOCS.find(x=>x.id===id);return d?`<button class="rrow" data-open="${d.id}"><span class="t">${esc(d.t)}</span><span class="a">${esc(AREAS[d.a])}${d.kind==='gl'?' · '+esc(d.soc):''} · ${d.yr||'–'}</span></button>`:'';}).join('')+`</div>`;
+  const recentDocs=recents.map(id=>BYID.get(id)).filter(d=>d&&docPass(d));
+  if(recentDocs.length){
+    h+=`<div class="sect"><h3>Senast öppnade</h3><button data-clear-recent>Rensa</button></div><div class="recent">`+recentDocs.slice(0,5).map(d=>`<button class="rrow" data-open="${d.id}"><span class="t">${esc(d.t)}</span><span class="a">${esc(AREAS[d.a])}${d.kind==='gl'?' · '+esc(d.soc):''} · ${d.yr||'–'}</span></button>`).join('')+`</div>`;
   }
   const pmd=docs.filter(d=>d.kind!=='gl'), gld=docs.filter(d=>d.kind==='gl');
   if(state.kind!=='gl'){
@@ -480,7 +511,12 @@ function renderSearch(main,r){
     el.innerHTML=`<div class="dh"><div class="t"><b>${esc(d.t)}</b><div class="meta">${tagsFor(d,true)}</div></div><span class="score">${g.titleOnly?'titel':g.hits.length+' träff'+(g.hits.length>1?'ar':'')}</span>${favBtn(d)}</div><div class="hits">${hits}</div>${g.hits.length>3?`<button class="more">${exp?'Visa färre':`Visa alla ${g.hits.length} träffar`}</button>`:''}<div class="actions">${d.txt?`<button data-act="open">Öppna ${kindLabel(d)} med markeringar</button>`:''}${srcLink(d)}${saveBtn(d)}</div>`;
     el.querySelector('.dh').onclick=()=>openReader(d,r.terms,r.phrases);
     const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>openReader(d,r.terms,r.phrases);
-    el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>openReader(d,r.terms,r.phrases,g.hits[+x.dataset.i].pg));
+    el.querySelectorAll('.hit').forEach(x=>{
+      const open=()=>openReader(d,r.terms,r.phrases,x.hasAttribute('data-i')?g.hits[+x.dataset.i].pg:undefined);
+      x.onclick=open; x.tabIndex=0; x.setAttribute('role','button');
+      x.setAttribute('aria-label',`Öppna ${d.t}${x.hasAttribute('data-i')?', sida '+g.hits[+x.dataset.i].pg:''}`);
+      x.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};
+    });
     const m=el.querySelector('.more'); if(m)m.onclick=()=>{exp?state.expanded.delete(key):state.expanded.add(key);update();};
     bindFav(el); main.appendChild(el);
   });
@@ -496,9 +532,11 @@ function update(){
 }
 
 // ---------- reader ----------
+let readerTrigger=null;
 function openReader(d,terms,phrases,page){
   if(!d.txt){ window.open(d.url,'_blank','noopener'); return; }
   if(!d.loaded){ setStat('Hämtar text…'); loadArea(d.a).then(()=>{ if(d.loaded) openReader(d,terms,phrases,page); else setStat('Kunde inte hämta texten – kontrollera uppkopplingen.'); }); return; }
+  if($('reader').hidden)readerTrigger=document.activeElement;
   recents=[d.id,...recents.filter(x=>x!==d.id)].slice(0,8); store.set('recent',recents);
   $('rtitle').textContent=d.t; $('rmeta').innerHTML=tagsFor(d,true); $('ract').innerHTML=`${srcLink(d)}${saveBtn(d)}`; bindFav($('ract'));
   const body=$('pbody'), nav=$('pnav'); body.innerHTML=''; nav.innerHTML='';
@@ -510,13 +548,21 @@ function openReader(d,terms,phrases,page){
     cs.forEach(c=>{const h=fmt(c.text,terms,phrases,false);if(h.includes('<mark>'))hot.add(pg);inner+=h;});
     sec.innerHTML=inner; body.appendChild(sec);
   });
-  pages.forEach((_,pg)=>{const b=document.createElement('button');b.textContent=pg;b.dataset.pg=pg;if(hot.has(pg))b.className='hot';b.onclick=()=>{$('pg'+pg).scrollIntoView({block:'start'});};nav.appendChild(b);});
-  body.onscroll=()=>{let cur=null;for(const sec of body.querySelectorAll('.page')){if(sec.offsetTop-body.offsetTop<=body.scrollTop+40)cur=sec.id.slice(2);else break;}nav.querySelectorAll('button').forEach(b=>{const on=b.dataset.pg===cur;b.classList.toggle('cur',on);if(on)b.scrollIntoView({inline:'center',block:'nearest'});});};
+  pages.forEach((_,pg)=>{const b=document.createElement('button');b.textContent=pg;b.dataset.pg=pg;b.setAttribute('aria-label','Sida '+pg);if(hot.has(pg))b.className='hot';b.onclick=()=>{$('pg'+pg).scrollIntoView({block:'start'});};nav.appendChild(b);});
+  body.onscroll=()=>{let cur=null;for(const sec of body.querySelectorAll('.page')){if(sec.offsetTop<=body.scrollTop+40)cur=sec.id.slice(2);else break;}nav.querySelectorAll('button').forEach(b=>{const on=b.dataset.pg===cur;b.classList.toggle('cur',on);if(on)b.scrollIntoView({inline:'center',block:'nearest'});});};
   $('reader').hidden=false; document.body.style.overflow='hidden';
-  const target=page||[...hot][0]; if(target){requestAnimationFrame(()=>{const s=$('pg'+target);if(s)body.scrollTop=s.offsetTop-body.offsetTop-6;});} else body.scrollTop=0;
-  try{history.pushState({reader:1},'');}catch(e){}
+  document.querySelectorAll('body > header, body > .layout, body > footer').forEach(el=>el.inert=true);
+  $('rclose').focus();
+  const target=page||[...hot][0]; if(target){requestAnimationFrame(()=>{const s=$('pg'+target);if(s)body.scrollTop=s.offsetTop-6;});} else body.scrollTop=0;
+  try{if(!(history.state&&history.state.reader))history.pushState({reader:1},'');}catch(e){}
 }
-function closeReader(){if($('reader').hidden)return;$('reader').hidden=true;document.body.style.overflow='';if(!state.q&&!state.area)update();}
+function closeReader(){
+  if($('reader').hidden)return;
+  $('reader').hidden=true;document.body.style.overflow='';
+  document.querySelectorAll('body > header, body > .layout, body > footer').forEach(el=>el.inert=false);
+  if(!state.q&&!state.area)update();
+  if(readerTrigger&&readerTrigger.isConnected)readerTrigger.focus();else qEl.focus();
+}
 $('rclose').onclick=()=>{closeReader();try{if(history.state&&history.state.reader)history.back();}catch(e){}};
 $('reader').addEventListener('click',e=>{if(e.target===$('reader'))$('rclose').onclick();});
 window.addEventListener('popstate',()=>closeReader());
@@ -524,12 +570,21 @@ window.addEventListener('popstate',()=>closeReader());
 // ---------- wiring ----------
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!$('reader').hidden){$('rclose').onclick();return;}
+  if(!$('reader').hidden){
+    if(e.key==='Tab'){
+      const controls=[...$('reader').querySelectorAll('a[href],button,[tabindex="0"]')];
+      const first=controls[0],last=controls[controls.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+    }
+    return;
+  }
   if(e.key==='/'&&document.activeElement!==qEl){e.preventDefault();qEl.focus();qEl.select();}
 });
 let timer; qEl.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(update,140);});
 $('clr').onclick=()=>{qEl.value='';update();qEl.focus();};
 $('home').onclick=()=>{qEl.value='';state.area=null;state.kind=null;syncChips();update();window.scrollTo(0,0);};
-function syncChips(){document.querySelectorAll('.filters .chip[data-f]').forEach(x=>x.classList.toggle('on',!!state[x.dataset.f]));document.querySelectorAll('.filters .chip[data-k]').forEach(x=>x.classList.toggle('on',state.kind===x.dataset.k));}
+function syncChips(){document.querySelectorAll('.filters .chip[data-f],.filters .chip[data-k]').forEach(x=>{const on=x.dataset.f?!!state[x.dataset.f]:state.kind===x.dataset.k;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});}
 document.querySelectorAll('.filters .chip[data-k]').forEach(b=>b.onclick=()=>{state.kind=state.kind===b.dataset.k?null:b.dataset.k;syncChips();update();});
 document.querySelectorAll('.filters .chip[data-f]').forEach(b=>b.onclick=()=>{
   const f=b.dataset.f; state[f]=!state[f];
@@ -538,9 +593,13 @@ document.querySelectorAll('.filters .chip[data-f]').forEach(b=>b.onclick=()=>{
   syncChips(); update();
 });
 const bt=$('boot');if(bt)bt.remove();
-update(); setLoadStat();
+syncChips(); update(); setLoadStat();
 (window.requestIdleCallback||(f=>setTimeout(f,300)))(()=>prefetchAll());
-})().catch(e=>{const m=document.getElementById('main');if(m)m.innerHTML='<div class="empty">Kunde inte läsa in data ('+e.message+'). Uppdatera webbläsaren – appen kräver Safari 16.4+/Chrome 80+.</div>';});
+})().catch(e=>{
+  console.error('Kunde inte läsa in dokumentregistret',e);
+  const m=document.getElementById('main');
+  if(m){m.textContent='';const box=document.createElement('div');box.className='empty';box.setAttribute('role','alert');box.textContent='Kunde inte läsa in dokumentregistret. Kontrollera uppkopplingen och försök igen. ';const retry=document.createElement('button');retry.textContent='Försök igen';retry.onclick=()=>location.reload();box.appendChild(retry);m.appendChild(box);}
+});
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
 </body></html>
