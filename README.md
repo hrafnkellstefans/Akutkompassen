@@ -1,6 +1,12 @@
-# Akutkompassen – webbapp (v10, version ak-v10s2e)
+# Akutkompassen – webbapp (v10, version ak-v10s2g)
 
 Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per område (`ak_*.json`). Den öppnar direkt, hämtar PM-texten i bakgrunden och fungerar offline efter första besöket. Svenska och internationella riktlinjer visas som länkar till utgivaren. Deras fulltext lagras inte i appen och kräver internet; titlar, beskrivningar och sökord är sökbara lokalt.
+
+## Gränssnitt ak-v10s2g
+
+Startsidan skiljer mellan **Lokala PM** (Region Uppsala / DocPlus) och **Externa riktlinjer** (svenska och internationella utgivare). Källtypen syns även i sökresultat, sparade dokument och läsvyn. Indelningen i kärn-PM och andra linjen har tagits bort, liksom dess påverkan på sortering och sökpoäng. Områdeslistor sorteras alfabetiskt. Dokumentregistret och källtexterna är oförändrade.
+
+Gränssnittet har tydligare källfilter, luftigare kort och mobilanpassad layout. Texten ”Riktlinjer är ett stöd och ersätter inte klinisk bedömning” visas på startsidan och i sidfoten.
 
 ## Riktlinjer tillagda 22 september 2026
 
