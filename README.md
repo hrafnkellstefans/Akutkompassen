@@ -1,6 +1,23 @@
-# Akutkompassen – webbapp (v10, version ak-v10s2b)
+# Akutkompassen – webbapp (v10, version ak-v10s2e)
 
-Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per område (`ak_*.json`). Den öppnar direkt, hämtar PM-texten i bakgrunden och fungerar offline efter första besöket. Internationella riktlinjer visas som länkar till utgivaren – ingen upphovsrättsskyddad text lagras i appen.
+Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per område (`ak_*.json`). Den öppnar direkt, hämtar PM-texten i bakgrunden och fungerar offline efter första besöket. Svenska och internationella riktlinjer visas som länkar till utgivaren. Deras fulltext lagras inte i appen och kräver internet; titlar, beskrivningar och sökord är sökbara lokalt.
+
+## Riktlinjer tillagda 22 september 2026
+
+Sex källänkar har verifierats hos utgivarna. Inga nya behandlingssammanfattningar eller doseringar har införts.
+
+| ID | Dokument | Verifierad version |
+|---|---|---|
+| GL82 | UKKA: akut hyperkalemi hos vuxna | Uppdaterad juli 2026, 180 sidor |
+| GL83 | RCC: nationellt vårdprogram akut onkologi | 2.0, 2026-02-10 |
+| GL84 | RCC: biverkningar av checkpointhämmare | 1.2, 2026-06-23 |
+| GL85 | NPO Ögon: lathund akut trångvinkelattack | Bilaga B, 2026 |
+| GL86 | NPO Ögon: periorbitala och orbitala infektioner | 2022-02-07, offentlig webbversion |
+| GL87 | LÖF: akut stopp i trakealkanyl, barn och vuxna | Fickkort 2021 |
+
+Källadresser, verifieringsdatum och svenska sökord finns i `ak_index.json`. Etiketten Nationellt skiljer de nya svenska kunskapsstöden från internationella riktlinjer. Områdena HEM och URO har fått tydligare namn; befintliga dokument-ID:n och sparade favoriter behålls.
+
+Kontrollera sökningen med `node --test tests/search.test.cjs`. Testerna använder appens sökmotor och kontrollerar de nya sökorden både före och efter inläsning av PM-text.
 
 | Fil | Vad |
 |---|---|

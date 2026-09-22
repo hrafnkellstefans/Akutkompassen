@@ -1,11 +1,11 @@
-<!doctype html><html lang="sv" data-v="ak-v10s2d"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-v="ak-v10s2e"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Akutkompassen">
-<meta name="description" content="PM för akutmottagningen, Akademiska sjukhuset, och ett urval internationella riktlinjer – bläddra, sök och läs.">
+<meta name="description" content="PM för akutmottagningen, Akademiska sjukhuset, och svenska och internationella riktlinjer – bläddra, sök och läs.">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -197,7 +197,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
 .acard .socs{font-size:11px;color:var(--muted);line-height:1.3}
 .acard.gl .nm::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brand-ink);margin:0 6px 2px 0;opacity:.7}
 #boot{max-width:720px;margin:40px auto;text-align:center;color:var(--muted);font-size:14px}
-.tag.lnk{background:#eef1f5;color:#556}.hit.tonly{color:var(--muted);font-style:italic}</style>
+.tag.lnk{background:#eef1f5;color:#556}.hit.tonly{display:block;color:var(--muted);font-style:italic}</style>
 
 </head><body><header>
 <div class="hwrap">
@@ -226,7 +226,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color
   </aside>
   <main class="main" id="main"><div id="boot">Laddar…</div></main>
 </div>
-<footer>PM: texten är hämtad från de offentliga DocPlus-PDF:erna (Region Uppsala). Internationella riktlinjer visas som länkar till utgivaren (ingen text lagras här). Personligt urval av Kjell Stefansson, ST-läkare akutsjukvård – ersätter inte DocPlus. Sökningen sker helt lokalt i webbläsaren; inget skickas någonstans. ⚠ = PM ≥ 4 år gammalt eller med utgången giltighet.</footer>
+<footer>PM: texten är hämtad från de offentliga DocPlus-PDF:erna (Region Uppsala). Svenska och internationella riktlinjer visas som länkar till utgivaren. För länkade riktlinjer söker appen i titlar, beskrivningar och sökord, inte i fulltexten. Källan kräver internet. Personligt urval av Kjell Stefansson, ST-läkare akutsjukvård – ersätter inte DocPlus. Sökningen sker helt lokalt i webbläsaren; inget skickas någonstans. ⚠ = PM ≥ 4 år gammalt eller med utgången giltighet.</footer>
 
 <div class="reader" id="reader" hidden><div class="pane" role="dialog" aria-modal="true">
   <div class="ph"><div class="t"><b id="rtitle"></b><div class="meta" id="rmeta"></div></div><button class="x" id="rclose" aria-label="Stäng">×</button></div>
@@ -253,12 +253,13 @@ let favs=new Set(store.get('favs',[]).filter(id=>BYID.has(id))), recents=store.g
 // ---------- tokenizer ----------
 function norm(s){return s.toLowerCase().replace(/é|è|ë/g,'e').replace(/ü/g,'y').replace(/[^a-z0-9åäöµ]+/g,' ').trim();}
 function toks(s){return norm(s).split(' ').filter(t=>t.length>1&&!STOP.has(t));}
+function docSearchText(d){return [d.t,d.soc||'',d.note||'',...(d.keywords||[])].join(' ');}
 
 // ---------- index ----------
 const chunks=[]; const df=new Map(); let N=0, avg=1, TERMS=[], dirty=false;
 DOCS.forEach((d,di)=>{
   d.di=di; d.old = d.kind!=='gl' && (d.yr && +d.yr<2022 || /utgick|utgått/i.test(d.note||''));
-  d.fresh = d.yr && +d.yr>=2025; d.chunks=[]; d.loaded=false; d.tt=new Set(toks(d.t+' '+(d.soc||'')));
+  d.fresh = d.yr && +d.yr>=2025; d.chunks=[]; d.loaded=false; d.tt=new Set(toks(docSearchText(d)));
 });
 function addText(d,c){
   if(d.loaded) return; d.loaded=true;
@@ -317,10 +318,10 @@ function search(qs){
   const byDoc=new Map();
   for(const ch of res){const g=byDoc.get(ch.d)||{d:DOCS[ch.d],hits:[],score:0};g.hits.push(ch);byDoc.set(ch.d,g);}
   const groups=[];
-  // title + society match for riktlinjer (no body text) and PM whose body did not hit
+  // Search document metadata too, including Swedish synonyms for linked guidelines.
   DOCS.forEach(d=>{
     if(byDoc.has(d.di)) return;
-    const hay=norm(d.t+' '+(d.soc||''));
+    const hay=norm(docSearchText(d));
     if(phrases.length && !phrases.every(p=>hay.includes(p))) return;
     let m=0; for(const w of terms){for(const t of d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){m++;break;}}}
     if(terms.length ? m===terms.length : phrases.length) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true});
@@ -379,7 +380,7 @@ function docPass(d){
 }
 function yrClass(d){return d.old?'old':(d.fresh?'':'mid');}
 function tagsFor(d,withArea){
-  if(d.kind==='gl') return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.txt?'':'<span class="tag lnk">länk</span>'}<span class="tag yr ${+d.yr<2020?'old':(+d.yr>=2025?'':'mid')}">${d.yr||'–'}</span><span>${d.np} s</span>`;
+  if(d.kind==='gl') return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.lvl==='nationell'?'<span class="tag">Nationellt</span>':''}${d.txt?'':'<span class="tag lnk">länk</span>'}<span class="tag yr ${+d.yr<2020?'old':(+d.yr>=2025?'':'mid')}">${d.yr||'–'}</span>${d.np&&d.fmt==='pdf'?`<span>${d.np} s</span>`:''}${d.note?`<span>${esc(d.note)}</span>`:''}`;
   return `${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${d.id}</span>${d.tier===2?'<span class="tag t2">andra linjen</span>':''}${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
 }
 function favBtn(d){return '';}
@@ -428,7 +429,7 @@ function renderHome(main){
   });
   h+=`</div>`;}
   if(state.kind!=='pm'){
-  h+=`<div class="sect"><h3>Internationella riktlinjer</h3><span style="font-size:12px;color:var(--muted)">${gld.length} länkar · ERC, ESC, ESO, NICE, RCEM, ACEP, WSES m.fl. – öppnas hos utgivaren</span></div><div class="grid">`;
+  h+=`<div class="sect"><h3>Svenska &amp; internationella riktlinjer</h3><span style="font-size:12px;color:var(--muted)">${gld.length} länkar · RCC, NPO, LÖF, UKKA, ERC, ESC m.fl. – öppnas hos utgivaren</span></div><div class="grid">`;
   ORDER.forEach(a=>{
     const ds=gld.filter(d=>d.a===a); const n=ds.length; if(!n)return;
     const socs=[...new Set(ds.map(d=>d.soc.split('/')[0]))].slice(0,4).join(' · ');
@@ -462,7 +463,7 @@ function renderArea(main){
     if(d.tier!==cur){cur=d.tier;if(cur===2)H('Andra linjen');}
     main.appendChild(docCard(d,false));
   });
-  if(glS.length){ if(pmS.length) H('Internationella riktlinjer'); glS.sort((a,b)=>(b.yr||'').localeCompare(a.yr||'')||a.t.localeCompare(b.t)).forEach(d=>main.appendChild(docCard(d,false))); }
+  if(glS.length){ if(pmS.length) H('Svenska & internationella riktlinjer'); glS.sort((a,b)=>(b.yr||'').localeCompare(a.yr||'')||a.t.localeCompare(b.t)).forEach(d=>main.appendChild(docCard(d,false))); }
 }
 function renderSearch(main,r){
   const groups=r.groups.filter(g=>docPass(g.d));
@@ -483,8 +484,8 @@ function renderSearch(main,r){
     const lim=exp?g.hits.length:Math.min(3,g.hits.length);
     let hits='';
     for(let i=0;i<lim;i++){const x=g.hits[i];hits+=`<div class="hit" data-i="${i}"><span class="pg">s. ${x.pg}</span>${fmt(x.text,r.terms,r.phrases,true)}</div>`;}
-    if(g.titleOnly) hits=`<div class="hit tonly">${d.txt?(loadedAreas.has(d.a)?'Träff i titeln':'Träff i titeln – texten hämtas…'):'Träff i titeln – öppna riktlinjen via länken'}</div>`;
-    el.innerHTML=`<div class="dh"><div class="t"><b>${esc(d.t)}</b><div class="meta">${tagsFor(d,true)}</div></div><span class="score">${g.titleOnly?'titel':g.hits.length+' träff'+(g.hits.length>1?'ar':'')}</span>${favBtn(d)}</div><div class="hits">${hits}</div>${g.hits.length>3?`<button class="more">${exp?'Visa färre':`Visa alla ${g.hits.length} träffar`}</button>`:''}<div class="actions">${d.txt?`<button data-act="open">Öppna ${kindLabel(d)} med markeringar</button>`:''}${srcLink(d)}${saveBtn(d)}</div>`;
+    if(g.titleOnly) hits=`<div class="hit tonly">${d.txt?(loadedAreas.has(d.a)?'Träff i titel, beskrivning eller sökord':'Träff i titel, beskrivning eller sökord – texten hämtas…'):'Träff i titel, beskrivning eller sökord – fulltext öppnas hos utgivaren'}</div>`;
+    el.innerHTML=`<div class="dh"><div class="t"><b>${esc(d.t)}</b><div class="meta">${tagsFor(d,true)}</div></div><span class="score">${g.titleOnly?'sökord':g.hits.length+' träff'+(g.hits.length>1?'ar':'')}</span>${favBtn(d)}</div><div class="hits">${hits}</div>${g.hits.length>3?`<button class="more">${exp?'Visa färre':`Visa alla ${g.hits.length} träffar`}</button>`:''}<div class="actions">${d.txt?`<button data-act="open">Öppna ${kindLabel(d)} med markeringar</button>`:''}${srcLink(d)}${saveBtn(d)}</div>`;
     el.querySelector('.dh').onclick=()=>openReader(d,r.terms,r.phrases);
     const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>openReader(d,r.terms,r.phrases);
     el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>{
