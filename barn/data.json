@@ -1,0 +1,1066 @@
+{
+  "updated": "2026-09-23",
+  "areas": {
+    "akut": "Akut omhändertagande",
+    "luft": "Andning & luftväg",
+    "inf": "Feber & infektion",
+    "neuro": "Neurologi & kramper",
+    "buk": "Buk & urologi",
+    "vatska": "Vätska & elektrolyter",
+    "met": "Diabetes & metabolism",
+    "trauma": "Trauma & ortopedi",
+    "smarta": "Smärta & procedurer",
+    "hjarta": "Hjärta & blod",
+    "tox": "Förgiftning & bett",
+    "neo": "Nyfödda & spädbarn",
+    "trygg": "Barnets trygghet"
+  },
+  "docs": [
+    {
+      "id": "up-8416",
+      "title": "Osteomyelit och septisk artrit barn - handläggningsrutiner",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "trauma",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-8416",
+      "date": "2021-02-11",
+      "scope": "Akut barnsjukvård; Barnkirurgi",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-18453",
+      "title": "Svampinfektioner barn - utredning, diagnostik och behandling, BOT",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "inf",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-18453",
+      "date": "2022-03-04",
+      "scope": "Blod- och tumörsjukdomar hos barn",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "feber",
+        "infektion"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-14495",
+      "title": "Handläggning av särskilda patientgrupper på barnakuten",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "trygg",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-14495",
+      "date": "2020-10-05",
+      "scope": "Akademiska Barnsjukhuset",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "orosanmälan"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-8549",
+      "title": "Barnkardiologiska patienter i akutsjukvården",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "hjarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-8549",
+      "date": "2019-02-18",
+      "scope": "Akut barnsjukvård",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-24724",
+      "title": "Abstinens efter sedering och delirium - BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "smarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-24724",
+      "date": "2022-08-29",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-103",
+      "title": "Hypoglykemi vid diabetes typ 1 barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "met",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-103",
+      "date": "2026-04-27",
+      "scope": "Specialiserad pediatrik; Akut",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "DKA",
+        "blodsocker"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-25272",
+      "title": "Akut vätsketerapi barn - Akademiska Barnsjukhuset",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "vatska",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-25272",
+      "date": "2024-03-21",
+      "scope": "Akademiska Barnsjukhuset",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "uttorkning",
+        "dropp"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-25647",
+      "title": "Diabetes barn och ungdom - översikt",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "met",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-25647",
+      "date": "2024-06-11",
+      "scope": "Akut barnsjukvård;",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "DKA",
+        "blodsocker"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-104",
+      "title": "Ketoacidos vid diabetes - akut omhändertagande barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "met",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-104",
+      "date": "2020-11-23",
+      "scope": "Specialiserad pediatrik",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "DKA",
+        "blodsocker"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-9332",
+      "title": "Dehydrering vid akut gastroenterit hos barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "vatska",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-9332",
+      "date": "2020-11-06",
+      "scope": "Akut barnsjukvård",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "uttorkning",
+        "dropp"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-3804",
+      "title": "Pseudokrupp",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "luft",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-3804",
+      "date": "2018-10-30",
+      "scope": "Barnintensivvårdsavdelningen;",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "obstruktivitet",
+        "stridor",
+        "andningsbesvär",
+        "RSV"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-21607",
+      "title": "Hyponatremi - BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "vatska",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-21607",
+      "date": "2026-08-25",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "uttorkning",
+        "dropp"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-9261",
+      "title": "Lumbalpunktion med sedering barn - BOT",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "smarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-9261",
+      "date": "2025-10-21",
+      "scope": "Blod- och tumörsjukdomar hos",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-24127",
+      "title": "Feberkramp - AVP Barnmedicin",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "neuro",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-24127",
+      "date": "2020-11-23",
+      "scope": "Pediatrik",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "anfall",
+        "kramp",
+        "feber",
+        "infektion"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-57163",
+      "title": "Oväntade dödsfall hos barn och ungdomar",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "trygg",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-57163",
+      "date": "2026-05-29",
+      "scope": "Akademiska Barnsjukhuset",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "orosanmälan"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-29236",
+      "title": "Bronkiolit - vård på BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "luft",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-29236",
+      "date": "2025-01-28",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "obstruktivitet",
+        "stridor",
+        "andningsbesvär",
+        "RSV"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-9050",
+      "title": "Sedering av barn och ungdomar - Barnkirurgi",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "smarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-9050",
+      "date": "2019-06-07",
+      "scope": "Barnkirurgi",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-3214",
+      "title": "Diabetes ketoacidos - BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "met",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-3214",
+      "date": "2025-03-31",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "DKA",
+        "blodsocker"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-17085",
+      "title": "Epilepsi - medicinska riktlinjer barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "neuro",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-17085",
+      "date": "2021-10-26",
+      "scope": "Sektionen för barnneurologi",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "status epilepticus",
+        "kramp",
+        "anfall"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-9435",
+      "title": "Meningit barn - Akut barnsjukvård",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "inf",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-9435",
+      "date": "2021-11-24",
+      "scope": "Akut barnsjukvård",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "feber",
+        "infektion"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-30084",
+      "title": "Rekommenderade läkemedel barn - Region Uppsala",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "akut",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-30084",
+      "date": "2025-06-10",
+      "scope": "Region Uppsala",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-21146",
+      "title": "Akut scrotum barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "buk",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-21146",
+      "date": "2019-10-02",
+      "scope": "Barnkirurgi",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "kräkning"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-3829",
+      "title": "Procedursedering barn - BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "smarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-3829",
+      "date": "2026-05-30",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-61326",
+      "title": "Procedursedering för barn på BC",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "smarta",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-61326",
+      "date": "2026-04-29",
+      "scope": "Anestesi, operation och intensivvård; Oral-",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-5015",
+      "title": "Ormbett på barn - BIVA",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "tox",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-5015",
+      "date": "2026-06-02",
+      "scope": "Barnintensivvårdsavdelningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-24129",
+      "title": "Intoxikation barn - AVP Barnmedicin",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "tox",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-24129",
+      "date": "2020-11-23",
+      "scope": "Akademiska Barnsjukhuset",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-3867",
+      "title": "Intoxikationer hos äldre barn - handläggning",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "tox",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-3867",
+      "date": "2024-10-01",
+      "scope": "Akademiska Barnsjukhuset;",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-4783",
+      "title": "Intralipid vid cirkulationsstillestånd - Barnanestesin",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "tox",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-4783",
+      "date": "2024-02-14",
+      "scope": "Barnanestesi- och",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "up-8766",
+      "title": "Lever- och mjältskador hos barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "trauma",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-8766",
+      "date": "2025-11-28",
+      "scope": "Barnkirurgi",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-27375",
+      "title": "Skalltrauma hos barn",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "trauma",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-27375",
+      "date": "2025-11-25",
+      "scope": "Akademiska Barnsjukhuset",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ],
+      "library": true
+    },
+    {
+      "id": "up-21087",
+      "title": "Akutlarm vuxen och barn AKM AS",
+      "source": "uppsala",
+      "publisher": "Region Uppsala · Akademiska",
+      "area": "akut",
+      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-21087",
+      "date": "2021-05-31",
+      "scope": "Akutmottagningen",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [],
+      "library": true
+    },
+    {
+      "id": "swepem-1",
+      "title": "Akut astma",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "luft",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/akut-astma/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "obstruktivitet",
+        "stridor",
+        "andningsbesvär",
+        "RSV"
+      ]
+    },
+    {
+      "id": "swepem-2",
+      "title": "Akut stopp trakealkanyl",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "luft",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/akut-stopp-trakealkanyl/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "andningsbesvär"
+      ]
+    },
+    {
+      "id": "swepem-4",
+      "title": "Akutrumsblad baserade på ålder och vikt",
+      "source": "karolinska",
+      "publisher": "Karolinska · via SWEPEM",
+      "area": "akut",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/pm/",
+      "date": "",
+      "scope": "Ålders- och viktindelade akutrumsblad; välj rätt original",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "swepem-5",
+      "title": "Anafylaxi barn",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "akut",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/anafylaxi-barn/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "swepem-6",
+      "title": "Avlidna barn",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "trygg",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/avlidna-barn/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "orosanmälan"
+      ]
+    },
+    {
+      "id": "swepem-7",
+      "title": "Frakturkompendium i barnortopedi",
+      "source": "karolinska",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "area": "trauma",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/blf-attachments/Frakturkompendium-i-Barnortopedi.pdf",
+      "date": "2026-01-11",
+      "scope": "Publicerad av SWEPEM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ]
+    },
+    {
+      "id": "swepem-8",
+      "title": "Drunkning",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "akut",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/drunkning/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "swepem-9",
+      "title": "Högflödesgrimma",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "luft",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/hogflodesgrimma/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "obstruktivitet",
+        "stridor",
+        "andningsbesvär",
+        "RSV"
+      ]
+    },
+    {
+      "id": "swepem-10",
+      "title": "Misstänkt misshandel av små barn",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "trygg",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/misstankt-misshandel-av-sma-barn/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "orosanmälan"
+      ]
+    },
+    {
+      "id": "swepem-11",
+      "title": "Misstänkt sexuellt övergrepp mot barn",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "trygg",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/misstankt-sexuellt-overgrepp-mot-barn/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "orosanmälan"
+      ]
+    },
+    {
+      "id": "swepem-12",
+      "title": "Nedsvald främmande kropp",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "buk",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/nedsvalda-frammande-kropp/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "kräkning",
+        "batteri",
+        "magnet",
+        "knappbatteri"
+      ]
+    },
+    {
+      "id": "swepem-13",
+      "title": "Procedursedering och smärtlindring",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "smarta",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/procedursedering-och-smartlindring/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "smärtlindring",
+        "analgesi"
+      ]
+    },
+    {
+      "id": "swepem-14",
+      "title": "Sepsis hos barn",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "inf",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/sepsis-hos-barn/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "feber",
+        "infektion"
+      ]
+    },
+    {
+      "id": "swepem-15",
+      "title": "Skallskador",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "trauma",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/patientmaterial/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ]
+    },
+    {
+      "id": "swepem-16",
+      "title": "Status epilepticus",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "neuro",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/status-epilepticus/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "status epilepticus",
+        "kramp",
+        "anfall"
+      ]
+    },
+    {
+      "id": "swepem-17",
+      "title": "Transfusionsprotokoll vid pediatrisk traumatisk blödning",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "trauma",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/transfusionsprotokoll-vid-pediatrisk-traumatisk-blodning/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "skada"
+      ]
+    },
+    {
+      "id": "swepem-18",
+      "title": "Vätskebehandling",
+      "source": "nationellt",
+      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "area": "vatska",
+      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/vatskebehandling/",
+      "date": "",
+      "scope": "Riktlinjesida hos specialistföreningen",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "uttorkning",
+        "dropp"
+      ]
+    },
+    {
+      "id": "alb-smarta",
+      "title": "Riktlinjer för smärtbehandling",
+      "source": "karolinska",
+      "publisher": "Karolinska · Smärtbehandlingsenheten för barn",
+      "area": "smarta",
+      "url": "https://www.karolinska.se/4a6477/globalassets/global/1-teman/tema-barn---alb/me--barn-perioperativ-medicin-och-intensivvard/riktlinjer202309014.pdf",
+      "date": "2023-09-01",
+      "scope": "Astrid Lindgrens barnsjukhus",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "analgesi",
+        "smärta",
+        "procedurer",
+        "smärtlindring",
+        "analgesi"
+      ]
+    },
+    {
+      "id": "alb-skelett",
+      "title": "Led- och skelettinfektioner hos barn",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2021/12/PM-skelettinfektioner-barn.docx",
+      "area": "trauma",
+      "date": "2021-08-04",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Publicerat via Svensk Barninfektionsförening",
+      "format": "Dokument hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "alb-dios-0",
+      "title": "DIOS vid cystisk fibros · 1–3 år (9–16 kg)",
+      "url": "https://www.karolinska.se/498ddd/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-9-16-kg-1-3-ar.pdf",
+      "area": "buk",
+      "date": "2022-05-31",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "obstruktion",
+        "cystisk fibros",
+        "CF"
+      ]
+    },
+    {
+      "id": "alb-dios-1",
+      "title": "DIOS vid cystisk fibros · 4–6 år (17–23 kg)",
+      "url": "https://www.karolinska.se/498da9/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-17-23-kg-4-6-ar.pdf",
+      "area": "buk",
+      "date": "2022-05-31",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "obstruktion",
+        "cystisk fibros",
+        "CF"
+      ]
+    },
+    {
+      "id": "alb-dios-2",
+      "title": "DIOS vid cystisk fibros · 7–9 år (24–33 kg)",
+      "url": "https://www.karolinska.se/498dbc/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-24-33-kg-7-9-ar.pdf",
+      "area": "buk",
+      "date": "2022-05-31",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "obstruktion",
+        "cystisk fibros",
+        "CF"
+      ]
+    },
+    {
+      "id": "alb-dios-3",
+      "title": "DIOS vid cystisk fibros · 10–11 år (34–39 kg)",
+      "url": "https://www.karolinska.se/498dc7/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-34-39-kg-10-11-ar.pdf",
+      "area": "buk",
+      "date": "2022-05-31",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "obstruktion",
+        "cystisk fibros",
+        "CF"
+      ]
+    },
+    {
+      "id": "alb-dios-4",
+      "title": "DIOS vid cystisk fibros · från 12 år (från 40 kg)",
+      "url": "https://www.karolinska.se/498dd2/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-fran-40-kg-fran-12-ar-och-vuxna-final.pdf",
+      "area": "buk",
+      "date": "2022-05-31",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "buksmärta",
+        "obstruktion",
+        "cystisk fibros",
+        "CF"
+      ]
+    },
+    {
+      "id": "alb-cf-ab",
+      "title": "Antibiotikadoser vid cystisk fibros",
+      "url": "https://www.karolinska.se/link/6727233a8c2740e9968ab95d213623c2.aspx",
+      "area": "luft",
+      "date": "",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · kontrollera åldersgrupp i originalet",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "andningsbesvär"
+      ]
+    },
+    {
+      "id": "alb-cf-inhal",
+      "title": "Inhalationsläkemedel vid cystisk fibros",
+      "url": "https://www.karolinska.se/link/e7fc28bcff29460395c1518b86bfd2cf.aspx",
+      "area": "luft",
+      "date": "",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · kontrollera åldersgrupp i originalet",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "andningsbesvär"
+      ]
+    },
+    {
+      "id": "blf-inf-20",
+      "title": "Vårdprogram Borrelia",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2026/09/Vardprogram-borreliainfektion-hos-barn-.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-21",
+      "title": "Vårdprogram Pertussis",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2026/09/PM-Pertussis-Barinfektion-BIVA-uppdaterat-december-2025.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-22",
+      "title": "Sepsis hos barn, initialt omhändertagande – vårdprogram",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Pediatrisk-sepsis-Svenska-riktlinjer-VER-2.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-23",
+      "title": "Sepsis hos barn, initialt omhändertagande – flödesschema",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/03/Flodesschema.-Misstanke-om-sepsis-hos-barn-med-eller-utan-chock-2.1.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-24",
+      "title": "Sepsis hos barn, initialt omhändertagande – checklista",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/03/Checklista.-Initial-handlaggning-Sepsis-hos-barn-med-eller-utan-chock-ver-2.1.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-25",
+      "title": "Sepsis hos barn, Phoenix sepsis score svenska",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Phoenix-sepsis-score-Svenska.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-26",
+      "title": "Sepsis hos barn, Phoenix sepsis score – räkneexempel",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Rakneexempel-for-Phoenix-sepsis-score.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "blf-inf-28",
+      "title": "Pleuravätska vid bakteriella pneumonier inklusive pleuraempyem",
+      "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/02/Riktlinje-Empyem.pdf",
+      "area": "inf",
+      "date": "",
+      "publisher": "Svensk Barninfektionsförening · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    },
+    {
+      "id": "snf-neo",
+      "title": "Neonatalvård · nationella riktlinjer och vårdprogram",
+      "url": "https://neo.barnlakarforeningen.se/riktlinjer-vardprogram/",
+      "area": "neo",
+      "date": "",
+      "publisher": "Svenska Neonatalföreningen · BLF",
+      "source": "nationellt",
+      "scope": "",
+      "format": "Hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": []
+    }
+  ]
+}

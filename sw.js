@@ -1,7 +1,7 @@
 // Akutkompassen service worker – app shell + data shards, works offline after first visit.
 // Bump VERSION on every release (build.py does this).
-const VERSION = 'ak-v10s2g';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json'];
+const VERSION = 'ak-v10s3-barn';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './barn/', './barn/index.html', './barn/style.css', './barn/app.js', './barn/data.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
@@ -19,5 +19,5 @@ self.addEventListener('fetch', e => {
   }
   // shell + index: network first, cache fallback
   e.respondWith(fetch(e.request).then(r => { const copy = r.clone(); caches.open(VERSION).then(c => c.put(e.request, copy)); return r; })
-    .catch(() => caches.open(VERSION).then(c => c.match(e.request, {ignoreSearch:true})).then(r => r || caches.match('./index.html'))));
+    .catch(() => caches.open(VERSION).then(c => c.match(e.request, {ignoreSearch:true})).then(r => r || (e.request.mode === 'navigate' ? caches.match(url.pathname.includes('/barn') ? './barn/index.html' : './index.html') : new Response('', {status:503})))));
 });
