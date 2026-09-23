@@ -3,6 +3,7 @@
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
+    "lung": "Lungsjukdomar",
     "inf": "Feber & infektion",
     "neuro": "Neurologi & kramper",
     "buk": "Buk & urologi",
@@ -826,126 +827,6 @@
       "keywords": []
     },
     {
-      "id": "alb-dios-0",
-      "title": "DIOS vid cystisk fibros · 1–3 år (9–16 kg)",
-      "url": "https://www.karolinska.se/498ddd/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-9-16-kg-1-3-ar.pdf",
-      "area": "buk",
-      "date": "2022-05-31",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "buksmärta",
-        "obstruktion",
-        "cystisk fibros",
-        "CF"
-      ]
-    },
-    {
-      "id": "alb-dios-1",
-      "title": "DIOS vid cystisk fibros · 4–6 år (17–23 kg)",
-      "url": "https://www.karolinska.se/498da9/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-17-23-kg-4-6-ar.pdf",
-      "area": "buk",
-      "date": "2022-05-31",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "buksmärta",
-        "obstruktion",
-        "cystisk fibros",
-        "CF"
-      ]
-    },
-    {
-      "id": "alb-dios-2",
-      "title": "DIOS vid cystisk fibros · 7–9 år (24–33 kg)",
-      "url": "https://www.karolinska.se/498dbc/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-24-33-kg-7-9-ar.pdf",
-      "area": "buk",
-      "date": "2022-05-31",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "buksmärta",
-        "obstruktion",
-        "cystisk fibros",
-        "CF"
-      ]
-    },
-    {
-      "id": "alb-dios-3",
-      "title": "DIOS vid cystisk fibros · 10–11 år (34–39 kg)",
-      "url": "https://www.karolinska.se/498dc7/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-34-39-kg-10-11-ar.pdf",
-      "area": "buk",
-      "date": "2022-05-31",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "buksmärta",
-        "obstruktion",
-        "cystisk fibros",
-        "CF"
-      ]
-    },
-    {
-      "id": "alb-dios-4",
-      "title": "DIOS vid cystisk fibros · från 12 år (från 40 kg)",
-      "url": "https://www.karolinska.se/498dd2/globalassets/global/1-teman/tema-barn---alb/me-hogspecialicerad-barnmedicin-2/stockolm-cfcenter/pm-cystisk-fibros/pm-dios-barn-fran-40-kg-fran-12-ar-och-vuxna-final.pdf",
-      "area": "buk",
-      "date": "2022-05-31",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · ålders- och viktspecifikt PM",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "buksmärta",
-        "obstruktion",
-        "cystisk fibros",
-        "CF"
-      ]
-    },
-    {
-      "id": "alb-cf-ab",
-      "title": "Antibiotikadoser vid cystisk fibros",
-      "url": "https://www.karolinska.se/link/6727233a8c2740e9968ab95d213623c2.aspx",
-      "area": "luft",
-      "date": "",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · kontrollera åldersgrupp i originalet",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "andningsbesvär"
-      ]
-    },
-    {
-      "id": "alb-cf-inhal",
-      "title": "Inhalationsläkemedel vid cystisk fibros",
-      "url": "https://www.karolinska.se/link/e7fc28bcff29460395c1518b86bfd2cf.aspx",
-      "area": "luft",
-      "date": "",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · kontrollera åldersgrupp i originalet",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "andningsbesvär"
-      ]
-    },
-    {
       "id": "blf-inf-20",
       "title": "Vårdprogram Borrelia",
       "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2026/09/Vardprogram-borreliainfektion-hos-barn-.pdf",
@@ -1061,6 +942,33 @@
       "format": "Hos utgivaren",
       "checked": "2026-09-23",
       "keywords": []
+    },
+    {
+      "id": "alb-cf",
+      "title": "Cystisk fibros – samlade PM",
+      "url": "cystisk-fibros.html",
+      "area": "lung",
+      "date": "",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
+      "source": "karolinska",
+      "scope": "Stockholm CF-center · DIOS för alla åldersgrupper, antibiotika och inhalationer",
+      "format": "Dokumentsamling",
+      "checked": "2026-09-23",
+      "keywords": [
+        "CF",
+        "DIOS",
+        "cystisk fibros",
+        "buksmärta",
+        "obstruktion",
+        "andningsbesvär",
+        "antibiotika",
+        "inhalation",
+        "1–3 år",
+        "4–6 år",
+        "7–9 år",
+        "10–11 år",
+        "12 år"
+      ]
     }
   ]
 }

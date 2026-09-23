@@ -1,8 +1,8 @@
-# Akutkompassen – webbapp (v10, version ak-v10s3-barn)
+# Akutkompassen – webbapp (v10, version ak-v10s4-cf)
 
 Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per område (`ak_*.json`). Den öppnar direkt, hämtar PM-texten i bakgrunden och fungerar offline efter första besöket. Svenska och internationella riktlinjer visas som länkar till utgivaren. Deras fulltext lagras inte i appen och kräver internet; titlar, beskrivningar och sökord är sökbara lokalt.
 
-## Gränssnitt ak-v10s3-barn
+## Gränssnitt ak-v10s4-cf
 
 Startsidan skiljer mellan **Lokala PM** (Region Uppsala / DocPlus) och **Externa riktlinjer** (svenska och internationella utgivare). Källtypen syns även i sökresultat, sparade dokument och läsvyn. Indelningen i kärn-PM och andra linjen har tagits bort, liksom dess påverkan på sortering och sökpoäng. Områdeslistor sorteras alfabetiskt. Dokumentregistret och källtexterna är oförändrade.
 
@@ -51,7 +51,7 @@ Repot är publikt. Innehållet är text ur offentliga DocPlus-PDF:er (Region Upp
 
 ## Barnsektion – 23 september 2026
 
-`/barn/` är ett separat sökbart bibliotek med 66 offentliga källänkar: 31 lokala Akademiska/Region Uppsala-PM, 11 Karolinska-resurser och 24 externa kunskapsstöd. Sökning omfattar metadata och sökord, inte medicinsk fulltext. Favoriter lagras separat under `ak.barn.saved`.
+`/barn/` är ett separat sökbart bibliotek med 60 biblioteksposter: 31 lokala Akademiska/Region Uppsala-PM, 5 Karolinska-poster och 24 externa kunskapsstöd. Cystisk fibros samlar sju Karolinska-PM i en post under Lungsjukdomar; totalt finns fortfarande 66 källänkar. Sökning omfattar metadata och sökord, inte medicinsk fulltext. Favoriter lagras separat under `ak.barn.saved`.
 
 `barn/data.json` innehåller dokumentdatum när verifierbart, avsändare, område och datum för länkkontroll. Datumet för länkkontroll är inte medicinsk granskning. Karolinska-PM kan vara publicerade via specialistföreningar; de attribueras till sjukhuset. Inga lokala PDF-filer har kopierats eller publicerats. Ytterligare 27 bibliotekskopior har identifierats men hålls utanför webbplatsen tills offentlig publicering har godkänts.
 
