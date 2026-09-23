@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-theme="light" data-v="ak-v10s5-unified"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-theme="light" data-v="ak-v10s6-area-colors"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -318,6 +318,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 (async function(){
 const DATA = await (await fetch('ak_index.json?v='+encodeURIComponent(document.documentElement.dataset.v||''),{cache:'no-cache'})).json();
 const AREAS = DATA.areas, DOCS = DATA.docs, UPDATED = DATA.updated, SHARDS = DATA.shards;
+const AREA_COLORS={TRA:'#cc7850',KAR:'#b55669',HLR:'#b6532f',AK:'#a35c91',NEU:'#7963b6',INF:'#c28012',GI:'#4d8772',END:'#a35c91',URO:'#2289b6',LUN:'#178b9a',ALL:'#b88730',TOX:'#738643',PSY:'#6181b4',PRO:'#96679b',ORT:'#bd8752',GYN:'#ad6689',HEM:'#aa596d',LM:'#63835e',RAD:'#557f9e',ONH:'#4f938e',OPS:'#788398'};
 const ORDER = Object.keys(AREAS); const NPM=DOCS.filter(d=>d.kind!=='gl').length, NGL=DOCS.filter(d=>d.kind==='gl').length; const T0=performance.now();
 const BYID = new Map(DOCS.map(d=>[d.id,d]));
 const STOP = new Set('och i att det som en på är av för med till den har de inte om ett vid kan eller så ska skall från man än men efter sig vara alla när där bör vilket samt även dessa detta denna hos under över mot ut in upp ner per st the of and in to for with or is be are by on as at an this that from not was were should may than if it its their these those which who into no do does'.split(' '));
@@ -477,7 +478,7 @@ function docCard(d,withArea){
 function renderAreas(counts){
   const el=$('areas'); el.innerHTML='';
   const all=document.createElement('button'); all.className=state.area?'':'on'; all.innerHTML=`<span>Alla områden</span><span class="n">${counts.total}</span>`; all.onclick=()=>{state.area=null;update();}; el.appendChild(all);
-  ORDER.forEach(a=>{const n=counts[a]||0;const b=document.createElement('button');b.className=(state.area===a?'on':'')+(n?'':' zero');b.innerHTML=`<span>${esc(AREAS[a])}</span><span class="n">${n}</span>`;b.onclick=()=>{state.area=state.area===a?null:a;update();};el.appendChild(b);});
+  ORDER.forEach(a=>{const n=counts[a]||0;const b=document.createElement('button');b.style.setProperty('--area-color',AREA_COLORS[a]||'#163c53');b.className=(state.area===a?'on':'')+(n?'':' zero');b.innerHTML=`<span>${esc(AREAS[a])}</span><span class="n">${n}</span>`;b.onclick=()=>{state.area=state.area===a?null:a;update();};el.appendChild(b);});
 }
 function setStat(t){$('stat').textContent=t;}
 const EXAMPLES=['insulin DKA','HINTS nystagmus','tranexamsyra trauma','"lågmolekylärt heparin" gravid','acetylcystein paracetamol','hyperkalemi','trombolys kontraindikation','anafylaxi adrenalin dos','delirium tremens','lumbalpunktion antikoagulantia','tenecteplase stroke','sepsis lactate fluids','ketamine sedation children','aortic dissection D-dimer'];

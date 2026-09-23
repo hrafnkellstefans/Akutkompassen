@@ -1,6 +1,6 @@
 // Akutkompassen service worker – app shell + data shards, works offline after first visit.
 // Bump VERSION on every release (build.py does this).
-const VERSION = 'ak-v10s5-unified';
+const VERSION = 'ak-v10s6-area-colors';
 const SHELL = ['./', './index.html', './shared.css', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './barn/', './barn/index.html', './barn/style.css', './barn/app.js', './barn/data.json',];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
