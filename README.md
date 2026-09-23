@@ -56,3 +56,19 @@ Repot är publikt. Innehållet är text ur offentliga DocPlus-PDF:er (Region Upp
 `barn/data.json` innehåller dokumentdatum när verifierbart, avsändare, område och datum för länkkontroll. Datumet för länkkontroll är inte medicinsk granskning. Karolinska-PM kan vara publicerade via specialistföreningar; de attribueras till sjukhuset. Inga lokala PDF-filer har kopierats eller publicerats. Ytterligare 27 bibliotekskopior har identifierats men hålls utanför webbplatsen tills offentlig publicering har godkänts.
 
 Barnsidan länkar direkt till original-PDF:er och riktlinjesidor. Vid ändringar uppdateras `barn/data.json`, `index.html`/`ak_index.json` och cacheversionen i `sw.js`. Service worker cachelagrar barnsidan och dess register, men aldrig externa källdokument.
+
+### Rättningar 23 september 2026 (ak-v10s4e)
+
+- "Skallskador" (swepem-15) pekade på SWEPEM:s sida för patientmaterial; pekar nu på SNC:s skandinaviska riktlinje för skallskador hos barn (PDF, Läkartidningen 2017).
+- Osteomyelit/septisk artrit (Akademiska) och Led- och skelettinfektioner (ALB) flyttade från Trauma & ortopedi till Feber & infektion.
+- 14 SWEPEM-poster länkar nu direkt till dokumentet (PDF) i stället för föreningens landningssida, med dokumentdatum och utgivare (BLF Allergi & lung, BSFI, SNPF). Anafylaxi barn pekar på BLF-AL:s riktlinje rev 2026-08-21 i stället för SFFA:s fickformat.
+- Sökningen tål böjningar ("kramper" hittar "kramp", "feberkramper" hittar "feberkramp").
+- Fokus stannar på valt område efter klick (tangentbord/skärmläsare).
+- Dokumentspecifika sökord för krupp, bronkiolit, meningit, feberkramp, epilepsi, akut skrotum, ormbett, LAST och hyponatremi.
+
+## 23 september 2026 – Barn (ak-v10s4f)
+
+- Barnbiblioteket utökat från 60 till 94 dokument: nationella PM från BLF:s sektioner (endokrin/diabetes, nefrologi, reumatologi, hematologi/onkologi, kardiologi, neuropediatrik, neonatal), HLR-rådet, Löf, Läkemedelsverket, SWESEM, NPO kirurgi och Socialstyrelsen. Alla länkar går direkt till PDF hos utgivaren (kontrollerade 2026-09-23).
+- Borttaget: Svampinfektioner barn (BOT), Abstinens efter sedering (BIVA), samlingssidan för cystisk fibros (`barn/cystisk-fibros.html`) och neonatalföreningens listsida – ersatt av konkreta neonataldokument.
+- SWEPEM-poster länkar nu direkt till PDF; sökningen tål böjningsformer (t.ex. "kramper" hittar "kramp").
+- Sparade favoriter som pekar på borttagna dokument rensas automatiskt.

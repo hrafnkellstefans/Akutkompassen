@@ -3,7 +3,6 @@
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
-    "lung": "Lungsjukdomar",
     "inf": "Feber & infektion",
     "neuro": "Neurologi & kramper",
     "buk": "Buk & urologi",
@@ -22,31 +21,18 @@
       "title": "Osteomyelit och septisk artrit barn - handläggningsrutiner",
       "source": "uppsala",
       "publisher": "Region Uppsala · Akademiska",
-      "area": "trauma",
+      "area": "inf",
       "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-8416",
       "date": "2021-02-11",
       "scope": "Akut barnsjukvård; Barnkirurgi",
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "skada"
-      ],
-      "library": true
-    },
-    {
-      "id": "up-18453",
-      "title": "Svampinfektioner barn - utredning, diagnostik och behandling, BOT",
-      "source": "uppsala",
-      "publisher": "Region Uppsala · Akademiska",
-      "area": "inf",
-      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-18453",
-      "date": "2022-03-04",
-      "scope": "Blod- och tumörsjukdomar hos barn",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "feber",
-        "infektion"
+        "osteomyelit",
+        "septisk artrit",
+        "hälta",
+        "skelettinfektion",
+        "feber"
       ],
       "library": true
     },
@@ -79,23 +65,6 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [],
-      "library": true
-    },
-    {
-      "id": "up-24724",
-      "title": "Abstinens efter sedering och delirium - BIVA",
-      "source": "uppsala",
-      "publisher": "Region Uppsala · Akademiska",
-      "area": "smarta",
-      "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-24724",
-      "date": "2022-08-29",
-      "scope": "Barnintensivvårdsavdelningen",
-      "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": [
-        "smärtlindring",
-        "analgesi"
-      ],
       "library": true
     },
     {
@@ -195,10 +164,12 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "obstruktivitet",
+        "krupp",
+        "falsk krupp",
         "stridor",
-        "andningsbesvär",
-        "RSV"
+        "skällhosta",
+        "inhalation adrenalin",
+        "andningsbesvär"
       ],
       "library": true
     },
@@ -214,7 +185,9 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "uttorkning",
+        "hyponatremi",
+        "natrium",
+        "elektrolyt",
         "dropp"
       ],
       "library": true
@@ -248,10 +221,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "anfall",
+        "feberkramp",
         "kramp",
-        "feber",
-        "infektion"
+        "anfall",
+        "feber"
       ],
       "library": true
     },
@@ -284,10 +257,11 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "bronkiolit",
+        "RSV",
         "obstruktivitet",
-        "stridor",
         "andningsbesvär",
-        "RSV"
+        "högflöde"
       ],
       "library": true
     },
@@ -337,9 +311,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "status epilepticus",
+        "epilepsi",
         "kramp",
-        "anfall"
+        "anfall",
+        "status epilepticus"
       ],
       "library": true
     },
@@ -355,8 +330,11 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "meningit",
+        "encefalit",
         "feber",
-        "infektion"
+        "infektion",
+        "lumbalpunktion"
       ],
       "library": true
     },
@@ -386,8 +364,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "buksmärta",
-        "kräkning"
+        "testis",
+        "torsion",
+        "skrotum",
+        "buksmärta"
       ],
       "library": true
     },
@@ -436,7 +416,12 @@
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
-      "keywords": [],
+      "keywords": [
+        "huggorm",
+        "ormbett",
+        "antiserum",
+        "bett"
+      ],
       "library": true
     },
     {
@@ -478,7 +463,12 @@
       "scope": "Barnanestesi- och",
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
-      "keywords": [],
+      "keywords": [
+        "LAST",
+        "lokalanestetika",
+        "intralipid",
+        "hjärtstopp"
+      ],
       "library": true
     },
     {
@@ -531,18 +521,18 @@
       "id": "swepem-1",
       "title": "Akut astma",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Allergi & lung · via SWEPEM",
       "area": "luft",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/akut-astma/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://aol.barnlakarforeningen.se/wp-content/uploads/sites/24/2024/12/Akut_astma_241206.pdf",
+      "date": "2024-12-06",
+      "scope": "Riktlinje akut astma barn",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "astma",
         "obstruktivitet",
-        "stridor",
-        "andningsbesvär",
-        "RSV"
+        "inhalation",
+        "andningsbesvär"
       ]
     },
     {
@@ -568,23 +558,28 @@
       "area": "akut",
       "url": "https://swepem.barnlakarforeningen.se/riktlinjer/pm/",
       "date": "",
-      "scope": "Ålders- och viktindelade akutrumsblad; välj rätt original",
-      "format": "Hos utgivaren",
+      "scope": "Ålders- och viktindelade akutrumsblad (Word) – välj rätt ålder/vikt",
+      "format": "Dokumentsamling",
       "checked": "2026-09-23",
       "keywords": []
     },
     {
       "id": "swepem-5",
-      "title": "Anafylaxi barn",
+      "title": "Anafylaxi hos barn och ungdomar",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Allergi & lung",
       "area": "akut",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/anafylaxi-barn/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://aol.barnlakarforeningen.se/wp-content/uploads/sites/24/2026/08/Anafylaxi.260821-2.pdf",
+      "date": "2026-08-21",
+      "scope": "Riktlinje rev augusti 2026",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
-      "keywords": []
+      "keywords": [
+        "anafylaxi",
+        "adrenalin",
+        "allergisk reaktion",
+        "urtikaria"
+      ]
     },
     {
       "id": "swepem-6",
@@ -592,10 +587,10 @@
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "trygg",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/avlidna-barn/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2020/11/Avlidna-barn.pdf",
+      "date": "2020-11-01",
+      "scope": "Handläggning vid dödsfall hos barn",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
         "barn som far illa",
@@ -623,27 +618,32 @@
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "akut",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/drunkning/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2026/06/Drunkning.pdf",
+      "date": "2026-06-01",
+      "scope": "Akut behandling vid drunkning",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
-      "keywords": []
+      "keywords": [
+        "drunkning",
+        "hypotermi",
+        "hjärtstopp"
+      ]
     },
     {
       "id": "swepem-9",
       "title": "Högflödesgrimma",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Allergi & lung · via SWEPEM",
       "area": "luft",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/hogflodesgrimma/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://aol.barnlakarforeningen.se/wp-content/uploads/sites/24/2024/11/riktlinje-HFG-oversikt.pdf",
+      "date": "2024-11-01",
+      "scope": "Kortversion av riktlinje högflödesgrimma",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "obstruktivitet",
-        "stridor",
+        "högflöde",
+        "HFNC",
+        "bronkiolit",
         "andningsbesvär",
         "RSV"
       ]
@@ -652,12 +652,12 @@
       "id": "swepem-10",
       "title": "Misstänkt misshandel av små barn",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Barn som far illa (BSFI)",
       "area": "trygg",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/misstankt-misshandel-av-sma-barn/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://bsfi.barnlakarforeningen.se/wp-content/uploads/sites/13/2025/08/Medicinsk-rutin-for-handlaggning-av-misstankt-misshandel-av-sma-barn-250827.pdf",
+      "date": "2025-08-27",
+      "scope": "Medicinsk rutin",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
         "barn som far illa",
@@ -668,12 +668,12 @@
       "id": "swepem-11",
       "title": "Misstänkt sexuellt övergrepp mot barn",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Barn som far illa (BSFI)",
       "area": "trygg",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/misstankt-sexuellt-overgrepp-mot-barn/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://bsfi.barnlakarforeningen.se/wp-content/uploads/sites/13/2024/11/Nationell-checklista-for-medicinsk-utredning-sparsakring-och-samverkan-vid-sexuella-overgrepp-mot-barn.-Version-2.0.-2024-10-08.pdf",
+      "date": "2024-10-08",
+      "scope": "Nationell checklista v2.0",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
         "barn som far illa",
@@ -686,10 +686,10 @@
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "buk",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/nedsvalda-frammande-kropp/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2026/09/Nedsvald-frammande-kropp-barn.pdf",
+      "date": "2026-09-01",
+      "scope": "Riktlinje nedsvald främmande kropp",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
         "buksmärta",
@@ -705,12 +705,16 @@
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "smarta",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/procedursedering-och-smartlindring/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2026/03/Procedursedering-och-smartlindring-inom-barnakutsjukvard-K73695_1.pdf",
+      "date": "2026-03-01",
+      "scope": "Riktlinje v2.0 procedursedering och smärtlindring inom barnakutsjukvård",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "sedering",
+        "ketamin",
+        "lustgas",
+        "intranasal",
         "smärtlindring",
         "analgesi"
       ]
@@ -733,29 +737,33 @@
     },
     {
       "id": "swepem-15",
-      "title": "Skallskador",
+      "title": "Skallskador hos barn – skandinaviska riktlinjer (SNC)",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "Scandinavian Neurotrauma Committee · via SWEPEM",
       "area": "trauma",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/patientmaterial/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2020/11/EFMZ.pdf",
+      "date": "2017-01-01",
+      "scope": "Läkartidningen 2017 – minimal, lätt och medelsvår skallskada",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "skalltrauma",
+        "hjärnskakning",
+        "commotio",
+        "DT hjärna",
         "skada"
       ]
     },
     {
       "id": "swepem-16",
-      "title": "Status epilepticus",
+      "title": "Konvulsivt status epilepticus – barn över 1 månad",
       "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
+      "publisher": "BLF Neuropediatrik (SNPF)",
       "area": "neuro",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/status-epilepticus/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://snpf.barnlakarforeningen.se/wp-content/uploads/sites/4/2025/11/202511KONVULSIVT-STATUS-EPILEPTI-CUS-%E2%80%93-BARN-OVER-1-MAN.pdf",
+      "date": "2025-11-01",
+      "scope": "Nationellt handläggningsstöd",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
         "status epilepticus",
@@ -769,29 +777,35 @@
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "trauma",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/transfusionsprotokoll-vid-pediatrisk-traumatisk-blodning/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2022/09/Nationella-rekommendationer-massivt-transfusionsprotokoll-vid-pediatrisk-traumatisk-blodning.pdf",
+      "date": "2022-09-01",
+      "scope": "Nationella rekommendationer",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "massiv blödning",
+        "transfusion",
+        "trauma",
         "skada"
       ]
     },
     {
       "id": "swepem-18",
-      "title": "Vätskebehandling",
+      "title": "Intravenös rehydrering av barn över 1 månad",
       "source": "nationellt",
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "vatska",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/vatskebehandling/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
+      "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2022/09/PM-Intravenos-rehydrering-av-barn-o-1-man-nation-rev210929.pdf",
+      "date": "2021-09-29",
+      "scope": "Nationellt PM",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
+        "rehydrering",
+        "dehydrering",
         "uttorkning",
-        "dropp"
+        "dropp",
+        "vätska"
       ]
     },
     {
@@ -817,14 +831,20 @@
       "id": "alb-skelett",
       "title": "Led- och skelettinfektioner hos barn",
       "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2021/12/PM-skelettinfektioner-barn.docx",
-      "area": "trauma",
+      "area": "inf",
       "date": "2021-08-04",
       "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
       "source": "karolinska",
       "scope": "Publicerat via Svensk Barninfektionsförening",
       "format": "Dokument hos utgivaren",
       "checked": "2026-09-23",
-      "keywords": []
+      "keywords": [
+        "osteomyelit",
+        "septisk artrit",
+        "hälta",
+        "skelettinfektion",
+        "feber"
+      ]
     },
     {
       "id": "blf-inf-20",
@@ -931,43 +951,695 @@
       "keywords": []
     },
     {
-      "id": "snf-neo",
-      "title": "Neonatalvård · nationella riktlinjer och vårdprogram",
-      "url": "https://neo.barnlakarforeningen.se/riktlinjer-vardprogram/",
-      "area": "neo",
-      "date": "",
-      "publisher": "Svenska Neonatalföreningen · BLF",
+      "id": "hlr-ahlr-barn",
+      "title": "A-HLR barn – handlingsplan 2026",
       "source": "nationellt",
-      "scope": "",
-      "format": "Hos utgivaren",
-      "checked": "2026-09-23",
-      "keywords": []
-    },
-    {
-      "id": "alb-cf",
-      "title": "Cystisk fibros – samlade PM",
-      "url": "cystisk-fibros.html",
-      "area": "lung",
-      "date": "",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus",
-      "source": "karolinska",
-      "scope": "Stockholm CF-center · DIOS för alla åldersgrupper, antibiotika och inhalationer",
-      "format": "Dokumentsamling",
+      "publisher": "Svenska HLR-rådet",
+      "area": "akut",
+      "url": "https://www.hlr.nu/wp-content/uploads/2026/05/A-HLR-barn.pdf",
+      "date": "2026-05-01",
+      "scope": "Handlingsplan (1 sida)",
+      "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
-        "CF",
-        "DIOS",
-        "cystisk fibros",
+        "hjärtstopp",
+        "HLR",
+        "defibrillering",
+        "adrenalin",
+        "amiodaron"
+      ]
+    },
+    {
+      "id": "hlr-arbetsblad-barn",
+      "title": "Arbetsblad hjärtstopp barn 2026",
+      "source": "nationellt",
+      "publisher": "Svenska HLR-rådet",
+      "area": "akut",
+      "url": "https://www.hlr.nu/wp-content/uploads/2026/06/Arbetsblad-A-HLR-barn-2026_1.pdf",
+      "date": "2026-06-01",
+      "scope": "Doser och tubstorlekar efter vikt",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "hjärtstopp",
+        "HLR",
+        "dos",
+        "vikt",
+        "tub"
+      ]
+    },
+    {
+      "id": "lof-pews",
+      "title": "Swe-PEWS – kort för alla åldrar",
+      "source": "nationellt",
+      "publisher": "Löf · Säker barnsjukvård",
+      "area": "akut",
+      "url": "https://wp.lof.se/wp-content/uploads/PEWs-korten-A4-alla.pdf",
+      "date": "2021-01-01",
+      "scope": "Pediatric Early Warning Score, åldersindelade kort",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "PEWS",
+        "vitalparametrar",
+        "triage",
+        "övervakning"
+      ]
+    },
+    {
+      "id": "sfai-luftvag-barn",
+      "title": "Luftvägshantering hos barn och ungdomar",
+      "source": "nationellt",
+      "publisher": "SFAI / SFBABI",
+      "area": "luft",
+      "url": "https://sfai.se/wp-content/uploads/2020/10/Airway_management_children_SFAI_2020.pdf",
+      "date": "2020-10-01",
+      "scope": "Rådgivande dokument",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "luftväg",
+        "intubation",
+        "larynxmask",
+        "svår luftväg",
+        "andningsbesvär"
+      ]
+    },
+    {
+      "id": "lof-trakealkanyl",
+      "title": "Akut stopp i trakealkanyl – fickkort",
+      "source": "nationellt",
+      "publisher": "Löf",
+      "area": "luft",
+      "url": "https://lof.se/filer/akut-stopp-kort-2021.pdf",
+      "date": "2021-01-01",
+      "scope": "Fickkort barn och vuxna",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "trakeostomi",
+        "trakealkanyl",
+        "luftvägsstopp",
+        "andningsbesvär"
+      ]
+    },
+    {
+      "id": "blf-endo-dka",
+      "title": "Ketoacidos (DKA) och hyperosmolärt hyperglykemiskt tillstånd hos barn – nationellt vårdprogram",
+      "source": "nationellt",
+      "publisher": "BLF Endokrinologi & diabetes",
+      "area": "met",
+      "url": "https://endodiab.barnlakarforeningen.se/wp-content/uploads/sites/9/2024/04/VP_diabetes_ketoacidos_HHC-231209.pdf",
+      "date": "2023-12-09",
+      "scope": "Nationellt vårdprogram",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "DKA",
+        "ketoacidos",
+        "HHS",
+        "insulin",
+        "blodsocker",
+        "diabetes"
+      ]
+    },
+    {
+      "id": "blf-endo-kortisol",
+      "title": "Kortisolbrist – akutschema barn",
+      "source": "nationellt",
+      "publisher": "BLF Endokrinologi & diabetes",
+      "area": "met",
+      "url": "https://endodiab.barnlakarforeningen.se/wp-content/uploads/sites/9/2019/05/Kortisolbrist180921.pdf",
+      "date": "2018-09-21",
+      "scope": "PM akut handläggning",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "binjurebarkssvikt",
+        "Addison",
+        "hydrokortison",
+        "kortisolbrist",
+        "kräkning"
+      ]
+    },
+    {
+      "id": "blf-endo-hypokalcemi",
+      "title": "Hypokalcemi – akut omhändertagande barn",
+      "source": "nationellt",
+      "publisher": "BLF Endokrinologi & diabetes",
+      "area": "met",
+      "url": "https://endodiab.barnlakarforeningen.se/wp-content/uploads/sites/9/2024/04/PM-hypokalcemi-2024-final.pdf",
+      "date": "2024-04-01",
+      "scope": "PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "hypokalcemi",
+        "kalcium",
+        "kramp",
+        "tetani"
+      ]
+    },
+    {
+      "id": "blf-endo-hypoglykemi",
+      "title": "Hypoglykemi vid diabetes hos barn (ISPAD kap 12, svensk version)",
+      "source": "nationellt",
+      "publisher": "BLF Endokrinologi & diabetes",
+      "area": "met",
+      "url": "https://endodiab.barnlakarforeningen.se/wp-content/uploads/sites/9/2024/12/12-Hypoglykemi.pdf",
+      "date": "2024-12-01",
+      "scope": "Svensk sammanfattning",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "hypoglykemi",
+        "glukagon",
+        "glukos",
+        "blodsocker",
+        "diabetes"
+      ]
+    },
+    {
+      "id": "blf-metabol-kris",
+      "title": "Akuta metabola sjukdomar och misstänkt metabol kris",
+      "source": "nationellt",
+      "publisher": "BLF Metabola sjukdomar",
+      "area": "met",
+      "url": "https://www.barnlakarforeningen.se/wp-content/uploads/2020/11/Akuta-metabola-sjukdomar-PM_191126.pdf",
+      "date": "2019-11-26",
+      "scope": "PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "metabol kris",
+        "hyperammonemi",
+        "medfödd metabol sjukdom",
+        "acidos"
+      ]
+    },
+    {
+      "id": "blf-reuma-artrit",
+      "title": "Akut artrit hos barn och ungdomar",
+      "source": "nationellt",
+      "publisher": "BLF Barnreumatologi",
+      "area": "inf",
+      "url": "https://reuma.barnlakarforeningen.se/wp-content/uploads/sites/11/2023/10/Akut-artrit-uppdatering-231015.pdf",
+      "date": "2023-10-15",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "artrit",
+        "hälta",
+        "septisk artrit",
+        "coxitis simplex",
+        "ledsvullnad"
+      ]
+    },
+    {
+      "id": "blf-reuma-misc",
+      "title": "MIS-C – twopager",
+      "source": "nationellt",
+      "publisher": "BLF Barnreumatologi",
+      "area": "inf",
+      "url": "https://reuma.barnlakarforeningen.se/wp-content/uploads/sites/11/2021/05/Twopager-MIS-C-210510.pdf",
+      "date": "2021-05-10",
+      "scope": "Kortversion",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "MIS-C",
+        "hyperinflammation",
+        "feber",
+        "covid"
+      ]
+    },
+    {
+      "id": "blf-reuma-pfapa",
+      "title": "PFAPA – periodisk feber",
+      "source": "nationellt",
+      "publisher": "BLF Barnreumatologi",
+      "area": "inf",
+      "url": "https://reuma.barnlakarforeningen.se/wp-content/uploads/sites/11/2025/12/PFAPA-2025-10-21.pdf",
+      "date": "2025-10-21",
+      "scope": "Vårdprogram",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "PFAPA",
+        "periodisk feber",
+        "feber",
+        "tonsillit"
+      ]
+    },
+    {
+      "id": "blf-reuma-kawasaki",
+      "title": "Kawasakis sjukdom – nationellt vårdprogram",
+      "source": "nationellt",
+      "publisher": "BLF Barnreumatologi",
+      "area": "inf",
+      "url": "https://reuma.barnlakarforeningen.se/wp-content/uploads/sites/11/2023/11/kawasaki_vardprogram_slutversion-231025-1.pdf",
+      "date": "2023-10-25",
+      "scope": "Nationellt vårdprogram",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "Kawasaki",
+        "feber",
+        "vaskulit",
+        "koronaraneurysm"
+      ]
+    },
+    {
+      "id": "blf-reuma-iga",
+      "title": "IgA-vaskulit (Henoch-Schönlein) – nationellt PM",
+      "source": "nationellt",
+      "publisher": "BLF Barnreumatologi",
+      "area": "inf",
+      "url": "https://reuma.barnlakarforeningen.se/wp-content/uploads/sites/11/2018/12/Nationellt-PM-om-IgA-vaskulit.pdf",
+      "date": "2018-12-01",
+      "scope": "Nationellt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "Henoch-Schönlein",
+        "IgA-vaskulit",
+        "purpura",
         "buksmärta",
-        "obstruktion",
-        "andningsbesvär",
+        "hematuri"
+      ]
+    },
+    {
+      "id": "blf-pho-neutropeni",
+      "title": "Febril neutropeni hos barn med cancer",
+      "source": "nationellt",
+      "publisher": "BLF Barnonkologi (PHO)",
+      "area": "inf",
+      "url": "https://pho.barnlakarforeningen.se/wp-content/uploads/sites/20/2024/09/PM-SC-Febril-neutropeni-240610.pdf",
+      "date": "2024-06-10",
+      "scope": "PM v3.0",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "neutropen feber",
+        "feber",
+        "onkologi",
+        "antibiotika"
+      ]
+    },
+    {
+      "id": "raf-antibiotika-barn",
+      "title": "Doseringstabell antibiotika barn",
+      "source": "nationellt",
+      "publisher": "RAF / BLF",
+      "area": "inf",
+      "url": "https://forening.sls.se/media/rjchwff1/doseringstabell-barn-1.pdf",
+      "date": "2021-01-01",
+      "scope": "Dosering per kg, v1.0",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
         "antibiotika",
-        "inhalation",
-        "1–3 år",
-        "4–6 år",
-        "7–9 år",
-        "10–11 år",
-        "12 år"
+        "dosering",
+        "dos",
+        "infektion"
+      ]
+    },
+    {
+      "id": "blf-nefro-uvi",
+      "title": "Urinvägsinfektioner hos barn – nationella riktlinjer",
+      "source": "nationellt",
+      "publisher": "BLF Barnnefrologi",
+      "area": "buk",
+      "url": "https://nefro.barnlakarforeningen.se/wp-content/uploads/sites/8/2015/09/UVI-riktlinjer.pdf",
+      "date": "2015-09-01",
+      "scope": "Nationella riktlinjer (algoritmer finns på föreningens sida)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "UVI",
+        "pyelonefrit",
+        "urinvägsinfektion",
+        "feber",
+        "infektion"
+      ]
+    },
+    {
+      "id": "blf-nefro-hematuri",
+      "title": "Hematuri hos barn – nationellt PM",
+      "source": "nationellt",
+      "publisher": "BLF Barnnefrologi",
+      "area": "buk",
+      "url": "https://nefro.barnlakarforeningen.se/wp-content/uploads/sites/8/2014/12/Hematuri-PM-nationellt-förslag-sidbrytning-180114.pdf",
+      "date": "2018-01-14",
+      "scope": "Nationellt PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "hematuri",
+        "blod i urinen",
+        "nefrit"
+      ]
+    },
+    {
+      "id": "blf-nefro-njursten",
+      "title": "Njursten hos barn – utredning och behandling",
+      "source": "nationellt",
+      "publisher": "BLF Barnnefrologi",
+      "area": "buk",
+      "url": "https://nefro.barnlakarforeningen.se/wp-content/uploads/sites/8/2016/03/Vardprogram-for-utredning-och-behandling-av-njursten-hos-barn-2015.pdf",
+      "date": "2015-01-01",
+      "scope": "Vårdprogram",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "njursten",
+        "njurkolik",
+        "buksmärta",
+        "hematuri"
+      ]
+    },
+    {
+      "id": "blf-nefro-hus",
+      "title": "STEC och STEC-HUS – handläggningsstöd",
+      "source": "nationellt",
+      "publisher": "BLF Barnnefrologi",
+      "area": "buk",
+      "url": "https://nefro.barnlakarforeningen.se/wp-content/uploads/sites/8/2025/01/STEC-HUS-handlaggningsstod-dec24.pdf",
+      "date": "2024-12-01",
+      "scope": "Handläggningsstöd v1.0",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "HUS",
+        "EHEC",
+        "blodig diarré",
+        "njursvikt"
+      ]
+    },
+    {
+      "id": "npo-appendicit",
+      "title": "Akut appendicit – nationellt vårdprogram (vuxna och barn)",
+      "source": "nationellt",
+      "publisher": "Nationellt programområde kirurgi",
+      "area": "buk",
+      "url": "https://vardpersonal.1177.se/globalassets/nkk/nationell/media/dokument/kunskapsstod/vardprogram/nationellt-vardprogram-for-akut-appendicit2.pdf",
+      "date": "2024-01-01",
+      "scope": "Nationellt vårdprogram",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "appendicit",
+        "buksmärta",
+        "blindtarm"
+      ]
+    },
+    {
+      "id": "snpf-epilepsi",
+      "title": "Epilepsi hos barn och ungdomar – handläggningsstöd",
+      "source": "nationellt",
+      "publisher": "BLF Neuropediatrik (SNPF)",
+      "area": "neuro",
+      "url": "https://snpf.barnlakarforeningen.se/wp-content/uploads/sites/4/2026/09/2609Epilepsi-hos-barn-och-ungdomar-Handla-̈ggningsstod_uppdaterad-20260907.pdf",
+      "date": "2026-09-07",
+      "scope": "Nationellt handläggningsstöd",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "epilepsi",
+        "anfall",
+        "kramp",
+        "antiepileptika"
+      ]
+    },
+    {
+      "id": "sbkf-svt",
+      "title": "Akut handläggning av SVT hos barn",
+      "source": "nationellt",
+      "publisher": "BLF Barnkardiologi (SBKF)",
+      "area": "hjarta",
+      "url": "https://sbkf.barnlakarforeningen.se/wp-content/uploads/sites/17/2025/07/PSVT-PM-20250522.pdf",
+      "date": "2025-05-22",
+      "scope": "PM",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "SVT",
+        "takykardi",
+        "adenosin",
+        "arytmi"
+      ]
+    },
+    {
+      "id": "sbkf-blasljud",
+      "title": "Checklista bedömning av blåsljud hos barn",
+      "source": "nationellt",
+      "publisher": "BLF Barnkardiologi (SBKF)",
+      "area": "hjarta",
+      "url": "https://sbkf.barnlakarforeningen.se/wp-content/uploads/sites/17/2017/02/VP_Checklista-Bed-Blasljud-ORGINAL-REV-161025.pdf",
+      "date": "2016-10-25",
+      "scope": "Checklista",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "blåsljud",
+        "hjärta",
+        "auskultation"
+      ]
+    },
+    {
+      "id": "blf-vph-itp",
+      "title": "ITP hos barn och ungdomar",
+      "source": "nationellt",
+      "publisher": "BLF Barnhematologi (VPH)",
+      "area": "hjarta",
+      "url": "https://pho.barnlakarforeningen.se/wp-content/uploads/sites/20/2021/09/PM-ITP-VPH-2021.pdf",
+      "date": "2021-09-01",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "ITP",
+        "trombocytopeni",
+        "blödning",
+        "petekier"
+      ]
+    },
+    {
+      "id": "blf-vph-transfusion",
+      "title": "Transfusion av blodkomponenter till barn",
+      "source": "nationellt",
+      "publisher": "BLF Barnhematologi (VPH)",
+      "area": "hjarta",
+      "url": "https://pho.barnlakarforeningen.se/wp-content/uploads/sites/20/2023/11/PM-VPH-Transfusioner-till-barn-2023.pdf",
+      "date": "2023-11-01",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "transfusion",
+        "blod",
+        "erytrocyter",
+        "trombocyter"
+      ]
+    },
+    {
+      "id": "sbkf-trombos",
+      "title": "Trombos, lungemboli och sinustrombos hos barn",
+      "source": "nationellt",
+      "publisher": "BLF Barnkoagulation (SBKF)",
+      "area": "hjarta",
+      "url": "https://pho.barnlakarforeningen.se/wp-content/uploads/sites/20/2024/01/PM-trombos-lungemboli-och-sinustrombos-ver-1.0.pdf",
+      "date": "2024-01-01",
+      "scope": "Riktlinje v1.0",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "trombos",
+        "lungemboli",
+        "DVT",
+        "antikoagulation"
+      ]
+    },
+    {
+      "id": "lof-mtp-barn",
+      "title": "Flödesschema massiv blödning hos barn",
+      "source": "nationellt",
+      "publisher": "Löf · Säker traumavård",
+      "area": "trauma",
+      "url": "https://wp.lof.se/wp-content/uploads/Flodesschema-vid-massiv-blodning-hos-barn.pdf",
+      "date": "2025-01-01",
+      "scope": "Flödesschema (1 sida)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "massiv blödning",
+        "transfusion",
+        "trauma",
+        "skada"
+      ]
+    },
+    {
+      "id": "sfpr-misshandel",
+      "title": "Radiologi vid misstänkt fysisk barnmisshandel",
+      "source": "nationellt",
+      "publisher": "Svensk förening för pediatrisk radiologi",
+      "area": "trygg",
+      "url": "https://slf.se/sfmr/app/uploads/2025/02/Riktlinjer-for-utredning-av-misstankt-barnmisshandel-2024-publ1.pdf",
+      "date": "2025-02-01",
+      "scope": "Riktlinjer",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "barn som far illa",
+        "misshandel",
+        "skelettröntgen",
+        "orosanmälan"
+      ]
+    },
+    {
+      "id": "sos-orosanmalan",
+      "title": "Till dig som är skyldig att anmäla oro för barn",
+      "source": "nationellt",
+      "publisher": "Socialstyrelsen",
+      "area": "trygg",
+      "url": "https://www.socialstyrelsen.se/contentassets/bb095e3444da46c592bd0483ecc935c4/2026-5-10268.pdf",
+      "date": "2026-05-01",
+      "scope": "Kortversion (4 sidor)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "orosanmälan",
+        "anmälningsskyldighet",
+        "barn som far illa",
+        "socialtjänst"
+      ]
+    },
+    {
+      "id": "lv-vatska-barn",
+      "title": "Intravenös vätskebehandling till barn",
+      "source": "nationellt",
+      "publisher": "Läkemedelsverket",
+      "area": "vatska",
+      "url": "https://www.lakemedelsverket.se/globalassets/dokument/behandling-och-forskrivning/behandlingsrekommendationer/behandlingsrekommendation/behandlingsrekommendation-intravenos-vatskebehandling-till-barn.pdf",
+      "date": "2018-01-01",
+      "scope": "Behandlingsrekommendation",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "vätska",
+        "dropp",
+        "underhållsbehandling",
+        "dehydrering",
+        "uttorkning",
+        "natrium"
+      ]
+    },
+    {
+      "id": "lv-vatska-bilaga1",
+      "title": "IV vätskebehandling barn – flödesschema underhållsbehandling",
+      "source": "nationellt",
+      "publisher": "Läkemedelsverket",
+      "area": "vatska",
+      "url": "https://www.lakemedelsverket.se/globalassets/dokument/behandling-och-forskrivning/behandlingsrekommendationer/presentationer-och-bilagor/intravenos-vatskebehandling-till-barn-bilaga-1-flodesschema-intravenos-underhallsbehandling.pdf",
+      "date": "2018-01-01",
+      "scope": "Bilaga 1 (1 sida)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "vätska",
+        "dropp",
+        "underhållsbehandling"
+      ]
+    },
+    {
+      "id": "lv-vatska-bilaga2",
+      "title": "IV vätskebehandling barn – flödesschema dehydrering",
+      "source": "nationellt",
+      "publisher": "Läkemedelsverket",
+      "area": "vatska",
+      "url": "https://www.lakemedelsverket.se/globalassets/dokument/behandling-och-forskrivning/behandlingsrekommendationer/presentationer-och-bilagor/intravenos-vatskebehandling-till-barn-bilaga-2-flodesschema-dehydrering-for-barn-aldre-an-1-manad.pdf",
+      "date": "2018-01-01",
+      "scope": "Bilaga 2 (1 sida)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "vätska",
+        "dropp",
+        "dehydrering",
+        "uttorkning",
+        "rehydrering"
+      ]
+    },
+    {
+      "id": "snf-hlr",
+      "title": "Neonatal HLR – nationella riktlinjer",
+      "source": "nationellt",
+      "publisher": "Svenska Neonatalföreningen",
+      "area": "neo",
+      "url": "https://neo.barnlakarforeningen.se/wp-content/uploads/sites/14/2022/10/Neonatal-Hjartlungraddning_2022.pdf",
+      "date": "2022-10-01",
+      "scope": "Nationella riktlinjer",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "nyfödd",
+        "HLR",
+        "neonatal",
+        "förlossning"
+      ]
+    },
+    {
+      "id": "snf-hlr-algoritm",
+      "title": "Neonatal HLR – algoritm",
+      "source": "nationellt",
+      "publisher": "Svenska Neonatalföreningen",
+      "area": "neo",
+      "url": "https://neo.barnlakarforeningen.se/wp-content/uploads/sites/14/2021/10/Neonatal_HLR.pdf",
+      "date": "2021-10-01",
+      "scope": "Algoritm (1 sida)",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "nyfödd",
+        "HLR",
+        "neonatal"
+      ]
+    },
+    {
+      "id": "snf-anfall",
+      "title": "Diagnostik och behandling av neonatala anfall",
+      "source": "nationellt",
+      "publisher": "Svenska Neonatalföreningen",
+      "area": "neo",
+      "url": "https://neo.barnlakarforeningen.se/wp-content/uploads/sites/14/2023/10/Diagnostik-och-behandling-av-neonatala-anfall-2023-08-29_FINAL.pdf",
+      "date": "2023-08-29",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "nyfödd",
+        "kramp",
+        "anfall",
+        "neonatal"
+      ]
+    },
+    {
+      "id": "swesem-nyfodd",
+      "title": "Initialt omhändertagande av nyfödda",
+      "source": "nationellt",
+      "publisher": "SWESEM",
+      "area": "neo",
+      "url": "https://slf.se/swesem/app/uploads/2021/11/Initialt-omha%CC%88ndertagande-av-nyfo%CC%88dda-211115.pdf",
+      "date": "2021-11-15",
+      "scope": "Rekommendation för akutläkare",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-09-23",
+      "keywords": [
+        "nyfödd",
+        "förlossning",
+        "HLR",
+        "neonatal"
       ]
     }
   ]
