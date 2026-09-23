@@ -72,3 +72,6 @@ Barnsidan länkar direkt till original-PDF:er och riktlinjesidor. Vid ändringar
 - Borttaget: Svampinfektioner barn (BOT), Abstinens efter sedering (BIVA), samlingssidan för cystisk fibros (`barn/cystisk-fibros.html`) och neonatalföreningens listsida – ersatt av konkreta neonataldokument.
 - SWEPEM-poster länkar nu direkt till PDF; sökningen tål böjningsformer (t.ex. "kramper" hittar "kramp").
 - Sparade favoriter som pekar på borttagna dokument rensas automatiskt.
+
+## Gemensam design
+Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel, navigering, kort och mobilbrytpunkter. Vuxensidans läsare och fulltextsökning behålls; äldre läsarstilar ligger i ett separat CSS-lager.
