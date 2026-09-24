@@ -1,0 +1,7 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import worker from './worker.mjs';import ids from './documents.json' with {type:'json'};
+const event='26a61e67-25bc-456a-9004-186145e0ae13';let writes=0;
+const env={CLICK_LIMITER:{limit:async()=>({success:true})},DB:{prepare:()=>({bind:()=>({run:async()=>{writes++;}}),all:async()=>({results:[{document_id:ids[0],opens:3},{document_id:'removed',opens:99}]})})}};
+function post(body,origin='https://akutkompassen.se'){return new Request('https://counter.example/click',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});}
+test('Rejects arbitrary document IDs and unexpected data',async()=>{for(const body of [{document:'injected',event},{document:ids[0],event,query:'private'},{document:ids[0],event:'bad'}])assert.equal((await worker.fetch(post(body),env)).status,400);assert.equal(writes,0);});
+test('Restricts origins and enforces rate limit',async()=>{assert.equal((await worker.fetch(post({document:ids[0],event},'https://other.example'),env)).status,403);assert.equal((await worker.fetch(post({document:ids[0],event}),{...env,CLICK_LIMITER:{limit:async()=>({success:false})}})).status,429);});
+test('Accepts known document open and filters obsolete counts',async()=>{assert.equal((await worker.fetch(post({document:ids[0],event}),env)).status,200);const r=await worker.fetch(new Request('https://counter.example/counts'),env);assert.deepEqual((await r.json()).counts,{[ids[0]]:3});});
