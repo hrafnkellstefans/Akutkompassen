@@ -16,3 +16,10 @@ Backend: Cloudflare Worker + D1. The public site remains on GitHub Pages. Count 
 Front end: aggregate counts refreshed on load and return to the tab (at most once per minute). Backend failure preserves the current session's last successful snapshot, or falls back to alphabetical ordering. Click requests fail without preventing opening guidelines; no retry queue or stale local popularity is used. Category winners are computed over the full category; count ties choose the first Swedish alphabetical title, then ID. Owner exclusion still permits reading global rankings.
 
 Validation: `node --test tests/popularity.test.cjs tracking/worker.test.mjs` from repository root. Existing search tests continue to pass.
+
+## Visitor dashboard
+
+Cloudflare Web Analytics, site `akutkompassen.se`, configured 2026-09-24.
+Private dashboard: https://dash.cloudflare.com/dab238a8bc25a00088f042bdc2e3bdcb/web-analytics
+`visitor-analytics.js` loads the public site beacon on production only, after checking the same owner exclusion key. Storage failures skip analytics. No beacon is loaded on the exclusion page. Reload any already-open site tabs after changing exclusion.
+The dashboard measures visits and page views, not unique people. Use the Paths breakdown for `/` and `/barn/`. SPA tracking is disabled so opening the adult PM reader does not inflate page views. Cloudflare/ad blockers may omit some visits. Analytics begin at installation, with no historical backfill.
