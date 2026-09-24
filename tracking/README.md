@@ -1,6 +1,6 @@
 # Shared popularity counter
 
-Backend deployed at https://akutkompassen-popularity.hrafnkellstefans.workers.dev on 2026-09-24. Database ID: `460aa263-b423-4b8b-a09c-3566d4c24f06`. Frontend activation follows owner-browser exclusion. No historical clicks are available. The frontend must never substitute device-local click counts for shared popularity.
+Backend deployed at https://akutkompassen-popularity.hrafnkellstefans.workers.dev on 2026-09-24. Database ID: `460aa263-b423-4b8b-a09c-3566d4c24f06`. Frontend activated after verifying exclusion in the owner’s current browser. Other browsers/devices must opt out separately at /statistik.html. No historical clicks are available. The frontend must never substitute device-local click counts for shared popularity.
 
 Backend: Cloudflare Worker + D1. The public site remains on GitHub Pages. Count each guideline open; client suppresses reopens of the same document within 30 seconds. Anonymous event UUIDs deduplicate delivery; a daily cleanup retains them for approximately 24–48 hours while aggregate counts remain. No search text, full document content, persistent visitor identifier or IP address is stored in D1. Cloudflare processes request IPs for delivery and a short-lived abuse limiter (120/minute per IP/location); this may affect busy shared networks. Public counters are an approximate popularity signal, not clinical recommendations or authenticated visitor analytics.
 
