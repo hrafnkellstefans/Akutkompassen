@@ -7,15 +7,23 @@ test('Owner exclusion sends no click but still reads shared rankings',async()=>{
 test('Counts only document opens, throttles repeats, sends no search or visitor identity',()=>{const {p,calls}=setup();p.record('a');p.record('a');assert.equal(calls.length,1);const body=JSON.parse(calls[0].options.body);assert.deepEqual(Object.keys(body).sort(),['document','event']);assert.equal(body.document,'adult:a');assert.equal(calls[0].options.referrerPolicy,'no-referrer');});
 test('Unconfigured deployment sends no requests',async()=>{const {p,calls}=setup({endpoint:''});await p.load();p.record('a');assert.equal(calls.length,0);});
 
-test('New badges use addition dates, expire at 30 days and reject invalid or future dates',()=>{
+test('New badges use publication dates within a year, including the anniversary',()=>{
  const {p}=setup({endpoint:''});
- for(const addedOn of ['2026-09-27','2026-08-29'])assert.match(p.badge({...docs[0],addedOn}),/>NY!</);
- for(const addedOn of [undefined,'2026-08-28','2026-09-28','2026-02-30','invalid'])assert.equal(p.badge({...docs[0],addedOn}), '');
- assert.equal(p.badge({...docs[0],date:'2026-09-27',verified:'2026-09-27'}),'');
+ for(const date of ['2026-09-27','2026-01-01','2025-12-01','2025-09-27'])assert.match(p.badge({...docs[0],date}),/>NY!</);
+ for(const date of [undefined,'2025-09-26','2025-01-01','2026-09-28','2026-02-30','invalid'])assert.equal(p.badge({...docs[0],date}), '');
+ assert.equal(p.badge({...docs[0],addedOn:'2026-09-27',checked:'2026-09-27',verified:'2026-09-27'}),'');
+ assert.match(p.badge({...docs[0],yr:'2026'}),/>NY!</);
+ assert.equal(p.badge({...docs[0],yr:'2025'}),'');
+ assert.equal(p.badge({...docs[0],yr:'2027'}),'');
+ assert.equal(p.badge({...docs[0],publishedOn:'2025-01-01',yr:'2026'}),'');
+ assert.match(p.badge({...docs[0],publishedOn:'2025-11-10',yr:'2025'}),/>NY!</);
+ const later=setup({now:'2027-01-02T00:00:00Z'}).p;
+ assert.equal(later.badge({...docs[0],date:'2026-01-01'}),'');
+ assert.match(later.badge({...docs[0],date:'2026-01-02'}),/>NY!</);
 });
 test('New and popular badges coexist, independent of tracking exclusion',async()=>{
  const {p}=setup({excluded:true,counts:{'adult:a':5}});await p.load();
- const badge=p.badge({...docs[0],addedOn:'2026-09-25'});
+ const badge=p.badge({...docs[0],publishedOn:'2026-09-25'});
  assert.match(badge,/>NY!</);assert.match(badge,/>POPULÄR!</);
  assert.match(p.status(),/POPULÄR!/);assert.doesNotMatch(p.status(),/gul cirkel/);
 });

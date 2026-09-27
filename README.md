@@ -78,6 +78,6 @@ Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel
 
 ## Dokumentetiketter – 27 september 2026
 
-`NY!` visas i 30 dygn från dokumentets `addedOn` (YYYY-MM-DD, UTC), datumet då det lades till i Akutkompassen. Detta är inte dokumentets medicinska publicerings- eller granskningsdatum. De sju vuxenriktlinjer som tillkom 22–25 september och barnbibliotekets dokument från 23 september har fått verifierade tilläggsdatum från versionshistoriken. Äldre vuxendokument saknar datum och märks inte som nya. Lägg till `addedOn` vid framtida nytillskott; ändra inte datumet vid vanlig länkkontroll.
+`NY!` avser dokumentets publicerings- eller godkännandedatum under de senaste 12 månaderna, inklusive årsdagen (UTC). `publishedOn` har företräde, därefter barnbibliotekets `date`, därefter vuxenbibliotekets `yr`. Exakta godkännandedatum har hämtats ur de befintliga PM-texternas fält ”Godkänt den”; riktlinjedatum kan anges i `publishedOn`. När endast årtal finns kvalificerar innevarande år, men föregående år behöver ett exakt datum för att styrka att dokumentet är yngre än ett år. Framtida, ogiltiga och saknade datum ger ingen etikett. Tilläggsdatum och länkkontroll påverkar aldrig etiketten.
 
 `POPULÄR!` ersätter den gula cirkeln och visas för samma områdesledare baserat på gemensamma öppningar. Noll eller otillgänglig statistik ger ingen popularitetsetikett. Båda etiketterna kan visas samtidigt i kort, sparade urval och sökresultat.

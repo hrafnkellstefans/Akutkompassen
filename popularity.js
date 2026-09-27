@@ -12,13 +12,19 @@
   const compare=(a,b)=>count(counts,key(b))-count(counts,key(a))||(a.title||a.t).localeCompare(b.title||b.t,'sv')||String(a.id).localeCompare(String(b.id));
   function leader(d){if(!ready||!count(counts,key(d)))return false;return !docs.some(x=>(x.area||x.a)===(d.area||d.a)&&compare(x,d)<0);}
   function isNew(d){
-   if(typeof d.addedOn!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(d.addedOn))return false;
-   const added=Date.parse(d.addedOn+'T00:00:00Z'),age=Date.now()-added;
-   return Number.isFinite(added)&&new Date(added).toISOString().slice(0,10)===d.addedOn&&age>=0&&age<30*86400000;
+   // Source publication/approval date only; never the date added or link-checked.
+   const value=String(d.publishedOn||d.date||d.yr||'');
+   const now=new Date(Date.now()),today=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate());
+   const cutoff=new Date(today);cutoff.setUTCFullYear(cutoff.getUTCFullYear()-1);
+   // A year alone cannot establish that a previous-year document is recent.
+   if(/^\d{4}$/.test(value))return Number(value)===now.getUTCFullYear();
+   if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
+   const published=Date.parse(value+'T00:00:00Z');
+   return Number.isFinite(published)&&new Date(published).toISOString().slice(0,10)===value&&published>=cutoff.getTime()&&published<=today;
   }
   function badge(d){
    const labels=[];
-   if(isNew(d))labels.push('<span class="document-badge badge-new" title="Tillagd i Akutkompassen de senaste 30 dagarna">NY!</span>');
+   if(isNew(d))labels.push('<span class="document-badge badge-new" title="Publicerad eller godkänd under de senaste 12 månaderna">NY!</span>');
    if(leader(d))labels.push('<span class="document-badge badge-popular" title="Mest öppnad i området · alla besökare">POPULÄR!</span>');
    return labels.length?'<span class="document-badges">'+labels.join('')+'</span>':'';
   }
