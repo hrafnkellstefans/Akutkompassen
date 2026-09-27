@@ -75,3 +75,9 @@ Barnsidan länkar direkt till original-PDF:er och riktlinjesidor. Vid ändringar
 
 ## Gemensam design
 Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel, navigering, kort och mobilbrytpunkter. Vuxensidans läsare och fulltextsökning behålls; äldre läsarstilar ligger i ett separat CSS-lager.
+
+## Dokumentetiketter – 27 september 2026
+
+`NY!` visas i 30 dygn från dokumentets `addedOn` (YYYY-MM-DD, UTC), datumet då det lades till i Akutkompassen. Detta är inte dokumentets medicinska publicerings- eller granskningsdatum. De sju vuxenriktlinjer som tillkom 22–25 september och barnbibliotekets dokument från 23 september har fått verifierade tilläggsdatum från versionshistoriken. Äldre vuxendokument saknar datum och märks inte som nya. Lägg till `addedOn` vid framtida nytillskott; ändra inte datumet vid vanlig länkkontroll.
+
+`POPULÄR!` ersätter den gula cirkeln och visas för samma områdesledare baserat på gemensamma öppningar. Noll eller otillgänglig statistik ger ingen popularitetsetikett. Båda etiketterna kan visas samtidigt i kort, sparade urval och sökresultat.
