@@ -81,3 +81,9 @@ Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel
 `NY!` avser dokumentets publicerings- eller godkännandedatum under de senaste 12 månaderna, inklusive årsdagen (UTC). `publishedOn` har företräde, därefter barnbibliotekets `date`, därefter vuxenbibliotekets `yr`. Exakta godkännandedatum har hämtats ur de befintliga PM-texternas fält ”Godkänt den”; riktlinjedatum kan anges i `publishedOn`. När endast årtal finns kvalificerar innevarande år, men föregående år behöver ett exakt datum för att styrka att dokumentet är yngre än ett år. Framtida, ogiltiga och saknade datum ger ingen etikett. Tilläggsdatum och länkkontroll påverkar aldrig etiketten.
 
 `POPULÄR!` ersätter den gula cirkeln och visas för samma områdesledare baserat på gemensamma öppningar. Noll eller otillgänglig statistik ger ingen popularitetsetikett. Båda etiketterna kan visas samtidigt i kort, sparade urval och sökresultat.
+
+## Kompass / Original – utseende
+
+Den nya visuella stilen ligger separat i `appearance.css` och aktiveras enbart av `html[data-look=kompass]`. Originalets `shared.css` och läsarstilar är oförändrade. Växla med **Utseende → Original** i sidhuvudet; valet sparas lokalt och gäller både Vuxna och Barn. Inget laddas om och sökning/favoriter påverkas inte.
+
+För att återställa originalet som standard för nya besökare: ändra `DEFAULT_LOOK` till `original` i `appearance.js`. För en fullständig återställning till originaldesignen för alla: ta bort de två `appearance`-referenserna i båda HTML-sidorna och publicera med en ny cacheversion. Förra versionen finns i Git som `5a5ef4d`. Ingen extern font eller bild behövs för det nya utseendet.
