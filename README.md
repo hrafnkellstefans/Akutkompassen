@@ -87,3 +87,11 @@ Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel
 Den nya visuella stilen ligger separat i `appearance.css` och aktiveras enbart av `html[data-look=kompass]`. Originalets `shared.css` och läsarstilar är oförändrade. Växla med **Utseende → Original** i sidhuvudet; valet sparas lokalt och gäller både Vuxna och Barn. Inget laddas om och sökning/favoriter påverkas inte.
 
 För att återställa originalet som standard för nya besökare: ändra `DEFAULT_LOOK` till `original` i `appearance.js`. För en fullständig återställning till originaldesignen för alla: ta bort de två `appearance`-referenserna i båda HTML-sidorna och publicera med en ny cacheversion. Förra versionen finns i Git som `5a5ef4d`. Ingen extern font eller bild behövs för det nya utseendet.
+
+## 27 september 2026 – riktlinjer och akutrumsblad
+
+DAS 2015 ersatt av 2025 med bibehållet GL54-ID. Tillagt SILF endokardit revision 2025, ESICM vätskeval och tydligt märkt visuell chocksammanfattning, ESVS kärltrauma, fulltextlänkar för ESO basilaris/SAH, JBDS HHS, ACEP agitation, GIC paracetamol/metanol samt tio ANZCOR-kapitel. Externa riktlinjer förblir länkar till källor.
+
+Barnbiblioteket har en lokal PDF-sammanställning av 16 offentliga Word-källblad från SWEPEM/Karolinska. Innehållsrutornas text har satts om eftersom direktkonverteringen klippte innehåll. Kliniska uppgifter och källversioner har inte uppdaterats. Samlingen är markerad som äldre bibliotekskopia; sammanställningsdatum används inte för NY!-etiketten. Originalkällan anges i PDF och metadata.
+
+WMS Drowning 2024 och WMS Heat Illness 2024 tillagda med länkar till utgivaren. Original-PDF:erna är sparade i ED Consultant.

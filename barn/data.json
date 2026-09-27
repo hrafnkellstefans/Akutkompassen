@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-23",
+  "updated": "2026-09-27",
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
@@ -1641,6 +1641,31 @@
         "HLR",
         "neonatal"
       ]
+    },
+    {
+      "id": "swepem-akutrumsblad-samling",
+      "title": "Akutrumsblad efter ålder och vikt – samlad PDF",
+      "source": "karolinska",
+      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus · via SWEPEM",
+      "area": "akut",
+      "url": "../documents/swepem-akutrumsblad-samling.pdf",
+      "date": "",
+      "scope": "16 äldre källblad: 3 månader / 5 kg till vuxen över 50 kg. Omsatt text från Word-original; doser och källversioner är inte uppdaterade. Kontrollera aktuellt original hos utgivaren.",
+      "format": "PDF – bibliotekssammanställning",
+      "checked": "2026-09-27",
+      "keywords": [
+        "akutrumsblad",
+        "WETFLAG",
+        "vikt",
+        "ålder",
+        "barn",
+        "återupplivning",
+        "akutrum",
+        "läkemedel"
+      ],
+      "library": true,
+      "archive": true,
+      "sourceUrl": "https://swepem.barnlakarforeningen.se/riktlinjer/pm/"
     }
   ]
 }

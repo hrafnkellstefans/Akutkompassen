@@ -26,6 +26,7 @@ function searchEngine(withBodies = false) {
 }
 
 const queries = [
+  ['DAS svår luftväg', 'GL54'], ['endokardit SILF', 'GL89'], ['hyperosmolärt JBDS', 'GL94'], ['agitation ACEP', 'GL95'],
   ['högt kalium', 'GL82'], ['hyperkalaemia', 'GL82'], ['"högt kalium"', 'GL82'],
   ['tumörlys', 'GL83'], ['malign ryggmärgskompression', 'GL83'], ['vena cava superior', 'GL83'],
   ['immunterapi myokardit', 'GL84'], ['checkpoint pneumonit', 'GL84'],
@@ -55,7 +56,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 215);
+  assert.equal(data.docs.length, 237);
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);
