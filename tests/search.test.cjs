@@ -56,7 +56,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 237);
+  assert.equal(data.docs.length, 229);
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);

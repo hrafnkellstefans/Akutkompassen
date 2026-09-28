@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
@@ -706,8 +706,8 @@
       "publisher": "SWEPEM · Svenska Barnläkarföreningen",
       "area": "smarta",
       "url": "https://swepem.barnlakarforeningen.se/wp-content/uploads/sites/18/2026/03/Procedursedering-och-smartlindring-inom-barnakutsjukvard-K73695_1.pdf",
-      "date": "2026-03-01",
-      "scope": "Riktlinje v2.0 procedursedering och smärtlindring inom barnakutsjukvård",
+      "date": "2026-02-19",
+      "scope": "Riktlinje v2.0 procedursedering och smärtlindring inom barnakutsjukvård · giltig från 2026-02-19",
       "format": "PDF hos utgivaren",
       "checked": "2026-09-23",
       "keywords": [
@@ -716,7 +716,20 @@
         "lustgas",
         "intranasal",
         "smärtlindring",
-        "analgesi"
+        "analgesi",
+        "procedursedering",
+        "barn",
+        "midazolam",
+        "dexmedetomidin",
+        "fentanyl",
+        "reponering",
+        "gips",
+        "suturering",
+        "lumbalpunktion",
+        "brännskada",
+        "avledning",
+        "EMLA",
+        "lidokain"
       ]
     },
     {
@@ -1666,6 +1679,130 @@
       "library": true,
       "archive": true,
       "sourceUrl": "https://swepem.barnlakarforeningen.se/riktlinjer/pm/"
+    },
+    {
+      "id": "GL02",
+      "title": "ERC 2025 – Paediatric Life Support",
+      "source": "nationellt",
+      "publisher": "ERC",
+      "area": "akut",
+      "url": "https://www.resuscitationjournal.com/article/S0300-9572(25)00279-5/fulltext",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2025.",
+      "format": "Hos utgivaren",
+      "keywords": [
+        "HLR",
+        "hjärtstopp",
+        "återupplivning",
+        "barn"
+      ],
+      "year": "2025"
+    },
+    {
+      "id": "GL27",
+      "title": "Surviving Sepsis Campaign 2026 – Children",
+      "source": "nationellt",
+      "publisher": "SCCM/ESICM",
+      "area": "inf",
+      "url": "https://link.springer.com/content/pdf/10.1007/s00134-026-08360-2.pdf",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2026.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "sepsis",
+        "septisk chock",
+        "barn"
+      ],
+      "year": "2026"
+    },
+    {
+      "id": "GL29",
+      "title": "NICE NG254 Suspected Sepsis in under 16s 2025",
+      "source": "nationellt",
+      "publisher": "NICE",
+      "area": "inf",
+      "url": "https://www.nice.org.uk/guidance/ng254/resources/suspected-sepsis-in-under-16s-recognition-diagnosis-and-early-management-pdf-66144017065669",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2025.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "sepsis",
+        "infektion",
+        "barn"
+      ],
+      "year": "2025"
+    },
+    {
+      "id": "GL31",
+      "title": "NICE NG143 Fever in under 5s",
+      "source": "nationellt",
+      "publisher": "NICE",
+      "area": "inf",
+      "url": "https://www.nice.org.uk/guidance/ng143/resources/fever-in-under-5s-assessment-and-initial-management-pdf-66141778137541",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2021.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "feber",
+        "spädbarn",
+        "barn"
+      ],
+      "year": "2021"
+    },
+    {
+      "id": "GL50",
+      "title": "ISPAD Paediatric DKA & HHS 2022",
+      "source": "nationellt",
+      "publisher": "ISPAD",
+      "area": "met",
+      "url": "https://www.ispad.org/static/6dd62eae-c8cb-4b4a-84e1efc768505746/Ch11PediatricDiabetes.pdf",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2022.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "DKA",
+        "HHS",
+        "ketoacidos",
+        "diabetes",
+        "barn"
+      ],
+      "year": "2022"
+    },
+    {
+      "id": "GL71",
+      "title": "RCEM Ketamine Procedural Sedation for Children 2020",
+      "source": "nationellt",
+      "publisher": "RCEM",
+      "area": "smarta",
+      "url": "https://rcem.ac.uk/wp-content/uploads/2022/02/Ketamine_Procedural_Sedation_-for_Children_in_EDs_Feb_2020.pdf",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2020.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "ketamin",
+        "procedursedering",
+        "sedering",
+        "barn"
+      ],
+      "year": "2020"
+    },
+    {
+      "id": "GL72",
+      "title": "RCEM Management of Pain in Children 2017",
+      "source": "nationellt",
+      "publisher": "RCEM",
+      "area": "smarta",
+      "url": "https://rcem.ac.uk/wp-content/uploads/2021/10/RCEM_Pain_in_Children_Best_Practice_Guidance_REV_Jul2017.pdf",
+      "date": "",
+      "scope": "Internationell riktlinje för barn · dokumentår 2017.",
+      "format": "PDF hos utgivaren",
+      "keywords": [
+        "smärta",
+        "smärtlindring",
+        "analgesi",
+        "barn"
+      ],
+      "year": "2017"
     }
   ]
 }
