@@ -84,3 +84,12 @@ html[data-look=kompass] .areas button.on .n,html[data-look=kompass] .areas butto
 
 /* The search container provides the focus indicator; avoid a second ring inside it. */
 html[data-look=kompass] .searchbox input:focus-visible{outline:none}
+
+/* Keep quick searches in one row, with scrolling on the narrowest screens. */
+html[data-look=kompass] .quick{flex-wrap:nowrap;overflow-x:auto;padding:4px;margin:8px -4px -4px}
+html[data-look=kompass] .quick button,html[data-look=kompass] .quick span{flex-shrink:0;white-space:nowrap}
+html[data-look=kompass] .intro h1.eyebrow{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.5px}
+@media(max-width:760px){
+ html[data-look=kompass] .quick{gap:4px}
+ html[data-look=kompass] .quick button{padding:5px 6px}
+}
