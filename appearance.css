@@ -25,7 +25,7 @@ html[data-look=kompass] .intro-count strong{font-family:"Avenir Next Condensed",
 html[data-look=kompass] .search-panel{background:#242b2c;border-radius:3px;padding:20px 22px 16px;box-shadow:4px 4px 0 #c9cbbf;border-left:4px solid var(--brand-red)}
 html[data-look=kompass] .searchbox{border-radius:0;background:#fffef8;height:58px}
 html[data-look=kompass] .searchbox svg{stroke:var(--brand-red)}
-html[data-look=kompass] .searchbox:focus-within{outline:3px solid #f77361;outline-offset:3px}
+html[data-look=kompass] .searchbox:focus-within{outline:2px solid #8db6ae;outline-offset:2px}
 html[data-look=kompass] .quick span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.8px;color:#c4c9c2;text-transform:uppercase}
 html[data-look=kompass] .quick button{background:transparent;border:1px solid #626d68;border-radius:2px;color:#fffef8;font-size:12px;padding:5px 11px}
 html[data-look=kompass] .quick button:hover{background:#414d47;border-color:#d0d4ca}
@@ -81,3 +81,6 @@ html[data-look=kompass] .areas button.on .n,html[data-look=kompass] .areas butto
  .top .brand{width:100%}.top nav{margin-left:0}
  html[data-look=kompass] .intro h1{font-size:20px}
 }
+
+/* The search container provides the focus indicator; avoid a second ring inside it. */
+html[data-look=kompass] .searchbox input:focus-visible{outline:none}
