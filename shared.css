@@ -10,3 +10,19 @@ body{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-
 .adult #main:has(>.card),.adult #main:has(>.doc){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.adult #main>.crumb,.adult #main>.hint,.adult #main>h4,.adult #main>.empty{grid-column:1/-1}.adult #main>.card{margin:0}.adult .doc{border-top:3px solid var(--teal);border-left:1px solid var(--line);box-shadow:none}.adult .doc.gl{border-top-color:var(--blue);border-left:1px solid var(--line)}@media(min-width:1450px){.adult #main:has(>.card),.adult #main:has(>.doc){grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:900px){.adult #main:has(>.card),.adult #main:has(>.doc){grid-template-columns:1fr}}@media(max-width:430px){.brand{font-size:17px}.brand-sub{font-size:7px}nav a{padding:8px 9px}}
 
 .document-badges{display:inline-flex;flex-wrap:wrap;gap:4px;vertical-align:middle;margin-right:6px}.document-badge{display:inline-block;border-radius:5px;padding:3px 6px;font-size:10px;font-weight:800;line-height:1.4;letter-spacing:.3px;white-space:nowrap}.badge-new{background:#e00000;color:#fff}.badge-popular{background:#fff0b8;color:#694900}.card-top{align-items:flex-start}.card-labels{display:flex;align-items:center;flex-wrap:wrap;gap:5px;min-width:0;margin-right:auto}.card-labels .document-badges{margin:0}.card-top>.fav,.card-top>.save{flex-shrink:0}.dh .meta .document-badges{margin:0;vertical-align:middle}.popularity-status{font-size:12px;color:var(--muted);margin:-6px 0 18px;line-height:1.5}
+
+/* Search-first layout: bar under header, compact title + tucked count. */
+.wrap>.search-panel{margin-top:18px;position:sticky;top:env(safe-area-inset-top,0px);z-index:6}
+.intro{display:block;padding:14px 0 2px}
+.intro .eyebrow{margin:0 0 6px}
+.intro-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px 18px;flex-wrap:wrap}
+.intro h1{font-size:clamp(20px,2.2vw,28px);letter-spacing:-.7px;line-height:1.2}
+.intro-count{margin:0;font-size:13px;color:var(--muted);white-space:nowrap}
+.intro-count strong{font-size:15px;font-weight:750;color:var(--ink);letter-spacing:-.3px}
+.workspace{padding-top:22px}
+@media(max-width:760px){
+ .wrap>.search-panel{margin-top:12px}
+ .intro{padding:12px 0 0}
+ .intro h1{font-size:20px;letter-spacing:-.4px}
+ .intro-count{white-space:normal}
+}
