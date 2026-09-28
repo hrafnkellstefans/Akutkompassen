@@ -26,6 +26,7 @@ function searchEngine(withBodies = false) {
 }
 
 const queries = [
+  ['lungemboli AHA', 'GL111'], ['SILF UVI', 'GL112'], ['SILF pneumoni', 'GL113'], ['EAU njursten', 'GL114'], ['ACC bröstsmärta', 'GL115'], ['GINA astma', 'GL56'], ['GOLD KOL', 'GL57'],
   ['DAS svår luftväg', 'GL54'], ['endokardit SILF', 'GL89'], ['hyperosmolärt JBDS', 'GL94'], ['agitation ACEP', 'GL95'],
   ['högt kalium', 'GL82'], ['hyperkalaemia', 'GL82'], ['"högt kalium"', 'GL82'],
   ['tumörlys', 'GL83'], ['malign ryggmärgskompression', 'GL83'], ['vena cava superior', 'GL83'],
@@ -56,7 +57,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 229);
+  assert.equal(data.docs.length, 234);
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);
