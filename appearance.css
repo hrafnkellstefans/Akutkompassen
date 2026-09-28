@@ -1,11 +1,5 @@
-/* The original stylesheet is preserved. All new visual rules are opt-in. */
-.appearance-switch{display:flex;align-items:center;gap:2px;flex-shrink:0;border:1px solid #c7cecc;border-radius:6px;padding:3px;background:#fff;color:#263332}
-.appearance-label{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1px;margin:0 7px}
-.appearance-switch button{border:0;border-radius:3px;background:transparent;color:#515d60;font-size:11px;font-weight:650;padding:7px 9px;min-height:32px}
-.appearance-switch button[aria-pressed=true]{background:#242b2c;color:#fff}
+/* Kompass is the only look. */
 .top{flex-wrap:wrap}.top nav{margin-left:auto}
-@media(max-width:1050px){.appearance-switch{margin-left:auto}.appearance-label{display:none}}
-@media(max-width:600px){.appearance-switch{margin-top:-2px}.appearance-label{display:inline}.top{row-gap:10px}.appearance-switch button{min-height:32px}}
 
 html[data-look=kompass]{--ink:#202725;--muted:#5e655f;--line:#d4d4c9;--bg:#f4f3eb;--teal:#bd302d;--blue:#254f63;--purple:#67486e;--orange:#a54b15;--surface:#fffef8;--surface2:#ecece2;--accent-soft:#f8e5df;--brand-red:#c73530}
 html[data-look=kompass] body{background:var(--bg);font-family:"Avenir Next",Avenir,"Segoe UI",sans-serif}
@@ -18,8 +12,6 @@ html[data-look=kompass] nav{border-radius:0;background:none;padding:0;gap:0;bord
 html[data-look=kompass] nav a{border-radius:0;padding:10px 19px;box-shadow:none;color:var(--ink)}
 html[data-look=kompass] nav a[aria-current]{background:#242b2c;color:#fffef8;box-shadow:none}
 html[data-look=kompass] .nav-dot{background:#f36956;border-radius:0;width:6px;height:6px}
-html[data-look=kompass] .appearance-switch{border-radius:0;background:transparent;border-color:#d4d4c9}
-html[data-look=kompass] .appearance-switch button{border-radius:0}
 html[data-look=kompass] .intro{position:relative;padding-top:16px;padding-bottom:6px}
 html[data-look=kompass] .intro h1{font-family:"Avenir Next Condensed","Arial Narrow","Avenir Next",sans-serif;font-size:clamp(22px,2.6vw,32px);font-weight:800;line-height:1.12;letter-spacing:-1px}
 html[data-look=kompass] h1 span{color:var(--brand-red)}
@@ -86,6 +78,6 @@ html[data-look=kompass] button:focus-visible,html[data-look=kompass] a:focus-vis
 /* Keep counts legible on the selected dark area, including legacy adult labels. */
 html[data-look=kompass] .areas button.on .n,html[data-look=kompass] .areas button.active .n{color:#fffef8;opacity:.85}
 @media(max-width:360px){
- .top .brand{width:100%}.top nav{margin-left:0}.appearance-switch{margin-left:auto}.appearance-label{display:none}
+ .top .brand{width:100%}.top nav{margin-left:0}
  html[data-look=kompass] .intro h1{font-size:20px}
 }
