@@ -1,7 +1,7 @@
 // Akutkompassen service worker – app shell + data shards, works offline after first visit.
 // Bump VERSION on every release (build.py does this).
-const VERSION = 'ak-v10s27-sokordning';
-const SHELL = ['./', './index.html', './shared.css', './appearance.css', './appearance.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './barn/', './barn/index.html', './barn/style.css', './barn/app.js', './barn/data.json',];
+const VERSION = 'ak-v10s28-visual';
+const SHELL = ['./', './index.html', './shared.css', './appearance.css', './appearance.js', './usability.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './barn/', './barn/index.html', './barn/style.css', './barn/app.js', './barn/data.json',];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
