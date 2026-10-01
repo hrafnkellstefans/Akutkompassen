@@ -198,3 +198,6 @@ html[data-look=kompass] .reader .actions a,html[data-look=kompass] .reader .acti
 html[data-look=kompass] .tag.area{display:inline-flex;width:auto;padding:3px 7px;gap:0;font-size:12px;line-height:1.4;min-height:0;background:var(--surface2);color:var(--ink);border:0}
 html[data-look=kompass] .card[data-source=external] .publisher,html[data-look=kompass] .card[data-source=karolinska] .publisher,html[data-look=kompass] .card[data-source=nationellt] .publisher{display:block}
 html[data-look=kompass] .search-results .card .meta .soc{display:inline}
+
+/* Original look: the area chips row is always visible on phones, so the dropdown toggle is not needed. */
+html:not([data-look=kompass]) .area-menu-toggle{display:none!important}
