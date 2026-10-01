@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-10-01",
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
@@ -26,7 +26,7 @@
       "date": "2021-02-11",
       "scope": "Akut barnsjukvård; Barnkirurgi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "osteomyelit",
         "septisk artrit",
@@ -46,7 +46,7 @@
       "date": "2020-10-05",
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "orosanmälan"
@@ -63,7 +63,7 @@
       "date": "2019-02-18",
       "scope": "Akut barnsjukvård",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [],
       "library": true
     },
@@ -77,7 +77,7 @@
       "date": "2026-04-27",
       "scope": "Specialiserad pediatrik; Akut",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "DKA",
         "blodsocker"
@@ -94,7 +94,7 @@
       "date": "2024-03-21",
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "uttorkning",
         "dropp"
@@ -111,7 +111,7 @@
       "date": "2024-06-11",
       "scope": "Akut barnsjukvård;",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "DKA",
         "blodsocker"
@@ -128,7 +128,7 @@
       "date": "2020-11-23",
       "scope": "Specialiserad pediatrik",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "DKA",
         "blodsocker"
@@ -145,7 +145,7 @@
       "date": "2020-11-06",
       "scope": "Akut barnsjukvård",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "uttorkning",
         "dropp"
@@ -162,7 +162,7 @@
       "date": "2018-10-30",
       "scope": "Barnintensivvårdsavdelningen;",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "krupp",
         "falsk krupp",
@@ -183,7 +183,7 @@
       "date": "2026-08-25",
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hyponatremi",
         "natrium",
@@ -202,7 +202,7 @@
       "date": "2025-10-21",
       "scope": "Blod- och tumörsjukdomar hos",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "smärtlindring",
         "analgesi"
@@ -219,7 +219,7 @@
       "date": "2020-11-23",
       "scope": "Pediatrik",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "feberkramp",
         "kramp",
@@ -238,7 +238,7 @@
       "date": "2026-05-29",
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "orosanmälan"
@@ -255,7 +255,7 @@
       "date": "2025-01-28",
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "bronkiolit",
         "RSV",
@@ -275,7 +275,7 @@
       "date": "2019-06-07",
       "scope": "Barnkirurgi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "smärtlindring",
         "analgesi"
@@ -292,7 +292,7 @@
       "date": "2025-03-31",
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "DKA",
         "blodsocker"
@@ -309,7 +309,7 @@
       "date": "2021-10-26",
       "scope": "Sektionen för barnneurologi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "epilepsi",
         "kramp",
@@ -328,7 +328,7 @@
       "date": "2021-11-24",
       "scope": "Akut barnsjukvård",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "meningit",
         "encefalit",
@@ -348,7 +348,7 @@
       "date": "2025-06-10",
       "scope": "Region Uppsala",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [],
       "library": true
     },
@@ -362,7 +362,7 @@
       "date": "2019-10-02",
       "scope": "Barnkirurgi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "testis",
         "torsion",
@@ -381,7 +381,7 @@
       "date": "2026-05-30",
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "smärtlindring",
         "analgesi"
@@ -398,7 +398,7 @@
       "date": "2026-04-29",
       "scope": "Anestesi, operation och intensivvård; Oral-",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "smärtlindring",
         "analgesi"
@@ -415,7 +415,7 @@
       "date": "2026-06-02",
       "scope": "Barnintensivvårdsavdelningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "huggorm",
         "ormbett",
@@ -434,7 +434,7 @@
       "date": "2020-11-23",
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [],
       "library": true
     },
@@ -448,7 +448,7 @@
       "date": "2024-10-01",
       "scope": "Akademiska Barnsjukhuset;",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [],
       "library": true
     },
@@ -462,7 +462,7 @@
       "date": "2024-02-14",
       "scope": "Barnanestesi- och",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "LAST",
         "lokalanestetika",
@@ -481,7 +481,7 @@
       "date": "2025-11-28",
       "scope": "Barnkirurgi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "skada"
       ],
@@ -497,7 +497,7 @@
       "date": "2025-11-25",
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "skada"
       ],
@@ -513,7 +513,7 @@
       "date": "2021-05-31",
       "scope": "Akutmottagningen",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [],
       "library": true
     },
@@ -527,7 +527,7 @@
       "date": "2024-12-06",
       "scope": "Riktlinje akut astma barn",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "astma",
         "obstruktivitet",
@@ -545,7 +545,7 @@
       "date": "",
       "scope": "Riktlinjesida hos specialistföreningen",
       "format": "Hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "andningsbesvär"
       ]
@@ -560,7 +560,7 @@
       "date": "",
       "scope": "Ålders- och viktindelade akutrumsblad (Word) – välj rätt ålder/vikt",
       "format": "Dokumentsamling",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -573,7 +573,7 @@
       "date": "2026-08-21",
       "scope": "Riktlinje rev augusti 2026",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "anafylaxi",
         "adrenalin",
@@ -591,7 +591,7 @@
       "date": "2020-11-01",
       "scope": "Handläggning vid dödsfall hos barn",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "orosanmälan"
@@ -607,7 +607,7 @@
       "date": "2026-01-11",
       "scope": "Publicerad av SWEPEM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "skada"
       ]
@@ -622,7 +622,7 @@
       "date": "2026-06-01",
       "scope": "Akut behandling vid drunkning",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "drunkning",
         "hypotermi",
@@ -639,7 +639,7 @@
       "date": "2024-11-01",
       "scope": "Kortversion av riktlinje högflödesgrimma",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "högflöde",
         "HFNC",
@@ -658,7 +658,7 @@
       "date": "2025-08-27",
       "scope": "Medicinsk rutin",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "orosanmälan"
@@ -674,7 +674,7 @@
       "date": "2024-10-08",
       "scope": "Nationell checklista v2.0",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "orosanmälan"
@@ -690,7 +690,7 @@
       "date": "2026-09-01",
       "scope": "Riktlinje nedsvald främmande kropp",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "buksmärta",
         "kräkning",
@@ -709,7 +709,7 @@
       "date": "2026-02-19",
       "scope": "Riktlinje v2.0 procedursedering och smärtlindring inom barnakutsjukvård · giltig från 2026-02-19",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "sedering",
         "ketamin",
@@ -742,7 +742,7 @@
       "date": "",
       "scope": "Riktlinjesida hos specialistföreningen",
       "format": "Hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "feber",
         "infektion"
@@ -758,7 +758,7 @@
       "date": "2017-01-01",
       "scope": "Läkartidningen 2017 – minimal, lätt och medelsvår skallskada",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "skalltrauma",
         "hjärnskakning",
@@ -777,7 +777,7 @@
       "date": "2025-11-01",
       "scope": "Nationellt handläggningsstöd",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "status epilepticus",
         "kramp",
@@ -794,7 +794,7 @@
       "date": "2022-09-01",
       "scope": "Nationella rekommendationer",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "massiv blödning",
         "transfusion",
@@ -812,7 +812,7 @@
       "date": "2021-09-29",
       "scope": "Nationellt PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "rehydrering",
         "dehydrering",
@@ -831,7 +831,7 @@
       "date": "2023-09-01",
       "scope": "Astrid Lindgrens barnsjukhus",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "analgesi",
         "smärta",
@@ -850,7 +850,7 @@
       "source": "karolinska",
       "scope": "Publicerat via Svensk Barninfektionsförening",
       "format": "Dokument hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "osteomyelit",
         "septisk artrit",
@@ -864,12 +864,12 @@
       "title": "Vårdprogram Borrelia",
       "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2026/09/Vardprogram-borreliainfektion-hos-barn-.pdf",
       "area": "inf",
-      "date": "",
+      "date": "2026-08-31",
       "publisher": "Svensk Barninfektionsförening · BLF",
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -882,7 +882,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -895,7 +895,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -908,7 +908,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -921,7 +921,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -934,7 +934,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -947,7 +947,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -960,7 +960,7 @@
       "source": "nationellt",
       "scope": "",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": []
     },
     {
@@ -973,7 +973,7 @@
       "date": "2026-05-01",
       "scope": "Handlingsplan (1 sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hjärtstopp",
         "HLR",
@@ -992,7 +992,7 @@
       "date": "2026-06-01",
       "scope": "Doser och tubstorlekar efter vikt",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hjärtstopp",
         "HLR",
@@ -1011,7 +1011,7 @@
       "date": "2021-01-01",
       "scope": "Pediatric Early Warning Score, åldersindelade kort",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "PEWS",
         "vitalparametrar",
@@ -1029,7 +1029,7 @@
       "date": "2020-10-01",
       "scope": "Rådgivande dokument",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "luftväg",
         "intubation",
@@ -1048,7 +1048,7 @@
       "date": "2021-01-01",
       "scope": "Fickkort barn och vuxna",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "trakeostomi",
         "trakealkanyl",
@@ -1066,7 +1066,7 @@
       "date": "2023-12-09",
       "scope": "Nationellt vårdprogram",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "DKA",
         "ketoacidos",
@@ -1086,7 +1086,7 @@
       "date": "2018-09-21",
       "scope": "PM akut handläggning",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "binjurebarkssvikt",
         "Addison",
@@ -1105,7 +1105,7 @@
       "date": "2024-04-01",
       "scope": "PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hypokalcemi",
         "kalcium",
@@ -1123,7 +1123,7 @@
       "date": "2024-12-01",
       "scope": "Svensk sammanfattning",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hypoglykemi",
         "glukagon",
@@ -1142,7 +1142,7 @@
       "date": "2019-11-26",
       "scope": "PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "metabol kris",
         "hyperammonemi",
@@ -1160,7 +1160,7 @@
       "date": "2023-10-15",
       "scope": "Riktlinje",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "artrit",
         "hälta",
@@ -1179,7 +1179,7 @@
       "date": "2021-05-10",
       "scope": "Kortversion",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "MIS-C",
         "hyperinflammation",
@@ -1197,7 +1197,7 @@
       "date": "2025-10-21",
       "scope": "Vårdprogram",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "PFAPA",
         "periodisk feber",
@@ -1215,7 +1215,7 @@
       "date": "2023-10-25",
       "scope": "Nationellt vårdprogram",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "Kawasaki",
         "feber",
@@ -1233,7 +1233,7 @@
       "date": "2018-12-01",
       "scope": "Nationellt PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "Henoch-Schönlein",
         "IgA-vaskulit",
@@ -1252,7 +1252,7 @@
       "date": "2024-06-10",
       "scope": "PM v3.0",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "neutropen feber",
         "feber",
@@ -1270,7 +1270,7 @@
       "date": "2021-01-01",
       "scope": "Dosering per kg, v1.0",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "antibiotika",
         "dosering",
@@ -1288,7 +1288,7 @@
       "date": "2015-09-01",
       "scope": "Nationella riktlinjer (algoritmer finns på föreningens sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "UVI",
         "pyelonefrit",
@@ -1307,7 +1307,7 @@
       "date": "2018-01-14",
       "scope": "Nationellt PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "hematuri",
         "blod i urinen",
@@ -1324,7 +1324,7 @@
       "date": "2015-01-01",
       "scope": "Vårdprogram",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "njursten",
         "njurkolik",
@@ -1342,7 +1342,7 @@
       "date": "2024-12-01",
       "scope": "Handläggningsstöd v1.0",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "HUS",
         "EHEC",
@@ -1360,7 +1360,7 @@
       "date": "2024-01-01",
       "scope": "Nationellt vårdprogram",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "appendicit",
         "buksmärta",
@@ -1377,7 +1377,7 @@
       "date": "2026-09-07",
       "scope": "Nationellt handläggningsstöd",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "epilepsi",
         "anfall",
@@ -1395,7 +1395,7 @@
       "date": "2025-05-22",
       "scope": "PM",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "SVT",
         "takykardi",
@@ -1413,7 +1413,7 @@
       "date": "2016-10-25",
       "scope": "Checklista",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "blåsljud",
         "hjärta",
@@ -1430,7 +1430,7 @@
       "date": "2021-09-01",
       "scope": "Riktlinje",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "ITP",
         "trombocytopeni",
@@ -1448,7 +1448,7 @@
       "date": "2023-11-01",
       "scope": "Riktlinje",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "transfusion",
         "blod",
@@ -1466,7 +1466,7 @@
       "date": "2024-01-01",
       "scope": "Riktlinje v1.0",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "trombos",
         "lungemboli",
@@ -1484,7 +1484,7 @@
       "date": "2025-01-01",
       "scope": "Flödesschema (1 sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "massiv blödning",
         "transfusion",
@@ -1502,7 +1502,7 @@
       "date": "2025-02-01",
       "scope": "Riktlinjer",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "barn som far illa",
         "misshandel",
@@ -1520,7 +1520,7 @@
       "date": "2026-05-01",
       "scope": "Kortversion (4 sidor)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "orosanmälan",
         "anmälningsskyldighet",
@@ -1538,7 +1538,7 @@
       "date": "2018-01-01",
       "scope": "Behandlingsrekommendation",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "vätska",
         "dropp",
@@ -1558,7 +1558,7 @@
       "date": "2018-01-01",
       "scope": "Bilaga 1 (1 sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "vätska",
         "dropp",
@@ -1575,7 +1575,7 @@
       "date": "2018-01-01",
       "scope": "Bilaga 2 (1 sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "vätska",
         "dropp",
@@ -1594,7 +1594,7 @@
       "date": "2022-10-01",
       "scope": "Nationella riktlinjer",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "nyfödd",
         "HLR",
@@ -1612,7 +1612,7 @@
       "date": "2021-10-01",
       "scope": "Algoritm (1 sida)",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "nyfödd",
         "HLR",
@@ -1629,7 +1629,7 @@
       "date": "2023-08-29",
       "scope": "Riktlinje",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "nyfödd",
         "kramp",
@@ -1647,7 +1647,7 @@
       "date": "2021-11-15",
       "scope": "Rekommendation för akutläkare",
       "format": "PDF hos utgivaren",
-      "checked": "2026-09-23",
+      "checked": "2026-10-01",
       "keywords": [
         "nyfödd",
         "förlossning",
@@ -1665,7 +1665,7 @@
       "date": "",
       "scope": "16 äldre källblad: 3 månader / 5 kg till vuxen över 50 kg. Omsatt text från Word-original; doser och källversioner är inte uppdaterade. Kontrollera aktuellt original hos utgivaren.",
       "format": "PDF – bibliotekssammanställning",
-      "checked": "2026-09-27",
+      "checked": "2026-10-01",
       "keywords": [
         "akutrumsblad",
         "WETFLAG",
@@ -1730,7 +1730,8 @@
         "infektion",
         "barn"
       ],
-      "year": "2025"
+      "year": "2025",
+      "checked": "2026-10-01"
     },
     {
       "id": "GL31",
@@ -1747,7 +1748,8 @@
         "spädbarn",
         "barn"
       ],
-      "year": "2021"
+      "year": "2021",
+      "checked": "2026-10-01"
     },
     {
       "id": "GL50",
@@ -1766,7 +1768,8 @@
         "diabetes",
         "barn"
       ],
-      "year": "2022"
+      "year": "2022",
+      "checked": "2026-10-01"
     },
     {
       "id": "GL71",
@@ -1784,7 +1787,8 @@
         "sedering",
         "barn"
       ],
-      "year": "2020"
+      "year": "2020",
+      "checked": "2026-10-01"
     },
     {
       "id": "GL72",
@@ -1802,7 +1806,84 @@
         "analgesi",
         "barn"
       ],
-      "year": "2017"
+      "year": "2017",
+      "checked": "2026-10-01"
+    },
+    {
+      "id": "snf-perinatal-stroke",
+      "title": "Perinatal stroke – nationell riktlinje",
+      "source": "nationellt",
+      "publisher": "Svenska Neonatalföreningen",
+      "area": "neo",
+      "url": "https://neo.barnlakarforeningen.se/wp-content/uploads/sites/14/2026/08/20260525_Riktlinje_Perinatal-stroke.pdf",
+      "date": "2026-08-27",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-10-01",
+      "keywords": [
+        "nyfödd",
+        "stroke",
+        "kramper",
+        "sinustrombos",
+        "neonatal"
+      ]
+    },
+    {
+      "id": "blf-aol-bigeting",
+      "title": "Bi- och getingstick – utredning och behandling",
+      "source": "nationellt",
+      "publisher": "BLF Allergi & lung",
+      "area": "akut",
+      "url": "https://aol.barnlakarforeningen.se/wp-content/uploads/sites/24/2026/08/Bi-och-getingallergi.pdf",
+      "date": "2026-08-01",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-10-01",
+      "keywords": [
+        "getingstick",
+        "bistick",
+        "anafylaxi",
+        "insektsallergi",
+        "adrenalinpenna"
+      ]
+    },
+    {
+      "id": "sbkf-trombolys",
+      "title": "Trombolys till barn och ungdomar",
+      "source": "nationellt",
+      "publisher": "BLF Barnkoagulation (SBKF)",
+      "area": "hjarta",
+      "url": "https://pho.barnlakarforeningen.se/wp-content/uploads/sites/20/2026/02/PM-trombolys-till-barn-och-ungdomar-SBKF-ver-1.0.pdf",
+      "date": "2026-02-01",
+      "scope": "PM, version 1.0",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-10-01",
+      "keywords": [
+        "trombolys",
+        "alteplas",
+        "trombos",
+        "lungemboli",
+        "stroke"
+      ]
+    },
+    {
+      "id": "blf-aol-pneumothorax",
+      "title": "Spontan pneumothorax hos barn och ungdomar",
+      "source": "nationellt",
+      "publisher": "BLF Allergi & lung",
+      "area": "luft",
+      "url": "https://aol.barnlakarforeningen.se/wp-content/uploads/sites/24/2025/07/riktlinje-Spontan-pneumothorax-250704.pdf",
+      "date": "2025-07-04",
+      "scope": "Riktlinje",
+      "format": "PDF hos utgivaren",
+      "checked": "2026-10-01",
+      "keywords": [
+        "pneumothorax",
+        "pneumomediastinum",
+        "bröstsmärta",
+        "dyspné",
+        "drän"
+      ]
     }
   ]
 }

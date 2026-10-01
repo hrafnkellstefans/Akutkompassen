@@ -95,3 +95,18 @@ DAS 2015 ersatt av 2025 med bibehållet GL54-ID. Tillagt SILF endokardit revisio
 Barnbiblioteket har en lokal PDF-sammanställning av 16 offentliga Word-källblad från SWEPEM/Karolinska. Innehållsrutornas text har satts om eftersom direktkonverteringen klippte innehåll. Kliniska uppgifter och källversioner har inte uppdaterats. Samlingen är markerad som äldre bibliotekskopia; sammanställningsdatum används inte för NY!-etiketten. Originalkällan anges i PDF och metadata.
 
 WMS Drowning 2024 och WMS Heat Illness 2024 tillagda med länkar till utgivaren. Original-PDF:erna är sparade i ED Consultant.
+
+
+## Länkkontroll och uppdatering 1 oktober 2026 (ak-v10s26-okt-lankkontroll)
+
+Rättade länkar: 20808 Meningit och encefalit (nu DocPlusSTYR-14040), GL65 GIC Antidotlista, GL122 Löf massivt transfusionsprotokoll.
+
+Borttagna, finns inte längre i publika DocPlus: 49801 Tyreotoxikos, 13720 Akuta larm, 196 Patientinformation hjärnskakning, 15224 Beredskapsplan, 27553 Beslut- och hänvisningsstöd triage.
+
+Uppdaterad fulltext: 22759 Omhändertagande efter hjärtstopp, CIVA (version 9, godkänd 2026-09-29). Provtagningsschemat på sidan 8–9 är återgivet som text.
+
+Nya länkar vuxna (GL127–GL134): HLR-rådets sammanfattning 2026, A-HLR vuxen, HLR vid trauma, drunkning, luftvägsstopp, Hjärtstopp inom hälso- och sjukvården, SFAI neuraxiala blockader och antitrombotiska läkemedel, nationellt vårdprogram gallstenssjukdom.
+
+Nya länkar barn: Perinatal stroke, Bi- och getingstick, Trombolys till barn och ungdomar, Spontan pneumothorax. Vårdprogram Borrelia har fått datum 2026-08-31.
+
+`tracking/documents.json` är uppdaterad; popularitetsräknaren räknar de nya dokumenten först när Cloudflare-workern har driftsatts på nytt.
