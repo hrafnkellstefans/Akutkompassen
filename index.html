@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-theme="light" data-look="kompass" data-v="ak-v10s26-okt-lankkontroll"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-theme="light" data-look="kompass" data-v="ak-v10s27-sokordning"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,8 +142,9 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .empty{padding:40px 20px;text-align:center;color:var(--muted)}
 
 /* reader */
-.reader{position:fixed;inset:0;background:rgba(10,20,18,.45);z-index:20;display:flex;justify-content:flex-end}
+.reader{position:fixed;inset:0;background:rgba(10,20,18,.45);z-index:1000;display:flex;justify-content:flex-end}
 .reader[hidden]{display:none}
+.show-all{display:block;margin:18px auto 0;padding:11px 18px;border:1px solid var(--line);background:var(--card,#fff);color:var(--ink);font-weight:650;border-radius:4px;min-height:44px}
 .pane{width:min(860px,100%);height:100%;height:100dvh;background:var(--surface);display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.25)}
 .pane>*{flex:none}
 .pane>.pbody{flex:1 1 auto;min-height:0}
@@ -300,9 +301,9 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:360px){.filters .chip{padding:7px 8px;font-size:12px}.source-head h2{font-size:17px}.source-head .source-count{padding:3px 6px}.source-icon{width:28px;height:28px}.acard .nm{font-size:13px}}
 .audience-nav{display:flex;gap:4px;align-items:center}.audience-nav a{padding:8px 14px;border-radius:9px;font-size:14px;font-weight:650;text-decoration:none;color:#163c53;background:#edf4f7}.audience-nav a[aria-current]{background:#163c53;color:white}.audience-nav a:focus-visible{outline:3px solid #bc6600;outline-offset:3px}@media(max-width:700px){.audience-nav{margin-left:auto}.hwrap{flex-wrap:wrap}.hwrap .search{flex-basis:100%}}
 }</style>
-<link rel="stylesheet" href="shared.css?v=ak-v10s26-okt-lankkontroll">
+<link rel="stylesheet" href="shared.css?v=ak-v10s27-sokordning">
 
-<link rel="stylesheet" href="appearance.css?v=ak-v10s26-okt-lankkontroll"><script src="appearance.js?v=ak-v10s26-okt-lankkontroll"></script></head><body class="adult"><header><div class="top"><button class="brand" id="home" aria-label="Till startsidan"><img src="logo-v2.png" alt="" width="48" height="48"><span>Akutkompassen<span class="brand-sub">KUNSKAPSSTÖD FÖR AKUTSJUKVÅRD</span></span></button><nav aria-label="Välj kunskapsstöd"><a href="./" aria-current="page">Vuxna <span class="nav-dot" aria-hidden="true"></span></a><a href="barn/">Barn</a></nav></div></header>
+<link rel="stylesheet" href="appearance.css?v=ak-v10s27-sokordning"><script src="appearance.js?v=ak-v10s27-sokordning"></script></head><body class="adult"><header><div class="top"><button class="brand" id="home" aria-label="Till startsidan"><img src="logo-v2.png" alt="" width="48" height="48"><span>Akutkompassen<span class="brand-sub">KUNSKAPSSTÖD FÖR AKUTSJUKVÅRD</span></span></button><nav aria-label="Välj kunskapsstöd"><a href="./" aria-current="page">Vuxna <span class="nav-dot" aria-hidden="true"></span></a><a href="barn/">Barn</a></nav></div></header>
 <main class="wrap"><section class="search-panel" aria-label="Sök och filtrera"><label class="searchbox" id="sbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="q" placeholder="Sök symtom, diagnos eller behandling…" aria-label="Sök PM och riktlinjer" autocomplete="off"><button class="app-search-clear" id="clr" aria-label="Rensa sökning">×</button><kbd>/</kbd></label><div class="quick"><span>Snabbsök</span><button data-query="sepsis">Sepsis</button><button data-query="andningsbesvär">Andningsbesvär</button><button data-query="bröstsmärta">Bröstsmärta</button><button data-query="stroke">Stroke</button><button data-query="sedering">Sedering</button></div></section>
 
 <div class="workspace"><aside aria-label="Filtrera riktlinjer"><div class="sidebar-head"><h2>Kliniska områden</h2><button id="reset" class="text-button">Återställ</button></div><div id="areas" class="areas"></div><div class="source-explainer"><h3>Vilket PM gäller här?</h3><p><b>Lokala PM</b> gäller respektive verksamhet inom Region Uppsala.</p><p><b>Externa riktlinjer</b> kommer från svenska och internationella utgivare.</p><p>Kontrollera alltid verksamhet och giltighet i originalet.</p></div></aside><section class="library"><div class="source-tabs filters" role="group" aria-label="Källa"><button class="chip kind on" data-k="" aria-pressed="true">Alla källor</button><button class="chip kind" data-k="pm" aria-pressed="false">Lokala PM</button><button class="chip kind" data-k="gl" aria-pressed="false">Externa riktlinjer</button></div><div class="results-head"><div><p class="section-label">KUNSKAPSBIBLIOTEKET</p><h2>PM & riktlinjer</h2><p id="stat" role="status"></p><span id="ldst" hidden></span></div><div class="filters saved-filter"><button class="chip saved-toggle" data-f="fav" aria-pressed="false">☆ Sparade</button></div></div><p class="popularity-status" id="popularity-status" role="status"></p><div id="main"><div id="boot">Laddar…</div></div></section></div><footer><p>Personligt urval av Kjell Stefansson · ST-läkare i akutsjukvård.</p><details><summary>Om källorna och biblioteket</summary><p>Det här är en fristående länksamling, inte en officiell webbplats för Akademiska, Karolinska eller Svenska Barnläkarföreningen. Sjukhusens PM gäller för respektive verksamhet.</p><p>Datum på korten avser dokumentets angivna datum. ”Länk kontrollerad” avser åtkomsten till källan, inte medicinsk granskning. Kontrollera aktuell version hos utgivaren. Äldre dokument markeras särskilt.</p><p>Sökningen omfattar lokala PM-texter och externa riktlinjers titlar och sökord. Originaldokument öppnas i en ny flik och kräver internet. Sparade favoriter lagras endast i den här webbläsaren.</p><p>Urvalet bygger på offentliga PM och kunskapsstöd. Inga patientuppgifter ska anges i sökfältet.</p><p>Popularitet bygger på registrerade öppningar från besökare och är ingen medicinsk rekommendation. Endast dokument-ID och ett slumpmässigt ID för varje öppning skickas till räknaren. <a href="statistik.html">Undanta dina egna öppningar</a>.</p><p>Besök och sidvisningar mäts med Cloudflare Web Analytics utan analyscookies. Statistiken identifierar inte enskilda personer. Dina sökord skickas inte som analyshändelser.</p></details><a href="barn/">Till Akutkompassen för barn</a></footer></main>
@@ -313,7 +314,7 @@ button,a{-webkit-tap-highlight-color:transparent}
   <div class="pbody" id="pbody"></div>
 </div></div>
 
-<script src="popularity-config.js?v=ak-v10s26-okt-lankkontroll"></script><script src="popularity.js?v=ak-v10s26-okt-lankkontroll"></script>
+<script src="popularity-config.js?v=ak-v10s27-sokordning"></script><script src="popularity.js?v=ak-v10s27-sokordning"></script>
 <script type="application/json" id="data"></script>
 <script>
 (async function(){
@@ -461,7 +462,7 @@ function docPass(d){
 function yrClass(d){return d.old?'old':(d.fresh?'':'mid');}
 function tagsFor(d,withArea,showSource=true,showBadges=false){
   if(d.kind==='gl') return `${showSource?'<span class="tag source-external">Extern riktlinje</span>':''}${showBadges?popularity.badge(d):''}${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.lvl==='nationell'?'<span class="tag">Nationellt</span>':''}<span class="tag yr ${+d.yr<2020?'old':(+d.yr>=2025?'':'mid')}">${d.yr||'–'}</span>${d.np&&d.fmt==='pdf'?`<span>${d.np} s</span>`:''}${d.note?`<span>${esc(d.note)}</span>`:''}`;
-  return `${showSource?'<span class="tag source-local">Lokalt PM · Region Uppsala</span>':''}${showBadges?popularity.badge(d):''}${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${d.id}</span>${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
+  return `${showSource?'<span class="tag source-local">Lokalt PM · Region Uppsala</span>':''}${showBadges?popularity.badge(d):''}${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${(String(d.url||'').match(/DocPlusSTYR-(\d+)/)||[0,d.id])[1]}</span>${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} s</span>`;
 }
 function favBtn(d){const on=favs.has(d.id);return `<button class="fav${on?' on':''}" data-fav="${d.id}" aria-label="${on?'Ta bort sparad':'Spara'}: ${esc(d.t)}" aria-pressed="${on}">${on?'★':'☆'}</button>`;}
 function srcLink(d){return d.kind==='gl'?`<a data-count-open="${esc(d.id)}" href="${d.url}" target="_blank" rel="noopener">${d.txt?'Källa hos utgivaren':'Öppna hos utgivaren'} ↗</a>`:`<a data-count-open="${esc(d.id)}" href="${d.url}" target="_blank" rel="noopener">Original i DocPlus ↗</a>`;}
@@ -485,12 +486,14 @@ function renderAreas(counts){
 function setStat(t){$('stat').textContent=t;}
 const EXAMPLES=['insulin DKA','HINTS nystagmus','tranexamsyra trauma','"lågmolekylärt heparin" gravid','acetylcystein paracetamol','hyperkalemi','trombolys kontraindikation','anafylaxi adrenalin dos','delirium tremens','lumbalpunktion antikoagulantia','tenecteplase stroke','sepsis lactate fluids','ketamine sedation children','aortic dissection D-dimer'];
 
+const HOME_LIMIT=24;
 // ---------- views ----------
 function renderHome(main){
  const docs=DOCS.filter(docPass).sort(popularity.compare);
  const counts={total:docs.length};docs.forEach(d=>counts[d.a]=(counts[d.a]||0)+1);renderAreas(counts);
  setStat(`${docs.length} dokument · ${state.kind==='pm'?'lokala PM':state.kind==='gl'?'externa riktlinjer':'alla källor'}`);
- main.innerHTML='<div class="cards"></div>';const grid=main.querySelector('.cards');docs.forEach(d=>grid.appendChild(docCard(d,true)));
+ main.innerHTML='<div class="cards"></div>';const grid=main.querySelector('.cards');const limited=!state.showAll&&docs.length>HOME_LIMIT;(limited?docs.slice(0,HOME_LIMIT):docs).forEach(d=>grid.appendChild(docCard(d,true)));
+ if(limited){main.insertAdjacentHTML('beforeend',`<button class="show-all" id="show-all">Visa alla ${docs.length} dokument</button>`);$('show-all').onclick=()=>{state.showAll=true;update();};}
  if(!docs.length)main.innerHTML='<div class="empty">Inga dokument matchar valda filter.</div>';
 }
 function renderArea(main){
@@ -512,7 +515,7 @@ function renderSearch(main,r){
   const groups=r.groups.filter(g=>docPass(g.d));
   const counts={total:0}; groups.forEach(g=>{counts[g.d.a]=(counts[g.d.a]||0)+1;counts.total++;});
   renderAreas(counts);
-  const shown=groups.filter(g=>!state.area||g.d.a===state.area).sort((a,b)=>popularity.compare(a.d,b.d));
+  const shown=groups.filter(g=>!state.area||g.d.a===state.area).sort((a,b)=>(b.score-a.score)||popularity.compare(a.d,b.d));
   setStat(`${shown.length} dokument`);
   let h=`<p class="hint">${r.empty?`Inga sökbara ord i “${esc(state.q.trim())}”.`:r.terms.length?`Söker på ${r.terms.map(t=>`<b>${esc(t)}</b>`).join(', ')}${r.phrases.length?` + frasen ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`:''} – böjningar och sammansatta ord matchas också.`:`Frassökning: ${r.phrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`}${state.area?` <button class="chip on" data-unarea>${esc(AREAS[state.area])} ×</button>`:''}</p>`;
   main.innerHTML=h;
@@ -584,7 +587,7 @@ document.addEventListener('keydown',e=>{
 });
 let timer; qEl.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(update,140);});
 $('clr').onclick=()=>{qEl.value='';update();qEl.focus();};
-$('home').onclick=()=>{qEl.value='';state.area=null;state.kind=null;syncChips();update();window.scrollTo(0,0);};
+$('home').onclick=()=>{qEl.value='';state.area=null;state.kind=null;state.showAll=false;syncChips();update();window.scrollTo(0,0);};
 function syncChips(){
   document.querySelectorAll('.filters .chip[data-f]').forEach(x=>{const on=!!state[x.dataset.f];x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});
   document.querySelectorAll('.filters .chip[data-k]').forEach(x=>{const on=(state.kind||'')===x.dataset.k;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});
@@ -603,4 +606,4 @@ const countSource=e=>{if(e.type==='auxclick'&&e.button!==1)return;const link=e.t
 })().catch(e=>{const m=document.getElementById('main');if(m)m.innerHTML='<div class="empty">Kunde inte läsa in data ('+e.message+'). Uppdatera webbläsaren – appen kräver Safari 16.4+/Chrome 80+.</div>';});
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
-<script src="visitor-analytics.js?v=ak-v10s26-okt-lankkontroll"></script></body></html>
+<script src="visitor-analytics.js?v=ak-v10s27-sokordning"></script></body></html>

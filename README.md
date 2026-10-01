@@ -6,7 +6,7 @@ Nytt i v10: appen är uppdelad i en liten startsida och separata datafiler per o
 
 Startsidan skiljer mellan **Lokala PM** (Region Uppsala / DocPlus) och **Externa riktlinjer** (svenska och internationella utgivare). Källtypen syns även i sökresultat, sparade dokument och läsvyn. Indelningen i kärn-PM och andra linjen har tagits bort, liksom dess påverkan på sortering och sökpoäng. Områdeslistor sorteras alfabetiskt. Dokumentregistret och källtexterna är oförändrade.
 
-Gränssnittet har tydligare källfilter, luftigare kort och mobilanpassad layout. Texten ”Riktlinjer är ett stöd och ersätter inte klinisk bedömning” visas på startsidan och i sidfoten.
+Gränssnittet har tydligare källfilter, luftigare kort och mobilanpassad layout. Texten ”Riktlinjer är ett stöd och ersätter inte klinisk bedömning” har senare tagits bort från startsidan.
 
 ## Riktlinjer tillagda 22 september 2026
 
@@ -84,7 +84,7 @@ Vuxen- och barnbiblioteket använder `shared.css` för samma sidhuvud, sökpanel
 
 ## Kompass / Original – utseende
 
-Den nya visuella stilen ligger separat i `appearance.css` och aktiveras enbart av `html[data-look=kompass]`. Originalets `shared.css` och läsarstilar är oförändrade. Växla med **Utseende → Original** i sidhuvudet; valet sparas lokalt och gäller både Vuxna och Barn. Inget laddas om och sökning/favoriter påverkas inte.
+Den nya visuella stilen ligger separat i `appearance.css` och aktiveras enbart av `html[data-look=kompass]`. Originalets `shared.css` och läsarstilar är oförändrade. Kompass är numera det enda utseendet; växeln **Utseende → Original** i sidhuvudet är borttagen.
 
 För att återställa originalet som standard för nya besökare: ändra `DEFAULT_LOOK` till `original` i `appearance.js`. För en fullständig återställning till originaldesignen för alla: ta bort de två `appearance`-referenserna i båda HTML-sidorna och publicera med en ny cacheversion. Förra versionen finns i Git som `5a5ef4d`. Ingen extern font eller bild behövs för det nya utseendet.
 
@@ -110,3 +110,7 @@ Nya länkar vuxna (GL127–GL134): HLR-rådets sammanfattning 2026, A-HLR vuxen,
 Nya länkar barn: Perinatal stroke, Bi- och getingstick, Trombolys till barn och ungdomar, Spontan pneumothorax. Vårdprogram Borrelia har fått datum 2026-08-31.
 
 `tracking/documents.json` är uppdaterad; popularitetsräknaren räknar de nya dokumenten först när Cloudflare-workern har driftsatts på nytt.
+
+## Rättningar 1 oktober 2026 (ak-v10s27-sokordning)
+
+Sökresultat sorteras nu efter relevans i både Vuxna och Barn; popularitet avgör bara vid lika poäng. Startsidan visar 24 dokument med knappen ”Visa alla”. GL111 (AHA/ACC lungemboli 2026) länkar till DOI-adressen hos Circulation. Kortet för Meningit och encefalit visar DocPlus-numret från länken (STYR-14040). Läsarens z-index är höjt, undertiteln i sidhuvudet är större på smal skärm och rubriken ”PM & riktlinjer” har luftigare teckenavstånd.
