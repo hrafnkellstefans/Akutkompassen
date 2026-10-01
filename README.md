@@ -114,3 +114,7 @@ Nya länkar barn: Perinatal stroke, Bi- och getingstick, Trombolys till barn och
 ## Rättningar 1 oktober 2026 (ak-v10s27-sokordning)
 
 Sökresultat sorteras nu efter relevans i både Vuxna och Barn; popularitet avgör bara vid lika poäng. Startsidan visar 24 dokument med knappen ”Visa alla”. GL111 (AHA/ACC lungemboli 2026) länkar till DOI-adressen hos Circulation. Kortet för Meningit och encefalit visar DocPlus-numret från länken (STYR-14040). Läsarens z-index är höjt, undertiteln i sidhuvudet är större på smal skärm och rubriken ”PM & riktlinjer” har luftigare teckenavstånd.
+
+## Rättning 1 oktober 2026 (ak-v10s29-scrollfix)
+
+Sidan hoppade och fastnade vid rullning med styrplatta. Orsak: sökpanelen krymper när den fastnar överst, vilket ändrade sidans längd och fick `IntersectionObserver` i `usability.js` att slå av och på läget upprepade gånger. Den förlorade höjden läggs nu tillbaka som marginal, så sidans längd är oförändrad.
