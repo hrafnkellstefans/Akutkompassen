@@ -115,6 +115,14 @@ Nya länkar barn: Perinatal stroke, Bi- och getingstick, Trombolys till barn och
 
 Sökresultat sorteras nu efter relevans i både Vuxna och Barn; popularitet avgör bara vid lika poäng. Startsidan visar 24 dokument med knappen ”Visa alla”. GL111 (AHA/ACC lungemboli 2026) länkar till DOI-adressen hos Circulation. Kortet för Meningit och encefalit visar DocPlus-numret från länken (STYR-14040). Läsarens z-index är höjt, undertiteln i sidhuvudet är större på smal skärm och rubriken ”PM & riktlinjer” har luftigare teckenavstånd.
 
-## Rättning 1 oktober 2026 (ak-v10s29-scrollfix)
+## Rättning 1 oktober 2026 (ak-v10s31-mobil-sokfalt)
 
 Sidan hoppade och fastnade vid rullning med styrplatta. Orsak: sökpanelen krymper när den fastnar överst, vilket ändrade sidans längd och fick `IntersectionObserver` i `usability.js` att slå av och på läget upprepade gånger. Den förlorade höjden läggs nu tillbaka som marginal, så sidans längd är oförändrad.
+
+## Rättning 1 oktober 2026 (ak-v10s31-mobil-sokfalt)
+
+Sökresultaten byggdes om upp till 21 gånger medan PM-texten hämtades i bakgrunden, vilket fick listan att hoppa under rullning direkt efter en sökning (tydligast efter varje ny version, då texten hämtas om). Listan uppdateras nu bara automatiskt när man är nära sidans topp. Har man rullat ner visas i stället knappen ”Fler träffar hämtade – uppdatera listan”.
+
+## Rättning 1 oktober 2026 (ak-v10s31-mobil-sokfalt)
+
+På mobil ändrade sökfältet storlek något när det fastnade överst (54 → 48 px högt, annan utfyllnad). Det kompakta läget gäller nu bara skärmar bredare än 760 px; på mobil har fältet samma storlek hela tiden.
