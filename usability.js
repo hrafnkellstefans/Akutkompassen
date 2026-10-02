@@ -1,19 +1,11 @@
 /* Shared presentation controls; document data and clinical text remain unchanged. */
 (()=>{
- const panel=document.querySelector('.search-panel'),areas=document.getElementById('areas');
+ const areas=document.getElementById('areas');
  const toggle=document.createElement('button');toggle.className='area-menu-toggle';toggle.type='button';toggle.setAttribute('aria-controls','areas');toggle.setAttribute('aria-expanded','false');
  areas.before(toggle);
  toggle.onclick=()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));areas.classList.toggle('expanded',open);};
  areas.addEventListener('click',()=>{toggle.setAttribute('aria-expanded','false');areas.classList.remove('expanded');if(getComputedStyle(toggle).display!=='none')toggle.focus({preventScroll:true});});
- const sentinel=document.createElement('div');sentinel.className='search-sentinel';panel.before(sentinel);
- /* The stuck panel is shorter. Give the lost height back as margin so the page length never changes; otherwise the page jumps and the observer flips back and forth while scrolling. */
- let naturalHeight=0,baseMargin=0;
- new IntersectionObserver(([entry])=>{
-  const stuck=!entry.isIntersecting;if(stuck===panel.classList.contains('is-stuck'))return;
-  if(stuck){naturalHeight=panel.offsetHeight;baseMargin=parseFloat(getComputedStyle(panel).marginBottom)||0;}
-  panel.classList.toggle('is-stuck',stuck);
-  panel.style.marginBottom=stuck?(baseMargin+Math.max(0,naturalHeight-panel.offsetHeight))+'px':'';
- },{threshold:0}).observe(sentinel);
+ // CSS sticky positioning keeps the search panel in place without resizing the page.
  const q=document.getElementById('q');let clear=document.getElementById('clr');
  if(!clear){clear=document.createElement('button');clear.className='app-search-clear';clear.type='button';clear.setAttribute('aria-label','Rensa sökning');clear.textContent='×';q.after(clear);clear.onclick=()=>{q.value='';q.dispatchEvent(new Event('input',{bubbles:true}));q.focus();};}
  q.addEventListener('input',()=>q.closest('.searchbox').classList.toggle('has',!!q.value));
