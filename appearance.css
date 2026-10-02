@@ -112,13 +112,6 @@ html[data-look=kompass] .tag.source-local{background:#e8eee4;color:#3e5a3f}
 html[data-look=kompass] .tag.source-external{background:#e7ecec;color:#335364}
 html[data-look=kompass] .app-search-clear{min-width:44px;min-height:44px;font-size:20px}
 .searchbox input::-webkit-search-cancel-button,.searchbox input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
-/* The compact stuck bar is for wide screens only; on phones the bar keeps one size so it does not shift while scrolling. */
-@media(min-width:761px){
- html[data-look=kompass] .search-panel.is-stuck{padding:8px 12px}
- .search-panel.is-stuck .quick{display:none}
- html[data-look=kompass] .search-panel.is-stuck .searchbox{height:48px}
-}
-.search-sentinel{height:1px}
 .area-menu-toggle{display:none}
 html[data-look=kompass] .adult #main.search-results{grid-template-columns:minmax(0,1fr)}
 html[data-look=kompass] .search-results .card{min-height:0}
