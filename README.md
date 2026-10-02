@@ -134,3 +134,7 @@ Originalutseendet är tillfälligt aktiverat i både Vuxna och Barn för att se 
 ### Compact catalogue cards — 2 October 2026
 
 Release `ak-v10s33-compact` reduces catalogue card padding and spacing, removes repeated source labels, and retains full titles and warnings. Both libraries retain 44px save/open controls. Validated at 320px, 390px and desktop widths.
+
+### Stable scrolling — 2 October 2026
+
+Release `ak-v10s34-scroll` removes scroll-triggered search-panel resizing and margin compensation. The search panel stays sticky at a constant height in both libraries. Background full-text search updates are deferred as soon as the page leaves the top; returning past a scroll threshold no longer rebuilds the list. Pending results remain available through the refresh button or the next search interaction.
