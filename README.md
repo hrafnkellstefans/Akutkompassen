@@ -130,3 +130,7 @@ På mobil ändrade sökfältet storlek något när det fastnade överst (54 → 
 ## Test 1 oktober 2026 (ak-v10s32-original)
 
 Originalutseendet är tillfälligt aktiverat i både Vuxna och Barn för att se om rullningsproblemet hör ihop med Kompass-stilen. Endast `data-look` är ändrat (i `index.html`, `barn/index.html` och `appearance.js`); sökning, innehåll och övriga rättningar är oförändrade. Byt tillbaka genom att sätta `kompass` på de tre ställena och höja versionen.
+
+### Compact catalogue cards — 2 October 2026
+
+Release `ak-v10s33-compact` reduces catalogue card padding and spacing, removes repeated source labels, and retains full titles and warnings. Both libraries retain 44px save/open controls. Validated at 320px, 390px and desktop widths.
