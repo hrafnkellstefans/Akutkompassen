@@ -30,7 +30,7 @@ body{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-
 .show-all{display:block;margin:18px auto 0;padding:11px 18px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:650;border-radius:4px;min-height:44px}
 
 /* Compact catalogue cards: retain full titles, source context and 44px controls. */
-.cards{gap:10px;align-items:start}
+.cards{gap:10px;align-items:stretch;grid-auto-rows:1fr}
 .cards .card{position:relative;min-height:0;padding:12px 14px 8px;border-radius:10px;border-top-width:2px;box-shadow:0 1px 3px #163c5306}
 .cards .card-top{padding-right:42px;min-height:24px;align-items:center}
 .cards .card-top>.fav,.cards .card-top>.save{position:absolute;right:5px;top:4px;width:44px;height:44px;display:grid;place-items:center;padding:0}
@@ -43,6 +43,10 @@ body{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-
 .cards .card .actions,.cards .card .card-bottom{margin-top:auto;padding:2px 0 0;gap:6px;align-items:center}
 .cards .card .actions a,.cards .card .actions button,.cards .card .card-bottom a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:4px 8px;font-size:13px}
 .cards .card .actions .save{display:none}
+@media(max-width:900px){
+ /* One column needs no row alignment; avoid oversized cards on phones. */
+ .cards{grid-auto-rows:auto}
+}
 @media(max-width:760px){
  .cards{gap:8px}
  .cards .card{padding:10px 12px 6px;border-radius:9px}

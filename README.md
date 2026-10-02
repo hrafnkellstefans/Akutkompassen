@@ -138,3 +138,7 @@ Release `ak-v10s33-compact` reduces catalogue card padding and spacing, removes 
 ### Stable scrolling — 2 October 2026
 
 Release `ak-v10s34-scroll` removes scroll-triggered search-panel resizing and margin compensation. The search panel stays sticky at a constant height in both libraries. Background full-text search updates are deferred as soon as the page leaves the top; returning past a scroll threshold no longer rebuilds the list. Pending results remain available through the refresh button or the next search interaction.
+
+### Aligned compact cards — 2 October 2026
+
+Release `ak-v10s35-aligned` gives multi-column catalogue cards equal heights, with actions aligned at the bottom. Single-column layouts keep content-sized cards to avoid unnecessary empty space on phones. Full titles, notes and warnings remain visible; scroll stability is preserved.
