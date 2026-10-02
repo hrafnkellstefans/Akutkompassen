@@ -27,3 +27,14 @@ test('New and popular badges coexist, independent of tracking exclusion',async()
  assert.match(badge,/>NY!</);assert.match(badge,/>POPULÄR!</);
  assert.match(p.status(),/POPULÄR!/);assert.doesNotMatch(p.status(),/gul cirkel/);
 });
+
+test('Arriving counts never re-sort a rendered list; cached snapshot orders the first render',async()=>{
+ const store=new Map();let refreshed=0;
+ const ctx=()=>({Date,AK_POPULARITY_ENDPOINT:'https://counter.example',localStorage:{getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)},document:{addEventListener(){}},location:{hostname:'akutkompassen.se'},AbortSignal,setTimeout,Promise,crypto:globalThis.crypto,fetch:async()=>({ok:true,json:async()=>({counts:{'adult:a':1,'adult:b':4}})})});
+ const first=ctx();vm.runInNewContext(fs.readFileSync('popularity.js','utf8'),first);
+ const p=first.AkPopularity.create('adult',docs,()=>refreshed++);p.load();await p.whenReady(600);
+ assert.equal(refreshed,0);assert.deepEqual([...docs].sort(p.compare).map(x=>x.id),['b','a','c']);
+ const again=ctx();again.fetch=async()=>{throw Error('offline');};vm.runInNewContext(fs.readFileSync('popularity.js','utf8'),again);
+ const q=again.AkPopularity.create('adult',docs,()=>refreshed++);const t=Date.now();await q.whenReady(600);
+ assert.ok(Date.now()-t<50);assert.deepEqual([...docs].sort(q.compare).map(x=>x.id),['b','a','c']);assert.equal(refreshed,0);
+});
