@@ -3,7 +3,7 @@
 // and switches by itself at the next start. All files of one release come from one cache, so a page
 // never mixes old and new files.
 // Bump VERSION on every release (the same string as data-v in index.html and barn/index.html).
-const VERSION = 'ak-v10s39-offline';
+const VERSION = 'ak-v10s40-sidfot';
 const SHELL = ['./', './index.html', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest',];
 // cache:'reload' skips the browser's HTTP cache (GitHub Pages: max-age=600), so a new release never
 // stores a ten-minute-old copy of a file from the previous one.

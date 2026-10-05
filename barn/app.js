@@ -5,7 +5,6 @@ const normal=s=>String(s).toLocaleLowerCase('sv').normalize('NFD').replace(/[̀-
 const STOP=new Set('och i att det som en pa ar av for med till den har de inte om ett vid kan eller sa ska fran man men efter sig vara alla nar dar samt aven dessa detta denna hos under over mot ut in upp ner per'.split(' '));
 const colors={lung:'#178b9a',akut:'#b6532f',luft:'#178b9a',inf:'#c28012',neuro:'#7963b6',buk:'#4d8772',vatska:'#2289b6',met:'#a35c91',trauma:'#cc7850',smarta:'#96679b',hjarta:'#b55669',tox:'#738643',neo:'#388782',trygg:'#6181b4'};
 const labels={uppsala:'Lokalt PM · Akademiska',karolinska:'Externt PM · Karolinska',nationellt:'Nationellt & övrigt'};
-const TRUST='Personligt urval av Kjell Stefansson, ST-läkare i akutsjukvård';
 let popularity;let data,source='all',area='all',onlySaved=false,saved=new Set();
 try{const v=JSON.parse(localStorage.getItem('ak.barn.saved')||'[]');if(Array.isArray(v))saved=new Set(v.filter(x=>typeof x==='string'));}catch{}
 
@@ -79,7 +78,7 @@ function render(){
  $('areas').innerHTML=[['all','Alla områden'],...Object.entries(data.areas)].map(([id,t])=>{const n=id==='all'?base.length:base.filter(d=>d.area===id).length;return `<button class="area ${area===id?'active':''}" data-area="${id}" aria-pressed="${area===id}" style="--accent:${colors[id]||'#163c53'}"><span class="area-dot" aria-hidden="true"></span><span>${esc(t)}</span><span class="n">${n}</span></button>`;}).join('');
  document.querySelectorAll('[data-source]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',source===b.dataset.source);});
  $('saved').setAttribute('aria-pressed',onlySaved);
- const ctx=$('context'),start=!onlySaved&&!q&&area==='all';ctx.textContent=onlySaved?'DINA SPARADE':q?'SÖKRESULTAT':start?TRUST:'KLINISKT OMRÅDE';ctx.classList.toggle('trust',start);
+ $('context').textContent=onlySaved?'DINA SPARADE':q?'SÖKRESULTAT':area==='all'?'HELA BIBLIOTEKET':'KLINISKT OMRÅDE';
  $('results-heading').textContent=area==='all'?(q?'Sök i biblioteket':'PM & riktlinjer'):data.areas[area];
  $('count').textContent=`${shown.length} dokument${q?' för ”'+q+'”':''} · ${source==='all'?'alla källor':source==='uppsala'?'Akademiska':source==='karolinska'?'Karolinska':'nationellt & övrigt'}`;
  const hint=$('search-hint');
@@ -103,7 +102,7 @@ function applyUrl(){
  $('q').value=p.get('q')||'';area=data.areas[p.get('omrade')]?p.get('omrade'):'all';source=['uppsala','karolinska','nationellt'].includes(p.get('kalla'))?p.get('kalla'):'all';onlySaved=p.get('sparade')==='1';
  applying=true;render();applying=false;
 }
-(async()=>{try{const r=await fetch('./data.json?v=ak-v10s39-offline');if(!r.ok)throw new Error('data');data=await r.json();if(!Array.isArray(data.docs))throw new Error('format');{const ids=new Set(data.docs.map(d=>d.id));const keep=[...saved].filter(id=>ids.has(id));if(keep.length!==saved.size){saved=new Set(keep);try{localStorage.setItem('ak.barn.saved',JSON.stringify(keep));}catch{}}}popularity=AkPopularity.create('barn',data.docs,render);
+(async()=>{try{const r=await fetch('./data.json?v=ak-v10s40-sidfot');if(!r.ok)throw new Error('data');data=await r.json();if(!Array.isArray(data.docs))throw new Error('format');{const ids=new Set(data.docs.map(d=>d.id));const keep=[...saved].filter(id=>ids.has(id));if(keep.length!==saved.size){saved=new Set(keep);try{localStorage.setItem('ak.barn.saved',JSON.stringify(keep));}catch{}}}popularity=AkPopularity.create('barn',data.docs,render);
  let timer;$('q').oninput=()=>{clearTimeout(timer);timer=setTimeout(()=>{const v=$('q').value.trim();if(!v&&history.state&&history.state.search){history.back();return;}if(!location.hash.includes('q=')&&v)pendingPush={search:1};render();},120);};
  $('reset').onclick=reset;$('saved').onclick=()=>{onlySaved=!onlySaved;render();};document.querySelectorAll('button[data-source]').forEach(b=>b.onclick=()=>{source=b.dataset.source;render();});document.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>applyQuery(b.dataset.query));
  document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('q').focus();}if(e.key==='Escape'&&document.activeElement===$('q')){$('q').value='';render();}});
