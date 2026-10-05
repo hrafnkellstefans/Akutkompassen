@@ -181,3 +181,22 @@ Från granskningen 5 okt 2026 (listan "före 4 nov"). Inga PM-texter eller länk
 Obs: nyckelorden och publiceringsdatumen är ändrade direkt i `ak_index.json` och `barn/data.json`. Om indexet byggs om från PM-underlaget behöver ändringarna följa med.
 
 Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`. `tests/search-quality.test.cjs` kör testsökningarna i `tests/search-queries.json` (142 Vuxna, 64 Barn) och fallerar om rankningen blir sämre.
+
+## Mörkt läge, snabbare start och veckokontroll 5 oktober 2026 (ak-v10s39-offline)
+
+- **Mörkt läge:** följer telefonens eller datorns inställning, i Vuxna, Barn och på statistiksidan. Ljust läge är oförändrat. Färgerna för mörkt läge står samlade sist i `shared.css`; all text har minst 4,5:1 kontrast (axe-core: 0 fel).
+- **Snabbare start, även offline:** `sw.js` visar den sparade versionen direkt i stället för att först vänta på nätet. Med 3 sekunders fördröjning per anrop startade sidan på 1,0 s i stället för 4,2 s. En ny version laddas ner i bakgrunden. Sidan visar då "Ny version av Akutkompassen finns – Uppdatera", och nästa start byter automatiskt. Sökningen eller PM:et i adressfältet finns kvar efter bytet. Medan ett PM är öppet syns inte rutan.
+- **Nya versioner hämtas färska:** installationen går förbi webbläsarens HTTP-cache (GitHub Pages: max-age=600), så en ny version kan inte få med tio minuter gamla filer från den förra.
+- **Sparad på enheten:** sidfoten visar "✓ Sparad på enheten – fungerar även utan uppkoppling" när versionen och PM-texten för alla områden finns lokalt.
+- **Typsnitt:** Google Fonts är borttaget. Vuxna använder systemets typsnitt, som Barn redan gjorde: inga anrop till Google, snabbare start och samma utseende offline.
+- **Tipsa-länken** i sidfoten ("Saknas något? Tipsa om PM eller riktlinjer") öppnar ett mejl till hrafnkell.stefansson@akademiska.se med ämnet "Akutkompassen – tips" (`AK_FEEDBACK_URL` i `popularity-config.js`).
+- **Sökfältet:** webbläsarens egen rensa-ikon döljs nu även i WebKit/Safari, så bara ×-knappen syns.
+- **Städning:** reglerna i `appearance.css` som faktiskt användes (originalutseendet) ligger nu sist i `shared.css`. `appearance.css`, `appearance.js` och `barn/style.css` används inte längre och kan raderas. Kompass-utseendet finns kvar i git-historiken.
+- **Veckokontroll (GitHub Actions):** `.github/workflows/pm-kontroll.yml` kör `tools/check-links.mjs` varje måndag 06:17. Den jämför "Godkänt den" i DocPlus med datumet i PM-texten här (Vuxna) och på kortet (Barn), och kontrollerar att alla länkar finns kvar. Vid avvikelser skapas ett ärende (issue) med etiketten `pm-kontroll`, och GitHub mejlar. Ingenting ändras automatiskt. Kör den när som helst under Actions → Veckokontroll av PM och länkar → Run workflow, eller lokalt med `node tools/check-links.mjs` (datumjämförelsen kräver `pdftotext`, t.ex. `brew install poppler`). Står repot orört i 60 dagar pausar GitHub schemat; starta det igen under Actions.
+- **Tester vid varje push:** `.github/workflows/tester.yml` kör alla tester. Ett rött kryss vid commiten på GitHub betyder att något test inte gick igenom.
+- **Första kontrollen 5 okt** hittade två saker, som är rättade: Pseudokrupp (Barn) har en ny version i DocPlus, godkänd 2026-10-05 (kortet visade 2018-10-30), och WSES Acute Mesenteric Ischaemia har flyttat till pmc.ncbi.nlm.nih.gov.
+- **Medvetet inte gjort:** PM-filer med innehållshash i namnet. Det skulle spara ungefär 1 MB nedladdning per användare och ny version, men kräver ett extra steg vid varje textändring, och glöms steget visas gammal PM-text offline. All PM-text laddas därför om vid varje ny version, i bakgrunden.
+
+Vid ny version: höj versionen på samma ställen som tidigare (`sw.js`, `index.html`, `barn/index.html` med `data-v`, `barn/app.js`, `ak_index.json`). `tests/offline.test.cjs` kontrollerar att de stämmer och att allt som sidorna laddar finns i listan `SHELL` i `sw.js`.
+
+Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`.

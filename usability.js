@@ -43,3 +43,50 @@
  const p=document.createElement('p');p.className='feedback';const a=document.createElement('a');a.href=url;a.textContent='Saknas något? Tipsa om PM eller riktlinjer';if(url.startsWith('https:')){a.target='_blank';a.rel='noopener';}
  p.appendChild(a);footer.prepend(p);
 })();
+/* New release: sw.js downloads it in the background. It is applied at the next start, or right away
+   with "Uppdatera". Both reload the page; the address keeps the search, area or open PM. */
+(()=>{
+ const sw=navigator.serviceWorker;if(!sw)return;
+ let switching=false;
+ sw.addEventListener('controllerchange',()=>{if(switching)location.reload();});
+ const apply=w=>{switching=true;w.postMessage('skipWaiting');};
+ function offer(w){
+  if(document.querySelector('.update-bar'))return;
+  const bar=document.createElement('div');bar.className='update-bar';bar.setAttribute('role','status');
+  bar.innerHTML='<span>Ny version av Akutkompassen finns.</span><button type="button" class="update-go">Uppdatera</button><button type="button" class="update-later" aria-label="Uppdatera senare">×</button>';
+  bar.querySelector('.update-go').onclick=()=>apply(w);
+  bar.querySelector('.update-later').onclick=()=>bar.remove();
+  document.body.appendChild(bar);
+ }
+ const watch=w=>{if(w)w.addEventListener('statechange',()=>{if(w.state==='installed'&&sw.controller)offer(w);});};
+ sw.getRegistration().then(reg=>{
+  if(!reg)return;
+  if(reg.waiting&&sw.controller)apply(reg.waiting);
+  watch(reg.installing);reg.addEventListener('updatefound',()=>watch(reg.installing));
+  // An app left open for hours still learns about new releases when it comes back to the screen.
+  let checked=Date.now();
+  document.addEventListener('visibilitychange',()=>{
+   if(document.visibilityState!=='visible')return;
+   if(reg.waiting&&sw.controller){offer(reg.waiting);return;}
+   if(Date.now()-checked>30*60e3){checked=Date.now();reg.update().catch(()=>{});}
+  });
+ }).catch(()=>{});
+})();
+/* "Sparad på enheten": this release and the PM text of every area are stored for offline use. */
+(()=>{
+ const sw=navigator.serviceWorker;if(!sw||!window.caches)return;
+ async function check(){
+  try{
+   const v=document.documentElement.dataset.v,reg=await sw.getRegistration();
+   if(!v||!reg||!sw.controller||!(await caches.has(v)))return;
+   const c=await caches.open(v),idx=await c.match(reg.scope+'ak_index.json');if(!idx)return;
+   const files=Object.values((await idx.json()).shards||{});
+   const have=await Promise.all(files.map(f=>c.match(reg.scope+f,{ignoreSearch:true})));
+   const foot=document.querySelector('footer');
+   if(!files.length||!have.every(Boolean)||!foot||foot.querySelector('.offline-ready'))return;
+   const p=document.createElement('p');p.className='offline-ready';p.textContent='✓ Sparad på enheten – fungerar även utan uppkoppling.';foot.appendChild(p);
+  }catch{}
+ }
+ if(document.readyState==='complete')check();else window.addEventListener('load',check);
+ sw.addEventListener('controllerchange',()=>setTimeout(check,500));
+})();
