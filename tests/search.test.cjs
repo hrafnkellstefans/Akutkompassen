@@ -14,7 +14,8 @@ const stopWords = html.match(/^const STOP = .*$/m)[0];
 function searchEngine(withBodies = false) {
   const docs = structuredClone(data.docs);
   const context = vm.createContext({DOCS: docs, state: {kind: null}});
-  vm.runInContext(stopWords + '\n' + engine + '\nglobalThis.runSearch=search; globalThis.loadText=addText;', context);
+  const terms = fs.readFileSync(path.join(root, 'search-terms.js'), 'utf8');
+  vm.runInContext(terms + '\n' + stopWords + '\n' + engine + '\nglobalThis.runSearch=search; globalThis.loadText=addText;', context);
   if (withBodies) {
     const byId = new Map(docs.map(d => [d.id, d]));
     for (const shard of Object.values(data.shards)) {

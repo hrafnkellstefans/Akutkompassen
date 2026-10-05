@@ -1,22 +1,22 @@
 {
-  "id": "/",
-  "name": "Akutkompassen",
-  "short_name": "Akutkompassen",
-  "description": "PM och riktlinjer för akutsjukvård – vuxna och barn. Sök, läs och spara, även offline.",
+  "id": "/barn/",
+  "name": "Akutkompassen Barn",
+  "short_name": "AK Barn",
+  "description": "PM och riktlinjer för akut barnsjukvård – Akademiska, Karolinska och nationella kunskapsstöd.",
   "start_url": "./",
-  "scope": "./",
+  "scope": "../",
   "display": "standalone",
   "background_color": "#F2F4F7",
-  "theme_color": "#FFFFFF",
+  "theme_color": "#163c53",
   "lang": "sv",
   "icons": [
     {
-      "src": "icon-192.png?v=ak-v10s2g",
+      "src": "../icon-192.png?v=ak-v10s2g",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png?v=ak-v10s2g",
+      "src": "../icon-512.png?v=ak-v10s2g",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -25,10 +25,10 @@
   "shortcuts": [
     {
       "name": "Vuxna",
-      "url": "./",
+      "url": "../",
       "icons": [
         {
-          "src": "icon-192.png?v=ak-v10s2g",
+          "src": "../icon-192.png?v=ak-v10s2g",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -36,10 +36,10 @@
     },
     {
       "name": "Barn",
-      "url": "./barn/",
+      "url": "./",
       "icons": [
         {
-          "src": "icon-192.png?v=ak-v10s2g",
+          "src": "../icon-192.png?v=ak-v10s2g",
           "sizes": "192x192",
           "type": "image/png"
         }

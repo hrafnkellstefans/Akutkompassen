@@ -64,7 +64,13 @@
       "scope": "Akut barnsjukvård",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": [],
+      "keywords": [
+        "hjärtfel",
+        "medfött hjärtfel",
+        "barnkardiologi",
+        "hjärtsjukdom",
+        "cyanos"
+      ],
       "library": true
     },
     {
@@ -79,7 +85,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
-        "DKA",
+        "hypoglykemi",
+        "lågt blodsocker",
+        "diabetes typ 1",
+        "glukagon",
         "blodsocker"
       ],
       "library": true
@@ -113,7 +122,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
+        "diabetes",
+        "diabetes typ 1",
         "DKA",
+        "hyperglykemi",
         "blodsocker"
       ],
       "library": true
@@ -130,7 +142,10 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
+        "ketoacidos",
         "DKA",
+        "diabetes",
+        "insulin",
         "blodsocker"
       ],
       "library": true
@@ -294,8 +309,11 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
+        "ketoacidos",
         "DKA",
-        "blodsocker"
+        "diabetes",
+        "insulin",
+        "intensivvård"
       ],
       "library": true
     },
@@ -349,7 +367,12 @@
       "scope": "Region Uppsala",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": [],
+      "keywords": [
+        "läkemedel",
+        "dosering",
+        "doser",
+        "barn"
+      ],
       "library": true
     },
     {
@@ -364,9 +387,11 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
+        "testistorsion",
         "testis",
         "torsion",
         "skrotum",
+        "akut skrotum",
         "buksmärta"
       ],
       "library": true
@@ -435,7 +460,12 @@
       "scope": "Akademiska Barnsjukhuset",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": [],
+      "keywords": [
+        "förgiftning",
+        "intoxikation",
+        "antidot",
+        "barn"
+      ],
       "library": true
     },
     {
@@ -449,7 +479,13 @@
       "scope": "Akademiska Barnsjukhuset;",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": [],
+      "keywords": [
+        "förgiftning",
+        "intoxikation",
+        "tonåring",
+        "alkohol",
+        "paracetamol"
+      ],
       "library": true
     },
     {
@@ -514,7 +550,12 @@
       "scope": "Akutmottagningen",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": [],
+      "keywords": [
+        "akutlarm",
+        "larmkriterier",
+        "triage",
+        "akutrum"
+      ],
       "library": true
     },
     {
@@ -561,7 +602,13 @@
       "scope": "Ålders- och viktindelade akutrumsblad (Word) – välj rätt ålder/vikt",
       "format": "Dokumentsamling",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "akutrumsblad",
+        "dosering",
+        "vikt",
+        "ålder",
+        "läkemedelsdoser"
+      ]
     },
     {
       "id": "swepem-5",
@@ -870,7 +917,13 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "borrelia",
+        "fästing",
+        "erythema migrans",
+        "neuroborrelios",
+        "facialispares"
+      ]
     },
     {
       "id": "blf-inf-21",
@@ -883,7 +936,12 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "kikhosta",
+        "pertussis",
+        "hosta",
+        "spädbarn"
+      ]
     },
     {
       "id": "blf-inf-22",
@@ -896,7 +954,12 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "sepsis",
+        "septisk chock",
+        "antibiotika",
+        "vätska"
+      ]
     },
     {
       "id": "blf-inf-23",
@@ -909,7 +972,11 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "sepsis",
+        "septisk chock",
+        "flödesschema"
+      ]
     },
     {
       "id": "blf-inf-24",
@@ -922,7 +989,11 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "sepsis",
+        "septisk chock",
+        "checklista"
+      ]
     },
     {
       "id": "blf-inf-25",
@@ -935,7 +1006,12 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "sepsis",
+        "Phoenix",
+        "sepsisscore",
+        "organsvikt"
+      ]
     },
     {
       "id": "blf-inf-26",
@@ -948,7 +1024,12 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "sepsis",
+        "Phoenix",
+        "sepsisscore",
+        "räkneexempel"
+      ]
     },
     {
       "id": "blf-inf-28",
@@ -961,7 +1042,13 @@
       "scope": "",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
-      "keywords": []
+      "keywords": [
+        "pleuraempyem",
+        "empyem",
+        "pleuravätska",
+        "pneumoni",
+        "lunginflammation"
+      ]
     },
     {
       "id": "hlr-ahlr-barn",
@@ -1088,6 +1175,7 @@
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
+        "binjurebarksvikt",
         "binjurebarkssvikt",
         "Addison",
         "hydrokortison",

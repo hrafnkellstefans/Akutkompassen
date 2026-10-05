@@ -23,3 +23,23 @@
   new MutationObserver(()=>body.querySelectorAll('.table-scroll').forEach(el=>{if(!measured.has(el)){measured.add(el);resize.observe(el);}})).observe(body,{childList:true,subtree:true});
  }
 })();
+
+/* One-time tip on phones: save the site as an app (iPhone: Dela → Lägg till på hemskärmen; Android: install prompt). */
+(()=>{
+ let done=false;try{done=localStorage.getItem('ak.install')==='done';}catch{done=true;}
+ if(done||matchMedia('(display-mode: standalone)').matches||navigator.standalone||!matchMedia('(max-width:760px)').matches)return;
+ const head=document.querySelector('.results-head');if(!head)return;
+ const box=document.createElement('div');box.className='install-hint';
+ const close=()=>{box.remove();try{localStorage.setItem('ak.install','done');}catch{}};
+ const show=html=>{box.innerHTML=html+'<button type="button" class="install-x" aria-label="Stäng tipset">×</button>';box.querySelector('.install-x').onclick=close;if(!box.isConnected)head.after(box);};
+ const ua=navigator.userAgent;
+ if(/iPhone|iPod/.test(ua)&&/Safari/.test(ua)&&!/CriOS|FxiOS|EdgiOS/.test(ua))show('<span>Spara som app: tryck på <b>Dela</b> och välj <b>Lägg till på hemskärmen</b>.</span>');
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();show('<span>Spara Akutkompassen som app på telefonen.</span><button type="button" class="install-go">Installera</button>');box.querySelector('.install-go').onclick=async()=>{e.prompt();try{await e.userChoice;}catch{}close();};});
+})();
+/* Feedback link, shown once an address is set in popularity-config.js (AK_FEEDBACK_URL). */
+(()=>{
+ const url=String(window.AK_FEEDBACK_URL||'');if(!/^(https:|mailto:)/.test(url))return;
+ const footer=document.querySelector('footer');if(!footer)return;
+ const p=document.createElement('p');p.className='feedback';const a=document.createElement('a');a.href=url;a.textContent='Saknas något? Tipsa om PM eller riktlinjer';if(url.startsWith('https:')){a.target='_blank';a.rel='noopener';}
+ p.appendChild(a);footer.prepend(p);
+})();

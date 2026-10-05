@@ -1,4 +1,4 @@
-<!doctype html><html lang="sv" data-theme="light" data-look="original" data-v="ak-v10s37-snabbfix"><head><meta charset="utf-8">
+<!doctype html><html lang="sv" data-theme="light" data-look="original" data-v="ak-v10s38-sok"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -6,6 +6,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Akutkompassen">
 <meta name="description" content="PM för akutmottagningen, Akademiska sjukhuset, och svenska och internationella riktlinjer – bläddra, sök och läs.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Akutkompassen">
+<meta property="og:title" content="Akutkompassen – PM och riktlinjer för akuten">
+<meta property="og:description" content="Sök i Akademiskas PM och i svenska och internationella riktlinjer för akutsjukvård. Fungerar i mobilen, även offline.">
+<meta property="og:url" content="https://akutkompassen.se/">
+<meta property="og:image" content="https://akutkompassen.se/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="sv_SE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://akutkompassen.se/">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.png?v=ak-v10s2g" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=ak-v10s2g">
@@ -150,7 +161,7 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .pane>.pbody{flex:1 1 auto;min-height:0}
 .ph{padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
 .ph .t{flex:1;min-width:0}
-.ph b{font-size:17px;font-weight:600}
+.ph h2{font-size:17px;font-weight:600}
 .ph .x{border:0;background:var(--surface2);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:18px;flex:none}
 .pnav{display:flex;gap:6px;flex-wrap:nowrap;padding:8px 16px;border-bottom:1px solid var(--line);font-size:12px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .pnav button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:6px;min-width:34px;height:30px;padding:0 8px;font-family:"IBM Plex Mono",monospace;font-size:12px;cursor:pointer}
@@ -159,12 +170,12 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .pbody{overflow:auto;padding:6px 20px max(70px,calc(24px + env(safe-area-inset-bottom)));font-size:16.5px;line-height:1.6;-webkit-overflow-scrolling:touch}
 @media (max-width:700px){.pbody{padding:6px 16px 70px}}
 .pbody .page{padding:18px 0 22px;border-bottom:1px dashed var(--line)}
-.pbody .page h5{margin:0 0 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.pbody .page .pglabel{margin:0 0 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
 /* structured text */
 .rt{min-width:0}
 .rt p{margin:0 0 10px;max-width:68ch}
-.rt h6{margin:16px 0 6px;font-size:1.02em;font-weight:700;color:var(--ink);text-wrap:balance}
-.rt h6:first-child{margin-top:2px}
+.rt h4{margin:16px 0 6px;font-size:1.02em;font-weight:700;color:var(--ink);text-wrap:balance}
+.rt h4:first-child{margin-top:2px}
 .rt ul{margin:0 0 10px;padding:0 0 0 1.25em;max-width:68ch;list-style:none}
 .rt li{position:relative;margin:0 0 5px}
 .rt li::before{content:"•";position:absolute;left:-1.1em;color:var(--accent);font-weight:700}
@@ -174,7 +185,7 @@ header{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand
 .rt td{border:1px solid var(--line);padding:3px 8px;vertical-align:top;white-space:nowrap}
 .rt tr:first-child td{background:var(--surface2);font-weight:600}
 .rt.compact p,.rt.compact ul{margin-bottom:5px}
-.rt.compact h6{margin:6px 0 3px;font-size:1em}
+.rt.compact h4{margin:6px 0 3px;font-size:1em}
 .rt.compact li{margin-bottom:2px}
 .rt.compact table{font-size:.88em}
 footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color:var(--muted)}
@@ -275,7 +286,7 @@ header{box-shadow:0 3px 18px rgba(25,42,62,.025)}
 .hit.tonly{font-size:13px;font-style:normal}
 .score{font-size:10px}
 .ph{padding:18px;padding-top:max(18px,env(safe-area-inset-top))}
-.ph b{font-size:20px}
+.ph h2{font-size:20px}
 footer{padding:0 28px max(32px,env(safe-area-inset-bottom))}
 .footer-inner{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
 .footer-note{max-width:58ch}
@@ -301,20 +312,20 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:360px){.filters .chip{padding:7px 8px;font-size:12px}.source-head h2{font-size:17px}.source-head .source-count{padding:3px 6px}.source-icon{width:28px;height:28px}.acard .nm{font-size:13px}}
 .audience-nav{display:flex;gap:4px;align-items:center}.audience-nav a{padding:8px 14px;border-radius:9px;font-size:14px;font-weight:650;text-decoration:none;color:#163c53;background:#edf4f7}.audience-nav a[aria-current]{background:#163c53;color:white}.audience-nav a:focus-visible{outline:3px solid #bc6600;outline-offset:3px}@media(max-width:700px){.audience-nav{margin-left:auto}.hwrap{flex-wrap:wrap}.hwrap .search{flex-basis:100%}}
 }</style>
-<link rel="stylesheet" href="shared.css?v=ak-v10s37-snabbfix">
+<link rel="stylesheet" href="shared.css?v=ak-v10s38-sok">
 
-<link rel="stylesheet" href="appearance.css?v=ak-v10s37-snabbfix"><script src="appearance.js?v=ak-v10s37-snabbfix"></script><script src="usability.js?v=ak-v10s37-snabbfix" defer></script></head><body class="adult"><header><div class="top"><button class="brand" id="home" aria-label="Till startsidan"><img src="logo-v2.png" alt="" width="48" height="48"><span>Akutkompassen<span class="brand-sub">KUNSKAPSSTÖD FÖR AKUTSJUKVÅRD</span></span></button><nav aria-label="Välj kunskapsstöd"><a href="./" aria-current="page">Vuxna <span class="nav-dot" aria-hidden="true"></span></a><a href="barn/">Barn</a></nav></div></header>
-<main class="wrap"><section class="search-panel" aria-label="Sök och filtrera"><label class="searchbox" id="sbox"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="q" placeholder="Sök symtom, diagnos eller behandling…" aria-label="Sök PM och riktlinjer" autocomplete="off"><button class="app-search-clear" id="clr" aria-label="Rensa sökning">×</button><kbd>/</kbd></label><div class="quick"><span>Snabbsök</span><button data-query="sepsis">Sepsis</button><button data-query="andningsbesvär">Andningsbesvär</button><button data-query="bröstsmärta">Bröstsmärta</button><button data-query="stroke">Stroke</button><button data-query="sedering">Sedering</button></div></section>
+<link rel="stylesheet" href="appearance.css?v=ak-v10s38-sok"><script src="appearance.js?v=ak-v10s38-sok"></script><script src="usability.js?v=ak-v10s38-sok" defer></script></head><body class="adult"><header><div class="top"><button class="brand" id="home" aria-label="Till startsidan"><img src="logo-v2.png" alt="" width="48" height="48"><span>Akutkompassen<span class="brand-sub">KUNSKAPSSTÖD FÖR AKUTSJUKVÅRD</span></span></button><nav aria-label="Välj kunskapsstöd"><a href="./" aria-current="page">Vuxna <span class="nav-dot" aria-hidden="true"></span></a><a href="barn/">Barn</a></nav></div></header>
+<main class="wrap"><section class="search-panel" aria-label="Sök och filtrera"><label class="searchbox" id="sbox"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="q" placeholder="Sök symtom, diagnos eller behandling…" aria-label="Sök PM och riktlinjer" autocomplete="off"><button class="app-search-clear" id="clr" aria-label="Rensa sökning">×</button><kbd>/</kbd></label></section><div class="quick" role="group" aria-label="Snabbsök"><span>Snabbsök</span><button data-query="sepsis">Sepsis</button><button data-query="andningsbesvär">Andningsbesvär</button><button data-query="bröstsmärta">Bröstsmärta</button><button data-query="stroke">Stroke</button><button data-query="procedursedering">Sedering</button></div>
 
-<div class="workspace"><aside aria-label="Filtrera riktlinjer"><div class="sidebar-head"><h2>Kliniska områden</h2><button id="reset" class="text-button">Återställ</button></div><div id="areas" class="areas"></div><div class="source-explainer"><h3>Vilket PM gäller här?</h3><p><b>Lokala PM</b> gäller respektive verksamhet inom Region Uppsala.</p><p><b>Externa riktlinjer</b> kommer från svenska och internationella utgivare.</p><p>Kontrollera alltid verksamhet och giltighet i originalet.</p></div></aside><section class="library"><div class="source-tabs filters" role="group" aria-label="Källa"><button class="chip kind on" data-k="" aria-pressed="true">Alla källor</button><button class="chip kind" data-k="pm" aria-pressed="false">Lokala PM</button><button class="chip kind" data-k="gl" aria-pressed="false">Externa riktlinjer</button></div><div class="results-head"><div><p class="section-label">KUNSKAPSBIBLIOTEKET</p><h2>PM & riktlinjer</h2><p id="stat" role="status"></p><span id="ldst" hidden></span></div><div class="filters saved-filter"><button class="chip saved-toggle" data-f="fav" aria-pressed="false">☆ Sparade</button></div></div><p class="popularity-status" id="popularity-status" role="status"></p><div id="main"><div id="boot">Laddar…</div></div></section></div><footer><p>Personligt urval av Kjell Stefansson · ST-läkare i akutsjukvård.</p><details><summary>Om källorna och biblioteket</summary><p>Det här är en fristående länksamling, inte en officiell webbplats för Akademiska, Karolinska eller Svenska Barnläkarföreningen. Sjukhusens PM gäller för respektive verksamhet.</p><p>Datum på korten avser dokumentets angivna datum. ”Länk kontrollerad” avser åtkomsten till källan, inte medicinsk granskning. Kontrollera aktuell version hos utgivaren. Äldre dokument markeras särskilt.</p><p>Sökningen omfattar lokala PM-texter och externa riktlinjers titlar och sökord. Originaldokument öppnas i en ny flik och kräver internet. Sparade favoriter lagras endast i den här webbläsaren.</p><p>Urvalet bygger på offentliga PM och kunskapsstöd. Inga patientuppgifter ska anges i sökfältet.</p><p>Popularitet bygger på registrerade öppningar från besökare och är ingen medicinsk rekommendation. Endast dokument-ID och ett slumpmässigt ID för varje öppning skickas till räknaren. <a href="statistik.html">Undanta dina egna öppningar</a>.</p><p>Besök och sidvisningar mäts med Cloudflare Web Analytics utan analyscookies. Statistiken identifierar inte enskilda personer. Dina sökord skickas inte som analyshändelser.</p></details><a href="barn/">Till Akutkompassen för barn</a></footer></main>
+<div class="workspace"><aside aria-label="Filtrera riktlinjer"><div class="sidebar-head"><h2>Kliniska områden</h2><button id="reset" class="text-button">Återställ</button></div><div id="areas" class="areas"></div><div class="source-explainer"><h3>Vilket PM gäller här?</h3><p><b>Lokala PM</b> gäller respektive verksamhet inom Region Uppsala.</p><p><b>Externa riktlinjer</b> kommer från svenska och internationella utgivare.</p><p>Kontrollera alltid verksamhet och giltighet i originalet.</p></div></aside><section class="library"><div class="source-tabs filters" role="group" aria-label="Källa"><button class="chip kind on" data-k="" aria-pressed="true">Alla källor</button><button class="chip kind" data-k="pm" aria-pressed="false">Lokala PM</button><button class="chip kind" data-k="gl" aria-pressed="false">Externa riktlinjer</button></div><div class="results-head"><div><p class="section-label trust">Personligt urval av Kjell Stefansson, ST-läkare i akutsjukvård</p><h1 id="results-heading">PM &amp; riktlinjer</h1><p id="stat" role="status"></p><span id="ldst" hidden></span></div><div class="filters saved-filter"><button class="chip saved-toggle" data-f="fav" aria-pressed="false">☆ Sparade</button></div></div><p class="popularity-status" id="popularity-status" role="status"></p><div id="main"><div id="boot">Laddar…</div></div></section></div><footer><p>Personligt urval av Kjell Stefansson · ST-läkare i akutsjukvård.</p><details><summary>Om källorna och biblioteket</summary><p>Det här är en fristående länksamling, inte en officiell webbplats för Akademiska, Karolinska eller Svenska Barnläkarföreningen. Sjukhusens PM gäller för respektive verksamhet.</p><p>Datum på korten avser dokumentets angivna datum. ”Länk kontrollerad” avser åtkomsten till källan, inte medicinsk granskning. Kontrollera aktuell version hos utgivaren. Äldre dokument markeras särskilt.</p><p>Sökningen omfattar lokala PM-texter och externa riktlinjers titlar och sökord. Originaldokument öppnas i en ny flik och kräver internet. Sparade favoriter lagras endast i den här webbläsaren.</p><p>Urvalet bygger på offentliga PM och kunskapsstöd. Inga patientuppgifter ska anges i sökfältet.</p><p>Popularitet bygger på registrerade öppningar från besökare och är ingen medicinsk rekommendation. Endast dokument-ID och ett slumpmässigt ID för varje öppning skickas till räknaren. <a href="statistik.html">Undanta dina egna öppningar</a>.</p><p>Besök och sidvisningar mäts med Cloudflare Web Analytics utan analyscookies. Statistiken identifierar inte enskilda personer. Dina sökord skickas inte som analyshändelser.</p></details><a href="barn/">Till Akutkompassen för barn</a></footer></main>
 <div class="reader" id="reader" hidden><div class="pane" role="dialog" aria-modal="true" aria-labelledby="rtitle">
-  <div class="ph"><div class="t"><b id="rtitle"></b><details class="reader-details"><summary>Dokumentinformation</summary><div class="meta" id="rmeta"></div><p>Textvy från PDF. Radbrytningar och tabeller kan avvika. Kontrollera layouten i originalet.</p></details></div><button class="x" id="rclose" aria-label="Stäng">×</button></div>
+  <div class="ph"><div class="t"><h2 id="rtitle"></h2><details class="reader-details"><summary>Dokumentinformation</summary><div class="meta" id="rmeta"></div><p>Textvy från PDF. Radbrytningar och tabeller kan avvika. Kontrollera layouten i originalet.</p></details></div><button class="x" id="rclose" aria-label="Stäng">×</button></div>
   <div class="actions" id="ract"></div>
   <div class="pnav" id="pnav"></div>
   <div class="pbody" id="pbody"></div>
 </div></div>
 
-<script src="popularity-config.js?v=ak-v10s37-snabbfix"></script><script src="popularity.js?v=ak-v10s37-snabbfix"></script>
+<script src="search-terms.js?v=ak-v10s38-sok"></script><script src="popularity-config.js?v=ak-v10s38-sok"></script><script src="popularity.js?v=ak-v10s38-sok"></script>
 <script type="application/json" id="data"></script>
 <script>
 (async function(){
@@ -343,15 +354,28 @@ const chunks=[]; const df=new Map(); let N=0, avg=1, TERMS=[], dirty=false;
 DOCS.forEach((d,di)=>{
   d.di=di; d.old = d.kind!=='gl' && (d.yr && +d.yr<2022 || /utgick|utgått/i.test(d.note||''));
   d.fresh = d.yr && +d.yr>=2025; d.chunks=[]; d.loaded=false; d.tt=new Set(toks(docSearchText(d)));
+  d.tTitle=new Set(toks(d.t)); d.tKw=new Set(toks((d.keywords||[]).join(' '))); d.tMeta=new Set(toks([d.soc||'',d.note||''].join(' ')));
 });
+// How many documents use each title/keyword word: common ones ("akut", "behandling") weigh little.
+const TDF=new Map(); DOCS.forEach(d=>new Set([...d.tTitle,...d.tKw]).forEach(t=>TDF.set(t,(TDF.get(t)||0)+1)));
 // Reference lists and document history rank below clinical text (like the table of contents).
-// A reference block runs until the next real section heading; field headings inside the
-// history table ("Författare:", "Datum:", "2024-07-05 …") do not end it.
-const REF_HEAD=/^(referenser|referens|referenslista|litteratur|litteraturförteckning|källor|källförteckning|dokumenthistorik|granskare|styrande dokument|externa styrande dokument|revisionshistorik)\s*:?$/i;
+// A reference block runs to the next section that the PM's own table of contents lists after it
+// (e.g. "Bilaga …"); names, dates and document titles inside the block do not end it.
+// Without a table of contents, any heading that is not a history field ends it.
+const REF_HEAD=/^(referenser|referens|referenslista|litteratur|litteraturförteckning|källor|källförteckning|dokumenthistorik|granskare|styrande dokument|externa styrande dokument|revisionshistorik|relaterade dokument)\s*:?$/i;
 const REF_FIELD=/^(författare|datum|granskare|granskad|granskat|reviderat|reviderad|revidering|revisionsdatum|version|ändring|ändringar|fastställd|godkän[dt]|ansvarig|upprättad|upprättat|avslutat|påbörjat|ej aktuellt|utgåva)\b|^[\d\s.\-–:]+|:$/i;
+const TOC_LINE=/^(.+?)\s*(?:…+|\.{2,})\s*\d+\s*$/;
+function tocAfterRefs(c){
+  const titles=[];
+  for(const x of c.filter((x,i)=>i<3||x[2])) for(const line of x[1].split('\n')){const m=TOC_LINE.exec(line.replace(/^#\s*/,'').trim());if(m)titles.push(m[1].trim());}
+  if(!titles.length) return null;
+  const i=titles.findIndex(t=>REF_HEAD.test(t));
+  return i<0?[]:titles.slice(i+1).filter(t=>!REF_HEAD.test(t)).map(t=>norm(t).slice(0,24));
+}
 function addText(d,c){
   if(d.loaded) return; d.loaded=true;
-  let ci=0, ref=false;
+  let ci=0, ref=false; const post=tocAfterRefs(c);
+  const endsRef=name=>/^bilaga/i.test(name)||(post?post.some(t=>t&&norm(name).startsWith(t)):!REF_FIELD.test(name));
   c.forEach(x=>{
     let cur=[];
     const flush=()=>{
@@ -365,7 +389,7 @@ function addText(d,c){
       const name=line.replace(/^#\s*/,'').trim();
       let next=ref;
       if(line.startsWith('# ')&&REF_HEAD.test(name)) next=true;
-      else if(ref&&line.startsWith('# ')&&!REF_FIELD.test(name)) next=false;
+      else if(ref&&(/^bilaga\b/i.test(name)||(line.startsWith('# ')&&endsRef(name)))) next=false;
       if(next!==ref) flush();
       ref=next; cur.push(line);
     }
@@ -373,7 +397,7 @@ function addText(d,c){
   });
   dirty=true;
 }
-function reindex(){ if(!dirty) return; N=chunks.length; avg=N?chunks.reduce((a,c)=>a+c.len,0)/N:1; TERMS=[...df.keys()]; dirty=false; }
+function reindex(){ if(!dirty) return; N=chunks.length; avg=N?chunks.reduce((a,c)=>a+c.len,0)/N:1; TERMS=[...df.keys()]; VOCAB=null; dirty=false; }
 // ---------- shards (one JSON per area, loaded on demand + prefetched in the background) ----------
 const loadedAreas=new Set(), loading=new Map(); let prefetchDone=false;
 function loadArea(a){
@@ -398,8 +422,10 @@ function refreshSearchSoon(){
 }
 async function prefetchAll(){for(const a of ORDER){if(SHARDS[a]&&!loadedAreas.has(a)){await loadArea(a);if(state.q)refreshSearchSoon();}}prefetchDone=true;setLoadStat();showPending();if(!state.q&&!state.area&&$('reader').hidden&&!scrolledIntoList())update();}
 function idf(w){const n=df.get(w)||0;return Math.log(1+(N-n+.5)/(n+.5));}
+// Swedish compounds often drop or change a final vowel: brännskada → brännskade-, lunga → lung-.
+const stemOf=w=>w.length>=7&&/[aeiouy]$/.test(w)?w.slice(0,-1):'';
 function expand(w){
-  const out=new Map();
+  const out=new Map(), stem=stemOf(w);
   if(df.has(w)) out.set(w,1);
   if(w.length>=4){
     for(const t of TERMS){
@@ -407,15 +433,48 @@ function expand(w){
       if(t.startsWith(w)) out.set(t,Math.max(out.get(t)||0,.75));
       else if(w.length>=5&&t.includes(w)) out.set(t,Math.max(out.get(t)||0,.5));
       else if(t.length>=5&&w.startsWith(t)&&w.length-t.length<=4) out.set(t,Math.max(out.get(t)||0,.4));
+      else if(stem&&t.startsWith(stem)) out.set(t,Math.max(out.get(t)||0,.6)); // compound stem: brännskada → brännskadekompendium
     }
   }
   return out;
 }
 function parseQuery(q){const phrases=[];q=q.replace(/"([^"]+)"/g,(m,p)=>{phrases.push(norm(p));return ' ';});return {terms:toks(q),phrases};}
+// ---------- ranking ----------
+// A document ABOUT the word (title, keywords) ranks above one that only MENTIONS it in its text.
+const W_TITLE=30, W_KEYWORD=22, W_META=6;
+// Broad lists that mention almost everything rank lower on body text alone:
+// the two drug lists, the burns compendium and the admission-responsibility PM.
+const COMPENDIA=new Set(['30285','33518','23932','33672']);
+const syn=w=>typeof AkTerms!=='undefined'?AkTerms.synonyms(w):[];
+function termVariants(w,base=1){return [[w,base],...syn(w).map(s=>[s,0.85*base])];}
+function expandVariants(vars){const out=new Map();for(const [v,bw] of vars)expand(v).forEach((wt,t)=>{if(wt*bw>(out.get(t)||0))out.set(t,wt*bw);});return out;}
+function fieldMatch(vars,set){
+  let best=0,tok='';
+  for(const [c,bw] of vars) for(const t of set){
+    const st=stemOf(c), m=t===c?1:c.length>=3&&t.startsWith(c)?.85:st&&t.startsWith(st)?.75:c.length>=5&&t.includes(c)?.7:t.length>=5&&c.startsWith(t)&&c.length-t.length<=4?.6:0;
+    if(m*bw>best){best=m*bw;tok=t;}
+  }
+  return [best,tok];
+}
+// A word that many titles share ("akut", "behandling", "trauma") counts for less than a rare one.
+const specOf=n=>Math.max(.15,Math.min(1,Math.log(DOCS.length/Math.max(1,n))/Math.log(DOCS.length/3)));
+// Everyday words that say little about a document's subject when they appear in its title.
+const LOWINFO=new Set('akut akuta svar svara behandling handlaggning riktlinje riktlinjer rutin rutiner lokal region uppsala akademiska vuxen vuxna patient patienter misstanke utredning omhandertagande initial klinisk kliniska praktisk praktiska nationellt vardprogram pm guideline guidelines management acute adult adults clinical policy ed emergency'.split(' '));
+let VOCAB=null;
+function vocab(){if(!VOCAB){const s=new Set(TERMS);TDF.forEach((_,t)=>s.add(t));if(typeof AkTerms!=='undefined')AkTerms.words().forEach(t=>s.add(t));VOCAB=[...s];}return VOCAB;}
+const freqOf=t=>(df.get(t)||0)+5*(TDF.get(t)||0);
 function search(qs){
   const {terms,phrases}=parseQuery(qs);
   if(!terms.length&&!phrases.length) return (qs&&qs.trim()) ? {groups:[],terms,phrases,empty:true} : null;
-  reindex(); const exp=terms.map(expand); const k1=1.4,b=.6; const res=[];
+  reindex();
+  const vars=terms.map(w=>termVariants(w)), exp=vars.map(expandVariants), fixed=[];
+  // A word found nowhere is probably misspelt: search for the closest known word instead, and say so.
+  if(prefetchDone&&typeof AkTerms!=='undefined') terms.forEach((w,qi)=>{
+    if(w.length<4||exp[qi].size||DOCS.some(d=>fieldMatch(vars[qi],d.tTitle)[0]||fieldMatch(vars[qi],d.tKw)[0]))return;
+    const fix=AkTerms.closest(w,vocab(),freqOf);
+    if(fix){fixed.push([w,fix]);vars[qi]=termVariants(fix,.9);exp[qi]=expandVariants(vars[qi]);}
+  });
+  const k1=1.4,b=.6; const res=[];
   for(const ch of chunks){
     let s=0,matched=0;
     for(let qi=0;qi<terms.length;qi++){
@@ -430,25 +489,34 @@ function search(qs){
   }
   const byDoc=new Map();
   for(const ch of res){const g=byDoc.get(ch.d)||{d:DOCS[ch.d],hits:[],score:0};g.hits.push(ch);byDoc.set(ch.d,g);}
-  const groups=[];
-  // Search document metadata too, including Swedish synonyms for linked guidelines.
+  const groups=[], glf=d=>d.kind==='gl'&&state.kind!=='gl'?0.85:1;
+  // Title/keyword/notes evidence per document and word, and how many titles share each word.
+  const fm=DOCS.map(d=>vars.map(v=>[fieldMatch(v,d.tTitle)[0],fieldMatch(v,d.tKw)[0],fieldMatch(v,d.tMeta)[0]]));
+  const spec=vars.map((v,qi)=>Math.min(LOWINFO.has(v[0][0])?.3:1,specOf(fm.reduce((n,f)=>n+(f[qi][0]||f[qi][1]?1:0),0))));
   DOCS.forEach(d=>{
-    if(byDoc.has(d.di)) return;
-    const hay=norm(docSearchText(d));
-    if(phrases.length && !phrases.every(p=>hay.includes(p))) return;
-    let m=0; for(const w of terms){for(const t of d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){m++;break;}}}
-    if(terms.length ? m===terms.length : phrases.length) byDoc.set(d.di,{d,hits:[],score:0,titleOnly:true});
-  });
-  byDoc.forEach(g=>{
-    if(g.titleOnly){ g.score=8*Math.max(1,terms.length)*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1); groups.push(g); return; }
+    // Per word, the strongest evidence from title, keywords or publisher/notes.
+    let meta=0,metaWords=0;
+    fm[d.di].forEach(([mt,mk,mm],qi)=>{
+      const sc=Math.max(mt*W_TITLE*spec[qi],mk*W_KEYWORD*spec[qi],mm*W_META);
+      if(sc>0){meta+=sc;metaWords++;}
+    });
+    // Several words, all in the title: the document is about exactly this.
+    if(terms.length>1&&fm[d.di].every(([mt])=>mt)) meta*=1.5;
+    const g=byDoc.get(d.di);
+    if(!g){
+      // No text hit (a linked guideline, or PM text not loaded yet): every word must match its metadata.
+      if(terms.length?metaWords<terms.length:!phrases.length) return;
+      if(phrases.length&&!phrases.every(p=>norm(docSearchText(d)).includes(p))) return;
+      groups.push({d,hits:[],score:(meta||8)*glf(d),titleOnly:true}); return;
+    }
     g.hits.sort((a,b)=>b.score-a.score);
-    const top=g.hits[0].score;
-    let titleBoost=0; for(const w of terms){for(const t of g.d.tt){if(t===w||t.startsWith(w)||(w.length>=5&&t.includes(w))){titleBoost+=1;break;}}}
-    g.score=top*(1+0.25*Math.min(3,g.hits.length-1)/3)*(1+0.35*titleBoost)*(g.d.kind==='gl'&&state.kind!=='gl'?0.85:1);
+    // The compendium discount does not apply when its title is about the words searched (strong title match).
+    const body=g.hits[0].score*(1+0.25*Math.min(3,g.hits.length-1)/3)*(COMPENDIA.has(d.id)&&meta<W_TITLE/2?0.45:1);
+    g.score=(body+meta)*glf(d);
     groups.push(g);
   });
   groups.sort((a,b)=>b.score-a.score);
-  return {groups,terms,phrases};
+  return {groups,terms,phrases,fixed,hlTerms:[...new Set(vars.flat().map(v=>v[0]))]};
 }
 function hl(text,terms,phrases){
   const pats=[];
@@ -469,6 +537,7 @@ function foldChars(s){let o='';for(const c of s){const l=c.toLowerCase();o+=l.le
 function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 
 // ---------- structured text → HTML ----------
+let TBL=0; // numbers table regions so each has a unique accessible name
 function fmt(text,terms,phrases,compact){
   const lines=text.split('\n'); let out='',list=null,tbl=false;
   const closeAll=()=>{if(list){out+='</ul>';list=null;}if(tbl){out+='</table></div></div>';tbl=false;}};
@@ -480,10 +549,10 @@ function fmt(text,terms,phrases,compact){
       out+=`<li class="l${lv}">${hl(raw.slice(2),terms,phrases)}</li>`;
     }else if(raw.startsWith('| ')){
       if(list){out+='</ul>';list=null;}
-      if(!tbl){out+='<div class="table-block"><p class="table-hint" hidden>↔ Dra i sidled för att se hela tabellen</p><div class="table-scroll" tabindex="0" role="region" aria-label="Tabell från originaldokumentet"><table>';tbl=true;}
+      if(!tbl){out+='<div class="table-block"><p class="table-hint" hidden>↔ Dra i sidled för att se hela tabellen</p><div class="table-scroll" tabindex="0" role="region" aria-label="Tabell '+(++TBL)+' från originaldokumentet"><table>';tbl=true;}
       out+='<tr>'+raw.slice(2).split(' | ').map(c=>`<td>${hl(c,terms,phrases)}</td>`).join('')+'</tr>';
     }else if(raw.startsWith('# ')){
-      closeAll(); out+=`<h6>${hl(raw.slice(2),terms,phrases)}</h6>`;
+      closeAll(); out+=`<h4>${hl(raw.slice(2),terms,phrases)}</h4>`;
     }else{
       closeAll(); out+=`<p>${hl(raw,terms,phrases)}</p>`;
     }
@@ -494,48 +563,87 @@ function fmt(text,terms,phrases,compact){
 // ---------- state ----------
 const state={q:'',area:null,old:false,fresh:false,fav:false,kind:null,expanded:new Set()};
 const qEl=$('q'), sbox=$('sbox');
+const PM_CHECKED=DATA.pmChecked||'';
+const MONTHS=['jan','feb','mars','april','maj','juni','juli','aug','sep','okt','nov','dec'];
+function fmtDate(iso){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');return m?`${+m[3]} ${MONTHS[+m[2]-1]} ${m[1]}`:iso;}
 function docPass(d){
   if(state.kind==='pm'&&d.kind==='gl')return false; if(state.kind==='gl'&&d.kind!=='gl')return false;
   if(state.old&&!d.old)return false; if(state.fresh&&!d.fresh)return false;
   if(state.fav&&!favs.has(d.id))return false;
   return true;
 }
-function yrClass(d){return d.old?'old':(d.fresh?'':'mid');}
-function tagsFor(d,withArea,showSource=true,showBadges=false){
-  if(d.kind==='gl') return `${showSource?'<span class="tag source-external">Extern riktlinje</span>':''}${showBadges?popularity.badge(d):''}${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag soc">${esc(d.soc)}</span>${d.lvl==='nationell'?'<span class="tag">Nationellt</span>':''}<span class="tag yr ${+d.yr<2020?'old':(+d.yr>=2025?'':'mid')}">${d.yr||'–'}</span>${d.np&&d.fmt==='pdf'?`<span>${d.np} sid.</span>`:''}${d.note?`<span>${esc(d.note)}</span>`:''}`;
-  return `${showSource?'<span class="tag source-local">Lokalt PM · Region Uppsala</span>':''}${showBadges?popularity.badge(d):''}${withArea?`<span class="tag area">${esc(AREAS[d.a]||d.a)}</span>`:''}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span><span class="mono" style="color:var(--muted)">STYR-${(String(d.url||'').match(/DocPlusSTYR-(\d+)/)||[0,d.id])[1]}</span>${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${d.note&&!/utgick/i.test(d.note)?`<span class="tag warn">${esc(d.note)}</span>`:''}${d.acc?`<span class="tag acc">${esc(d.acc)}</span>`:''}<span>${d.np} sid.</span>`;
+function yrClass(d){return d.old?'old':'mid';}
+const STYR=d=>(String(d.url||'').match(/DocPlusSTYR-(\d+)/)||[0,d.id])[1];
+function sourceLabel(d){return d.kind!=='gl'?'Lokalt PM · Region Uppsala':d.lvl==='nationell'?'Nationell riktlinje':'Internationell riktlinje';}
+const noteTag=d=>d.note&&!/utgick/i.test(d.note)?`<span class="tag ${/gäller/i.test(d.note)?'note':'warn'}">${esc(d.note)}</span>`:'';
+// Cards show area, year and validity warnings; document number and page count are in the reader.
+function metaFor(d,withArea){
+  const area=withArea?`<span class="m-area">${esc(AREAS[d.a]||d.a)}</span>`:'';
+  if(d.kind==='gl') return `${area}<span class="tag yr ${d.yr&&+d.yr<2020?'old':'mid'}">${d.yr||'–'}</span>`;
+  return `${area}<span class="tag yr ${yrClass(d)}">${d.yr||'–'}</span>${d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':''}${noteTag(d)}`;
+}
+function readerMeta(d){
+  return [`<span class="tag">${esc(sourceLabel(d))}</span>`,`<span>${esc(AREAS[d.a]||d.a)}</span>`,`<span class="mono">STYR-${STYR(d)}</span>`,
+    d.publishedOn?`<span>Godkänd ${d.publishedOn}</span>`:`<span>${d.yr||''}</span>`,d.np?`<span>${d.np} sid.</span>`:'',
+    PM_CHECKED?`<span>Texten kontrollerad mot DocPlus ${fmtDate(PM_CHECKED)}</span>`:'',
+    d.old?'<span class="tag warn">⚠ äldre – jämför extern riktlinje</span>':'',noteTag(d)].join('');
 }
 function favBtn(d){const on=favs.has(d.id);return `<button class="fav${on?' on':''}" data-fav="${d.id}" aria-label="${on?'Ta bort sparad':'Spara'}: ${esc(d.t)}" aria-pressed="${on}">${on?'★':'☆'}</button>`;}
 function srcLink(d){return d.kind==='gl'?`<a data-count-open="${esc(d.id)}" href="${d.url}" target="_blank" rel="noopener">${d.txt?'Källa hos utgivaren':'Öppna hos utgivaren'} ↗</a>`:`<a data-count-open="${esc(d.id)}" href="${d.url}" target="_blank" rel="noopener">Original i DocPlus ↗</a>`;}
-function kindLabel(d){return d.kind==='gl'?'riktlinje':'PM';}
 function saveBtn(d){const on=favs.has(d.id);return `<button class="save${on?' on':''}" data-fav="${d.id}" aria-pressed="${on}">${on?'★ Sparad':'☆ Spara'}</button>`;}
 function bindFav(el){el.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);store.set('favs',[...favs]);
   document.querySelectorAll(`[data-fav="${id}"]`).forEach(x=>{const on=favs.has(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);x.textContent=x.classList.contains('fav')?(on?'★':'☆'):(on?'★ Sparad':'☆ Spara');});
   if(state.fav||(!state.q&&!state.area&&$('reader').hidden))update();});}
-function docCard(d,withArea){
-  const el=document.createElement('div');el.className='card';el.dataset.source=d.kind==='gl'?'external':'uppsala';el.style.setProperty('--accent',d.kind==='gl'?'#165bab':'#007c78');
-  el.innerHTML=`<div class="card-top"><div class="card-labels"><span class="source-badge">${d.kind==='gl'?'Extern riktlinje':'Lokalt PM · Region Uppsala'}</span>${popularity.badge(d)}</div>${favBtn(d)}</div><h3><button class="open-title">${esc(d.t)}</button></h3><p class="publisher">${esc(d.kind==='gl'?d.soc:'Region Uppsala')}</p><div class="meta">${tagsFor(d,withArea,false)}</div><div class="actions">${d.txt?'<button data-act="open">Läs här</button>':''}${srcLink(d)}${saveBtn(d)}</div>`;
-  el.querySelector('.open-title').onclick=()=>openReader(d,[],[]);
-  const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>openReader(d,[],[]);
+// One card design for the start page, areas and search results. In search results the card
+// also shows the best passage; tapping it opens the reader on that page.
+function docCard(d,o={}){
+  const el=document.createElement('article');el.className='card';el.dataset.doc=d.id;el.dataset.source=d.kind==='gl'?'external':'uppsala';el.style.setProperty('--accent',d.kind==='gl'?'#165bab':'#007c78');
+  const g=o.group, terms=o.terms||[], phrases=o.phrases||[], exp=!!(g&&state.expanded.has(d.id));
+  let hits='';
+  if(g&&g.hits.length) hits=`<div class="hits">${(exp?g.hits:g.hits.slice(0,1)).map((x,i)=>`<div class="hit" data-i="${i}"><span class="pg">s. ${x.pg}</span>${exp?fmt(x.text,terms,phrases,true):`<p class="excerpt">${hl(searchExcerpt(x.text,terms),terms,phrases)}</p>`}</div>`).join('')}</div>`;
+  else if(g) hits=`<p class="tonly">${d.txt?'Träff i titeln':'Träff i titel eller sökord · fulltext hos utgivaren'}</p>`;
+  el.innerHTML=`<div class="card-top"><div class="card-labels"><span class="source-badge">${sourceLabel(d)}</span>${popularity.badge(d)}</div>${favBtn(d)}</div>`
+    +`<h3><button class="open-title">${esc(d.t)}${d.txt?'':'<span class="ext" aria-hidden="true"> ↗</span>'}</button></h3>`
+    +(d.kind==='gl'&&d.soc?`<p class="publisher">${esc(d.soc)}</p>`:'')
+    +`<div class="meta">${metaFor(d,o.withArea!==false)}</div>${hits}`
+    +`<div class="actions">${d.txt?'<button data-act="open">Läs här</button>':''}${srcLink(d)}${g&&g.hits.length>1?`<button class="more">${exp?'Visa färre träffar':`Visa alla ${g.hits.length} träffar`}</button>`:''}</div>`;
+  const open=page=>openReader(d,terms,phrases,page);
+  el.querySelector('.open-title').onclick=()=>open();
+  const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>open();
+  el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>{const hit=g.hits[+x.dataset.i];open(hit?hit.pg:undefined);});
+  const m=el.querySelector('.more'); if(m)m.onclick=()=>{exp?state.expanded.delete(d.id):state.expanded.add(d.id);update();};
   bindFav(el); return el;
 }
 function renderAreas(counts){
   const el=$('areas'); el.innerHTML='';
-  const all=document.createElement('button'); all.className=state.area?'':'on'; all.innerHTML=`<span>Alla områden</span><span class="n">${counts.total}</span>`; all.onclick=()=>{state.area=null;update();}; el.appendChild(all);
-  ORDER.forEach(a=>{const n=counts[a]||0;const b=document.createElement('button');b.style.setProperty('--area-color',AREA_COLORS[a]||'#163c53');b.className=(state.area===a?'on':'')+(n?'':' zero');b.innerHTML=`<span>${esc(AREAS[a])}</span><span class="n">${n}</span>`;b.onclick=()=>{state.area=state.area===a?null:a;update();};el.appendChild(b);});
+  const all=document.createElement('button'); all.className=state.area?'':'on'; all.innerHTML=`<span>Alla områden</span><span class="n">${counts.total}</span>`; all.onclick=()=>{if(state.area){state.area=null;pendingPush=true;}update();}; el.appendChild(all);
+  ORDER.forEach(a=>{const n=counts[a]||0;const b=document.createElement('button');b.style.setProperty('--area-color',AREA_COLORS[a]||'#163c53');b.className=(state.area===a?'on':'')+(n?'':' zero');b.innerHTML=`<span>${esc(AREAS[a])}</span><span class="n">${n}</span>`;b.onclick=()=>{state.area=state.area===a?null:a;pendingPush=true;update();};el.appendChild(b);});
 }
 function setStat(t){$('stat').textContent=t;}
-const EXAMPLES=['insulin DKA','HINTS nystagmus','tranexamsyra trauma','"lågmolekylärt heparin" gravid','acetylcystein paracetamol','hyperkalemi','trombolys kontraindikation','anafylaxi adrenalin dos','delirium tremens','lumbalpunktion antikoagulantia','tenecteplase stroke','sepsis lactate fluids','ketamine sedation children','aortic dissection D-dimer'];
+function statLine(n){return `${n} dokument · ${state.kind==='pm'?'lokala PM':state.kind==='gl'?'externa riktlinjer':'alla källor'}${PM_CHECKED&&state.kind!=='gl'?` · PM-text kontrollerad mot DocPlus ${fmtDate(PM_CHECKED)}`:''}`;}
+// Recently opened and saved documents, at the top of the start page.
+function remember(id){recents=[id,...recents.filter(x=>x!==id)].slice(0,8);store.set('recent',recents);}
+function quickAccess(){
+  const rec=recents.map(id=>BYID.get(id)).filter(Boolean).slice(0,4), sav=[...favs].map(id=>BYID.get(id)).filter(Boolean);
+  if(!rec.length&&!sav.length) return '';
+  const row=d=>`<button type="button" class="qa-row" data-open="${esc(d.id)}"><span class="qa-t">${esc(d.t)}${d.txt?'':' ↗'}</span><span class="qa-m">${esc(AREAS[d.a]||d.a)} · ${d.kind==='gl'?'riktlinje':'lokalt PM'}</span></button>`;
+  return `<div class="quick-access">${rec.length?`<section><h2>Senast öppnade</h2>${rec.map(row).join('')}</section>`:''}${sav.length?`<section><h2>Sparade</h2>${sav.slice(0,4).map(row).join('')}${sav.length>4?`<button type="button" class="qa-all" data-allsaved>Visa alla ${sav.length} sparade</button>`:''}</section>`:''}</div>`;
+}
+function bindQuickAccess(main){
+  main.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openReader(BYID.get(b.dataset.open),[],[]));
+  const all=main.querySelector('[data-allsaved]'); if(all)all.onclick=()=>{state.fav=true;syncChips();update();window.scrollTo(0,0);};
+}
 
 const HOME_LIMIT=24;
 // ---------- views ----------
 function renderHome(main){
  const docs=DOCS.filter(docPass).sort(popularity.compare);
  const counts={total:docs.length};docs.forEach(d=>counts[d.a]=(counts[d.a]||0)+1);renderAreas(counts);
- setStat(`${docs.length} dokument · ${state.kind==='pm'?'lokala PM':state.kind==='gl'?'externa riktlinjer':'alla källor'}`);
- main.innerHTML='<div class="cards"></div>';const grid=main.querySelector('.cards');const limit=state.visibleLimit||HOME_LIMIT;const limited=docs.length>limit;docs.slice(0,limit).forEach(d=>grid.appendChild(docCard(d,true)));
+ setStat(statLine(docs.length));
+ main.innerHTML=(state.fav?'':quickAccess())+'<h2 class="sr-only">Dokument</h2><div class="cards"></div>';bindQuickAccess(main);
+ const grid=main.querySelector('.cards');const limit=state.visibleLimit||HOME_LIMIT;const limited=docs.length>limit;docs.slice(0,limit).forEach(d=>grid.appendChild(docCard(d)));
  if(limited){main.insertAdjacentHTML('beforeend',`<button class="show-all" id="show-all">Visa ${Math.min(HOME_LIMIT,docs.length-limit)} fler · ${Math.min(limit,docs.length)} av ${docs.length}</button>`);$('show-all').onclick=()=>{state.visibleLimit=(state.visibleLimit||HOME_LIMIT)+HOME_LIMIT;update();};}
- if(!docs.length)main.innerHTML='<div class="empty">Inga dokument matchar valda filter.</div>';
+ if(!docs.length)main.innerHTML=`<div class="empty">${state.fav?'Inga sparade dokument ännu. Spara med stjärnan på kortet.':'Inga dokument matchar valda filter.'}</div>`;
 }
 function renderArea(main){
   loadArea(state.area);
@@ -547,10 +655,10 @@ function renderArea(main){
   const sub=state.kind==='gl'?`${glS.length} externa riktlinjer · Öppnas hos utgivaren`:state.kind==='pm'?`${pmS.length} lokala PM · Region Uppsala / DocPlus`:`${pmS.length} lokala PM · ${glS.length} externa riktlinjer`;
   setStat(`${pmS.length + glS.length} dokument`);
   main.innerHTML=`<div class="crumb"><button data-back>‹ Start</button><div><h2>${esc(AREAS[state.area])}</h2><div class="sub">${sub}</div></div></div>`;
-  main.querySelector('[data-back]').onclick=()=>{state.area=null;state.kind=null;syncChips();update();};
+  main.querySelector('[data-back]').onclick=()=>goHome();
   if(!shown.length){main.insertAdjacentHTML('beforeend','<div class="empty">Inga dokument matchar valda filter.</div>');return;}
-  shown.forEach(d=>main.appendChild(docCard(d,false)));
-
+  const grid=document.createElement('div');grid.className='cards';main.appendChild(grid);
+  shown.forEach(d=>grid.appendChild(docCard(d,{withArea:false})));
 }
 function searchExcerpt(text,terms){
  const flat=cleanText(text), folded=foldChars(flat);
@@ -581,59 +689,52 @@ function renderSearch(main,r){
   renderAreas(counts);
   const shown=groups.filter(g=>!state.area||g.d.a===state.area).sort((a,b)=>(b.score-a.score)||popularity.compare(a.d,b.d));
   setStat(`${shown.length} dokument`);
-  const shownWords=displayWords(state.q,r.terms), shownPhrases=[...state.q.matchAll(/"([^"]+)"/g)].map(m=>m[1].trim()).filter(Boolean);
-  let h=`<p class="hint">${r.empty?`Inga sökbara ord i “${esc(state.q.trim())}”.`:r.terms.length?`Söker på ${shownWords.map(t=>`<b>${esc(t)}</b>`).join(', ')}${shownPhrases.length?` + frasen ${shownPhrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`:''} – böjningar och sammansatta ord matchas också.`:`Frassökning: ${shownPhrases.map(p=>`<b>"${esc(p)}"</b>`).join(', ')}`}${state.area?` <button class="chip on" data-unarea>${esc(AREAS[state.area])} ×</button>`:''}</p>`;
-  main.innerHTML=h;
+  const fixed=(r.fixed||[]).map(([w,f])=>[displayWords(state.q,[w])[0]||w,f]);
+  const words=displayWords(state.q,r.terms).filter(w=>!fixed.some(([x])=>x===w)), phr=[...state.q.matchAll(/"([^"]+)"/g)].map(m=>m[1].trim()).filter(Boolean);
+  const b=x=>`<b>${esc(x)}</b>`;
+  const lead=r.empty?`Inga sökbara ord i “${esc(state.q.trim())}”.`:fixed.length?`Inga träffar för ${fixed.map(([w])=>b(w)).join(', ')} – visar ${fixed.map(([,f])=>b(f)).join(', ')}.`:'';
+  const more=!r.empty&&(words.length||phr.length)?`<span class="hint-more">Söker på ${[...words.map(b),...phr.map(p=>b('"'+p+'"'))].join(', ')} – även böjningar, synonymer och sammansatta ord.</span>`:'';
+  main.innerHTML=`<p class="hint${lead||state.area?' important':''}">${lead}${lead&&more?' ':''}${more}${state.area?` <button class="chip on" data-unarea>${esc(AREAS[state.area])} ×</button>`:''}</p>`;
   const ua=main.querySelector('[data-unarea]'); if(ua)ua.onclick=()=>{state.area=null;update();};
   if(!shown.length){main.insertAdjacentHTML('beforeend', r.empty
     ? `<div class="empty">Inga sökbara ord – småord som “och”, “vid”, “för” ignoreras. Prova ett mer specifikt ord.</div>`
     : `<div class="empty">Inga träffar i de ${DOCS.filter(docPass).length} valda dokumenten. Prova färre eller andra ord, eller ta bort filter.</div>`);return;}
-  shown.forEach(g=>{
-    const d=g.d,key=d.id,exp=state.expanded.has(key);
-    const el=document.createElement('div');el.className='card';el.dataset.source=d.kind==='gl'?'external':'uppsala';el.style.setProperty('--accent',d.kind==='gl'?'#165bab':'#007c78');
-    const lim=exp?g.hits.length:Math.min(1,g.hits.length);
-    let hits='';
-    for(let i=0;i<lim;i++){const x=g.hits[i];hits+=`<div class="hit" data-i="${i}"><span class="pg">s. ${x.pg}</span>${exp?fmt(x.text,r.terms,r.phrases,true):`<p class="excerpt">${hl(searchExcerpt(x.text,r.terms),r.terms,r.phrases)}</p>`}</div>`;}
-    if(g.titleOnly) hits=`<div class="hit tonly">${d.txt?(loadedAreas.has(d.a)?'Träff i titel, beskrivning eller sökord':'Träff i titel, beskrivning eller sökord – texten hämtas…'):'Träff i titel, beskrivning eller sökord – fulltext öppnas hos utgivaren'}</div>`;
-    el.innerHTML=`<div class="dh"><div class="t"><b>${esc(d.t)}</b><div class="meta">${tagsFor(d,true,true,true)}</div></div><span class="score">${g.titleOnly?'sökord':g.hits.length+' träff'+(g.hits.length>1?'ar':'')}</span>${favBtn(d)}</div><div class="hits">${hits}</div>${g.hits.length>0?`<button class="more">${exp?'Visa kort utdrag':g.hits.length===1?'Visa hela utdraget':`Visa alla ${g.hits.length} träffar`}</button>`:''}<div class="actions">${d.txt?`<button data-act="open">Öppna ${kindLabel(d)} med markeringar</button>`:''}${srcLink(d)}${saveBtn(d)}</div>`;
-    el.querySelector('.dh').onclick=()=>openReader(d,r.terms,r.phrases);
-    const ob=el.querySelector('[data-act=open]'); if(ob)ob.onclick=()=>openReader(d,r.terms,r.phrases);
-    el.querySelectorAll('.hit').forEach(x=>x.onclick=()=>{
-      const hit=x.dataset.i!=null&&g.hits[+x.dataset.i];
-      openReader(d,r.terms,r.phrases,hit?hit.pg:undefined);
-    });
-    const m=el.querySelector('.more'); if(m)m.onclick=()=>{exp?state.expanded.delete(key):state.expanded.add(key);update();};
-    bindFav(el); main.appendChild(el);
-  });
+  main.insertAdjacentHTML('beforeend','<h2 class="sr-only">Sökresultat</h2>');
+  const grid=document.createElement('div');grid.className='cards results';main.appendChild(grid);
+  shown.forEach(g=>grid.appendChild(docCard(g.d,{group:g,terms:lastHl.terms,phrases:r.phrases})));
 }
+let pendingPush=false, applying=false, lastHl={terms:[],phrases:[]};
 function update(){
   if(pendingRefresh){pendingRefresh=false;showPending();}
   $('popularity-status').textContent=popularity.status();
   const nq=qEl.value; if(nq&&!state.q&&state.area)state.area=null; // a new search starts across all areas
   state.q=nq; sbox.classList.toggle('has',!!state.q);
+  document.body.classList.toggle('searching',!!state.q.trim());
   const main=$('main');main.classList.toggle('search-results',!!state.q);
-  document.querySelector('.results-head h2').textContent=state.q?'Sök i biblioteket':'PM & riktlinjer';
-  document.querySelector('.saved-toggle').textContent='☆ Sparade '+favs.size;
+  $('results-heading').textContent=state.q?'Sök i biblioteket':state.fav?'Sparade':'PM & riktlinjer';
+  document.querySelector('.saved-toggle').textContent=favs.size?`☆ Sparade ${favs.size}`:'☆ Sparade';
   const r=search(state.q);
-  if(r) return renderSearch(main,r);
-  if(state.area) return renderArea(main);
-  renderHome(main);
+  if(r){lastHl={terms:r.hlTerms||r.terms,phrases:r.phrases};renderSearch(main,r);}
+  else if(state.area) renderArea(main);
+  else renderHome(main);
+  if(!applying) writeUrl(pendingPush);
+  pendingPush=false;
 }
 
 // ---------- reader ----------
-function openReader(d,terms,phrases,page){
+let readerDoc=null, readerPage=0;
+function openReader(d,terms,phrases,page,fromUrl){
   if(!d) return;
-  if(!d.txt){ popularity.record(d.id);window.open(d.url,'_blank','noopener'); return; }
-  if(!d.loaded){ setStat('Hämtar text…'); loadArea(d.a).then(()=>{ if(d.loaded) openReader(d,terms,phrases,page); else setStat('Kunde inte hämta texten – kontrollera uppkopplingen.'); }); return; }
-  popularity.record(d.id);
-  recents=[d.id,...recents.filter(x=>x!==d.id)].slice(0,8); store.set('recent',recents);
-  $('rtitle').textContent=d.t; $('rmeta').innerHTML=tagsFor(d,true); $('ract').innerHTML=`${srcLink(d)}${saveBtn(d)}`; bindFav($('ract'));
+  if(!d.txt){ popularity.record(d.id);remember(d.id);window.open(d.url,'_blank','noopener'); return; }
+  if(!d.loaded){ setStat('Hämtar text…'); loadArea(d.a).then(()=>{ if(d.loaded) openReader(d,terms,phrases,page,fromUrl); else setStat('Kunde inte hämta texten – kontrollera uppkopplingen.'); }); return; }
+  popularity.record(d.id); remember(d.id);
+  $('rtitle').textContent=d.t; $('rmeta').innerHTML=readerMeta(d); $('ract').innerHTML=`${srcLink(d)}${saveBtn(d)}`; bindFav($('ract'));
   const body=$('pbody'), nav=$('pnav'); body.innerHTML=''; nav.innerHTML='';
   const pages=new Map(); d.chunks.forEach(c=>{if(!pages.has(c.pg))pages.set(c.pg,[]);pages.get(c.pg).push(c);});
   const hot=new Set();
   pages.forEach((cs,pg)=>{
     const sec=document.createElement('div');sec.className='page';sec.id='pg'+pg;
-    let inner=`<h5>Sida ${pg} av ${d.np}</h5>`;
+    let inner=`<h3 class="pglabel">Sida ${pg} av ${d.np}</h3>`;
     cs.forEach(c=>{const h=fmt(c.text,terms,phrases,false);if(h.includes('<mark>'))hot.add(pg);inner+=h;});
     sec.innerHTML=inner; body.appendChild(sec);
   });
@@ -641,30 +742,61 @@ function openReader(d,terms,phrases,page){
   nav.innerHTML='<button type="button" data-prev aria-label="Föregående sida">‹</button><label>Sida <select aria-label="Välj sida"></select></label><span>av '+d.np+'</span><button type="button" data-next aria-label="Nästa sida">›</button>';
   const select=nav.querySelector('select');
   numbers.forEach(pg=>{const option=document.createElement('option');option.value=pg;option.textContent=pg+(hot.has(pg)?' · träff':'');select.appendChild(option);});
-  function syncPage(){select.value=numbers[current];nav.querySelector('[data-prev]').disabled=current===0;nav.querySelector('[data-next]').disabled=current===numbers.length-1;}
+  function syncPage(){select.value=numbers[current];nav.querySelector('[data-prev]').disabled=current===0;nav.querySelector('[data-next]').disabled=current===numbers.length-1;if(readerDoc===d&&readerPage!==numbers[current]){readerPage=numbers[current];writeUrl(false);}}
   function jump(index){current=Math.max(0,Math.min(numbers.length-1,index));const section=$('pg'+numbers[current]);body.scrollTop=section.offsetTop-body.offsetTop;syncPage();}
   select.onchange=()=>jump(numbers.indexOf(+select.value));
   nav.querySelector('[data-prev]').onclick=()=>jump(current-1);
   nav.querySelector('[data-next]').onclick=()=>jump(current+1);
   body.onscroll=()=>{let i=0;for(const sec of body.querySelectorAll('.page')){if(sec.offsetTop-body.offsetTop<=body.scrollTop+40)current=i;else break;i++;}syncPage();};
-  syncPage();
+  const wasOpen=!!readerDoc; readerDoc=d; readerPage=0;
   $('reader').hidden=false;document.querySelector('.reader-details').open=false; document.body.style.overflow='hidden';
-  const target=page||[...hot][0]; if(target){requestAnimationFrame(()=>{const s=$('pg'+target);if(s)body.scrollTop=s.offsetTop-body.offsetTop-6;});} else body.scrollTop=0;
-  try{ if(history.state&&history.state.reader) history.replaceState({reader:1},''); else history.pushState({reader:1},''); }catch(e){}
+  if(!fromUrl) writeUrl(wasOpen?false:{reader:1});
+  const target=page||[...hot][0]; if(target){current=Math.max(0,numbers.indexOf(+target));requestAnimationFrame(()=>{const s=$('pg'+target);if(s)body.scrollTop=s.offsetTop-body.offsetTop-6;syncPage();});} else {body.scrollTop=0;syncPage();}
 }
-function closeReader(){if($('reader').hidden)return;$('reader').hidden=true;document.body.style.overflow='';if(!state.q&&!state.area)update();}
-$('rclose').onclick=()=>{closeReader();try{if(history.state&&history.state.reader)history.back();}catch(e){}};
-$('reader').addEventListener('click',e=>{if(e.target===$('reader'))$('rclose').onclick();});
-window.addEventListener('popstate',()=>closeReader());
+function closeReader(fromUrl){
+  if($('reader').hidden)return;$('reader').hidden=true;document.body.style.overflow='';readerDoc=null;readerPage=0;
+  if(!fromUrl){ if(history.state&&history.state.reader){try{history.back();}catch(e){}} else writeUrl(false); }
+  if(!state.q&&!state.area)update(); // refreshes "Senast öppnade"
+}
+$('rclose').onclick=()=>closeReader(false);
+$('reader').addEventListener('click',e=>{if(e.target===$('reader'))closeReader(false);});
+
+// ---------- address bar: Back works, and a search, an area or a PM can be shared as a link ----------
+function stateHash(){
+  const p=new URLSearchParams();
+  if(state.q.trim())p.set('q',state.q.trim()); if(state.area)p.set('omrade',state.area); if(state.kind)p.set('kalla',state.kind); if(state.fav)p.set('sparade','1');
+  if(readerDoc){p.set('pm',readerDoc.id);if(readerPage>1)p.set('sida',readerPage);}
+  const s=p.toString(); return s?'#'+s:'';
+}
+function writeUrl(push){
+  const url=location.pathname+location.search+stateHash();
+  try{
+    if(push) history.pushState(Object.assign({ak:1},typeof push==='object'?push:{}),'',url);
+    else if(url!==location.pathname+location.search+location.hash) history.replaceState(Object.assign({},history.state||{ak:1}),'',url);
+  }catch(e){}
+}
+function applyUrl(){
+  const p=new URLSearchParams(location.hash.slice(1));
+  qEl.value=p.get('q')||''; state.area=AREAS[p.get('omrade')]?p.get('omrade'):null;
+  state.kind=['pm','gl'].includes(p.get('kalla'))?p.get('kalla'):null; state.fav=p.get('sparade')==='1'; syncChips();
+  applying=true; state.q=qEl.value; update(); applying=false;
+  const d=p.get('pm')&&BYID.get(p.get('pm'));
+  if(d&&d.txt){ if(readerDoc!==d) openReader(d,lastHl.terms,lastHl.phrases,+p.get('sida')||undefined,true); }
+  else closeReader(true);
+}
+window.addEventListener('popstate',applyUrl);
 
 // ---------- wiring ----------
+function goHome(){qEl.value='';const was=stateHash();state.area=null;state.kind=null;state.fav=false;state.visibleLimit=HOME_LIMIT;syncChips();pendingPush=!!was;update();window.scrollTo(0,0);}
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&!$('reader').hidden){$('rclose').onclick();return;}
+  if(e.key==='Escape'&&!$('reader').hidden){closeReader(false);return;}
   if(e.key==='/'&&document.activeElement!==qEl){e.preventDefault();qEl.focus();qEl.select();}
 });
-let timer; qEl.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(update,140);});
-$('clr').onclick=()=>{qEl.value='';update();qEl.focus();};
-$('home').onclick=()=>{qEl.value='';state.area=null;state.kind=null;state.visibleLimit=HOME_LIMIT;syncChips();update();window.scrollTo(0,0);};
+// A new search gets its own history entry (Back returns to where you were); refining it does not.
+function startSearch(){if(!state.q.trim()&&qEl.value.trim()){pendingPush={search:1};if(window.scrollY>0)window.scrollTo(0,0);}}
+let timer; qEl.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>{startSearch();update();},140);});
+$('clr').onclick=()=>{qEl.value='';if(history.state&&history.state.search){try{history.back();}catch(e){update();}}else update();qEl.focus();};
+$('home').onclick=goHome;
 function syncChips(){
   document.querySelectorAll('.filters .chip[data-f]').forEach(x=>{const on=!!state[x.dataset.f];x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});
   document.querySelectorAll('.filters .chip[data-k]').forEach(x=>{const on=(state.kind||'')===x.dataset.k;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});
@@ -675,12 +807,14 @@ document.querySelectorAll('.filters .chip[data-f]').forEach(b=>b.onclick=()=>{
   if(f==='old'&&state.old)state.fresh=false; if(f==='fresh'&&state.fresh)state.old=false;
   syncChips(); update();
 });
-$('reset').onclick=()=>{state.fav=false;$('home').onclick();};document.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>{qEl.value=b.dataset.query;state.area=null;update();qEl.focus();});
+$('reset').onclick=goHome;
+document.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>{qEl.value=b.dataset.query;state.area=null;pendingPush={search:1};update();window.scrollTo(0,0);if(!matchMedia('(pointer:coarse)').matches)qEl.focus();});
 const bt=$('boot');if(bt)bt.remove();
-popularity.load();popularity.whenReady(600).then(()=>{update();setLoadStat();});
-const countSource=e=>{if(e.type==='auxclick'&&e.button!==1)return;const link=e.target.closest('a[data-count-open]');if(link)popularity.record(link.dataset.countOpen);};document.addEventListener('click',countSource);document.addEventListener('auxclick',countSource);
+try{history.replaceState(Object.assign({ak:1},history.state||{}),'',location.href);}catch(e){}
+popularity.load();popularity.whenReady(600).then(()=>{applyUrl();setLoadStat();});
+const countSource=e=>{if(e.type==='auxclick'&&e.button!==1)return;const link=e.target.closest('a[data-count-open]');if(link){popularity.record(link.dataset.countOpen);remember(link.dataset.countOpen);}};document.addEventListener('click',countSource);document.addEventListener('auxclick',countSource);
 (window.requestIdleCallback||(f=>setTimeout(f,300)))(()=>prefetchAll());
 })().catch(e=>{const m=document.getElementById('main');if(m)m.innerHTML='<div class="empty">Kunde inte läsa in data ('+e.message+'). Uppdatera webbläsaren – appen kräver Safari 16.4+/Chrome 80+.</div>';});
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
-<script src="visitor-analytics.js?v=ak-v10s37-snabbfix"></script></body></html>
+<script src="visitor-analytics.js?v=ak-v10s38-sok"></script></body></html>

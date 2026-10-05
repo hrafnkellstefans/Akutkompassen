@@ -158,3 +158,26 @@ Från granskningen 5 okt 2026. Inga PM-texter eller länkar är ändrade.
 - **Övrigt:** "3 s" heter nu "3 sid.", sökikonen har fast storlek även om CSS laddas sent, Barns sökfält har kortare platshållartext.
 
 Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`.
+
+## Sökning och mobil 5 oktober 2026 (ak-v10s38-sok)
+
+Från granskningen 5 okt 2026 (listan "före 4 nov"). Inga PM-texter eller länkar är ändrade.
+
+- **Rankning (Vuxna):** ett dokument som handlar om ordet (titel, nyckelord) rankas före ett som bara nämner det i texten. Vanliga titelord ("akut", "behandling", "trauma") väger mindre än ovanliga. De breda samlingarna (läkemedelslistorna, brännskadekompendiet, PM om medicinskt ansvar) rankas ned när titeln inte matchar sökningen. Testsökningarna: rätt dokument först i 131 av 142 (tidigare 79), bland de tre första i 136.
+- **Gemensamt ordförråd (`search-terms.js`):** synonymer, förkortningar, handelsnamn och substans (Eliquis/apixaban, Waran/warfarin) och engelska termer, för både Vuxna och Barn. Ett ord som inte finns någonstans rättas till närmaste kända ord, och sidan säger det ("Inga träffar för sepssis – visar sepsis"). Ett rättstavat ord utan dokument (t.ex. invagination) ger inga träffar i stället för en gissning.
+- **Referenslistor:** PM:ets innehållsförteckning avgör var referensavsnittet slutar, så en bilaga efter referenserna rankas som vanlig text.
+- **Mobil:** under sökning börjar träfflistan direkt under sökfältet, och bara sökfältet ligger fast vid scroll. PM och riktlinjer har samma kortdesign. Startsidan visar senast öppnade och sparade dokument överst.
+- **Adressfältet:** Tillbaka fungerar, och en sökning, ett område eller ett PM (med sida) kan delas som länk (`#q=`, `#omrade=`, `#pm=`, `#sida=`).
+- **Barn:** samma ordförråd och stavfelsrättning. Ord på högst tre bokstäver (t.ex. "dos") måste börja ett ord. Har inget dokument alla sökord visas först de som har de mest specifika orden. 20 nyckelordsrättningar i `barn/data.json`. Eget app-manifest (`barn/manifest.webmanifest`), så Barn kan installeras som egen app.
+- **Avsändare och aktualitet:** "Personligt urval av Kjell Stefansson, ST-läkare i akutsjukvård" på startsidan, och datum då PM-texten senast kontrollerades mot DocPlus (`pmChecked` i `ak_index.json`).
+- **NY!** bygger nu på publiceringsdatum (`publishedOn`) för 28 PM.
+- **Nyckelord:** 66 riktlinjers nyckelordslistor är rensade från läkemedelsnamn som inte beskriver dokumentets ämne. ACEP:s DOAC-riktlinje har fått nyckelordet "antikoagulantia".
+- **Installera som app:** ett engångstips på mobil (iPhone: Dela → Lägg till på hemskärmen; Android: Installera). Genvägar till Vuxna och Barn i manifesten.
+- **Länkförhandsvisning:** Open Graph-bild (`og-image.png`) och beskrivning när en länk delas.
+- **Tillgänglighet:** rubrikordning och namngivna tabeller. axe-core ger 0 fel i alla vyer, ljust och mörkt.
+- **Tipsa-länk:** sätt `AK_FEEDBACK_URL` i `popularity-config.js` (en `mailto:`- eller `https:`-adress) för att visa "Saknas något? Tipsa om PM eller riktlinjer" i sidfoten. Tom = dold.
+- **Övrigt:** snabbknappen Sedering söker "procedursedering".
+
+Obs: nyckelorden och publiceringsdatumen är ändrade direkt i `ak_index.json` och `barn/data.json`. Om indexet byggs om från PM-underlaget behöver ändringarna följa med.
+
+Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`. `tests/search-quality.test.cjs` kör testsökningarna i `tests/search-queries.json` (142 Vuxna, 64 Barn) och fallerar om rankningen blir sämre.
