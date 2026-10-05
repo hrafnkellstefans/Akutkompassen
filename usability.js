@@ -12,7 +12,7 @@
  function sync(){
   const chosen=areas.querySelector('.on,.active');const label=(chosen?chosen.querySelector('span:not(.area-dot)').textContent:'Alla områden')+' ▾';if(toggle.textContent!==label)toggle.textContent=label;
   const results=document.getElementById('main')||document.getElementById('results');
-  const empty=results.querySelector('.empty');const status=document.getElementById('popularity-status');status.hidden=!!empty||!!q.value.trim();
+  const empty=results.querySelector('.empty');const status=document.getElementById('popularity-status');status.hidden=!!empty||!!q.value.trim()||!status.textContent.trim();
   if(empty&&!empty.querySelector('button')){const reset=document.createElement('button');reset.textContent='Visa hela biblioteket';reset.onclick=()=>document.getElementById('reset').click();empty.appendChild(reset);}
   if(q.value==='')q.closest('.searchbox').classList.remove('has');
  }

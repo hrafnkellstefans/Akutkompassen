@@ -54,3 +54,30 @@ body{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-
  .cards .card h3{margin:2px 0 4px}
  .cards .card .actions{border-top:0;padding-top:0}
 }
+
+/* 5 okt 2026 (ak-v10s37): long words and URLs wrap instead of widening the phone page. */
+#main,.pbody,.reader-details{overflow-wrap:anywhere}
+/* Year tags are neutral; amber is kept for "check validity". Contrast >= 4.5:1. */
+.tag.yr,.tag.yr.mid{background:#eef2f5;color:#3b4e5c}
+.tag.yr.old,.tag.warn{background:#fbebd5;color:#8a3c0c}
+.tag.acc{border-color:#8a3c0c;color:#8a3c0c}
+.adult .areas button.zero{opacity:1;color:#5d7180}
+/* Touch screens get 44 px targets; mouse users keep the compact sizes. */
+@media (pointer:coarse){
+ .brand,nav a,.quick button,.source-tabs button,.saved-toggle,.text-button,.area,.adult .areas button,.crumb button,.more,.show-all{min-height:44px}
+ .quick button,.text-button,.crumb button{display:inline-flex;align-items:center}
+ nav a{display:inline-flex;align-items:center}
+ .app-search-clear{min-width:44px;min-height:44px}
+ .fav,.card-top>.save{min-width:44px;min-height:44px}
+ .actions a,.actions button{min-height:44px;display:inline-flex;align-items:center}
+ .ph .x{width:44px;height:44px}
+ .pane .reader-details summary,footer summary{min-height:44px}
+ footer>a{display:inline-flex;align-items:center;min-height:44px}
+ .pnav button{min-width:44px;height:44px}
+}
+/* Phones: quick searches stay on one swipeable row, so the sticky panel stays short. */
+@media (max-width:760px){
+ .quick{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-right:-13px;padding-right:13px}
+ .quick::-webkit-scrollbar{display:none}
+ .quick button{flex:none}
+}

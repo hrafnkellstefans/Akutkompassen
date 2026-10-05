@@ -142,3 +142,19 @@ Release `ak-v10s34-scroll` removes scroll-triggered search-panel resizing and ma
 ### Aligned compact cards — 2 October 2026
 
 Release `ak-v10s35-aligned` gives multi-column catalogue cards equal heights, with actions aligned at the bottom. Single-column layouts keep content-sized cards to avoid unnecessary empty space on phones. Full titles, notes and warnings remain visible; scroll stability is preserved.
+
+## Snabbfixar 5 oktober 2026 (ak-v10s37-snabbfix)
+
+Från granskningen 5 okt 2026. Inga PM-texter eller länkar är ändrade.
+
+- **Mobil bredd:** långa ord och URL:er i sökutdrag och läsaren radbryts (`overflow-wrap:anywhere`). Tidigare gjorde 25 av 142 testsökningar sidan bredare än skärmen, och läsarens stängknapp hamnade utanför skärmen på Android.
+- **Offline:** service workern sparar PM-texten för alla 21 områden redan vid installationen. Tidigare saknades 8 områden (Trauma, Kardiologi, HLR m.fl.) offline efter första besöket.
+- **Sökning:** å/ä/ö jämställs med a/a/o, så "brostsmarta" hittar "bröstsmärta". Referenslistor och dokumenthistorik rankas ned (×0,3) och sökutdrag visas utan radmarkörer, tabellstreck och URL:er. Markeringen av träffar är omskriven så att den fungerar med å/ä/ö.
+- **Sökmotorer:** `noindex` är borttagen, i linje med robots.txt (vanliga sökmotorer får indexera, AI-träning blockeras).
+- **Pekskärm:** alla knappar är minst 44 px på pekskärmar (`@media (pointer:coarse)`); snabbsökningarna ligger på en svepbar rad på mobil.
+- **Kontrast:** årtalstaggar är neutrala, äldre-varningar mörkare bärnsten (#8a3c0c), alla minst 4,5:1.
+- **Popularitet:** färre än 20 öppningar (`MIN_OPENS` i `popularity.js`) ger varken omsortering eller POPULÄR!. Utan tillräcklig statistik sorteras lokala PM först, sedan nationella och internationella, A–Ö inom varje grupp. Statusraden visas bara när ordningen faktiskt bygger på popularitet; en otillgänglig räknare (t.ex. sjukhusnät) ger ingen felrad.
+- **Logotyp:** `logo-v2.png` är 144×144 px (17 KB, tidigare 508 KB).
+- **Övrigt:** "3 s" heter nu "3 sid.", sökikonen har fast storlek även om CSS laddas sent, Barns sökfält har kortare platshållartext.
+
+Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`.

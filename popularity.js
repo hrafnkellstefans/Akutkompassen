@@ -9,7 +9,10 @@
  // Last successful snapshot, so the first render is already in popularity order
  // and the list never has to reshuffle under the reader's eyes.
  function cached(){try{const v=JSON.parse(get(CACHE)||'null');return v&&validCounts(v.counts)&&Date.now()-v.t<CACHE_MAX_AGE?v.counts:null;}catch{return null;}}
- const count=(counts,id)=>Number.isSafeInteger(counts[id])&&counts[id]>0?counts[id]:0;
+ // A handful of opens is noise (one colleague's afternoon, or a test browser), so counts
+ // below MIN_OPENS neither reorder the list nor earn a POPULÄR! badge.
+ const MIN_OPENS=20;
+ const count=(counts,id)=>Number.isSafeInteger(counts[id])&&counts[id]>=MIN_OPENS?counts[id]:0;
  function create(section,docs,refresh){
   // `refresh` is no longer called when counts arrive: re-sorting a rendered list
   // caused large layout shifts (CLS). New counts apply on the next render.
@@ -19,7 +22,9 @@
   const key=d=>section+':'+d.id;
   const endpoint=String(root.AK_POPULARITY_ENDPOINT||'').replace(/\/$/,'');
   const excluded=()=>get(EXCLUDE)==='1';
-  const compare=(a,b)=>count(counts,key(b))-count(counts,key(a))||(a.title||a.t).localeCompare(b.title||b.t,'sv')||String(a.id).localeCompare(String(b.id));
+  // Without enough opens the order is: local PM (Region Uppsala), then national, then international; A–Ö within each.
+ const tier=d=>{const l=d.lvl||d.source||'';return l==='lokal'||l==='uppsala'?0:l==='nationell'||l==='nationellt'||l==='karolinska'?1:2;};
+ const compare=(a,b)=>count(counts,key(b))-count(counts,key(a))||tier(a)-tier(b)||(a.title||a.t).localeCompare(b.title||b.t,'sv')||String(a.id).localeCompare(String(b.id));
   function leader(d){if(!ready||!count(counts,key(d)))return false;return !docs.some(x=>(x.area||x.a)===(d.area||d.a)&&compare(x,d)<0);}
   function isNew(d){
    // Source publication/approval date only; never the date added or link-checked.
@@ -50,9 +55,10 @@
    // No search text, URL, persistent visitor ID or user profile is sent.
    fetch(endpoint+'/click',{method:'POST',credentials:'omit',referrerPolicy:'no-referrer',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({document,event:crypto.randomUUID()})}).catch(()=>{});
   }
-  function status(){return !endpoint?'Popularitetsstatistik är ännu inte aktiverad.':!ready?'Popularitetsstatistik kunde inte hämtas. Visar A–Ö.':Object.keys(counts).some(k=>k.startsWith(section+':')&&count(counts,k))?'Mest öppnade först · POPULÄR! = mest öppnad i området':'Inga registrerade öppningar ännu. Visar A–Ö.';}
+  // Silent unless the order really is by popularity; an unreachable counter (e.g. a hospital network) just means A–Ö.
+  function status(){return endpoint&&ready&&Object.keys(counts).some(k=>k.startsWith(section+':')&&count(counts,k))?'Mest öppnade först · POPULÄR! = mest öppnad i området':'';}
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load();});
-  return {compare,badge,record,load,whenReady,status,excluded};
+  return {compare,badge,record,load,whenReady,status,excluded,MIN_OPENS};
  }
  root.AkPopularity={create,EXCLUDE};
 })(globalThis);
