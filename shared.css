@@ -227,3 +227,11 @@ body:has(.refresh-pill) .update-bar{bottom:calc(76px + env(safe-area-inset-botto
  @media(max-width:760px){.area,.adult .areas button{background-color:var(--surface)}}
  @media(hover:hover){.card .hit:hover .excerpt{text-decoration-color:#4f6a78}}
 }
+
+/* Akutversion: red text in both themes, including visited and hover states. */
+.actions a.acute-version{color:#b4232c;font-weight:700}
+.actions a.acute-version:hover{color:#951b23;border-color:currentColor}
+@media(prefers-color-scheme:dark){
+ .actions a.acute-version{color:#ff8b91}
+ .actions a.acute-version:hover{color:#ffadb1}
+}

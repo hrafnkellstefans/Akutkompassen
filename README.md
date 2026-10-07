@@ -201,3 +201,10 @@ Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`. `tests/search-qual
 Vid ny version: höj versionen på samma ställen som tidigare (`sw.js`, `index.html`, `barn/index.html` med `data-v`, `barn/app.js`, `ak_index.json`). `tests/offline.test.cjs` kontrollerar att de stämmer och att allt som sidorna laddar finns i listan `SHELL` i `sw.js`.
 
 Kontroll: `node --test tests/*.cjs tracking/worker.test.mjs`.
+
+
+## Akutversion – 7 oktober 2026 (ak-v10s41-akutversion)
+
+Divertikulit (DocPlusSTYR-9633) har nu en röd länk **Akutversion** bredvid **Läs här** och **Original i DocPlus**, även i läsvyn. Länken öppnar den godkända Canva-sammanfattningen som en lokal PDF i en ny flik. Den finns även offline efter att den nya webbversionen har sparats på enheten.
+
+PDF: `akutversioner/akut-divertikulit.pdf`. Exporterad oförändrad från Canva-design `DAHXXkU-lnc` den 7 oktober 2026. Källhänvisning till DocPlus version 5 (godkänd 2026-04-15), namnangivelse och AI-disclaimer finns i dokumentet. Dokumentregistret använder det valfria fältet `summaryUrl`; andra PM får ingen extra länk. Rött har anpassats för både ljust och mörkt läge. PM-text och originallänk är oförändrade.
