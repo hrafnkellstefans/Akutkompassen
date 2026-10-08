@@ -222,3 +222,10 @@ Länken Akutversion heter nu **Snabbguide**, även i läsvyn och för skärmläs
 - Innehållet kommer enbart från PM:et, med sidhänvisning (”Källa s. N”) per avsnitt. Före publicering har alla tal, doser och enheter kontrollerats mot DocPlus-PDF:en, och guiden har faktagranskats separat mot PM:et.
 - Version och godkänt-datum står i guidens sidfot. Kommer en ny version av PM:et i DocPlus behöver guiden göras om.
 - PM-text och originallänkar är oförändrade.
+
+## Ny PM med snabbguide – 8 oktober 2026 (ak-v10s44-inlaggning)
+
+**Inläggning kirurgpatient från akutmottagning – rutin, VO kirurgi** (DocPlusSTYR-29090, version 1, godkänd 2022-05-29) finns nu under AKM-drift, med fulltext och en **Snabbguide** (`akutversioner/inlaggning-kirurgpatient.pdf`, 1 sida). Rutinen gäller vardagar kl 8–16: akutläkaren kontaktar Dagbakjouren innan en patient läggs in eller opereras inom VO Kirurgi.
+
+- Texten är återgiven ordagrant från DocPlus-PDF:en. Snabbguiden är gjord med samma mall och kontroller som de övriga.
+- `tracking/documents.json` är uppdaterad; popularitetsräknaren räknar PM:et först när Cloudflare-workern har driftsatts på nytt.
