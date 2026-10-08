@@ -3,8 +3,8 @@
 // and switches by itself at the next start. All files of one release come from one cache, so a page
 // never mixes old and new files.
 // Bump VERSION on every release (the same string as data-v in index.html and barn/index.html).
-const VERSION = 'ak-v10s42-snabbguide';
-const SHELL = ['./', './index.html', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './akutversioner/akut-divertikulit.pdf', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest',];
+const VERSION = 'ak-v10s43-snabbguider';
+const SHELL = ['./', './index.html', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './akutversioner/akut-divertikulit.pdf', './akutversioner/septisk-chock.pdf', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest',];
 // cache:'reload' skips the browser's HTTP cache (GitHub Pages: max-age=600), so a new release never
 // stores a ten-minute-old copy of a file from the previous one.
 const fresh = url => new Request(url, {cache: 'reload'});

@@ -212,3 +212,13 @@ PDF: `akutversioner/akut-divertikulit.pdf`. Exporterad oförändrad från Canva-
 ## Snabbguide – 7 oktober 2026 (ak-v10s42-snabbguide)
 
 Länken Akutversion heter nu **Snabbguide**, även i läsvyn och för skärmläsare. Den röda textfärgen och den publicerade Canva-PDF:en är oförändrade.
+
+## Snabbguider – 8 oktober 2026 (ak-v10s43-snabbguider)
+
+**Septisk chock** (DocPlusSTYR-10049, version 8, godkänd 2025-05-14) har nu en **Snabbguide**, och divertikulit har fått en ny version av sin. Båda finns även offline efter att den nya webbversionen har sparats på enheten.
+
+- PDF: `akutversioner/septisk-chock.pdf` (3 sidor, ca 100 kB) och `akutversioner/akut-divertikulit.pdf` (1 sida, ca 60 kB). Divertikulit ersätter Canva-exporten på samma adress.
+- Samma utseende och samma friskrivning som Canva-versionen, men byggda från en gemensam mall med riktig text i stället för bild: skarpa i alla storlekar, sökbara och små. Flersidiga guider har sidnummer och DocPlus-id i sidfoten.
+- Innehållet kommer enbart från PM:et, med sidhänvisning (”Källa s. N”) per avsnitt. Före publicering har alla tal, doser och enheter kontrollerats mot DocPlus-PDF:en, och guiden har faktagranskats separat mot PM:et.
+- Version och godkänt-datum står i guidens sidfot. Kommer en ny version av PM:et i DocPlus behöver guiden göras om.
+- PM-text och originallänkar är oförändrade.
