@@ -1879,6 +1879,28 @@
       "checked": "2026-10-01"
     },
     {
+      "id": "GL135",
+      "title": "ACEP Unscheduled Procedural Sedation 2026 – del 2: klinisk praxis",
+      "source": "nationellt",
+      "publisher": "ACEP",
+      "area": "smarta",
+      "url": "https://www.annemergmed.com/article/S0196-0644(26)00463-4/fulltext",
+      "date": "",
+      "scope": "Internationell riktlinje, gäller alla åldrar · dokumentår 2026.",
+      "format": "Hos utgivaren",
+      "checked": "2026-10-12",
+      "keywords": [
+        "procedursedering",
+        "sedering",
+        "ketamin",
+        "propofol",
+        "fasta",
+        "barn",
+        "sedation"
+      ],
+      "year": "2026"
+    },
+    {
       "id": "GL72",
       "title": "RCEM Management of Pain in Children 2017",
       "source": "nationellt",

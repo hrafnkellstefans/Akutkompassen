@@ -30,5 +30,5 @@ test('Child-only guidelines are in Barn exactly once and absent from Vuxen',()=>
 });
 test('Cross-catalogue overlap is limited to documented adult-and-child resources',()=>{
  const childUrls=new Set(child.docs.map(key));
- assert.deepEqual(adult.docs.filter(d=>childUrls.has(key(d))).map(d=>d.id).sort(),['21087','GL87']);
+ assert.deepEqual(adult.docs.filter(d=>childUrls.has(key(d))).map(d=>d.id).sort(),['21087','GL135','GL87']);
 });

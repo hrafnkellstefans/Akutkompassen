@@ -229,3 +229,12 @@ Länken Akutversion heter nu **Snabbguide**, även i läsvyn och för skärmläs
 
 - Texten är återgiven ordagrant från DocPlus-PDF:en. Snabbguiden är gjord med samma mall och kontroller som de övriga.
 - `tracking/documents.json` är uppdaterad; popularitetsräknaren räknar PM:et först när Cloudflare-workern har driftsatts på nytt.
+
+## ACEP procedursedering 2026 – 12 oktober 2026 (ak-v10s45-sedering)
+
+Nya internationella riktlinjer under **Procedurer** (Vuxna), som titel och länk till utgivaren:
+
+- **GL135** – ACEP Unscheduled Procedural Sedation: Multidisciplinary Delphi Consensus Guidelines, Part 2: Clinical Practice. Ann Emerg Med 2026;88:346–361, doi:10.1016/j.annemergmed.2026.06.039.
+- **GL136** – Part 1: Principles, Oversight, and Quality Monitoring. Ann Emerg Med 2026;88:332–345, doi:10.1016/j.annemergmed.2026.06.038.
+
+Båda är ACEP policy statements, godkända av ACEP:s styrelse 29 april 2026, och uppdaterar 2019 års multidisciplinära riktlinje för oplanerad procedursedering. De gäller alla åldrar, så del 2 (GL135) finns även på Barn under Smärta & procedurer. Den gemensamma posten är tillagd i testet för dokument som medvetet finns i båda biblioteken. `tracking/documents.json` är uppdaterad; popularitetsräknaren räknar de nya dokumenten först när Cloudflare-workern har driftsatts på nytt.
