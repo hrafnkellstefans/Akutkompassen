@@ -235,3 +235,6 @@ body:has(.refresh-pill) .update-bar{bottom:calc(76px + env(safe-area-inset-botto
  .actions a.acute-version{color:#ff8b91}
  .actions a.acute-version:hover{color:#ffadb1}
 }
+
+/* 15 okt 2026 (ak-v10s46): two footer links (other library, list of all documents) need space between them. */
+footer>a{margin-right:22px}

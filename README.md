@@ -238,3 +238,17 @@ Nya internationella riktlinjer under **Procedurer** (Vuxna), som titel och länk
 - **GL136** – Part 1: Principles, Oversight, and Quality Monitoring. Ann Emerg Med 2026;88:332–345, doi:10.1016/j.annemergmed.2026.06.038.
 
 Båda är ACEP policy statements, godkända av ACEP:s styrelse 29 april 2026, och uppdaterar 2019 års multidisciplinära riktlinje för oplanerad procedursedering. De gäller alla åldrar, så del 2 (GL135) finns även på Barn under Smärta & procedurer. Den gemensamma posten är tillagd i testet för dokument som medvetet finns i båda biblioteken. `tracking/documents.json` är uppdaterad; popularitetsräknaren räknar de nya dokumenten först när Cloudflare-workern har driftsatts på nytt.
+
+## Sökbar på Google – 15 oktober 2026 (ak-v10s46-sokbarhet)
+
+I appen öppnas varje PM på startsidans adress (`/#pm=10049`), och sådana adresser räknar Google som startsidan. Därför kunde inget PM hittas med en sökning. Nu finns sidor som sökmotorer kan läsa, byggda av `tools/build-seo.mjs` från samma data som appen:
+
+- **En sida per lokalt PM** (127 st) på `/pm/<DocPlus-nummer>/`, t.ex. `akutkompassen.se/pm/10049/`: egen titel och beskrivning, hela PM-texten (samma text som i appen), länkar till originalet i DocPlus, till PM:et i appen och till snabbguiden. Brödsmulor och strukturerade data (schema.org) för Google.
+- **Alla dokument på en sida**, `/pm/`: lokala PM, nationella och internationella riktlinjer (titel och länk till utgivaren) och Barn. Länkad från sidfoten på Vuxna och Barn.
+- **`sitemap.xml`** med alla sidor och snabbguider, och en rad om den i `robots.txt`. Datumet (`lastmod`) ändras bara när innehållet på adressen ändras (fingeravtryck i `tools/seo-lastmod.json`).
+- Startsidan har en tydligare titel och beskrivning och talar om för Google att webbplatsen heter Akutkompassen. Statistikinställningarna visas inte i sökresultat. Källkod, tester och verktyg är undantagna i `robots.txt`.
+- Brännskadekompendiet (DocPlusSTYR-23932) förbjuder mångfaldigande utan medgivande. Det får därför ingen egen sida utan listas med länk till DocPlus. Skriptet hittar sådana förbehåll (”©”, ”upphovsrätt”, ”Mångfaldigande … förbjudet” m.fl.) av sig självt.
+- E-postadresser och mobilnummer i PM-texterna visas bara i originalet, inte på sidorna som Google läser (4 sidor berörs). Appen visar hela texten som förut. Reglerna för kopieringsförbud och kontaktuppgifter finns på ett ställe, `tools/seo-rules.cjs`.
+- Offline öppnar en PM-sida samma PM i appen.
+
+**Vid varje release som ändrar data, `index.html`, Barn eller snabbguiderna:** kör `node tools/build-seo.mjs`. Annars fallerar `tests/seo.test.cjs`.

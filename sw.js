@@ -3,7 +3,7 @@
 // and switches by itself at the next start. All files of one release come from one cache, so a page
 // never mixes old and new files.
 // Bump VERSION on every release (the same string as data-v in index.html and barn/index.html).
-const VERSION = 'ak-v10s45-sedering';
+const VERSION = 'ak-v10s46-sokbarhet';
 const SHELL = ['./', './index.html', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './akutversioner/akut-divertikulit.pdf', './akutversioner/septisk-chock.pdf', './akutversioner/inlaggning-kirurgpatient.pdf', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest',];
 // cache:'reload' skips the browser's HTTP cache (GitHub Pages: max-age=600), so a new release never
 // stores a ten-minute-old copy of a file from the previous one.
@@ -40,8 +40,12 @@ self.addEventListener('fetch', e => {
       if (res.ok && /\/ak_[A-Z]+\.json$/.test(url.pathname)) c.put(req, res.clone());
       return res;
     } catch (err) {
-      // Offline and not saved: a page address opens the start page of its library.
       if (req.mode === 'navigate') {
+        // Offline: a PM page (pm/<id>/, made for search engines) opens the same PM in the app, whose
+        // text is saved on the device; the list of all documents (pm/) opens the start page.
+        const pm = /^\/pm(?:\/([^/]+))?\/?$/.exec(url.pathname.replace(/\/index\.html$/, '/'));
+        if (pm) return Response.redirect(new URL(pm[1] ? './#pm=' + pm[1] : './', location).href, 302);
+        // Any other page address opens the start page of its library.
         const page = await c.match(url.pathname.includes('/barn') ? './barn/index.html' : './index.html');
         if (page) return page;
       }

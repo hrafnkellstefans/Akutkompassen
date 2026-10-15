@@ -1,0 +1,534 @@
+{
+  "https://akutkompassen.se/": {
+    "sha": "95eebfb4d09d3550",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/barn/": {
+    "sha": "7656a2fa4c0b6f01",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/": {
+    "sha": "cd9940da586755e0",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/89/": {
+    "sha": "974f0e7f41cc7b45",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/144/": {
+    "sha": "94dd83aad4e0329a",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/147/": {
+    "sha": "2ae3a8d4aafc2ab8",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/149/": {
+    "sha": "c77e19519728705f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/151/": {
+    "sha": "ead9777ff6b23b26",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/195/": {
+    "sha": "d8bfe940ff1de34e",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/257/": {
+    "sha": "979b7aff4f6565d6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/368/": {
+    "sha": "789f32bed9f54480",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/399/": {
+    "sha": "5373f8de9b1364df",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/754/": {
+    "sha": "fa1bd007da682abc",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/1540/": {
+    "sha": "31bf9174f7def32a",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/1983/": {
+    "sha": "81cbdb2ac0585cb1",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/2465/": {
+    "sha": "cd80ade8bc3635ea",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/2573/": {
+    "sha": "41aaadda1d05cd2c",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/3299/": {
+    "sha": "cd59d8a31aa4f090",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/3673/": {
+    "sha": "352bff8098155c18",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/3704/": {
+    "sha": "eed9482f646d7ef6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/3741/": {
+    "sha": "7c136abe4c108764",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/3782/": {
+    "sha": "89cb2021bcb01bbc",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4090/": {
+    "sha": "3645c728ba2cbe38",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4375/": {
+    "sha": "790afd9b41f6b5b6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4424/": {
+    "sha": "0b33b26e3e0240f6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4622/": {
+    "sha": "3cf7f666d3c7f4a5",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4736/": {
+    "sha": "a5685d6dc429b848",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4754/": {
+    "sha": "0eee61b35200984b",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/4909/": {
+    "sha": "44a475cebc400244",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/5735/": {
+    "sha": "929981bd7910283d",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/5750/": {
+    "sha": "a6b2bb89a27b6182",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6186/": {
+    "sha": "5f231107c08b4ed8",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6198/": {
+    "sha": "8fb3f35493d877d6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6210/": {
+    "sha": "41e7aaf6f263d9da",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6532/": {
+    "sha": "546df35facea6a35",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6535/": {
+    "sha": "f45aa2f5fd1e5a73",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6564/": {
+    "sha": "c9e8ded67eaed7cf",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6646/": {
+    "sha": "3b7e77795e475c27",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6660/": {
+    "sha": "68cf9b49814ffc67",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6694/": {
+    "sha": "c4d29aa2959209cc",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/6816/": {
+    "sha": "144cfcac0a08604a",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/7738/": {
+    "sha": "4b62b842d196ae42",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/7793/": {
+    "sha": "a418e7af326643da",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/7809/": {
+    "sha": "59505d059d595a27",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/7884/": {
+    "sha": "7f23aa9a7109fd66",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/8474/": {
+    "sha": "28064d5bf5bc1e2f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/8930/": {
+    "sha": "9fc0f81db6b1d166",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9006/": {
+    "sha": "a896079ff84be7bb",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9027/": {
+    "sha": "baeb61818b4a43b3",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9060/": {
+    "sha": "05dfdd806eed1417",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9109/": {
+    "sha": "18aa9d1e255f4992",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9227/": {
+    "sha": "f272ff8d2521f075",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9314/": {
+    "sha": "098d0edc47e210d2",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9441/": {
+    "sha": "ae4b087d6d7bc30d",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9591/": {
+    "sha": "ed8675018cedfec1",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9592/": {
+    "sha": "ccc574d82c250890",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9633/": {
+    "sha": "2cef2dfd3f04a902",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/9680/": {
+    "sha": "0c3751c9c3061776",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/10049/": {
+    "sha": "7a31a8dfde9f1524",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/10383/": {
+    "sha": "ea0b9a70b53e05b9",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/10427/": {
+    "sha": "0a4ccf165fece7dd",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/10807/": {
+    "sha": "3a736d406b0356a1",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/11203/": {
+    "sha": "36f30da09938d7ee",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/11265/": {
+    "sha": "eedcb188fe204e4f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/11462/": {
+    "sha": "0877ab455f53ceaa",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/12696/": {
+    "sha": "0c55c0b185332f59",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/13005/": {
+    "sha": "c06a5fddae047b3e",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/13445/": {
+    "sha": "258dce8805a68856",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/13556/": {
+    "sha": "d240ebdf514008f2",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/14513/": {
+    "sha": "46a17f3d12a810a5",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/14742/": {
+    "sha": "731a1276c77f5217",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/15283/": {
+    "sha": "6926d8b6def18843",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/15982/": {
+    "sha": "67478a8ef2aacc36",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16951/": {
+    "sha": "eabb38b7c4609bf2",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16952/": {
+    "sha": "98b106f3138cb4cc",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16953/": {
+    "sha": "5f5c5230834a233e",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16954/": {
+    "sha": "3cb454c4b431f808",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16955/": {
+    "sha": "f190ee863cb5fc36",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/16963/": {
+    "sha": "c3c814cb04af6aef",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/17700/": {
+    "sha": "1538781aacb847ec",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/17927/": {
+    "sha": "6b49d492cdeda533",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/18057/": {
+    "sha": "bbc43dd706c9f58f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/18312/": {
+    "sha": "e54894e9a0d6375d",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/18672/": {
+    "sha": "e79bb2db946fc02c",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/18749/": {
+    "sha": "e7a277a35f32b6e1",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/19603/": {
+    "sha": "db3e77bbd8ecfa72",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/20147/": {
+    "sha": "b7357428611a6601",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/20265/": {
+    "sha": "d83b1c3d8fe47369",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/20808/": {
+    "sha": "ab58e0a49690f6b2",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/21087/": {
+    "sha": "f15e4cc70cb5347e",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/21234/": {
+    "sha": "6e15098992c162c0",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/21976/": {
+    "sha": "e9a5ba281f7e57bd",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/22673/": {
+    "sha": "6513ad3047ad1bb6",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/22759/": {
+    "sha": "0bc3d3c141bad488",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/23121/": {
+    "sha": "c79929e0484ab155",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/23134/": {
+    "sha": "dac071694a04a83e",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/24822/": {
+    "sha": "208bfc10954a7e74",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/25324/": {
+    "sha": "52cd73142b550d34",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/26368/": {
+    "sha": "04d4e748cf9cc500",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/26440/": {
+    "sha": "7f6ea3ff0675e707",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/27904/": {
+    "sha": "f4ac36cfcd4ac62b",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/27941/": {
+    "sha": "5e317d8253089e01",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/28509/": {
+    "sha": "0c0bae5bd2c9a791",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/28778/": {
+    "sha": "374dcbfccdcbcbc8",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/29001/": {
+    "sha": "5e85a9807be3730f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/29090/": {
+    "sha": "e308588bbf94ad26",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/29101/": {
+    "sha": "978dc47acfc1aadc",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/29288/": {
+    "sha": "5a43328b8b834182",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/29853/": {
+    "sha": "1bb46d5b8ea3477f",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/30285/": {
+    "sha": "03f2cb02f82e9045",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/30667/": {
+    "sha": "e9dea07a34dac85c",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/31970/": {
+    "sha": "a2f3dc007f76f769",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/33518/": {
+    "sha": "e523378be1afce35",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/33594/": {
+    "sha": "7ea3b61022341a03",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/33672/": {
+    "sha": "c2e89514fac9ad61",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/33933/": {
+    "sha": "144301eab399da54",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/34176/": {
+    "sha": "b643b69e79042318",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/36916/": {
+    "sha": "2fecc6e128dd013a",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/42810/": {
+    "sha": "7888e542b045c7fe",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/42878/": {
+    "sha": "e90fd43dd5fb2b54",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/42914/": {
+    "sha": "8ab6fdccf7885d8a",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/43321/": {
+    "sha": "6778bf517053b2c0",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/44223/": {
+    "sha": "d394e610670e63dd",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/44496/": {
+    "sha": "455655c66ba021a2",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/46930/": {
+    "sha": "c6780c62f2c42284",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/57925/": {
+    "sha": "9484b422a910da63",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/58015/": {
+    "sha": "12914a71b58fb0b3",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/60262/": {
+    "sha": "02a79c6a7b48a8c4",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/60791/": {
+    "sha": "9e76fd163c9c65a4",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/61262/": {
+    "sha": "7cfd7a1137e58cc9",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/akutversioner/akut-divertikulit.pdf": {
+    "sha": "4f9af4c860a1a561",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/akutversioner/inlaggning-kirurgpatient.pdf": {
+    "sha": "982f43b42e96b772",
+    "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/akutversioner/septisk-chock.pdf": {
+    "sha": "aa8bacd6684cad37",
+    "date": "2026-10-15"
+  }
+}

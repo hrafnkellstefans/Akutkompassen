@@ -29,6 +29,7 @@ function worker({active = false, saved = {}, online = true} = {}) {
     constructor(body = '', init = {}) {this.body = body; this.status = init.status ?? 200; this.ok = this.status >= 200 && this.status < 300;}
     clone() {return new Response(this.body, {status: this.status});}
     async json() {return JSON.parse(this.body);}
+    static redirect(url, status = 302) {const r = new Response('', {status}); r.location = String(url); return r;}
   }
   const files = p => {const f = path.join(root, p.replace(/^\//, '') || 'index.html'); return fs.existsSync(f) && fs.statSync(f).isFile() ? fs.readFileSync(f, 'utf8') : fs.existsSync(path.join(f, 'index.html')) ? fs.readFileSync(path.join(f, 'index.html'), 'utf8') : null;};
   async function fetch(req) {
@@ -134,4 +135,18 @@ test('Saved files are used before the network; offline, page addresses open the 
   assert.equal((await w.get('/okand.js')).status, 503);
   // Other sites (DocPlus, publishers, counters) are left to the browser.
   assert.equal(await w.run('fetch', {request: {method: 'GET', url: 'https://publikdocplus.regionuppsala.se/x', mode: 'navigate'}}), undefined);
+});
+
+test('Offline, a PM page for search engines opens the same PM in the app, and the list opens the start page', async () => {
+  const w = worker({saved: {'/index.html': 'ADULT'}});
+  // Online the PM pages come from the network and are not stored.
+  const online = await w.get('/pm/10049/', 'navigate');
+  assert.equal(online.status, 200);
+  assert.ok(!w.store.has(ORIGIN + '/pm/10049/'));
+  w.setOnline(false);
+  for (const [address, target] of [['/pm/10049/', '/#pm=10049'], ['/pm/10049', '/#pm=10049'], ['/pm/10049/index.html', '/#pm=10049'], ['/pm/', '/'], ['/pm', '/'], ['/pm/index.html', '/']]) {
+    const res = await w.get(address, 'navigate');
+    assert.equal(res.status, 302, address);
+    assert.equal(res.location, ORIGIN + target, address);
+  }
 });

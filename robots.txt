@@ -51,3 +51,11 @@ Disallow: /
 
 User-agent: *
 Allow: /
+# Källkod, tester och verktyg är inga sidor.
+Disallow: /tests/
+Disallow: /tools/
+Disallow: /tracking/
+Disallow: /README.md
+
+# Alla sidor som ska kunna hittas, med datum för senaste ändring (tools/build-seo.mjs).
+Sitemap: https://akutkompassen.se/sitemap.xml
