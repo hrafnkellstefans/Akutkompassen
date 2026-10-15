@@ -252,3 +252,12 @@ I appen öppnas varje PM på startsidans adress (`/#pm=10049`), och sådana adre
 - Offline öppnar en PM-sida samma PM i appen.
 
 **Vid varje release som ändrar data, `index.html`, Barn eller snabbguiderna:** kör `node tools/build-seo.mjs`. Annars fallerar `tests/seo.test.cjs`.
+
+## Brännskadekompendiet som länk – 15 oktober 2026 (ak-v10s47-brannskada)
+
+**Brännskadekompendium Uppsala 2024** (DocPlusSTYR-23932) visas nu som titel och länk till DocPlus, som de internationella riktlinjerna. Kompendiet anger att mångfaldigande av innehållet, helt eller delvis, är förbjudet utan medgivande av Brännskadecentrum, så texten är borttagen ur `ak_TRA.json`.
+
+- Kortet finns kvar under Trauma och öppnar PDF:en i DocPlus. Sökord från kompendiets egen text (bl.a. brännskada, Parkland, inhalationsskada, eskarotomi, TBSA) gör att det fortfarande hittas vid sökning på brännskador.
+- Ingen fulltextsökning eller offlineläsning för just det här dokumentet.
+- `tests/seo.test.cjs` fallerar om någon PM-text i appen har ett sådant förbehåll (samma regel som i `tools/seo-rules.cjs`).
+- Får vi Brännskadecentrums medgivande kan texten läggas tillbaka.

@@ -35,6 +35,16 @@ test('Every local PM with text has a page, except documents that forbid copying;
   for (const d of index.docs.filter(d => d.kind === 'gl')) assert.ok(!pageDirs.includes(d.id), `${d.id} is a guideline: title and link only`);
 });
 
+test('No PM text in the app comes from a document that forbids copying (those are title and link only)', () => {
+  for (const [id, chunks] of Object.entries(TEXT)) {
+    const hit = chunks.find(c => RESERVED.test(c[1]));
+    assert.ok(!hit, `${id} page ${hit && hit[0]}: the text reserves its copyright; make it link only (txt 0, no text in the shard) or get permission`);
+  }
+  const burns = index.docs.find(d => d.id === '23932');
+  assert.equal(burns.txt, 0, 'the burns compendium is link only');
+  assert.ok(burns.keywords.includes('brännskada'), 'and still found by burns searches');
+});
+
 test('Each PM page has its own title, description, address and links, and the whole PM text', () => {
   const byId = new Map(index.docs.map(d => [d.id, d]));
   for (const id of pageDirs) {

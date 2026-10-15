@@ -16,13 +16,13 @@ test('Approval date: DocPlus puts labels first and values after', async () => {
   assert.equal(approvalDate('Ingen datumrad här'), null);
 });
 
-test('Every local PM in Vuxna has an approval date in its stored text, so revisions can be detected', async () => {
+test('Every local PM in Vuxna has an approval date (in its stored text, or in the index if it is link only), so revisions can be detected', async () => {
   const {approvalDate} = await load();
   const index = JSON.parse(fs.readFileSync(path.join(root, 'ak_index.json'), 'utf8'));
   const text = new Map();
   for (const f of Object.values(index.shards))
     for (const [id, blocks] of Object.entries(JSON.parse(fs.readFileSync(path.join(root, f), 'utf8')).docs)) text.set(id, blocks.slice(0, 3).map(b => b[1]).join('\n'));
-  const missing = index.docs.filter(d => d.kind !== 'gl' && /publikdocplus/.test(d.url) && !approvalDate(text.get(d.id))).map(d => `${d.id} ${d.t}`);
+  const missing = index.docs.filter(d => d.kind !== 'gl' && /publikdocplus/.test(d.url) && !(d.txt ? approvalDate(text.get(d.id)) : /^\d{4}-\d{2}-\d{2}$/.test(d.publishedOn || ''))).map(d => `${d.id} ${d.t}`);
   assert.deepEqual(missing, []);
 });
 
