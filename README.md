@@ -261,3 +261,20 @@ I appen öppnas varje PM på startsidans adress (`/#pm=10049`), och sådana adre
 - Ingen fulltextsökning eller offlineläsning för just det här dokumentet.
 - `tests/seo.test.cjs` fallerar om någon PM-text i appen har ett sådant förbehåll (samma regel som i `tools/seo-rules.cjs`).
 - Får vi Brännskadecentrums medgivande kan texten läggas tillbaka.
+
+## Snabbguider för jourpasset – 15 oktober 2026 (ak-v10s48-guider)
+
+Fyra nya **Snabbguider**, gjorda för att en akutläkare på ett stressigt nattpass ska hitta svaret på sekunder:
+
+- **Akut bröstsmärta** (DocPlusSTYR-14513, version 5, godkänd 2023-04-25): `akutversioner/akut-brostsmarta.pdf`, 1 sida.
+- **Meningit och encefalit** (DocPlusSTYR-14040, version 6, godkänd 2023-08-22): `akutversioner/meningit-encefalit.pdf`, 1 sida.
+- **Akut vestibulärt syndrom** (DocPlusSTYR-46930, version 2, godkänd 2026-06-10): `akutversioner/akut-vestibulart-syndrom.pdf`, 2 sidor (bedömning, handläggning).
+- **Akut diabetes** (DocPlusSTYR-89, version 6, godkänd 2024-12-04): `akutversioner/akut-diabetes.pdf`, 2 sidor (DKA; hypoglykemi, HHS, hyperglykemi, laktacidos).
+
+Ny kompakt layout: beslutsvägar först (villkor → nästa steg → åtgärd, färgade som PM:ets egna flödesscheman), doser samlade, sådant en akutläkare gör av reflex borttaget. Där PM:et självt är otydligt visas det med ⚠ i stället för att guiden fyller luckan. Innehållet kommer enbart från PM:et, med sidhänvisningar.
+
+Före publicering kontrollerades alla tal mot DocPlus-PDF:en. Varje guide faktagranskades oberoende mot PM:et två gånger och blindtestades: en granskare som bara såg guiden löste 5–6 korta fall. Fynden är rättade.
+
+Meningitposten behåller id 20808 i appen så att länkar, favoriter och popularitetsräkning fungerar som förut; den visar och länkar redan till rätt dokument, DocPlusSTYR-14040.
+
+Alla fyra finns offline efter att den nya webbversionen sparats på enheten. PM-sidorna under /pm/ har fått Snabbguide-knappen och sitemap.xml de nya PDF:erna. Lätt skallskada (9006) får ingen snabbguide.
