@@ -96,7 +96,7 @@ test('The sitemap lists every page that exists, and only those', () => {
   const entries = [...xml.matchAll(/<url><loc>([^<]+)<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod><\/url>/g)].map(m => m[1]);
   assert.equal(entries.length, (xml.match(/<url>/g) || []).length, 'every entry has an address and a date');
   assert.equal(new Set(entries).size, entries.length, 'no address twice');
-  for (const u of [`${SITE}/`, `${SITE}/barn/`, `${SITE}/pm/`, ...pageDirs.map(id => `${SITE}/pm/${id}/`)]) assert.ok(entries.includes(u), `${u} not in the sitemap`);
+  for (const u of [`${SITE}/`, `${SITE}/barn/`, `${SITE}/pm/`, `${SITE}/om/`, ...pageDirs.map(id => `${SITE}/pm/${id}/`)]) assert.ok(entries.includes(u), `${u} not in the sitemap`);
   for (const u of entries) {
     const p = decodeURI(new URL(u).pathname).replace(/^\//, '');
     const f = path.join(root, p.endsWith('/') || !p ? p + 'index.html' : p);
@@ -109,7 +109,7 @@ test('Search engines are pointed at the sitemap, and nothing that should be foun
   assert.ok(robots.includes(`Sitemap: ${SITE}/sitemap.xml`));
   const general = robots.split(/\n(?=User-agent:)/).find(g => /^User-agent: \*$/m.test(g));
   const blocked = [...general.matchAll(/^Disallow: (\S*)$/gm)].map(m => m[1]);
-  for (const p of ['/', '/pm/', '/barn/', '/pm/10049/', '/sitemap.xml', '/ak_index.json', '/shared.css']) {
+  for (const p of ['/', '/pm/', '/barn/', '/om/', '/pm/10049/', '/sitemap.xml', '/ak_index.json', '/shared.css']) {
     assert.ok(!blocked.some(b => b && p.startsWith(b)), `${p} is blocked for search engines`);
   }
 });

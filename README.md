@@ -278,3 +278,8 @@ Före publicering kontrollerades alla tal mot DocPlus-PDF:en. Varje guide faktag
 Meningitposten behåller id 20808 i appen så att länkar, favoriter och popularitetsräkning fungerar som förut; den visar och länkar redan till rätt dokument, DocPlusSTYR-14040.
 
 Alla fyra finns offline efter att den nya webbversionen sparats på enheten. PM-sidorna under /pm/ har fått Snabbguide-knappen och sitemap.xml de nya PDF:erna. Lätt skallskada (9006) får ingen snabbguide.
+
+
+## Om Akutkompassen – 17 oktober 2026 (ak-v10s49-om)
+
+`/om/` beskriver webbplatsens syfte, målgrupp, källor och Kjell Stefansson som skapare. Sidan länkas från vuxen- och barnbiblioteket samt dokumentlistan. Den har egen titel, beskrivning, canonical-adress och strukturerad information om webbplatsen och skaparen. `tools/build-seo.mjs` tar med sidan i sitemap och bevarar dess ändringsdatum. Om-sidan och dess stilmall sparas offline tillsammans med appen.

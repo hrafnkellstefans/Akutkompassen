@@ -12,7 +12,7 @@
 // tools/seo-rules.cjs.
 //
 // Run after every change to ak_index.json, the ak_XX.json files, barn/data.json, index.html,
-// barn/index.html or the snabbguide PDFs:
+// barn/index.html, om/index.html or the snabbguide PDFs:
 //   node tools/build-seo.mjs          writes the files above and tools/seo-lastmod.json
 //   node tools/build-seo.mjs --check  changes nothing; fails if any of them is out of date
 // tests/seo.test.cjs runs --check, so a release that forgets this step fails its tests.
@@ -289,6 +289,7 @@ ${siteHead('')}
 <h1>Alla PM och riktlinjer</h1>
 <p class="lead">Alla dokument i Akutkompassen på en sida: ${n.local} lokala PM från Region Uppsala (${n.pages === n.local ? 'alla' : n.pages} med en egen sida med hela texten), ${n.nat} svenska nationella och ${n.int} internationella riktlinjer samt ${n.barn} dokument för barn. Riktlinjerna länkar till utgivaren. <a href="/">Sök i Akutkompassen</a> för att söka i PM-texterna och läsa även offline.</p>
 <p class="source-note updated">Biblioteket uppdaterat ${esc(INDEX.updated)}.</p>
+<p class="source-note updated"><a href="/om/">Om Akutkompassen och källorna</a></p>
 <nav aria-label="Områden"><ul class="toc" id="omraden">${toc}</ul></nav>
 ${areas}
 <section class="area" id="barn" aria-labelledby="h-barn"><h2 id="h-barn">Barn</h2>
@@ -311,6 +312,7 @@ const content = html => html.replace(/\/pm\/pm\.css\?h=[0-9a-f]+/, '').replace(/
 const sources = [
   [`${SITE}/`, () => sha(unversioned(read('index.html')), unversioned(read('ak_index.json')))],
   [`${SITE}/barn/`, () => sha(unversioned(read('barn/index.html')), read('barn/data.json'), unversioned(read('barn/app.js')))],
+  [`${SITE}/om/`, () => sha(unversioned(read('om/index.html')))],
   [`${SITE}/pm/`, () => sha(content(out.get('pm/index.html')))],
   ...[...PAGES].sort((a, b) => collator.compare(a.id, b.id)).map(d => [`${SITE}/pm/${d.id}/`, () => sha(content(out.get(`pm/${d.id}/index.html`)))]),
   ...guides.map(g => [`${SITE}/${g}`, () => sha(fs.readFileSync(file(g)))]),
