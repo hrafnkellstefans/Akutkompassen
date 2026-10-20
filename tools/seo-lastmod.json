@@ -1,15 +1,15 @@
 {
   "https://akutkompassen.se/": {
-    "sha": "8b0f995d66884b84",
-    "date": "2026-10-15"
+    "sha": "5a85c1c6185961e6",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/barn/": {
     "sha": "7656a2fa4c0b6f01",
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/": {
-    "sha": "d9bb1b527c16bdfd",
-    "date": "2026-10-15"
+    "sha": "35be45bda2052834",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/pm/89/": {
     "sha": "8140dd211f3ed652",
@@ -520,31 +520,31 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/akutversioner/akut-brostsmarta.pdf": {
-    "sha": "9a551fbd06e05adc",
-    "date": "2026-10-15"
+    "sha": "f31db202aa7c903b",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/akut-diabetes.pdf": {
-    "sha": "3c79b2e8545ec8f2",
-    "date": "2026-10-15"
+    "sha": "d3e3bd250d9afacd",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/akut-divertikulit.pdf": {
-    "sha": "4f9af4c860a1a561",
-    "date": "2026-10-15"
+    "sha": "c0074afedb86d69e",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/akut-vestibulart-syndrom.pdf": {
-    "sha": "0421f8e8dc66dea6",
-    "date": "2026-10-15"
+    "sha": "0d08953b3fd09f08",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/inlaggning-kirurgpatient.pdf": {
-    "sha": "982f43b42e96b772",
-    "date": "2026-10-15"
+    "sha": "370c17765793c746",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/meningit-encefalit.pdf": {
-    "sha": "140e23249643f960",
-    "date": "2026-10-15"
+    "sha": "6719a94294bd9c6a",
+    "date": "2026-10-20"
   },
   "https://akutkompassen.se/akutversioner/septisk-chock.pdf": {
-    "sha": "aa8bacd6684cad37",
-    "date": "2026-10-15"
+    "sha": "b1fbedb342e3649a",
+    "date": "2026-10-20"
   }
 }

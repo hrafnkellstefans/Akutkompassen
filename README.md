@@ -278,3 +278,15 @@ Före publicering kontrollerades alla tal mot DocPlus-PDF:en. Varje guide faktag
 Meningitposten behåller id 20808 i appen så att länkar, favoriter och popularitetsräkning fungerar som förut; den visar och länkar redan till rätt dokument, DocPlusSTYR-14040.
 
 Alla fyra finns offline efter att den nya webbversionen sparats på enheten. PM-sidorna under /pm/ har fått Snabbguide-knappen och sitemap.xml de nya PDF:erna. Lätt skallskada (9006) får ingen snabbguide.
+
+## Snabbguiderna märkta som testdokument – 20 oktober 2026 (ak-v10s49-testdokument)
+
+Alla sju **Snabbguider** i `akutversioner/` (bröstsmärta, diabetes, divertikulit, vestibulärt syndrom, inläggning kirurgpatient, meningit/encefalit, septisk chock) är märkta som testdokument på varje sida, totalt 11 sidor:
+
+- **Banderoll överst**, i den tomma marginalen: ”TESTDOKUMENT · Inte publicerat eller granskat av PM:ets författare · Sammanfattningen är gjord av Kjell Stefansson, inte av författarna”.
+- **Diagonal vattenstämpel**, svag (ca 11 % täckning): ”TESTDOKUMENT” och ”Sammanfattning av Kjell Stefansson – inte av PM:ets författare”. Den är ritad som form, inte som text, så kopiering, sökmotorer och skärmläsare får bara banderollens text.
+- PDF-titeln (fliken i webbläsaren) börjar med ”TESTDOKUMENT – ”.
+- Innehållet är oförändrat: samma antal sidor, all text kvar och länkarna i sidfoten fungerar. Kontrollerat med pdftotext, qpdf och två PDF-renderare (Poppler, MuPDF). Varje fil är ca 35 kB större (typsnittet Heebo för banderollen och stämpeln, lagrade en gång per fil).
+- Versionen är höjd så att telefoner hämtar de nya PDF:erna, och `node tools/build-seo.mjs` är körd (nytt `lastmod` för PDF:erna i `sitemap.xml`). Alla tester passerar.
+
+När en guide har granskats av PM:ets författare: återställ guiden utan märkning (versionen från committen före ak-v10s49-testdokument, eller ombyggd med snabbguide-generatorn) och höj versionen.
