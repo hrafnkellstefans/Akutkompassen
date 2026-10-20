@@ -279,7 +279,12 @@ Meningitposten behåller id 20808 i appen så att länkar, favoriter och popular
 
 Alla fyra finns offline efter att den nya webbversionen sparats på enheten. PM-sidorna under /pm/ har fått Snabbguide-knappen och sitemap.xml de nya PDF:erna. Lätt skallskada (9006) får ingen snabbguide.
 
-## Snabbguiderna märkta som testdokument – 20 oktober 2026 (ak-v10s49-testdokument)
+
+## Om Akutkompassen – 17 oktober 2026 (ak-v10s49-om)
+
+`/om/` beskriver webbplatsens syfte, målgrupp, källor och Kjell Stefansson som skapare. Sidan länkas från vuxen- och barnbiblioteket samt dokumentlistan. Den har egen titel, beskrivning, canonical-adress och strukturerad information om webbplatsen och skaparen. `tools/build-seo.mjs` tar med sidan i sitemap och bevarar dess ändringsdatum. Om-sidan och dess stilmall sparas offline tillsammans med appen.
+
+## Snabbguiderna märkta som testdokument – 20 oktober 2026 (ak-v10s51-testdokument)
 
 Alla sju **Snabbguider** i `akutversioner/` (bröstsmärta, diabetes, divertikulit, vestibulärt syndrom, inläggning kirurgpatient, meningit/encefalit, septisk chock) är märkta som testdokument på varje sida, totalt 11 sidor:
 
@@ -289,4 +294,4 @@ Alla sju **Snabbguider** i `akutversioner/` (bröstsmärta, diabetes, divertikul
 - Innehållet är oförändrat: samma antal sidor, all text kvar och länkarna i sidfoten fungerar. Kontrollerat med pdftotext, qpdf och två PDF-renderare (Poppler, MuPDF). Varje fil är ca 35 kB större (typsnittet Heebo för banderollen och stämpeln, lagrade en gång per fil).
 - Versionen är höjd så att telefoner hämtar de nya PDF:erna, och `node tools/build-seo.mjs` är körd (nytt `lastmod` för PDF:erna i `sitemap.xml`). Alla tester passerar.
 
-När en guide har granskats av PM:ets författare: återställ guiden utan märkning (versionen från committen före ak-v10s49-testdokument, eller ombyggd med snabbguide-generatorn) och höj versionen.
+När en guide har granskats av PM:ets författare: återställ guiden utan märkning (versionen från committen före ak-v10s51-testdokument, eller ombyggd med snabbguide-generatorn) och höj versionen.

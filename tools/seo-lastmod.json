@@ -1,14 +1,18 @@
 {
   "https://akutkompassen.se/": {
-    "sha": "5a85c1c6185961e6",
+    "sha": "dba0350a50d02da0",
     "date": "2026-10-20"
   },
   "https://akutkompassen.se/barn/": {
-    "sha": "7656a2fa4c0b6f01",
-    "date": "2026-10-15"
+    "sha": "f61e933a54470e35",
+    "date": "2026-10-17"
+  },
+  "https://akutkompassen.se/om/": {
+    "sha": "98e8abd560a94ac2",
+    "date": "2026-10-17"
   },
   "https://akutkompassen.se/pm/": {
-    "sha": "35be45bda2052834",
+    "sha": "cd73d2c5f2d7a608",
     "date": "2026-10-20"
   },
   "https://akutkompassen.se/pm/89/": {
