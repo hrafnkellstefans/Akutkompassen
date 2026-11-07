@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
+<title>Akutloggen – ST-loggbok för akutsjukvård</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Akutloggen – gratis ST-loggbok för akutsjukvård: fall, Mini-CEX, DOPS, CbD, SWESEM:s kompetenstrappa, delmål och färdigheter. Data stannar i din webbläsare.">
 <meta name="author" content="Kjell Stefansson">
@@ -20,14 +21,13 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Akutloggen – ST-loggbok för akutsjukvård</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/jspdf-autotable@5.0.9/dist/jspdf.plugin.autotable.min.js"></script>
 <style>
 /* Layout: hospital wayfinding — a sticky signage header, one working column, fixed action bar while logging. */
 :root{
@@ -215,19 +215,39 @@ details.grp .chips{padding:4px 0 6px}
 .src{font-size:12px;color:var(--mute);line-height:1.5}
 .src a{color:var(--acc)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Comfortable controls and responsive navigation. */
+nav{overflow:visible;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+nav button{padding:10px 3px;font-size:13px;min-width:0}
+button,.btn,summary{min-height:44px}
+.chip,.dchip{font-size:14px;min-height:44px}
+.scale{flex-wrap:wrap}.scale button{min-width:44px;width:44px;height:44px}
+.rate{grid-template-columns:1fr}.lvl button{min-height:44px}.stc{min-height:44px}
+button:focus-visible,summary:focus-visible,.item:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.chip.on::before,.dchip.on::before{content:"✓ ";font-weight:700}
+.kpis .kpi:nth-child(n+4){display:block}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.brand .meta{max-width:100px;font-size:11px}}
+#moreNav{padding:8px 0;display:flex;flex-wrap:wrap;gap:8px}#moreNav[hidden]{display:none}
+.quick-row{display:flex;align-items:center;gap:6px;margin-top:6px}.quick-row .choose{flex:1;text-align:left}
+.quick-hidden{display:none!important}
+#v-fall.quick .chips[data-k="kind"],#v-fall.quick #f-title,#v-fall.quick #titleLabel{display:none}
+#quickResults{max-height:360px;overflow:auto}
+#v-fall.quick .details[data-for="procs"] .dfield:nth-of-type(n+4){display:none}
+label{display:block;font-weight:600;margin-bottom:5px}label.btn{margin:0}
+input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.sk-detail{padding:8px 0;border-bottom:1px solid var(--line)}.sk-detail summary{display:flex;align-items:center}
+.sk-detail .sk{flex:1;border:0}.skill-goal{max-width:100px}.skill-note{font-size:13px;color:var(--mute)}
 </style>
 
 <header>
   <div class="wrap">
     <div class="brand"><h1>Akut<b>loggen</b></h1><span class="sub">ST akutsjukvård · ett <a href="/" style="color:inherit">Akutkompassen</a>-projekt</span><span class="meta" id="savestate"></span></div>
-    <nav id="nav">
+    <nav id="nav" aria-label="Huvudmeny">
       <button data-v="home" class="on">Logga</button>
-      <button data-v="logg">Logg</button>
-      <button data-v="trappa">Kompetenstrappa</button>
-      <button data-v="delmal">Delmål</button>
-      <button data-v="fard">Färdigheter</button>
-      <button data-v="export">Export</button>
-    </nav>
+      <button data-v="logg">Min logg</button>
+      <button data-v="trappa">Utveckling</button>
+      <button id="moreBtn" aria-expanded="false" aria-controls="moreNav">Mer ▾</button>
+    </nav><div id="moreNav" hidden><button class="btn" data-open="delmal">Delmål</button> <button class="btn" data-open="fard">Färdigheter</button> <button class="btn" data-open="export">Export och säkerhetskopia</button></div>
   </div>
 </header>
 
@@ -236,13 +256,16 @@ details.grp .chips{padding:4px 0 6px}
 
   <!-- HOME -->
   <section id="v-home">
-    <div class="kpis" id="kpis"></div>
+    <div class="kpis" id="kpis"></div><p class="muted">POCUS räknar loggade frågeställningar, inte unika undersökningar.</p>
+    <div class="card" id="resumeCard" hidden><b>Du har ett utkast</b><p id="resumeInfo" class="muted"></p><button class="btn pri" id="resumeDraft">Fortsätt utkast</button></div>
+    <div class="card"><h2>Snabblogg</h2><p class="muted">Välj färdighet, din roll och resultat. Lägg till fler detaljer när du vill.</p><label for="quickSearch">Sök procedur eller POCUS</label><input id="quickSearch" type="search" placeholder="t.ex. intubation, eFAST, fascia iliaca"><div id="quickResults"></div><div id="quickChoices"></div></div>
     <div class="tiles" id="tiles">
       <button class="tile" data-new="fall"><span class="sw"></span><b>Patient</b><span>Sökorsak, prio, handläggning</span></button>
       <button class="tile" data-new="larm"><span class="sw"></span><b>Larm</b><span>Trauma, HLR, sepsis, stroke…</span></button>
       <button class="tile" data-new="proc"><span class="sw"></span><b>Procedur / POCUS</b><span>Bara färdigheten</span></button>
       <button class="tile" data-new="prehosp"><span class="sw"></span><b>Prehospitalt</b><span>Ambulans, transport</span></button>
       <button class="tile" data-new="led"><span class="sw"></span><b>Ledning</b><span>DAL, flöde, katastrof</span></button>
+      <button class="tile" data-new="teach"><span class="sw"></span><b>Undervisning / utbildning</b><span>Undervisat eller deltagit</span></button>
       <button class="tile wba" data-wba="1"><span class="sw"></span><b>Bedömning</b><span>Mini-CEX · DOPS · CbD</span></button>
     </div>
     <div class="card ai" id="aiCard" hidden>
@@ -258,12 +281,13 @@ details.grp .chips{padding:4px 0 6px}
 
   <!-- CASE FORM -->
   <section id="v-fall" hidden>
+    <div id="quickModeBar" class="card" hidden><b>Snabblogg</b><p class="muted">Datum är idag. Kontrollera roll, resultat och handledningsbehov.</p><button class="btn" id="expandQuick" aria-expanded="false">Lägg till detaljer</button></div>
     <div class="formhead"><button class="btn sm" id="fBack">← Tillbaka</button><h2 id="fTitle">Nytt fall</h2></div>
     <div class="card" id="fEditing" hidden><div class="row" style="align-items:center"><div><b>Redigerar</b> <span class="muted" id="fEditInfo"></span></div><div style="flex:0 0 auto;display:flex;gap:6px"><button class="btn sm" id="fCancel">Avbryt</button><button class="btn sm warn" id="fDel">Radera</button></div></div></div>
 
     <div class="card">
       <div class="lbl">Typ</div><div class="chips" data-k="kind"></div>
-      <div class="sect"><div class="lbl">Rubrik / arbetsdiagnos</div><input type="text" id="f-title" list="dl-title" placeholder="t.ex. NSTEMI, Distal radiusfraktur, Septisk chock"></div>
+      <div class="sect"><div class="lbl"><span id="titleLabel">Rubrik / arbetsdiagnos</span></div><input type="text" id="f-title" list="dl-title" placeholder="t.ex. NSTEMI, Distal radiusfraktur, Septisk chock"></div>
     </div>
 
     <div class="card">
@@ -291,7 +315,7 @@ details.grp .chips{padding:4px 0 6px}
     </div>
 
     <div class="card" data-show="teach">
-      <div class="lbl">Undervisning</div><div class="chips" data-k="teach"></div>
+      <div class="lbl">Min roll</div><div class="chips" data-k="teachRole"></div><div class="sect"><div class="lbl">Utbildningsaktivitet</div></div><div class="chips" data-k="teach"></div>
       <div class="sect"><div class="lbl">Målgrupp</div><div class="chips" data-k="aud"></div></div>
     </div>
 
@@ -311,9 +335,8 @@ details.grp .chips{padding:4px 0 6px}
     </div>
 
     <div class="card">
-      <div class="lbl">Handledning <span class="hint">– hur mycket stöd behövdes?</span></div><div class="chips" data-k="sup"></div>
-      <div class="sect"><div class="lbl">EPA <span class="hint">– förvalt efter typ och prio</span></div><div class="chips" data-k="epa"></div></div>
-      <div class="sect"><div class="lbl">Delmål <span class="hint">– streckade är förslag, tryck för att ändra</span></div><div class="chips" data-k="delmal"></div></div>
+      <div class="lbl">Handledningsbehov i detta fall</div><details><summary>Vad betyder nivåerna?</summary><p class="muted">1: handledare i rummet. 2a: på samma enhet med löpande avstämning. 2b: inom sjukhuset och kan snabbt hjälpa. 3: tillgänglig på distans och kan komma in. 4: kan handlägga utan handledarens medverkan. Detta är inte ett intyg om kompetens.</p></details><div class="chips" data-k="sup"></div>
+      <details class="sect"><summary id="mappingSummary">Föreslagna EPA och delmål – granska</summary><p class="muted">Automatiska förslag, inte en kompetensbedömning. Ändra så att de stämmer med aktiviteten.</p><div class="lbl">EPA</div><div class="chips" data-k="epa"></div><div class="sect"><div class="lbl">Delmål</div><div class="chips" data-k="delmal"></div></div></details>
     </div>
 
     <div class="card">
@@ -329,7 +352,7 @@ details.grp .chips{padding:4px 0 6px}
 
     <div class="card">
       <div class="lbl">Bedömningsinstrument</div><div class="chips" data-w="type"></div>
-      <p class="muted" id="wDesc" style="margin:8px 0 0"></p>
+      <p class="muted">Personligt dokumentationsstöd med anpassade bedömningsmallar. Använd klinikens fastställda blankett när den krävs. Markeringen för signerad blankett är din egen uppgift.</p><p class="muted" id="wDesc" style="margin:8px 0 0"></p>
     </div>
 
     <div class="card">
@@ -391,10 +414,10 @@ details.grp .chips{padding:4px 0 6px}
   <!-- TRAPPA -->
   <section id="v-trappa" hidden>
     <h2>Kompetenstrappan</h2>
-    <p class="muted" style="margin-top:-4px">SWESEM:s nio EPA. Målet är nivå 4 i alla delar i slutet av ST. Sätt din egen nivå; bedömarens senaste nivå visas bredvid.</p>
-    <div class="card"><div class="lbl">Progression per ST-år (ST Akut Malmö)</div><div class="ladder" id="ladder"></div></div>
+    <p class="muted" style="margin-top:-4px">SWESEM:s nio EPA. Målet är nivå 4 i alla delar i slutet av ST. Min självskattning och senaste dokumenterade bedömning visas separat. En enskild bedömning eller antal loggningar fastställer inte en samlad EPA-nivå.</p>
+    <div class="card"><label for="trainingTemplate">Lokal utbildningsmall</label><select id="trainingTemplate"><option value="none">Ingen lokal mall – visa enbart mina bedömningar</option><option value="malmo">ST Akut Malmö – exempel på lokal plan</option></select><p class="muted">Malmös årsprogression och antal bedömningar är lokala riktmärken, inte nationella krav. Stäm av planen med din handledare.</p><div class="ladder" id="ladder" hidden></div></div>
     <div id="epaList"></div>
-    <div class="card"><div class="legend" id="supLegend"></div><p class="src" style="margin:8px 0 0">Stapeln visar handledningsbehov i dina senaste 20 fall per EPA. Riktmärke för bedömningar från ST Akut Malmö. EPA-definitioner: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-KompetenstrappanEPA-230801.pdf" target="_blank" rel="noopener">SWESEM Kompetenstrappa (2023)</a>.</p></div>
+    <div class="card"><div class="legend" id="supLegend"></div><p class="src" style="margin:8px 0 0">Stapeln visar handledningsbehov i dina senaste 20 fall per EPA. Lokala riktmärken visas endast när Malmö-mallen valts. EPA-definitioner: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-KompetenstrappanEPA-230801.pdf" target="_blank" rel="noopener">SWESEM Kompetenstrappa (2023)</a>.</p></div>
   </section>
 
   <!-- DELMÅL -->
@@ -407,7 +430,7 @@ details.grp .chips{padding:4px 0 6px}
   <!-- FÄRDIGHETER -->
   <section id="v-fard" hidden>
     <h2>Färdigheter</h2>
-    <p class="muted" style="margin-top:-4px">Utförda av dig mot SWESEM Core Curriculums rekommenderade minsta antal. Assisterade visas inom parentes. MT = modellträning räcker.</p>
+    <p class="muted" style="margin-top:-4px">Urval ur SWESEM Core Curriculum 2023. Kliniskt utförda ingrepp och simulering redovisas separat. Antal visar erfarenhet, inte bedömd kompetens. Öppna en färdighet för delmål och eget mål. MT = modellträning enligt källan.</p>
     <div id="fardList"></div>
   </section>
 
@@ -433,9 +456,9 @@ details.grp .chips{padding:4px 0 6px}
       <div style="margin-top:10px"><button class="btn" id="saveSettings">Spara uppgifter</button></div>
     </div>
     <div class="card">
-      <div class="lbl">Säkerhetskopia</div>
-      <p class="muted" style="margin-top:0">JSON med alla fall, bedömningar och delmålsstatus. Kan läsas in igen (samma id skrivs över, inga dubbletter).</p>
-      <div class="row"><button class="btn" id="json">Exportera JSON</button><label class="btn" style="text-align:center">Importera JSON<input type="file" id="imp" accept=".json,application/json" hidden></label></div>
+      <div class="lbl">Säkerhetskopia</div><p class="muted" id="backupDate"></p>
+      <p class="muted" style="margin-top:0">Säkerhetskopian innehåller hela loggen, inställningar, egna mål och sparat utkast. Vid import får du först granska nya poster och konflikter. Spara filen på en trygg plats.</p>
+      <div class="row"><button class="btn" id="json">Säkerhetskopiera hela loggen</button><label class="btn" style="text-align:center">Återställ eller slå ihop säkerhetskopia<input type="file" id="imp" accept=".json,application/json" hidden></label></div>
     </div>
     <div class="card src">
       <div class="lbl">Underlag</div>
@@ -446,7 +469,7 @@ details.grp .chips{padding:4px 0 6px}
       EPA→delmål-kopplingen till 2021 års numrering är en tolkning (SWESEM:s trappa är skriven mot 2015 års delmål) och kan ändras per fall.
     </div>
   </section>
-</main>
+<section id="v-import" hidden class="card"><h2>Granska säkerhetskopian</h2><p id="importSummary"></p><label for="importPolicy">Poster med samma ID men olika innehåll</label><select id="importPolicy"><option value="keep">Behåll mina befintliga poster</option><option value="newer">Använd nyaste versionen när datum finns</option><option value="replace">Ersätt med versionen i filen</option></select><p><label><input type="checkbox" id="importMeta"> Läs även in inställningar, mål och självskattningar (ersätter motsvarande värden)</label></p><p><label><input type="checkbox" id="importDraft"> Läs in filens utkast (ersätter mitt nuvarande utkast)</label></p><p class="muted">Befintliga poster som saknas i filen behålls. Hämta gärna en säkerhetskopia före import.</p><button class="btn" id="backupBeforeImport">Säkerhetskopiera först</button> <button class="btn" id="cancelImport">Avbryt</button> <button class="btn pri" id="confirmImport">Importera valda uppgifter</button></section></main>
 
 <div class="savebar" id="savebar" hidden><div class="wrap in">
   <button class="btn" id="copyLast">Som senast</button>
@@ -463,7 +486,7 @@ details.grp .chips{padding:4px 0 6px}
 const KIND=[["fall","Patient"],["larm","Larm"],["proc","Procedur / POCUS"],["prehosp","Prehospitalt"],["led","Ledning"],["teach","Undervisning"]];
 const KINDNAME=Object.fromEntries(KIND);
 const SITES=["Akutmottagning","Barnakut","Prehospitalt / ambulans","Transport","Avdelning / IVA","Simulering","Annan enhet"];
-const SHIFT=["Dag","Kväll","Natt / helg"];
+const SHIFT=["Dag","Kväll","Natt"];
 const PRIO=[["1","Röd","--r1"],["2","Orange","--r2"],["3","Gul","--r3"],["4","Grön","--r4"],["5","Blå","--r5"]];
 const AGE=["<1 år","1–5 år","6–17 år","18–64 år","65–79 år","≥80 år"];
 const SOK=["Bröstsmärta","Andningsbesvär","Buksmärta","Huvudvärk","Yrsel","Svimning / TLOC","Feber / infektion","Medvetandepåverkan","Kramper","Pares / talpåverkan","Ryggsmärta","Extremitetsskada","Trauma","Hjärtklappning","GI-blödning","Intoxikation","Psykiatri / suicidalitet","Allergisk reaktion","Allmän försämring","Sår / brännskada","Urinvägsbesvär","Gyn / graviditet","Ögon","ÖNH","Avvikande prover"];
@@ -474,8 +497,8 @@ const LED=["Dagansvarig (DAL)","Samordnare / flöde","Överbeläggning","Särski
 const TEACH=["Bedside","Föreläsning","Simulering (instruktör)","Handledning","Journal club / M&M"];
 const AUD=["Läkarstudent","AT/BT","ST-läkare","Sjuksköterska","Ambulans","Blandat team"];
 const DISP=["Hem","Inläggning","IVA / IMA","Operation / PCI","Överflyttning","Avliden"];
-const SUP=[["1","1 · I rummet"],["2a","2a · På golvet"],["2b","2b · Nåbar"],["3","3 · Bakjour"],["4","4 · Självständigt"],["T","Handledde annan"]];
-const SUPLONG={"1":"Handledare i rummet","2a":"Handledare på golvet, löpande avstämning","2b":"Handledare nåbar vid behov","3":"Bakjour / på distans","4":"Självständigt","T":"Handledde annan"};
+const SUP=[["1","1 · I rummet"],["2a","2a · På golvet"],["2b","2b · Inom sjukhuset"],["3","3 · Bakjour"],["4","4 · Självständigt"],["T","Handledde annan"]];
+const SUPLONG={"1":"Handledare i rummet","2a":"Handledare på golvet, löpande avstämning","2b":"Handledare inom sjukhuset, tillgänglig för snabb hjälp","3":"Bakjour / på distans","4":"Självständigt","T":"Handledde annan"};
 const SUPCOL={"1":"--s1","2a":"--s2","2b":"--s3","3":"--s4","4":"--s5","T":"--r4"};
 
 const EPA=[
@@ -507,10 +530,10 @@ const PROCS=[
  ["Luftväg","Maskventilation",25],["Luftväg","Larynxmask",20],["Luftväg","Intubation – direkt laryngoskopi",35,"ett"],["Luftväg","Intubation – videolaryngoskop",20,"vl"],["Luftväg","Fiberlaryngoskopi",10],["Luftväg","Extubation",10],["Luftväg","Kirurgisk luftväg","MT"],
  ["Andning","NIV / CPAP",10],["Andning","Högflödesgrimma",10],["Andning","Nål-/fingerthorakostomi",5],["Andning","Pleuracentes",5],["Andning","Thoraxdrän",10,"drain"],
  ["Cirkulation","HLR – kompressioner",10],["Cirkulation","Defibrillering",10],["Cirkulation","Elkonvertering",10],["Cirkulation","Extern pacing",5],["Cirkulation","CVK",10,"cvk"],["Cirkulation","Artärnål",10,"art"],["Cirkulation","Intraosseös nål",5],["Cirkulation","Artärblodgas",10],["Cirkulation","PVK med ultraljud",25],
- ["Ortopedi","Frakturreposition",20,"frx"],["Ortopedi","Ledreposition",30,"lux"],["Ortopedi","Gipsskena",10],["Ortopedi","Artrocentes",30,"artro"],["Ortopedi","Bäckengördel",5],
+ ["Ortopedi","Frakturreposition",20,"frx"],["Ortopedi","Ledreposition",null,"lux"],["Ortopedi","Gipsskena",10],["Ortopedi","Artrocentes",30,"artro"],["Ortopedi","Bäckengördel",5],
  ["Smärta och sedering","Procedursedering",25,"sed"],["Smärta och sedering","Fascia iliaca / femoralisblock",10,"blk"],["Smärta och sedering","Fingerblockad",20],["Smärta och sedering","Hematomblockad",15],["Smärta och sedering","Annan nervblockad",5,"blk"],
- ["Sår och kirurgi","Sutur",25],["Sår och kirurgi","Abscessincision",20],["Sår och kirurgi","Främmande kropp, hud",10],["Sår och kirurgi","Nagelbädd / subungualt hematom",10],["Sår och kirurgi","Proktoskopi",10],
- ["Neuro, ÖNH, ögon","Lumbalpunktion",15],["Neuro, ÖNH, ögon","Näsblödning, tamponad / kauterisering",5],["Neuro, ÖNH, ögon","Främmande kropp, näsa / öra",10],["Neuro, ÖNH, ögon","Peritonsillit, punktion / incision",2],["Neuro, ÖNH, ögon","Spaltlampa",5],["Neuro, ÖNH, ögon","Främmande kropp, kornea",2],
+ ["Sår och kirurgi","Sutur",25],["Sår och kirurgi","Abscessincision",20],["Sår och kirurgi","Främmande kropp, hud",10],["Sår och kirurgi","Nagelbädd / subungualt hematom",null,"nail"],["Sår och kirurgi","Proktoskopi",10],
+ ["Neuro, ÖNH, ögon","Lumbalpunktion",15],["Neuro, ÖNH, ögon","Näsblödning, tamponad / kauterisering",null,"nose"],["Neuro, ÖNH, ögon","Främmande kropp, näsa / öra",10],["Neuro, ÖNH, ögon","Peritonsillit, punktion / incision",2],["Neuro, ÖNH, ögon","Spaltlampa",5],["Neuro, ÖNH, ögon","Främmande kropp, kornea",2],
  ["Övrigt","KAD",15],["Övrigt","V-sond",10],["Övrigt","Paracentes",5],["Övrigt","Gynekologisk spekulumundersökning",10],["Övrigt","Vaginal förlossning",5],
 ];
 const PROCMIN=Object.fromEntries(PROCS.map(p=>[p[1],p[2]]));
@@ -519,26 +542,28 @@ const PROCGROUPS=[...new Set(PROCS.map(p=>p[0]))];
 const POCUS=[["eFAST",25],["Hjärta – vänsterkammarfunktion",50],["Hjärta – högerkammarbelastning",25],["Perikardvätska",25],["Hjärta under HLR",10],["Lunga – pneumothorax",50],["Lunga – B-linjer",50],["Pleuravätska",50],["DVT",50],["Aorta (AAA)",25],["Gallvägar",25],["Hydronefros",25],["Urinblåsa",25],["IVC / RUSH",25],["Mjukdel / abscess",10],["Främmande kropp",10]];
 const POCMIN=Object.fromEntries(POCUS);
 
-const ROLE=["Utförde","Assisterade","Handledde annan"];
-const OK=["Lyckad","Ej lyckad"], TRIES=["1 försök","2 försök","≥3 försök"];
+const ROLE=["Utförde","Assisterade","Observerade","Handledde annan"];
+const OK=["Lyckad","Ej lyckad","Ej bedömt"], TRIES=["1 försök","2 försök","≥3 försök"];
 function procFields(name){
   const base=[["role","Roll",ROLE],["res","Utfall",OK]];
   const k=PROCDET[name];
   const X={
+    nail:[["tech","Åtgärd",["Nagelbäddsreparation","Dränage subungualt hematom"]]],
+    nose:[["tech","Åtgärd",["Kauterisering","Främre tamponad","Bakre tamponad"]]],
     ett:[["rsi","RSI",["RSI","Ej RSI"]],["tries","Försök",TRIES]],
     vl:[["dev","Typ",["McGrath","C-MAC","GlideScope","Annat"]],["rsi","RSI",["RSI","Ej RSI"]],["tries","Försök",TRIES]],
     drain:[["tech","Teknik",["Seldinger","Kirurgisk"]],["side","Sida",["Hö","Vä"]]],
     cvk:[["site","Läge",["V. jug. int.","V. subclavia","V. femoralis"]],["us","Teknik",["Ultraljud","Landmärke"]]],
     art:[["site","Läge",["A. radialis","A. femoralis","Annan"]],["us","Teknik",["Ultraljud","Palpation"]]],
     frx:[["loc","Lokal",["Distal radius","Fotled","Finger / tå","Underarm, barn","Annan"]]],
-    lux:[["loc","Led",["Axel","Armbåge","Finger","Patella","Höftprotes","Fotled","Käke"]]],
+    lux:[["loc","Led",["Axel","Armbåge","Finger","Patella","Höftprotes","Höft","Knä","Piglux","Fotled","Käke"]]],
     artro:[["loc","Led",["Knä","Annan led"]],["us","Teknik",["Ultraljud","Landmärke"]]],
     sed:[["drug","Läkemedel",["Propofol","Ketamin","Esketamin","Midazolam","Fentanyl","Lustgas"],1]],
     blk:[["us","Teknik",["Ultraljud","Landmärke"]]],
   };
   return [...base,...(X[k]||[])];
 }
-const POCFIELDS=[["find","Fynd",["Normalt","Patologiskt","Oklart"]],["dec","Ändrade handläggning",["Ja","Nej"]],["ver","Verifierad",["Handledare granskade","Mot rtg / annan us.","Ej verifierad"]],["img","Bild sparad",["Ja","Nej"]]];
+const POCFIELDS=[["role","Roll",ROLE],["find","Fynd",["Normalt","Patologiskt","Oklart"]],["dec","Ändrade handläggning",["Ja","Nej"]],["ver","Verifierad",["Handledare granskade","Mot rtg / annan us.","Ej verifierad"]],["img","Bild sparad",["Ja","Nej"]]];
 
 /* Bedömningsinstrument */
 const WTYPES={
@@ -548,7 +573,7 @@ const WTYPES={
  "Larmledning":{d:"Observation som teamledare vid larm. Bygger på ACEM:s Team Lead in Resuscitation och icke-tekniska färdigheter.",items:["Förberedelse och briefing","Rollfördelning","Situationsmedvetenhet","Beslutsfattande","Kommunikation, closed loop","Resurshantering","Debriefing"],g:"Sammanfattande förmåga som teamledare",focus:["Trauma","HLR","Medicinskt larm","Barn"]},
  "Passobservation":{d:"Observation av ett helt arbetspass (ca 2 h observation, 1 h återkoppling), efter RCEM:s ESLE.",items:["Prioritering och flöde","Beslutsfattande","Ledarskap och teamarbete","Kommunikation och överrapportering","Patientsäkerhet"],g:"Sammanfattande förmåga att leda arbetet",focus:["Akutrum","Medicinflöde","Kirurgflöde","DAL"]},
 };
-const WOPT={type:Object.keys(WTYPES),arole:["Specialist akut","Annan specialist","Huvudhandledare","Sjuksköterska / annan"],place:["Akutrum","Akutmottagning","Barnakut","Prehospitalt","Simulering"],diff:["Enkelt","Medelsvårt","Svårt"],epa:EPA.map(e=>[String(e[0]),"EPA "+e[0]]),level:[["1","Nivå 1"],["2","Nivå 2"],["3","Nivå 3"],["4","Nivå 4"]],entr:SUP.filter(s=>s[0]!=="T")};
+const WOPT={type:Object.keys(WTYPES),arole:["Specialist akut","Annan specialist","Huvudhandledare","Sjuksköterska / annan"],place:["Akutrum","Akutmottagning","Barnakut","Prehospitalt","Simulering"],diff:["Enkelt","Medelsvårt","Svårt"],epa:EPA.map(e=>[String(e[0]),"EPA "+e[0]+" – "+e[1]]),level:[["1","Nivå 1"],["2","Nivå 2"],["3","Nivå 3"],["4","Nivå 4"]],entr:SUP.filter(s=>s[0]!=="T")};
 
 /* ================= Hjälpfunktioner ================= */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -559,7 +584,7 @@ const clone=o=>JSON.parse(JSON.stringify(o));
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2000)}
 function setStatus(msg,ok){const s=$("#status");if(!msg){s.hidden=true;return}s.hidden=false;s.textContent=msg;s.classList.toggle("ok",!!ok)}
 const opts=a=>a.map(o=>Array.isArray(o)?o:[o,o]);
-function shiftNow(){const h=new Date().getHours();return h>=7&&h<16?"Dag":h>=16&&h<22?"Kväll":"Natt / helg"}
+function shiftNow(){const h=new Date().getHours();return h>=7&&h<16?"Dag":h>=16&&h<22?"Kväll":"Natt"}
 
 /* ================= State ================= */
 let cases=[], wbas=[], settings={name:"",clinic:"",hl:"",start:""}, dmState={}, epaState={};
@@ -567,14 +592,14 @@ let store=null, assets=null, sampleFn=null;
 let form, editingId=null, wform, wEditingId=null, view="home";
 
 function blankCase(kind,keep){
-  const f={kind:kind||"fall",title:"",date:today(),site:kind==="prehosp"?"Prehospitalt / ambulans":"Akutmottagning",shift:shiftNow(),prio:"",age:"",sok:[],sokx:"",larm:[],lroll:"",led:[],teach:[],aud:[],procs:[],pocus:[],details:{},disp:"",sup:"",epa:[],delmal:[],dmManual:false,epaManual:false,notes:""};
+  const f={kind:kind||"fall",title:"",date:today(),site:kind==="prehosp"?"Prehospitalt / ambulans":settings.lastSite||"Akutmottagning",shift:shiftNow(),prio:"",age:"",sok:[],sokx:"",larm:[],lroll:"",led:[],teach:[],teachRole:"",aud:[],procs:[],pocus:[],details:{},disp:"",sup:"",epa:[],delmal:[],dmManual:false,epaManual:false,notes:""};
   if(keep){["date","site","shift"].forEach(k=>f[k]=keep[k]);}
   if(kind==="larm") f.prio="1";
   autoEpa(f); autoDm(f);
   return f;
 }
 function blankWba(type){
-  return {type:type||"Mini-CEX",date:today(),assessor:"",arole:"Specialist akut",place:"Akutmottagning",diff:"Medelsvårt",epa:"",proc:"",focus:[],ctx:"",delmal:[],items:{},global:0,level:"",entr:"",good:"",imp:"",act:"",paper:false,photo:"",caseId:""};
+  return {type:type||"Mini-CEX",date:today(),assessor:"",arole:"",place:"Akutmottagning",diff:"",epa:"",proc:"",focus:[],ctx:"",delmal:[],items:{},global:0,level:"",entr:"",good:"",imp:"",act:"",paper:false,photo:"",caseId:""};
 }
 
 /* ---- Automatik: EPA och delmål ---- */
@@ -585,7 +610,7 @@ function autoEpa(f){
   if(f.kind==="larm") e=["4"];
   if(f.kind==="prehosp") e=["6"];
   if(f.kind==="led") e=["7"];
-  if(f.kind==="teach") e=["9"];
+  if(f.kind==="teach"&&f.teachRole!=="Deltog") e=["9"];
   if(f.procs.some(p=>/sedering|block/i.test(p))) e.push("8");
   if(f.sup==="T" && !e.includes("9")) e.push("9");
   f.epa=[...new Set(e)];
@@ -607,11 +632,11 @@ function autoDm(f){ if(!f.dmManual) f.delmal=suggestDm(f); }
 
 /* ================= Rendering av chips ================= */
 function caseOpts(k){
-  if(k==="kind") return KIND; if(k==="shift") return opts(SHIFT); if(k==="age") return opts(AGE);
+  if(k==="teachRole") return opts(["Undervisade","Deltog"]); if(k==="kind") return KIND; if(k==="shift") return opts(form.shift==="Natt / helg"?[...SHIFT,"Natt / helg"]:SHIFT); if(k==="age") return opts(AGE);
   if(k==="sok") return opts(SOK); if(k==="larm") return opts(LARM); if(k==="lroll") return opts(LROLL);
   if(k==="led") return opts(LED); if(k==="teach") return opts(TEACH); if(k==="aud") return opts(AUD);
   if(k==="disp") return opts(DISP); if(k==="sup") return SUP; if(k==="pocus") return opts(POCUS.map(p=>p[0]));
-  if(k==="epa") return EPA.map(e=>[String(e[0]),"EPA "+e[0]]);
+  if(k==="epa") return EPA.map(e=>[String(e[0]),"EPA "+e[0]+" – "+e[1]]);
   if(k==="delmal") return DM.map(d=>[d[0],d[0]]);
   return [];
 }
@@ -633,6 +658,8 @@ function renderDetails(group){
   }).join("");
 }
 function updateVisibility(){
+  $("#titleLabel").textContent=["teach","led"].includes(form.kind)?"Rubrik / ämne":"Rubrik / arbetsdiagnos";
+  $("#saveBtn").textContent=editingId?"Spara ändringar":"Spara aktivitet";
   $$("#v-fall [data-show]").forEach(el=>el.hidden=!el.dataset.show.split(" ").includes(form.kind));
   $("#fTitle").textContent=(editingId?"":"Nytt: ")+(KINDNAME[form.kind]||"Fall");
 }
@@ -640,8 +667,8 @@ function fillCase(){
   $("#f-site").innerHTML=SITES.map(s=>`<option${form.site===s?" selected":""}>${esc(s)}</option>`).join("");
   $("#f-date").value=form.date; $("#f-title").value=form.title; $("#f-sokx").value=form.sokx||""; $("#f-notes").value=form.notes;
   $("#fEditing").hidden=!editingId; $("#copyLast").hidden=!!editingId;
-  $("#saveBtn").textContent=editingId?"Spara ändringar":"Spara fall";
-  renderCaseChips(); updateVisibility();
+  $("#saveBtn").textContent=editingId?"Spara ändringar":"Spara aktivitet";
+  renderCaseChips(); updateVisibility(); applyQuickMode();
 }
 function readCase(){
   form.date=$("#f-date").value||today(); form.site=$("#f-site").value; form.title=$("#f-title").value.trim();
@@ -650,9 +677,10 @@ function readCase(){
 
 /* klick i fallformuläret */
 $("#v-fall").addEventListener("click",e=>{
+  readCase();
   const pb=e.target.closest("[data-proc]");
   if(pb){ const v=pb.dataset.proc,i=form.procs.indexOf(v); i<0?form.procs.push(v):form.procs.splice(i,1);
-    if(i<0){form.details["procs:"+v]=Object.assign({role:"Utförde",res:"Lyckad"},form.details["procs:"+v]||{});}
+    if(i<0){form.details["procs:"+v]=Object.assign({role:"",res:""},form.details["procs:"+v]||{});}
     autoEpa(form); autoDm(form); pb.classList.toggle("on"); const g=pb.closest("details"); const n=PROCS.filter(p=>p[0]===g.dataset.g&&form.procs.includes(p[1])).length; const s=g.querySelector("summary"); s.innerHTML=esc(g.dataset.g)+(n?`<span class="n">${n} vald${n>1?"a":""}</span>`:""); renderDetails("procs"); rerender(["epa","delmal"]); draftChanged(); return; }
   const dc=e.target.closest(".dchip");
   if(dc){ const {dk,df,dm,v}=dc.dataset; const d=form.details[dk]=form.details[dk]||{};
@@ -665,9 +693,9 @@ $("#v-fall").addEventListener("click",e=>{
   else form[k]=(form[k]===v&&k!=="kind"&&k!=="shift")?"":v;
   if(k==="epa") form.epaManual=true;
   if(k==="delmal") form.dmManual=true;
-  if(["kind","prio","sup","pocus"].includes(k)) autoEpa(form);
-  if(["kind","prio","sup","pocus","sok","larm","disp","epa"].includes(k)) autoDm(form);
-  if(k==="kind"){ if(form.kind==="larm"&&!form.prio) form.prio="1"; if(form.kind==="prehosp") form.site="Prehospitalt / ambulans"; autoEpa(form); autoDm(form); fillCase(); draftChanged(); return; }
+  if(["kind","teachRole","prio","sup","pocus"].includes(k)) autoEpa(form);
+  if(["kind","teachRole","prio","sup","pocus","sok","larm","disp","epa"].includes(k)) autoDm(form);
+  if(k==="kind"){ readCase(); quickMode=false; if(form.kind==="larm"&&!form.prio) form.prio="1"; if(form.kind==="prehosp") form.site="Prehospitalt / ambulans"; autoEpa(form); autoDm(form); fillCase(); draftChanged(); return; }
   if(k==="pocus"){ if(form.pocus.includes(v)) form.details["pocus:"+v]=form.details["pocus:"+v]||{}; renderDetails("pocus"); }
   if(k==="delmal"){ c.classList.toggle("on"); draftChanged(); return; }
   rerender([k,"epa","delmal"]); draftChanged();
@@ -701,17 +729,19 @@ async function saveCase(){
   readCase();
   if(!store){toast("Lagringen är inte redo än");return}
   if(form.kind==="proc"&&!form.procs.length&&!form.pocus.length){toast("Välj minst en procedur eller POCUS");return}
-  if(!form.sup){toast("Välj handledningsnivå");$('[data-k="sup"]').scrollIntoView({behavior:"smooth",block:"center"});return}
+  if(!form.sup&&form.kind!=="teach"){toast("Välj handledningsnivå");$('[data-k="sup"]').scrollIntoView({behavior:"smooth",block:"center"});return}
+  const issue=caseIssue(form); if(issue){toast(issue);return}
+  const wasQuick=quickMode;
   const c=cleanCase(form), now=new Date().toISOString();
   if(editingId){const old=cases.find(x=>x.id===editingId)||{};c.id=editingId;c.createdAt=old.createdAt||now}else{c.id=uid();c.createdAt=now}
   c.updatedAt=now;
   const b=$("#saveBtn"); b.disabled=true;
-  try{ await store.save("cases",c); toast(editingId?"Ändringar sparade":"Fall sparat"); clearDraft(); markSaved("Sparat");
-    const keep=editingId?null:form; editingId=null; form=blankCase(keep?keep.kind:"fall",keep); fillCase(); window.scrollTo({top:0,behavior:"smooth"}); }
+  try{ await store.save("cases",c); toast(editingId?"Ändringar sparade":"Aktivitet sparad"); settings.lastSite=form.site; try{await store.saveMeta("settings",settings)}catch(e){} clearDraft(); markSaved("Sparat");
+    const keep=editingId?null:form; editingId=null; form=blankCase(keep?keep.kind:"fall",keep); quickMode=false; fillCase(); if(wasQuick)show("home"); window.scrollTo({top:0,behavior:"smooth"}); }
   catch(err){toast(errMsg(err))} finally{b.disabled=false}
 }
-function errMsg(e){ if(e&&e.code==="quota_exceeded")return "Lagringen är full – exportera och rensa gamla poster"; if(e&&(e.code==="invalid_argument"||e.code==="permission_denied"))return "Du har inte skrivbehörighet till den här loggboken"; return "Kunde inte spara – försök igen"; }
-function editCase(id){ const c=cases.find(x=>x.id===id); if(!c)return; editingId=id; form=Object.assign(blankCase(c.kind),clone(c),{epaManual:true,dmManual:true}); $("#fEditInfo").textContent=`${c.date} · ${KINDNAME[c.kind]||""}`; show("fall"); fillCase(); window.scrollTo({top:0}); }
+function errMsg(e){ if(e&&e.code==="quota_exceeded")return "Kunde inte spara på enheten. Kontrollera lagringsutrymme och webbläsarinställningar. Säkerhetskopiera innan du rensar något."; if(e&&(e.code==="invalid_argument"||e.code==="permission_denied"))return "Du har inte skrivbehörighet till den här loggboken"; return "Kunde inte spara – försök igen"; }
+function editCase(id){quickMode=false; const c=cases.find(x=>x.id===id); if(!c)return; editingId=id; form=Object.assign(blankCase(c.kind),clone(c),{epaManual:true,dmManual:true}); $("#fEditInfo").textContent=`${c.date} · ${KINDNAME[c.kind]||""}`; show("fall"); fillCase(); window.scrollTo({top:0}); }
 $("#fCancel").onclick=()=>{editingId=null;form=blankCase();clearDraft();show("logg")};
 $("#fBack").onclick=()=>{ if(editingId){editingId=null;form=blankCase();} show("home") };
 armDelete($("#fDel"),async()=>{await store.remove("cases",editingId);clearDraft();toast("Fall raderat");editingId=null;form=blankCase();show("logg")});
@@ -775,6 +805,7 @@ async function saveWba(){
   readWba();
   if(!store){toast("Lagringen är inte redo än");return}
   if(!wform.assessor){toast("Skriv bedömarens namn");$("#w-assessor").focus();return}
+  if(!wform.global&&!Object.values(wform.items).some(v=>v>0)&&!wform.good&&!wform.imp){toast("Lägg till observation eller återkoppling");return}
   const w=clone(wform); delete w._dmManual; const now=new Date().toISOString();
   if(wEditingId){const old=wbas.find(x=>x.id===wEditingId)||{};w.id=wEditingId;w.createdAt=old.createdAt||now}else{w.id=uid();w.createdAt=now}
   w.updatedAt=now;
@@ -790,16 +821,17 @@ $("#wPdf").onclick=async()=>{ readWba(); if(!window.jspdf){toast("PDF-biblioteke
 
 /* ================= Vyer ================= */
 function show(v){
+  if(dirty&&["fall","wba"].includes(view)&&v!==view){clearTimeout(draftTimer);saveDraft();}
   view=v;
-  ["home","fall","wba","logg","trappa","delmal","fard","export"].forEach(x=>$("#v-"+x).hidden=x!==v);
+  ["home","fall","wba","logg","trappa","delmal","fard","export","import"].forEach(x=>$("#v-"+x).hidden=x!==v);
   const navv=["fall","wba"].includes(v)?"home":v;
   $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===navv));
   $("#savebar").hidden=!["fall","wba"].includes(v);
   if(v==="home") renderHome(); if(v==="logg") renderList(); if(v==="trappa") renderTrappa();
   if(v==="delmal") renderDelmal(); if(v==="fard") renderFard(); if(v==="export") renderExport();
 }
-$("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return; if(b.dataset.v==="home"){editingId=null;wEditingId=null} show(b.dataset.v); window.scrollTo({top:0})};
-$("#tiles").onclick=e=>{const t=e.target.closest(".tile");if(!t)return;
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(!b||!b.dataset.v)return; if(b.dataset.v==="home"){editingId=null;wEditingId=null} show(b.dataset.v); window.scrollTo({top:0})};
+$("#tiles").onclick=e=>{quickMode=false;const t=e.target.closest(".tile");if(!t)return;if(draftCache&&!confirm("Du har ett utkast. Vill du ersätta det med en ny aktivitet?"))return;clearDraft();
   if(t.dataset.wba){ wEditingId=null; wform=blankWba(); show("wba"); fillWba(); }
   else { editingId=null; form=blankCase(t.dataset.new); show("fall"); fillCase(); }
   window.scrollTo({top:0});
@@ -810,7 +842,8 @@ $("#copyLast").onclick=()=>{
   const last=[...cases].filter(c=>c.kind===form.kind).sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||""))[0];
   if(!last){toast("Inget tidigare fall av den typen");return}
   form=Object.assign(blankCase(last.kind),clone(last),{date:today(),title:"",notes:"",epaManual:true,dmManual:true}); delete form.id;delete form.createdAt;delete form.updatedAt;
-  fillCase(); toast("Ifyllt som senaste fallet");
+  Object.values(form.details).forEach(d=>{delete d.res;delete d.tries;delete d.find;delete d.dec;delete d.ver;delete d.img;});
+  fillCase(); draftChanged(); toast("Mall kopierad – bekräfta resultat för den nya aktiviteten");
 };
 
 /* ---- Hem ---- */
@@ -819,7 +852,7 @@ function caseLine(c){
   const head=c.title||(c.kind==="larm"?c.larm.join(", "):c.kind==="proc"?[...c.procs,...c.pocus][0]:c.kind==="led"?c.led.join(", "):c.kind==="teach"?c.teach.join(", "):c.sok[0])||KINDNAME[c.kind];
   const bits=[c.age,(c.sok||[]).filter(s=>s!==head).slice(0,2).join(", "),c.kind==="larm"?c.lroll:"",c.procs.length?c.procs.length+" proc":"",c.pocus.length?"POCUS: "+c.pocus.join(", "):"",c.disp].filter(Boolean);
   const sub=[c.sup?SUP.find(s=>s[0]===c.sup)?.[1]:"",(c.epa||[]).map(e=>"EPA "+e).join(" "),c.site!=="Akutmottagning"?c.site:""].filter(Boolean);
-  return `<div class="item" data-case="${esc(c.id)}"><div class="d">${esc(c.date)}<br>${esc(c.shift||"")}</div><div class="b"><div class="t"><span class="tag">${esc(KINDNAME[c.kind]||c.kind)}</span>${prioDot(c.prio)}${esc(head)}</div><div class="s">${esc(bits.join(" · "))}</div><div class="s">${esc(sub.join(" · "))}</div></div></div>`;
+  return `<div class="item" data-case="${esc(c.id)}"><div class="d">${esc(c.date)}<br>${esc(c.shift||"")}${[0,6].includes(new Date(c.date+"T12:00:00").getDay())?" · Helg":""}</div><div class="b"><div class="t"><span class="tag">${esc(KINDNAME[c.kind]||c.kind)}</span>${prioDot(c.prio)}${esc(head)}</div><div class="s">${esc(bits.join(" · "))}</div><div class="s">${esc(sub.join(" · "))}</div></div></div>`;
 }
 function wbaLine(w){
   const T=WTYPES[w.type]; const g=w.global?`global ${w.global}/6`:"";
@@ -827,11 +860,12 @@ function wbaLine(w){
 }
 function allItems(){return [...cases.map(c=>({t:"c",d:c.date,k:c.createdAt,o:c})),...wbas.map(w=>({t:"w",d:w.date,k:w.createdAt,o:w}))].sort((a,b)=>b.d.localeCompare(a.d)||(b.k||"").localeCompare(a.k||""))}
 function renderHome(){
+  renderQuickChoices(); $("#resumeCard").hidden=!draftCache; $("#resumeInfo").textContent=draftCache?"Senast ändrat "+new Date(draftCache.savedAt).toLocaleString("sv-SE"):"";
   const procN=cases.reduce((n,c)=>n+c.procs.length,0), pocN=cases.reduce((n,c)=>n+c.pocus.length,0);
   const month=today().slice(0,7);
-  $("#kpis").innerHTML=[["Fall",cases.length],["Denna månad",cases.filter(c=>c.date.startsWith(month)).length],["Bedömningar",wbas.length],["Procedurer",procN],["POCUS",pocN]].map(([a,b])=>`<div class="kpi"><b>${b}</b><span>${a}</span></div>`).join("");
+  $("#kpis").innerHTML=[["Aktiviteter",cases.length],["Denna månad",cases.filter(c=>c.date.startsWith(month)).length],["Bedömningar",wbas.length],["Procedurer",procN],["POCUS",pocN]].map(([a,b])=>`<div class="kpi"><b>${b}</b><span>${a}</span></div>`).join("");
   const it=allItems().slice(0,6);
-  $("#recent").innerHTML=it.length?it.map(x=>x.t==="c"?caseLine(x.o):wbaLine(x.o)).join(""):`<div class="empty">Inget loggat ännu. Välj typ ovan, eller skriv fritt så fyller Claude i åt dig.</div>`;
+  $("#recent").innerHTML=it.length?it.map(x=>x.t==="c"?caseLine(x.o):wbaLine(x.o)).join(""):`<div class="empty">Inget loggat ännu. Välj en aktivitet ovan eller börja med Snabblogg.</div>`;
 }
 document.addEventListener("click",e=>{const r=e.target.closest(".item");if(!r)return; if(r.dataset.case)editCase(r.dataset.case); else if(r.dataset.wba)editWba(r.dataset.wba);});
 
@@ -850,11 +884,12 @@ $("#q").oninput=renderList; $("#qk").onchange=renderList;
 
 /* ---- Kompetenstrappa ---- */
 function renderTrappa(){
+  $("#trainingTemplate").value=settings.trainingTemplate||"none"; $("#ladder").hidden=settings.trainingTemplate!=="malmo";
   $("#ladder").innerHTML=Object.entries(LADDER).map(([y,es])=>`<div><b>ST-år ${y}</b><span>EPA ${es.join(", ")} · ${esc(LADROLE[y])}</span></div>`).join("");
   $("#epaList").innerHTML=EPA.map(([n,t,s])=>{
     const ep=String(n), cs=cases.filter(c=>(c.epa||[]).includes(ep)), ws=wbas.filter(w=>w.epa===ep);
     const mc=ws.filter(w=>["Mini-CEX","Larmledning","Passobservation"].includes(w.type)).length, dops=ws.filter(w=>w.type==="DOPS").length, cbd=ws.filter(w=>w.type==="CbD").length;
-    const tg=TARGET[n]||{};
+    const tg=settings.trainingTemplate==="malmo"?(TARGET[n]||{}):{};
     const lastLvl=[...ws].filter(w=>w.level).sort((a,b)=>b.date.localeCompare(a.date))[0];
     const self=(epaState[ep]||{}).self||"";
     const recent=[...cs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,20);
@@ -865,7 +900,7 @@ function renderTrappa(){
       tg.dops||dops?`<span class="${tg.dops&&dops>=tg.dops?"done":""}">DOPS ${dops}${tg.dops?"/"+tg.dops:""}</span>`:"",
       `<span>CbD ${cbd}</span>`].join("");
     return `<div class="card epa"><div class="no">${n}<small>EPA</small></div><div class="tt">${esc(t)}</div><div class="muted">${esc(s)}</div>
-      <div><div class="lvl" data-epa="${ep}">${[1,2,3,4].map(l=>`<button type="button" class="${String(l)===self?"on":(+self>l?"fill":"")}" data-l="${l}" aria-label="Nivå ${l}">N${l}</button>`).join("")}<span class="ax">${lastLvl?`Bedömare: nivå ${esc(lastLvl.level)} (${esc(lastLvl.date)})`:"Ingen bedömd nivå än"}</span></div>
+      <div><div class="muted">Min självskattning</div><div class="lvl" data-epa="${ep}">${[1,2,3,4].map(l=>`<button type="button" class="${String(l)===self?"on":(+self>l?"fill":"")}" data-l="${l}" aria-label="Nivå ${l}">N${l}</button>`).join("")}<span class="ax">${lastLvl?`Senaste dokumenterade bedömning: nivå ${esc(lastLvl.level)} (${esc(lastLvl.date)})`:"Ingen dokumenterad bedömning än"}</span></div>
       <div class="ev">${ev}</div>
       ${tot?`<div class="supbar" title="Handledning i senaste ${tot} fall">${dist.map(([k,v])=>`<i style="width:${v/tot*100}%;background:var(${SUPCOL[k]})"></i>`).join("")}</div>`:""}</div></div>`;
   }).join("");
@@ -901,22 +936,17 @@ $("#dmList").addEventListener("change",async e=>{
 });
 
 /* ---- Färdigheter ---- */
-function skillCounts(){
-  const done={}, asst={};
-  cases.forEach(c=>{
-    (c.procs||[]).forEach(p=>{const r=((c.details||{})["procs:"+p]||{}).role||"Utförde"; if(r==="Assisterade")asst[p]=(asst[p]||0)+1; else done[p]=(done[p]||0)+1;});
-    (c.pocus||[]).forEach(p=>{done["US:"+p]=(done["US:"+p]||0)+1});
-  });
-  return {done,asst};
+function skillCounts(source=cases){
+  const done={},asst={},sim={},unknown={};
+  source.forEach(c=>{for(const group of ["procs","pocus"])(c[group]||[]).forEach(p=>{
+    const key=group==="pocus"?"US:"+p:p,d=(c.details||{})[group+":"+p]||{};
+    const bucket=c.site==="Simulering"?sim:d.role==="Utförde"?done:d.role==="Assisterade"?asst:!d.role?unknown:null;
+    if(bucket)bucket[key]=(bucket[key]||0)+1;
+  });}); return {done,asst,sim,unknown};
 }
 function skRow(name,n,a,min){
-  const mt=min==="MT"; const m=mt?1:min; const pct=Math.min(100,n/m*100); const ok=n>=m;
-  return `<div class="sk${ok?" done":""}"><span class="nm">${esc(name)}${a?` <small>(+${a} ass.)</small>`:""}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="num">${n}/${mt?"MT":min}</span></div>`;
-}
-function renderFard(){
-  const {done,asst}=skillCounts();
-  $("#fardList").innerHTML=PROCGROUPS.map(g=>`<div class="card"><div class="lbl">${esc(g)}</div>${PROCS.filter(p=>p[0]===g).map(p=>skRow(p[1],done[p[1]]||0,asst[p[1]]||0,p[2])).join("")}</div>`).join("")
-   +`<div class="card"><div class="lbl">POCUS</div>${POCUS.map(([p,m])=>skRow(p,done["US:"+p]||0,0,m)).join("")}</div>`;
+  const mt=min==="MT"; const m=typeof min==="number"&&min>0?min:0; const pct=m?Math.min(100,n/m*100):0; const ok=m>0&&n>=m;
+  return `<div class="sk${ok?" done":""}"><span class="nm">${esc(name)}${a?` <small>(+${a} ass.)</small>`:""}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="num">${n}${mt?" · MT":m?"/"+min:""}</span></div>`;
 }
 
 /* ================= Claude fyller i ================= */
@@ -966,7 +996,7 @@ function applyAi(j){
   form.larm=(Array.isArray(j.larm)?j.larm:[]).filter(x=>LARM.includes(x)); form.lroll=pick(j.lroll,LROLL);
   form.disp=pick(j.disp,DISP); form.sup=pick(String(j.sup||""),SUP.map(s=>s[0]));
   (Array.isArray(j.procs)?j.procs:[]).forEach(p=>{const n=p&&p.name; if(!(n in PROCMIN)||form.procs.includes(n)) return; form.procs.push(n);
-    const d={role:pick(p.role,ROLE)||"Utförde",res:pick(p.res,OK)||"Lyckad"}; const fs=procFields(n).map(f=>f[0]);
+    const d={role:pick(p.role,ROLE),res:pick(p.res,OK)}; const fs=procFields(n).map(f=>f[0]);
     if(fs.includes("tries")&&TRIES.includes(p.tries))d.tries=p.tries; if(fs.includes("rsi")&&["RSI","Ej RSI"].includes(p.rsi))d.rsi=p.rsi; if(fs.includes("us")&&["Ultraljud","Landmärke","Palpation"].includes(p.us))d.us=p.us;
     if(fs.includes("drug")&&Array.isArray(p.drug))d.drug=p.drug.filter(x=>["Propofol","Ketamin","Esketamin","Midazolam","Fentanyl","Lustgas"].includes(x));
     form.details["procs:"+n]=d;});
@@ -985,6 +1015,7 @@ function exportCases(){const [f,t]=period();return cases.filter(c=>inRange(c.dat
 function exportWbas(){const [f,t]=period();return wbas.filter(w=>inRange(w.date,f,t)).sort((a,b)=>a.date.localeCompare(b.date))}
 function periodText(){const [f,t]=period();return f||t?`${f||"start"} – ${t||today()}`:"Hela perioden"}
 function renderExport(){
+  $("#backupDate").textContent=settings.lastBackup?"Senaste hämtade säkerhetskopia: "+new Date(settings.lastBackup).toLocaleString("sv-SE"):"Ingen säkerhetskopia hämtad ännu.";
   $("#set-name").value=settings.name||""; $("#set-clinic").value=settings.clinic||""; $("#set-hl").value=settings.hl||""; $("#set-start").value=settings.start||"";
   $("#e-n").textContent=`${exportCases().length} fall och ${exportWbas().length} bedömningar i vald period.`;
 }
@@ -995,23 +1026,24 @@ $$("[data-range]").forEach(b=>b.onclick=()=>{const r=b.dataset.range,d=new Date(
 function fname(ext){const n=(settings.name||"").trim().replace(/[^\wåäöÅÄÖ-]+/g,"_");return `Akutloggen${n?"_"+n:""}_${today()}.${ext}`}
 async function offer(filename,data){
   const dl=await claude_use("downloads");
-  if(dl){ try{await dl.save({filename,data});toast("Fil sparad")}catch(e){ if(e&&e.code==="declined")return; toast("Nedladdningen misslyckades"); } return; }
-  try{const blob=data instanceof Blob?data:new Blob([data]);const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=filename;a.click()}catch(e){toast("Nedladdning stöds inte här")}
+  if(dl){try{await dl.save({filename,data});toast("Fil sparad");return true}catch(e){if(e?.code!=="declined")toast("Nedladdningen misslyckades");return false}}
+  try{const blob=data instanceof Blob?data:new Blob([data]);const a=document.createElement("a"),url=URL.createObjectURL(blob);a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Nedladdning startad – kontrollera att filen sparats");return true}catch(e){toast("Nedladdning stöds inte här");return false}
 }
 const detTxt=(c,g,v)=>{const d=(c.details||{})[g+":"+v];if(!d)return "";const x=Object.values(d).flat().filter(Boolean);return x.length?` (${x.join(", ")})`:""};
 const fmtList=(c,g)=>(c[g]||[]).map(v=>v+detTxt(c,g,v)).join("; ");
 $("#xlsx").onclick=async()=>{
   if(!window.XLSX){toast("Excel-biblioteket laddas fortfarande…");return}
+  if(period()[0]&&period()[1]&&period()[0]>period()[1]){toast("Från-datum måste vara före till-datum");return}
   const cs=exportCases(), ws=exportWbas(); if(!cs.length&&!ws.length){toast("Inget i perioden");return}
   const wb=XLSX.utils.book_new();
   const H=["Datum","Pass","Typ","Plats","Prio","Ålder","Rubrik","Sökorsak","Larm","Roll","Procedurer","POCUS","Handläggning","Handledning","EPA","Delmål","Reflektion"];
-  const rows=cs.map(c=>[c.date,c.shift,KINDNAME[c.kind],c.site,c.prio,c.age,c.title,[...c.sok,c.sokx].filter(Boolean).join(", "),c.larm.join(", "),c.lroll,fmtList(c,"procs"),fmtList(c,"pocus"),c.disp,SUPLONG[c.sup]||"",(c.epa||[]).join(", "),(c.delmal||[]).join(", "),c.notes]);
+  const rows=cs.map(c=>[c.date,c.shift,(KINDNAME[c.kind]||c.kind)+(c.teachRole?" – "+c.teachRole:""),c.site,c.prio,c.age,c.title,[...c.sok,c.sokx].filter(Boolean).join(", "),c.larm.join(", "),c.lroll,fmtList(c,"procs"),fmtList(c,"pocus"),c.disp,SUPLONG[c.sup]||"",(c.epa||[]).join(", "),(c.delmal||[]).join(", "),c.notes]);
   const s1=XLSX.utils.aoa_to_sheet([H,...rows]); s1["!autofilter"]={ref:s1["!ref"]}; s1["!cols"]=H.map(h=>({wch:["Procedurer","POCUS","Reflektion","Rubrik"].includes(h)?34:13})); XLSX.utils.book_append_sheet(wb,s1,"Fall");
-  const WH=["Datum","Instrument","Bedömare","Roll","EPA","Ingrepp / fokus","Sammanhang","Svårighet","Global (1–6)","Nivå i trappan","Handledningsbehov","Bra","Förbättring","Åtgärd","Signerad blankett","Delmål"];
+  const WH=["Datum","Instrument","Bedömare","Roll","EPA","Ingrepp / fokus","Sammanhang","Svårighet","Global (1–6)","Nivå i trappan","Handledningsbehov","Bra","Förbättring","Åtgärd","Signerad blankett (egen uppgift)","Delmål"];
   const s2=XLSX.utils.aoa_to_sheet([WH,...ws.map(w=>[w.date,w.type,w.assessor,w.arole,w.epa,w.proc||(w.focus||[]).join(", "),w.ctx,w.diff,w.global||"",w.level,SUPLONG[w.entr]||"",w.good,w.imp,w.act,w.paper?"Ja":"Nej",(w.delmal||[]).join(", ")])]); XLSX.utils.book_append_sheet(wb,s2,"Bedömningar");
-  const {done,asst}=skillCounts();
-  const s3=XLSX.utils.aoa_to_sheet([["Grupp","Färdighet","Utförda","Assisterade","SWESEM rek."],...PROCS.map(p=>[p[0],p[1],done[p[1]]||0,asst[p[1]]||0,p[2]]),...POCUS.map(([p,m])=>["POCUS",p,done["US:"+p]||0,"",m])]); XLSX.utils.book_append_sheet(wb,s3,"Färdigheter");
-  const s4=XLSX.utils.aoa_to_sheet([["Delmål","Namn","Fall","Bedömningar","Status","Intyg / notering"],...DM.map(([c,n])=>[c,n,cases.filter(x=>(x.delmal||[]).includes(c)).length,wbas.filter(x=>(x.delmal||[]).includes(c)).length,(dmState[c]||{}).status||"Ej påbörjat",(dmState[c]||{}).note||""])]); XLSX.utils.book_append_sheet(wb,s4,"Delmål");
+  const {done,asst}=skillCounts(cs);
+  const s3=XLSX.utils.aoa_to_sheet([["Grupp","Färdighet","Kliniskt utförda","Assisterade","Riktmärke SWESEM 2023"],...PROCS.flatMap(p=>[[p[0],p[1],done[p[1]]||0,asst[p[1]]||0,p[2]??"Se delmål"],...targetCounts(p[1],cs).map(t=>[p[0],p[1]+" – "+t.label,t.count,"",t.min])]),...POCUS.map(([p,m])=>["POCUS",p,done["US:"+p]||0,asst["US:"+p]||0,m])]); XLSX.utils.book_append_sheet(wb,s3,"Färdigheter");
+  const s4=XLSX.utils.aoa_to_sheet([["Delmål","Namn","Fall","Bedömningar","Status","Intyg / notering"],...DM.map(([c,n])=>[c,n,cs.filter(x=>(x.delmal||[]).includes(c)).length,ws.filter(x=>(x.delmal||[]).includes(c)).length,(dmState[c]||{}).status||"Ej påbörjat",(dmState[c]||{}).note||""])]); XLSX.utils.book_append_sheet(wb,s4,"Delmål");
   await offer(fname("xlsx"),new Uint8Array(XLSX.write(wb,{type:"array",bookType:"xlsx"})));
 };
 const P=s=>String(s??"").replace(/≥/g,">=").replace(/≤/g,"<=").replace(/→/g,"->").replace(/✓/g,"x").replace(/[“”]/g,'"');
@@ -1023,22 +1055,23 @@ function pdfHead(doc,title){
 const ACC=[27,92,158];
 $("#pdf").onclick=async()=>{
   if(!window.jspdf){toast("PDF-biblioteket laddas fortfarande…");return}
+  if(period()[0]&&period()[1]&&period()[0]>period()[1]){toast("Från-datum måste vara före till-datum");return}
   const cs=exportCases(), ws=exportWbas(); if(!cs.length&&!ws.length){toast("Inget i perioden");return}
   const {jsPDF}=window.jspdf; const doc=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"}); const W=doc.internal.pageSize.getWidth();
   pdfHead(doc,"Akutloggen – ST-portfölj, akutsjukvård");
   const at=(o)=>doc.autoTable(Object.assign({theme:"grid",styles:{fontSize:7.5,cellPadding:1.3,overflow:"linebreak"},headStyles:{fillColor:ACC}},o));
   const epaRows=EPA.map(([n,t])=>{const ep=String(n),c=cs.filter(x=>(x.epa||[]).includes(ep)).length,w=ws.filter(x=>x.epa===ep);const lv=[...w].filter(x=>x.level).sort((a,b)=>b.date.localeCompare(a.date))[0];return [n,P(t),c,w.filter(x=>x.type!=="DOPS"&&x.type!=="CbD").length,w.filter(x=>x.type==="DOPS").length,w.filter(x=>x.type==="CbD").length,(epaState[ep]||{}).self||"",lv?lv.level:""]});
-  at({startY:36,head:[["EPA","Aktivitet","Fall","Medsittn.","DOPS","CbD","Egen nivå","Bedömd nivå"]],body:epaRows,tableWidth:W/2-18,margin:{left:14}});
+  at({startY:36,head:[["EPA","Aktivitet","Fall","Medsittn.","DOPS","CbD","Självskattning (nu)","Senaste bedömning"]],body:epaRows,tableWidth:W/2-18,margin:{left:14}});
   const y1=doc.lastAutoTable.finalY;
   const dmRows=DM.map(([c,n])=>[c,P(n),cs.filter(x=>(x.delmal||[]).includes(c)).length,ws.filter(x=>(x.delmal||[]).includes(c)).length,(dmState[c]||{}).status||"",P((dmState[c]||{}).note||"")]);
   at({startY:36,head:[["Delmål","","Fall","Bed.","Status","Intyg"]],body:dmRows,tableWidth:W/2-10,margin:{left:W/2+2},styles:{fontSize:6.8,cellPadding:1}});
-  doc.addPage(); doc.setFontSize(13);doc.text("Färdigheter (utförda / SWESEM rekommendation)",14,14);
-  const {done,asst}=skillCounts(); const sk=[...PROCS.map(p=>[P(p[0]),P(p[1]),done[p[1]]||0,asst[p[1]]||0,p[2]]),...POCUS.map(([p,m])=>["POCUS",P(p),done["US:"+p]||0,"",m])].filter(r=>r[2]||r[3]);
+  doc.addPage(); doc.setFontSize(13);doc.text("Färdigheter i vald period (urval, SWESEM 2023)",14,14);
+  const {done,asst}=skillCounts(cs); const sk=[...PROCS.flatMap(p=>[[P(p[0]),P(p[1]),done[p[1]]||0,asst[p[1]]||0,p[2]??"Se delmål"],...targetCounts(p[1],cs).map(t=>[P(p[0]),P(p[1]+" – "+t.label),t.count,"",t.min])]),...POCUS.map(([p,m])=>["POCUS",P(p),done["US:"+p]||0,"",m])].filter(r=>r[2]||r[3]);
   at({startY:18,head:[["Grupp","Färdighet","Utförda","Ass.","Rek."]],body:sk.length?sk:[["–","Inga loggade färdigheter","","",""]],tableWidth:W/2-18});
   doc.addPage(); doc.setFontSize(13);doc.text("Bedömningar",14,14);
   at({startY:18,head:[["Datum","Instrument","Bedömare","EPA","Ingrepp / fokus","Global","Nivå","Bra","Förbättring","Sign."]],body:ws.length?ws.map(w=>[w.date,w.type,P(w.assessor),w.epa,P(w.proc||(w.focus||[]).join(", ")||w.ctx),w.global||"",w.level,P(w.good),P(w.imp),w.paper?"Ja":""]):[["","Inga bedömningar","","","","","","","",""]],columnStyles:{7:{cellWidth:50},8:{cellWidth:50}}});
   doc.addPage(); doc.setFontSize(13);doc.text("Fallförteckning",14,14);
-  at({startY:18,theme:"striped",head:[["#","Datum","Typ","Prio","Ålder","Rubrik / sökorsak","Procedurer / POCUS","Handläggning","Handledning","EPA","Delmål"]],body:cs.map((c,i)=>[i+1,c.date,KINDNAME[c.kind],c.prio,P(c.age),P([c.title,...c.sok,...c.larm].filter(Boolean).join(", ")),P([fmtList(c,"procs"),c.pocus.join(", ")].filter(Boolean).join(" | ")),c.disp,(SUP.find(s=>s[0]===c.sup)||[,""])[1],(c.epa||[]).join(","),(c.delmal||[]).join(" ")]),styles:{fontSize:6.5,cellPadding:1.1,overflow:"linebreak"},columnStyles:{0:{cellWidth:8},1:{cellWidth:19},3:{cellWidth:9},6:{cellWidth:60}}});
+  at({startY:18,theme:"striped",head:[["#","Datum","Typ","Prio","Ålder","Rubrik / sökorsak","Procedurer / POCUS","Handläggning","Handledning","EPA","Delmål"]],body:cs.map((c,i)=>[i+1,c.date,KINDNAME[c.kind],c.prio,P(c.age),P([c.title,c.teachRole,...c.teach,...c.sok,...c.larm].filter(Boolean).join(", ")),P([fmtList(c,"procs"),fmtList(c,"pocus")].filter(Boolean).join(" | ")),c.disp,(SUP.find(s=>s[0]===c.sup)||[,""])[1],(c.epa||[]).join(","),(c.delmal||[]).join(" ")]),styles:{fontSize:6.5,cellPadding:1.1,overflow:"linebreak"},columnStyles:{0:{cellWidth:8},1:{cellWidth:19},3:{cellWidth:9},6:{cellWidth:60}}});
   let y=doc.lastAutoTable.finalY+16; if(y>185){doc.addPage();y=30}
   doc.setFontSize(9);doc.line(14,y,95,y);doc.line(115,y,196,y);doc.text("Underskrift ST-läkare",14,y+4);doc.text("Underskrift huvudhandledare",115,y+4);
   const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){doc.setPage(p);doc.setFontSize(8);doc.setTextColor(120);doc.text(`Akutloggen · sida ${p} av ${n}`,W-14,doc.internal.pageSize.getHeight()-8,{align:"right"});doc.setTextColor(0)}
@@ -1053,21 +1086,10 @@ function wbaPdf(w){
   doc.autoTable({startY:doc.lastAutoTable.finalY+4,head:[["Bedömningsområde","1–6"]],body:items,theme:"grid",headStyles:{fillColor:ACC},styles:{fontSize:9.5},columnStyles:{1:{cellWidth:22,halign:"center"}}});
   doc.setFontSize(8.5);doc.setTextColor(90);doc.text("1–2 otillfredsställande · 3–4 tillfredsställande · 5–6 utmärkt",14,doc.lastAutoTable.finalY+5);doc.setTextColor(0);
   doc.autoTable({startY:doc.lastAutoTable.finalY+9,body:[["Nivå i kompetenstrappan",w.level||""],["Handledningsbehov",SUPLONG[w.entr]||""],["Något som gick speciellt bra",w.good],["Förslag till förbättring",w.imp],["Överenskommen åtgärd",w.act]].map(r=>r.map(P)),theme:"grid",styles:{fontSize:9.5,cellPadding:2,minCellHeight:10},columnStyles:{0:{fontStyle:"bold",cellWidth:52}}});
-  const y=Math.min(doc.lastAutoTable.finalY+22,280); doc.setFontSize(9);doc.line(14,y,90,y);doc.line(110,y,196,y);doc.text("Underskrift ST-läkare",14,y+4);doc.text("Underskrift bedömare",110,y+4);
+  let y=doc.lastAutoTable.finalY+22;if(y>275){doc.addPage();y=25;} doc.setFontSize(9);doc.line(14,y,90,y);doc.line(110,y,196,y);doc.text("Underskrift ST-läkare",14,y+4);doc.text("Underskrift bedömare",110,y+4);
   return doc.output("arraybuffer");
 }
-$("#json").onclick=()=>offer(fname("json"),JSON.stringify({app:"Akutloggen",version:1,exported:new Date().toISOString(),settings,dmState,epaState,cases,wbas},null,1));
-$("#imp").onchange=async e=>{
-  const f=e.target.files[0]; e.target.value=""; if(!f)return;
-  try{ const j=JSON.parse(await f.text()); let n=0;
-    for(const c of (j.cases||[])){ if(c&&c.date&&c.kind){c.id=c.id||uid();await store.save("cases",Object.assign(blankCase(c.kind),c));n++} }
-    for(const w of (j.wbas||[])){ if(w&&w.date&&w.type){w.id=w.id||uid();await store.save("wba",Object.assign(blankWba(w.type),w));n++} }
-    if(j.dmState){dmState=Object.assign(dmState,j.dmState);await store.saveMeta("delmal",dmState)}
-    if(j.epaState){epaState=Object.assign(epaState,j.epaState);await store.saveMeta("epa",epaState)}
-    toast(`${n} poster importerade`);
-  }catch(err){toast("Kunde inte läsa filen")}
-};
-$("#saveSettings").onclick=async()=>{ settings={name:$("#set-name").value.trim(),clinic:$("#set-clinic").value.trim(),hl:$("#set-hl").value.trim(),start:$("#set-start").value.trim()};
+$("#saveSettings").onclick=async()=>{ settings={...settings,name:$("#set-name").value.trim(),clinic:$("#set-clinic").value.trim(),hl:$("#set-hl").value.trim(),start:$("#set-start").value.trim()};
   try{await store.saveMeta("settings",settings);toast("Uppgifter sparade")}catch(e){toast(errMsg(e))} };
 
 /* ================= Data uppdaterad ================= */
@@ -1100,16 +1122,22 @@ async function initStore(){
     sampleFn=await claude_use("sample"); $("#aiCard").hidden=!sampleFn;
     return;
   }
-  setStatus("Dina fall sparas bara i den här webbläsaren på den här enheten, aldrig på någon server. Exportera JSON regelbundet som säkerhetskopia.",true);
+  setStatus("Sparas på den här enheten. Loggen synkas inte till andra enheter och kan försvinna om webbläsardata raderas. Säkerhetskopiera via Mer → Export och säkerhetskopia. Skriv inga identifierande patientuppgifter.",true);
   const KEY="akutloggen-v1";
-  const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
-  let d=load(); cases=d.cases||[]; wbas=(d.wba||[]).map(w=>Object.assign(blankWba(w.type),w)); settings=Object.assign(settings,(d.meta||{}).settings||{}); dmState=(d.meta||{}).delmal||{}; epaState=(d.meta||{}).epa||{};
-  const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({cases,wba:wbas,meta:{settings,delmal:dmState,epa:epaState}}))}catch(e){toast("Kunde inte spara lokalt")}};
-  const arr=col=>col==="cases"?cases:wbas;
-  store={ save:async(col,o)=>{const a=arr(col);const i=a.findIndex(x=>x.id===o.id);i<0?a.push(o):a[i]=o;persist();onData()},
-    remove:async(col,id)=>{if(col==="cases")cases=cases.filter(x=>x.id!==id);else wbas=wbas.filter(x=>x.id!==id);persist();onData()},
-    saveMeta:async()=>persist(), saveDraft:async x=>{try{localStorage.setItem(KEY+"-draft",JSON.stringify(x))}catch(e){}},
-    loadDraft:async()=>{try{return JSON.parse(localStorage.getItem(KEY+"-draft"))}catch(e){return null}}, clearDraft:async()=>{try{localStorage.removeItem(KEY+"-draft")}catch(e){}} };
+  let d={};
+  try{d=JSON.parse(localStorage.getItem(KEY))||{};if(typeof d!=="object"||Array.isArray(d)||(d.cases&&!Array.isArray(d.cases))||(d.wba&&!Array.isArray(d.wba)))throw Error("Ogiltig lagring");}catch(e){setStatus("Kunde inte läsa den sparade loggen. Inga uppgifter skrivs över. Prova att öppna samma webbläsare igen eller återställ en säkerhetskopia.",false);return;}
+  cases=d.cases||[];wbas=(d.wba||[]).map(w=>Object.assign(blankWba(w.type),w));settings=Object.assign(settings,d.meta?.settings||{});dmState=d.meta?.delmal||{};epaState=d.meta?.epa||{};
+  const snapshot=()=>({cases,wbas,settings,dmState,epaState});
+  const commit=next=>{
+    try{localStorage.setItem(KEY,JSON.stringify({cases:next.cases,wba:next.wbas,meta:{settings:next.settings,delmal:next.dmState,epa:next.epaState}}));}catch(e){throw {code:"quota_exceeded"};}
+    cases=next.cases;wbas=next.wbas;settings=next.settings;dmState=next.dmState;epaState=next.epaState;onData();
+  };
+  store={save:async(col,o)=>{const next=snapshot(),key=col==="cases"?"cases":"wbas";next[key]=[...next[key]];const i=next[key].findIndex(x=>x.id===o.id);i<0?next[key].push(o):next[key][i]=o;commit(next)},
+    remove:async(col,id)=>{const next=snapshot(),key=col==="cases"?"cases":"wbas";next[key]=next[key].filter(x=>x.id!==id);commit(next)},
+    saveMeta:async(k,o)=>{const next=snapshot();next[{settings:"settings",delmal:"dmState",epa:"epaState"}[k]]=o;commit(next)},
+    replaceAll:async next=>commit(next),
+    saveDraft:async x=>localStorage.setItem(KEY+"-draft",JSON.stringify(x)),
+    loadDraft:async()=>{const raw=localStorage.getItem(KEY+"-draft");return raw?JSON.parse(raw):null},clearDraft:async()=>localStorage.removeItem(KEY+"-draft")};
   onData();
 }
 
@@ -1120,14 +1148,15 @@ function markSaved(w){const el=$("#savestate");el.classList.remove("busy");el.te
 function markBusy(t){const el=$("#savestate");el.classList.add("busy");el.textContent=t}
 function draftChanged(){ if(!["fall","wba"].includes(view))return; dirty=true; markBusy("Osparat utkast…"); clearTimeout(draftTimer); draftTimer=setTimeout(saveDraft,3000); }
 async function saveDraft(){
-  if(!store||!dirty)return;
+  if(!store||!dirty||!["fall","wba"].includes(view))return;
   if(view==="fall")readCase(); if(view==="wba")readWba();
   const d={view,form:view==="fall"?clone(form):null,wform:view==="wba"?clone(wform):null,editingId,wEditingId,savedAt:new Date().toISOString()};
-  try{await store.saveDraft(d);dirty=false;markSaved("Utkast sparat")}catch(e){markBusy("Utkast ej sparat");draftTimer=setTimeout(saveDraft,15000)}
+  draftCache=d;
+  try{await store.saveDraft(d);dirty=false; if(view==="home")renderHome();markSaved("Utkast sparat")}catch(e){markBusy("Utkast ej sparat");draftTimer=setTimeout(saveDraft,15000)}
 }
-function clearDraft(){clearTimeout(draftTimer);dirty=false;if(store)store.clearDraft().catch(()=>{})}
+function clearDraft(){clearTimeout(draftTimer);dirty=false;draftCache=null;if(store)store.clearDraft().catch(()=>{})}
 async function restoreDraft(){
-  try{ const d=await store.loadDraft(); if(!d||(!d.form&&!d.wform))return;
+  try{ const d=await store.loadDraft(); if(!d||(!d.form&&!d.wform))return; draftCache=d;
     if(d.view==="fall"&&d.form){editingId=d.editingId||null;form=Object.assign(blankCase(d.form.kind),d.form);show("fall");fillCase()}
     else if(d.view==="wba"&&d.wform){wEditingId=d.wEditingId||null;wform=Object.assign(blankWba(d.wform.type),d.wform);show("wba");fillWba()}
     else return;
@@ -1137,6 +1166,152 @@ async function restoreDraft(){
 }
 $("#v-fall").addEventListener("input",draftChanged); $("#v-wba").addEventListener("input",draftChanged);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&dirty){clearTimeout(draftTimer);saveDraft()}});
+
+/* ================= Snabblogg, tillgänglighet och säkra säkerhetskopior ================= */
+let quickMode=false, draftCache=null, pendingImport=null;
+const SUBTARGETS={
+ 'Thoraxdrän':[['Kirurgisk',5,'tech',['Kirurgisk']],['Seldinger',5,'tech',['Seldinger']]],
+ 'Artrocentes':[['Knä',20,'loc',['Knä']],['Andra leder',10,'loc',['Annan led']]],
+ 'Nagelbädd / subungualt hematom':[['Nagelbäddsreparation',5,'tech',['Nagelbäddsreparation']],['Dränage subungualt hematom',10,'tech',['Dränage subungualt hematom']]],
+ 'Näsblödning, tamponad / kauterisering':[['Kauterisering',5,'tech',['Kauterisering']],['Främre tamponad',5,'tech',['Främre tamponad']],['Bakre tamponad',2,'tech',['Bakre tamponad']]],
+ 'Intubation – direkt laryngoskopi':[['Med RSI (av totalt 35)',10,'rsi',['RSI']]],
+ 'Ledreposition':[['Finger',5,'loc',['Finger']],['Axel',10,'loc',['Axel']],['Armbåge / patella',5,'loc',['Armbåge','Patella']],['Piglux',5,'loc',['Piglux']],['Fotled',5,'loc',['Fotled']],['Höft / knä',5,'loc',['Höft','Höftprotes','Knä']]]
+};
+function caseIssue(f){
+ if(f.kind==='teach'&&!f.teachRole)return 'Välj om du undervisade eller deltog';
+ if(f.kind==='teach'&&!f.title&&!f.teach.length)return 'Ange ämne eller utbildningsaktivitet';
+ for(const p of f.procs){const d=f.details['procs:'+p]||{};
+  if(!ROLE.includes(d.role))return 'Välj din roll för '+p;
+  if(d.role==='Utförde'&&!OK.includes(d.res))return 'Välj utfall för '+p;
+ }
+ for(const p of f.pocus){const d=f.details['pocus:'+p]||{};if(!ROLE.includes(d.role))return 'Välj din roll för '+p;}
+ if(!f.title&&!f.procs.length&&!f.pocus.length&&!f.sok.length&&!f.sokx&&!f.larm.length&&!f.led.length&&!f.teach.length)return 'Ange vad du vill logga';
+ return '';
+}
+function allSkills(){return [...PROCS.map(p=>({name:p[1],group:'procs'})),...POCUS.map(p=>({name:p[0],group:'pocus'}))]}
+function skillKey(s){return s.group+':'+s.name}
+function quickRows(items){return items.map(s=>{const key=skillKey(s),fav=(settings.favorites||[]).includes(key);return `<div class="quick-row"><button class="btn choose" data-quick="${esc(key)}">${esc(s.name)}${s.group==='pocus'?' · POCUS':''}</button><button class="btn" data-favorite="${esc(key)}" aria-label="${fav?'Ta bort':'Lägg till'} ${esc(s.name)} ${fav?'från':'som'} favorit" aria-pressed="${fav}">${fav?'★':'☆'}</button></div>`}).join('')}
+function renderQuickChoices(){
+ const skills=allSkills(),favorites=(settings.favorites||[]).map(k=>skills.find(s=>skillKey(s)===k)).filter(Boolean);
+ const recent=[...cases].sort((a,b)=>(b.updatedAt||b.date).localeCompare(a.updatedAt||a.date)).flatMap(c=>[...(c.procs||[]).map(name=>({name,group:'procs'})),...(c.pocus||[]).map(name=>({name,group:'pocus'}))]);
+ const seen=new Set(favorites.map(skillKey));const last=recent.filter(s=>{const k=skillKey(s);if(seen.has(k))return false;seen.add(k);return true}).slice(0,4);
+ $('#quickChoices').innerHTML=(favorites.length?'<h3>Favoriter</h3>'+quickRows(favorites):'')+(last.length?'<h3>Senast använda</h3>'+quickRows(last):'');
+ const q=$('#quickSearch').value.trim().toLocaleLowerCase('sv');
+ $('#quickResults').innerHTML=q?quickRows(skills.filter(s=>s.name.toLocaleLowerCase('sv').includes(q)).slice(0,15)):'';
+ if(q&&!$('#quickResults').textContent)$('#quickResults').textContent='Ingen träff. Prova ett annat ord eller välj Procedur / POCUS nedan.';
+}
+$('#quickSearch').oninput=renderQuickChoices;
+document.addEventListener('click',async e=>{
+ const favorite=e.target.closest('[data-favorite]');
+ if(favorite){const key=favorite.dataset.favorite;const old=clone(settings);let list=settings.favorites||[];settings.favorites=list.includes(key)?list.filter(k=>k!==key):[...list,key];try{await store.saveMeta('settings',settings);renderQuickChoices()}catch(err){settings=old;toast(errMsg(err))}return;}
+ const b=e.target.closest('[data-quick]');if(!b)return;
+ if(draftCache&&!confirm('Du har ett sparat utkast. Vill du ersätta det med en ny snabblogg?'))return;
+ const s=allSkills().find(s=>skillKey(s)===b.dataset.quick);if(!s)return;
+ clearDraft();quickMode=true;editingId=null;form=blankCase('proc');form[s.group]=[s.name];form.details[skillKey(s)]={};form.title=s.name;autoEpa(form);autoDm(form);show('fall');fillCase();draftChanged();window.scrollTo({top:0});
+});
+function applyQuickMode(){
+ const root=$('#v-fall');root.classList.toggle('quick',quickMode);$('#quickModeBar').hidden=!quickMode;
+ root.querySelectorAll('.quick-hidden').forEach(e=>e.classList.remove('quick-hidden'));
+ if(!quickMode)return;
+ root.querySelectorAll(':scope > .card').forEach(card=>{if(card.id==='quickModeBar'||card.id==='fEditing')return;
+  const isProc=card.querySelector('[data-for="procs"]'),isPoc=card.querySelector('[data-for="pocus"]'),isSup=card.querySelector('[data-k="sup"]');
+  if(!(isProc&&form.procs.length)&&!(isPoc&&form.pocus.length)&&!isSup)card.classList.add('quick-hidden');
+ });
+ $('#quickModeBar p').textContent=`${form.date} · ${form.site}. Kontrollera roll, resultat och handledningsbehov.`;
+ $('#procGroups').classList.add('quick-hidden');$('[data-k="pocus"]').classList.add('quick-hidden');
+}
+$('#expandQuick').onclick=()=>{readCase();quickMode=false;applyQuickMode();$('#f-title').focus()};
+$('#resumeDraft').onclick=()=>{quickMode=false;restoreDraft()};
+$('#moreBtn').onclick=()=>{const open=$('#moreNav').hidden;$('#moreNav').hidden=!open;$('#moreBtn').setAttribute('aria-expanded',String(open))};
+$('#moreNav').onclick=e=>{const b=e.target.closest('[data-open]');if(!b)return;show(b.dataset.open);$('#moreNav').hidden=true;$('#moreBtn').setAttribute('aria-expanded','false');window.scrollTo({top:0})};
+$('#trainingTemplate').onchange=async()=>{const old=settings.trainingTemplate;settings.trainingTemplate=$('#trainingTemplate').value;try{await store.saveMeta('settings',settings);renderTrappa()}catch(e){settings.trainingTemplate=old;renderTrappa();toast(errMsg(e))}};
+function skillEvidence(name,source=cases){
+ return source.filter(c=>c.site!=='Simulering'&&(c.procs||[]).includes(name)&&(c.details?.['procs:'+name]?.role==='Utförde'));
+}
+function targetCounts(name,source=cases){const rows=skillEvidence(name,source);return (SUBTARGETS[name]||[]).map(([label,min,field,values])=>({label,min,count:rows.filter(c=>values.includes(c.details?.['procs:'+name]?.[field])).length}));}
+function skillDetail(name,n,a,min,pocus,counts){
+ const key=pocus?'US:'+name:name,custom=settings.skillGoals?.[key];const target=custom||min;
+ const sub=pocus?[]:targetCounts(name);
+ const sourceNote=min===null?'Separata riktmärken – se nedan':min==='MT'?'Modellträning enligt SWESEM':`SWESEM-riktmärke: ${min}`;
+ return `<details class="sk-detail"><summary>${skRow(name,n,a,sub.length?null:target)}</summary><p class="skill-note">${sourceNote}. ${custom?'Eget mål: '+custom+'. ':''}Simulering: ${counts.sim[key]||0}. Äldre poster utan angiven roll: ${counts.unknown[key]||0} (räknas inte som utförda).</p>${sub.map(t=>skRow(t.label,t.count,0,t.min)).join('')}<label>Eget mål (valfritt)<input type="number" min="1" max="10000" class="skill-goal" data-goal="${esc(key)}" value="${custom||''}"></label><p class="skill-note">Riktmärken ersätter inte bedömning. Källa: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-Core-curriculum-230802.pdf" target="_blank" rel="noopener">SWESEM 2023</a>.</p></details>`;
+}
+function renderFard(){const counts=skillCounts(),{done,asst}=counts;
+ $('#fardList').innerHTML=PROCGROUPS.map(g=>`<div class="card"><h3>${esc(g)}</h3>${PROCS.filter(p=>p[0]===g).map(p=>skillDetail(p[1],done[p[1]]||0,asst[p[1]]||0,p[2],false,counts)).join('')}</div>`).join('')+`<div class="card"><h3>POCUS</h3>${POCUS.map(([p,m])=>skillDetail(p,done['US:'+p]||0,asst['US:'+p]||0,m,true,counts)).join('')}</div>`;
+};
+$('#fardList').addEventListener('change',async e=>{const input=e.target.closest('[data-goal]');if(!input)return;const v=input.value===''?null:Number(input.value);if(v!==null&&(!Number.isInteger(v)||v<1||v>10000)){toast('Ange ett heltal mellan 1 och 10000');return}const old=clone(settings);settings.skillGoals={...settings.skillGoals};if(v===null)delete settings.skillGoals[input.dataset.goal];else settings.skillGoals[input.dataset.goal]=v;try{await store.saveMeta('settings',settings);toast('Eget mål sparat')}catch(err){settings=old;toast(errMsg(err))}});
+/* Associate visible labels and states with native controls. Re-run after dynamic rendering. */
+function syncAccessibility(){
+ const fallback={'f-title':$('#titleLabel').textContent,'f-date':'Datum','f-site':'Plats','f-sokx':'Annan sökorsak','f-notes':'Reflektion / lärdom','w-date':'Datum','w-assessor':'Bedömare','w-proc':'Ingrepp','w-ctx':'Fall / sammanhang','w-good':'Något som gick speciellt bra?','w-imp':'Förslag till förbättring','w-act':'Överenskommen åtgärd','q':'Sök i min logg','qk':'Filtrera aktivitetstyp','e-from':'Från datum','e-to':'Till datum','set-name':'Ditt namn','set-clinic':'Klinik / sjukhus','set-hl':'Huvudhandledare','set-start':'ST-start (ÅÅÅÅ-MM)','aiText':'Anonymiserad anteckning för AI'};
+ document.querySelectorAll('input,textarea,select').forEach(el=>{
+  if(el.labels?.length)return;const name=fallback[el.id]||(el.dataset.note?el.dataset.note+' – intyg, kurs eller datum':null);if(!name)return;
+  let label=el.previousElementSibling;if(label?.classList.contains('lbl')){if(!label.id)label.id=el.id+'-label';el.setAttribute('aria-labelledby',label.id)}else el.setAttribute('aria-label',name);
+ });
+ document.querySelectorAll('.chips[data-k],.chips[data-w],.dfield,.scale,.lvl,.dm .st').forEach(group=>{
+  const k=group.dataset.k||group.dataset.w;
+  const multi=group.dataset.k?CMULTI.has(k):group.dataset.w?['focus','delmal'].includes(k):false;
+  const single=!!k&&!multi;
+  group.setAttribute('role',single?'radiogroup':'group');
+  const label=group.querySelector('.dl')?.textContent||group.closest('.rate')?.querySelector('.q')?.textContent||group.closest('.epa')?.querySelector('.tt')?.textContent||group.closest('.dm')?.querySelector('.n')?.textContent||group.parentElement.querySelector('.lbl')?.textContent||'Val';
+  group.setAttribute('aria-label',label);
+  group.querySelectorAll('button').forEach(b=>{
+   if(b.id==='dmAll'||b.dataset.all)return;
+   const on=b.classList.contains('on')||(b.dataset.s==='Ej påbörjat'&&!(dmState[b.closest('.dm')?.dataset.dm]||{}).status);
+   if(group.classList.contains('dfield'))b.setAttribute('aria-label',label+': '+b.textContent.trim());
+   if(single){b.setAttribute('role','radio');b.setAttribute('aria-checked',String(on));b.removeAttribute('aria-pressed');b.tabIndex=on?0:-1;}
+   else b.setAttribute('aria-pressed',String(on));
+   if(group.classList.contains('scale'))b.setAttribute('aria-label',label+': '+(b.dataset.n==='0'?'Ej observerat':b.dataset.n+' av 6'));
+   if(group.classList.contains('lvl'))b.setAttribute('aria-label',label+' – min självskattning nivå '+b.dataset.l);
+  });
+  if(single&&!group.querySelector('[aria-checked="true"]')){const b=group.querySelector('button');if(b)b.tabIndex=0;}
+ });
+ document.querySelectorAll('[data-proc]').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('on'))));
+ document.querySelectorAll('#nav [data-v]').forEach(b=>{if(b.classList.contains('on'))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ $('#w-paper').setAttribute('aria-pressed',String(wform?.paper||false));
+ document.querySelectorAll('.item').forEach(el=>{el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Öppna '+el.textContent.trim())});
+ if(form){const text=`${form.epa.length} EPA och ${form.delmal.length} delmål – granska förslag`;if($("#mappingSummary").textContent!==text)$("#mappingSummary").textContent=text;}
+}
+const accessibilityObserver=new MutationObserver(syncAccessibility);
+accessibilityObserver.observe(document.body,{childList:true,subtree:true});
+document.addEventListener('keydown',e=>{
+ const radio=e.target.closest('[role="radio"]');if(radio&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key)){const group=radio.closest('[role="radiogroup"]'),bs=[...group.querySelectorAll('[role="radio"]')];let i=bs.indexOf(radio);i=e.key==='Home'?0:e.key==='End'?bs.length-1:(i+(['ArrowLeft','ArrowUp'].includes(e.key)?-1:1)+bs.length)%bs.length;e.preventDefault();const parentKey=group.dataset.k||group.dataset.w,v=bs[i].dataset.v;bs[i].click();requestAnimationFrame(()=>document.querySelector(`.chips[data-k="${parentKey}"] [data-v="${CSS.escape(v)}"],.chips[data-w="${parentKey}"] [data-v="${CSS.escape(v)}"]`)?.focus());}
+ const row=e.target.closest('.item');if(row&&['Enter',' '].includes(e.key)){e.preventDefault();row.click()}
+});
+function backupObject(){return {app:'Akutloggen',version:2,exported:new Date().toISOString(),settings:clone(settings),dmState:clone(dmState),epaState:clone(epaState),cases:clone(cases),wbas:clone(wbas),draft:draftCache?clone(draftCache):null};}
+async function downloadBackup(){
+ if(dirty)await saveDraft();const stamp=new Date().toISOString();const data=backupObject();data.settings.lastBackup=stamp;
+ if(await offer(fname('json'),JSON.stringify(data,null,2))){settings.lastBackup=stamp;try{await store.saveMeta('settings',settings)}catch(e){toast('Filen hämtades, men backupdatum kunde inte sparas')}renderExport();}
+}
+$('#json').onclick=downloadBackup;$('#backupBeforeImport').onclick=downloadBackup;
+function validDate(d){if(typeof d!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(d))return false;const x=new Date(d+'T12:00:00Z');return !isNaN(x)&&x.toISOString().slice(0,10)===d;}
+function validateBackup(j){
+ const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
+ if(!obj(j)||j.app!=='Akutloggen'||![1,2].includes(j.version)||!Array.isArray(j.cases)||!Array.isArray(j.wbas))throw Error('Detta är inte en säkerhetskopia från Akutloggen (version 1 eller 2).');
+ if(j.cases.length+j.wbas.length>100000)throw Error('Säkerhetskopian innehåller för många poster.');
+ function safe(x){if(!x||typeof x!=='object')return;for(const k of Object.keys(x)){if(['__proto__','prototype','constructor'].includes(k))throw Error('Ogiltig nyckel i filen.');safe(x[k]);}}safe(j);
+ for(const list of [j.cases,j.wbas]){const seen=new Set();for(const r of list){if(!obj(r)||typeof r.id!=='string'||!r.id||seen.has(r.id)||!validDate(r.date))throw Error('En post har ogiltigt datum, saknat ID eller dubblerat ID.');seen.add(r.id);}}
+ for(const c of j.cases){if(!KINDNAME[c.kind])throw Error('Okänd aktivitetstyp.');for(const k of ['procs','pocus','sok','larm','led','teach','aud','epa','delmal'])if(c[k]!==undefined&&(!Array.isArray(c[k])||c[k].some(v=>typeof v!=='string')))throw Error('Ogiltig lista i en aktivitet.');if(c.details!==undefined&&!obj(c.details))throw Error('Ogiltiga procedurdetaljer.');for(const d of Object.values(c.details||{}))if(!obj(d)||Object.values(d).some(v=>typeof v!=='string'&&!(Array.isArray(v)&&v.every(t=>typeof t==='string'))))throw Error('Ogiltiga procedurdetaljer.');for(const k of ['title','site','shift','age','sup','notes','sokx','disp','lroll','teachRole','createdAt','updatedAt'])if(c[k]!==undefined&&typeof c[k]!=='string')throw Error('Ogiltigt textfält i en aktivitet.');}
+ for(const w of j.wbas){if(!WTYPES[w.type])throw Error('Okänt bedömningsinstrument.');for(const k of ['focus','delmal'])if(w[k]!==undefined&&(!Array.isArray(w[k])||w[k].some(v=>typeof v!=='string')))throw Error('Ogiltigt bedömningsfält.');if(w.items!==undefined&&(!obj(w.items)||Object.values(w.items).some(v=>!Number.isInteger(v)||v<0||v>6)))throw Error('Ogiltig bedömningsskala.');for(const k of ['assessor','ctx','good','imp','act','proc','epa','level','entr','date','arole','place','diff','createdAt','updatedAt'])if(w[k]!==undefined&&typeof w[k]!=='string')throw Error('Ogiltigt textfält i en bedömning.');}
+ for(const k of ['settings','dmState','epaState'])if(j[k]!==undefined&&!obj(j[k]))throw Error('Ogiltiga inställningar.');
+ if(j.settings){for(const key of ['name','clinic','hl','start','lastSite','lastBackup','trainingTemplate'])if(j.settings[key]!==undefined&&typeof j.settings[key]!=='string')throw Error('Ogiltigt inställningsfält.');for(const k of ['favorites'])if(j.settings[k]!==undefined&&(!Array.isArray(j.settings[k])||j.settings[k].some(x=>typeof x!=='string')))throw Error('Ogiltiga favoriter.');if(j.settings.skillGoals!==undefined&&(!obj(j.settings.skillGoals)||Object.values(j.settings.skillGoals).some(x=>!Number.isInteger(x)||x<1||x>10000)))throw Error('Ogiltiga egna mål.');}
+ for(const k of ['dmState','epaState'])for(const v of Object.values(j[k]||{}))if(!obj(v))throw Error('Ogiltig målstatus.');
+ if(j.draft){
+  const d=j.draft;if(!obj(d)||!['fall','wba'].includes(d.view)||!Number.isFinite(Date.parse(d.savedAt)))throw Error('Ogiltigt utkast.');
+  if(d.view==='fall'){if(!obj(d.form))throw Error('Utkastet saknar aktivitet.');validateBackup({app:'Akutloggen',version:2,cases:[{...d.form,id:'draft'}],wbas:[]});}
+  else {if(!obj(d.wform))throw Error('Utkastet saknar bedömning.');validateBackup({app:'Akutloggen',version:2,cases:[],wbas:[{...d.wform,id:'draft'}]});}
+ }
+ return j;
+}
+function mergeRows(current,incoming,policy){const rows=new Map(current.map(r=>[r.id,r]));for(const row of incoming){const old=rows.get(row.id);const newer=old&&Number.isFinite(Date.parse(row.updatedAt))&&Number.isFinite(Date.parse(old.updatedAt))&&Date.parse(row.updatedAt)>Date.parse(old.updatedAt);if(!old||policy==='replace'||policy==='newer'&&newer)rows.set(row.id,row);}return [...rows.values()];}
+function importStats(current,incoming){let added=0,conflicts=0,same=0;const map=new Map(current.map(r=>[r.id,r]));for(const r of incoming){const old=map.get(r.id);if(!old)added++;else if(JSON.stringify(old)===JSON.stringify(r))same++;else conflicts++;}return {added,conflicts,same};}
+$('#imp').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>25000000)throw Error('Filen är för stor (max 25 MB).');pendingImport=validateBackup(JSON.parse(await file.text()));const a=importStats(cases,pendingImport.cases),b=importStats(wbas,pendingImport.wbas);$('#importSummary').textContent=`${a.added+b.added} nya poster · ${a.conflicts+b.conflicts} konflikter · ${a.same+b.same} oförändrade. Inga uppgifter har ändrats ännu.`;$('#importMeta').checked=false;$('#importDraft').checked=false;$('#importDraft').disabled=!pendingImport.draft;$('#importPolicy').value='keep';show('import');}catch(err){pendingImport=null;toast(err.message||'Kunde inte läsa filen')}};
+$('#cancelImport').onclick=()=>{pendingImport=null;show('export')};
+$('#confirmImport').onclick=async()=>{
+ if(!pendingImport)return;const b=$('#confirmImport');b.disabled=true;
+ try{const j=pendingImport,policy=$('#importPolicy').value;const next={cases:mergeRows(cases,j.cases.map(c=>Object.assign(blankCase(c.kind),c)),policy),wbas:mergeRows(wbas,j.wbas.map(w=>Object.assign(blankWba(w.type),w)),policy),settings:$('#importMeta').checked?{...settings,...j.settings}:settings,dmState:$('#importMeta').checked?{...dmState,...j.dmState}:dmState,epaState:$('#importMeta').checked?{...epaState,...j.epaState}:epaState};
+ if(!store.replaceAll)throw Error('Import stöds endast i den lokala webbversionen.');
+ await store.replaceAll(next);if($('#importDraft').checked&&j.draft){await store.saveDraft(j.draft);draftCache=j.draft;}pendingImport=null;show('export');toast('Säkerhetskopian importerad');
+ }catch(err){toast(err.message||'Importen misslyckades. Försök igen.')}finally{b.disabled=false}
+};
 
 /* ================= Start ================= */
 form=blankCase(); wform=blankWba();
