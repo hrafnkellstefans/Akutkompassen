@@ -1,0 +1,1148 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Akutloggen – gratis ST-loggbok för akutsjukvård: fall, Mini-CEX, DOPS, CbD, SWESEM:s kompetenstrappa, delmål och färdigheter. Data stannar i din webbläsare.">
+<meta name="author" content="Kjell Stefansson">
+<link rel="canonical" href="https://akutkompassen.se/akutloggen/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Akutkompassen">
+<meta property="og:title" content="Akutloggen – ST-loggbok för akutsjukvård">
+<meta property="og:description" content="Logga fall, larm, procedurer, POCUS och bedömningar. Följ SWESEM:s kompetenstrappa och delmål. Gratis, utan inloggning – data stannar i din webbläsare.">
+<meta property="og:url" content="https://akutkompassen.se/akutloggen/">
+<meta property="og:image" content="https://akutkompassen.se/og-image.png">
+<meta property="og:locale" content="sv_SE">
+<meta name="theme-color" content="#1b5c9e">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="/visitor-analytics.js" defer></script>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Akutloggen – ST-loggbok för akutsjukvård</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<style>
+/* Layout: hospital wayfinding — a sticky signage header, one working column, fixed action bar while logging. */
+:root{
+  --bg:#eef2f5; --card:#ffffff; --ink:#122130; --mute:#5a6a78; --line:#d6dee5;
+  --acc:#1b5c9e; --acc-ink:#ffffff; --acc-soft:#e1ecf7;
+  --warn:#b23a2a; --warn-soft:#f9e6e2; --ok:#2e7d4f; --ok-soft:#e2f2e8;
+  --r1:#d4372c; --r2:#e8862a; --r3:#e2c12f; --r4:#3f9b5a; --r5:#3c7fc4;
+  --s1:#c9d9ea; --s2:#9dbbdc; --s3:#6c99c8; --s4:#3f74ae; --s5:#1b4f86;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --rad:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d151c; --card:#15212b; --ink:#e3ebf2; --mute:#90a2b1; --line:#253441;
+  --acc:#6aa8e6; --acc-ink:#071726; --acc-soft:#173149;
+  --warn:#ff8c78; --warn-soft:#3a1f1a; --ok:#6fcf97; --ok-soft:#173326;
+  --s1:#1d3550; --s2:#27496f; --s3:#33618f; --s4:#4c82b8; --s5:#79a9db;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d151c; --card:#15212b; --ink:#e3ebf2; --mute:#90a2b1; --line:#253441;
+  --acc:#6aa8e6; --acc-ink:#071726; --acc-soft:#173149;
+  --warn:#ff8c78; --warn-soft:#3a1f1a; --ok:#6fcf97; --ok-soft:#173326;
+  --s1:#1d3550; --s2:#27496f; --s3:#33618f; --s4:#4c82b8; --s5:#79a9db;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;gap:10px;padding-block:10px 2px}
+.brand h1{font:700 24px/1 var(--display);letter-spacing:.02em;margin:0;text-transform:uppercase}
+.brand h1 b{color:var(--acc)}
+.brand .sub{font-size:12px;color:var(--mute);flex:1}
+.brand .meta{font:500 12px var(--mono);color:var(--mute);text-align:right}
+.brand .meta.busy{color:var(--warn)}
+@media (max-width:560px){.brand .sub{font-size:0}.brand .sub::after{content:"ST akutsjukvård";font-size:12px}}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{border:0;background:none;color:var(--mute);font:600 13.5px var(--body);padding:9px 10px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav button.on{color:var(--acc);border-bottom-color:var(--acc)}
+main{padding-block:14px 120px}
+section[hidden]{display:none!important}
+.banner{font-size:13px;padding:8px 12px;border-radius:8px;margin-bottom:12px;background:var(--warn-soft);color:var(--warn)}
+.banner.ok{background:var(--acc-soft);color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:12px 14px;margin-bottom:10px;min-width:0}
+.lbl{font:600 11.5px var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--mute);margin:0 0 7px}
+.lbl .hint{text-transform:none;letter-spacing:0;font-weight:400}
+h2{font:700 21px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:4px 0 10px;text-wrap:balance}
+h3{font:600 15px var(--body);margin:0 0 6px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1;min-width:140px}
+.sect{margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.chip.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
+.chip.sm{padding:5px 10px;font-size:13px}
+.chip.sug{border-style:dashed}
+.chip:focus-visible,.btn:focus-visible,nav button:focus-visible,.dchip:focus-visible,.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.chip.p{display:inline-flex;align-items:center;gap:6px}
+.chip.p i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.chip.p.on i{box-shadow:0 0 0 2px var(--acc-ink)}
+input[type=text],input[type=date],input[type=search],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+textarea{min-height:70px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:10px 14px;font:600 14px var(--body);cursor:pointer}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn.warn{color:var(--warn);border-color:var(--warn)}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.55;cursor:default}
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:9;background:var(--card);border-top:1px solid var(--line);padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.savebar .in{display:flex;gap:8px}
+.savebar .btn.pri{flex:1}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+.muted{color:var(--mute);font-size:13px}
+.empty{text-align:center;color:var(--mute);padding:26px 10px;font-size:14px}
+/* home */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:9px 10px}
+.kpi b{display:block;font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.kpi span{font-size:11.5px;color:var(--mute)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.tile{display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:12px;font:inherit;color:var(--ink);cursor:pointer;min-height:76px}
+.tile b{font:700 18px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.tile span{font-size:12px;color:var(--mute)}
+.tile .sw{width:22px;height:4px;border-radius:2px;background:var(--acc);margin-bottom:4px}
+.tile.wba .sw{background:var(--r2)}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(3,1fr)}.kpis .kpi:nth-child(n+4){display:none}.tiles{grid-template-columns:repeat(2,1fr)}}
+.ai textarea{min-height:84px}
+.ai .row{align-items:center;margin-top:8px}
+.ai .row>*{flex:0 0 auto;min-width:0}
+.ai .st{flex:1;font-size:13px;color:var(--mute)}
+/* list */
+.item{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.item:last-child{border-bottom:0}
+.item .d{font:500 12px var(--mono);color:var(--mute);min-width:74px;font-variant-numeric:tabular-nums}
+.item .b{flex:1;min-width:0}
+.item .t{font-weight:600;overflow-wrap:anywhere}
+.item .s{font-size:13px;color:var(--mute);overflow-wrap:anywhere}
+.tag{display:inline-block;font:600 11px var(--body);padding:2px 7px;border-radius:5px;background:var(--acc-soft);color:var(--acc);margin-right:5px;vertical-align:1px}
+.tag.w{background:var(--warn-soft);color:var(--warn)}
+.pr{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+/* details */
+.details:empty{display:none}
+.details{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.dbox{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg)}
+.dbox .dt{font-weight:600;font-size:13px;margin-bottom:4px}
+.dfield{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:4px}
+.dfield .dl{font-size:12px;color:var(--mute);min-width:70px}
+.dchip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 9px;font:inherit;font-size:12.5px;cursor:pointer}
+.dchip.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
+details.grp{border-top:1px solid var(--line);padding:6px 0}
+details.grp:first-of-type{border-top:0}
+details.grp summary{cursor:pointer;font-weight:600;font-size:13.5px;padding:4px 0;list-style:none;display:flex;justify-content:space-between}
+details.grp summary::-webkit-details-marker{display:none}
+details.grp summary::after{content:"+";color:var(--mute)}
+details.grp[open] summary::after{content:"–"}
+details.grp summary .n{color:var(--acc);font-weight:600;margin-left:auto;margin-right:10px}
+details.grp .chips{padding:4px 0 6px}
+/* rating */
+.rate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.rate:last-child{border-bottom:0}
+.rate .q{font-size:14px;min-width:0}
+.rate .q.g{font-weight:600}
+.scale{display:flex;gap:3px}
+.scale button{width:32px;height:32px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;font:600 13px var(--mono);cursor:pointer}
+.scale button.na{width:auto;padding:0 7px;font:500 11px var(--body);color:var(--mute)}
+.scale button.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.scale button.on.lo{background:var(--warn);border-color:var(--warn)}
+.scale button.na.on{background:var(--mute);border-color:var(--mute);color:var(--card)}
+.scalekey{display:flex;gap:12px;font-size:11.5px;color:var(--mute);margin-top:4px;flex-wrap:wrap}
+@media (max-width:520px){.rate{grid-template-columns:1fr}.scale button{width:36px;height:34px}}
+/* trappa */
+.epa{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 12px}
+.epa .no{font:700 30px/1 var(--display);color:var(--acc);grid-row:span 3}
+.epa .no small{display:block;font:500 10.5px var(--mono);color:var(--mute);margin-top:4px;letter-spacing:.03em}
+.epa .tt{font-weight:600}
+.lvl{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.lvl button{min-width:44px;height:28px;border:1px solid var(--line);background:var(--bg);color:var(--mute);font:600 12px var(--mono);cursor:pointer;padding:0 8px}
+.lvl button:first-of-type{border-radius:6px 0 0 6px}
+.lvl button:last-of-type{border-radius:0 6px 6px 0}
+.lvl button.fill{background:var(--acc-soft);color:var(--acc);border-color:var(--acc-soft)}
+.lvl button.on{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.lvl .ax{font-size:12px;color:var(--mute);margin-left:8px}
+.ev{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ev span{font:500 12px var(--mono);padding:3px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ev span.done{background:var(--ok-soft);border-color:var(--ok-soft);color:var(--ok)}
+.supbar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin-top:8px;background:var(--bg)}
+.supbar i{display:block;height:100%}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.ladder div{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);min-width:0}
+.ladder b{font:700 16px var(--display);display:block;text-transform:uppercase}
+.ladder span{font-size:12px;color:var(--mute)}
+@media (max-width:560px){.ladder{grid-template-columns:repeat(2,1fr)}}
+/* delmål */
+.dm{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.dm:last-child{border-bottom:0}
+.dm .c{font:500 13px var(--mono);color:var(--acc)}
+.dm .n{font-size:14px;min-width:0}
+.dm .x{font:500 12px var(--mono);color:var(--mute);text-align:right;font-variant-numeric:tabular-nums}
+.dm .st{grid-column:2/4;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.dm .st input{max-width:150px;padding:5px 8px;font-size:13px}
+.stc{border:1px solid var(--line);background:var(--bg);color:var(--mute);border-radius:999px;padding:3px 9px;font:500 12px var(--body);cursor:pointer}
+.stc.on{color:var(--acc-ink);background:var(--acc);border-color:var(--acc)}
+.stc.on.k{background:var(--ok);border-color:var(--ok)}
+/* färdigheter */
+.sk{display:grid;grid-template-columns:minmax(0,1fr) 120px 62px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sk:last-child{border-bottom:0}
+.sk .bar{height:8px;border-radius:4px;background:var(--bg);overflow:hidden;border:1px solid var(--line)}
+.sk .bar i{display:block;height:100%;background:var(--acc)}
+.sk.done .bar i{background:var(--ok)}
+.sk .num{font:500 12.5px var(--mono);text-align:right;color:var(--mute);font-variant-numeric:tabular-nums}
+.sk.done .num{color:var(--ok)}
+.sk .nm{min-width:0;overflow-wrap:anywhere}
+.sk .nm small{color:var(--mute)}
+@media (max-width:420px){.sk{grid-template-columns:minmax(0,1fr) 70px 56px}}
+.formhead{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.formhead h2{margin:0;flex:1}
+.photo img{max-width:100%;border-radius:8px;border:1px solid var(--line);margin-top:8px}
+.src{font-size:12px;color:var(--mute);line-height:1.5}
+.src a{color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><h1>Akut<b>loggen</b></h1><span class="sub">ST akutsjukvård · ett <a href="/" style="color:inherit">Akutkompassen</a>-projekt</span><span class="meta" id="savestate"></span></div>
+    <nav id="nav">
+      <button data-v="home" class="on">Logga</button>
+      <button data-v="logg">Logg</button>
+      <button data-v="trappa">Kompetenstrappa</button>
+      <button data-v="delmal">Delmål</button>
+      <button data-v="fard">Färdigheter</button>
+      <button data-v="export">Export</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="status" class="banner ok">Laddar…</div>
+
+  <!-- HOME -->
+  <section id="v-home">
+    <div class="kpis" id="kpis"></div>
+    <div class="tiles" id="tiles">
+      <button class="tile" data-new="fall"><span class="sw"></span><b>Patient</b><span>Sökorsak, prio, handläggning</span></button>
+      <button class="tile" data-new="larm"><span class="sw"></span><b>Larm</b><span>Trauma, HLR, sepsis, stroke…</span></button>
+      <button class="tile" data-new="proc"><span class="sw"></span><b>Procedur / POCUS</b><span>Bara färdigheten</span></button>
+      <button class="tile" data-new="prehosp"><span class="sw"></span><b>Prehospitalt</b><span>Ambulans, transport</span></button>
+      <button class="tile" data-new="led"><span class="sw"></span><b>Ledning</b><span>DAL, flöde, katastrof</span></button>
+      <button class="tile wba" data-wba="1"><span class="sw"></span><b>Bedömning</b><span>Mini-CEX · DOPS · CbD</span></button>
+    </div>
+    <div class="card ai" id="aiCard" hidden>
+      <div class="lbl">Skriv fritt <span class="hint">– Claude fyller i formuläret, du granskar och sparar</span></div>
+      <textarea id="aiText" placeholder="t.ex. Höftfraktur 85 år prio 2, fascia iliaca med ultraljud, handledare nåbar, kvällspass, inlagd ortopedi"></textarea>
+      <div class="row"><span class="st" id="aiSt">Inga personnummer, namn eller exakta åldrar.</span><button class="btn sm" id="aiStop" hidden>Stoppa</button><button class="btn pri" id="aiGo">Fyll i</button></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Senast loggat</div>
+      <div id="recent"></div>
+    </div>
+  </section>
+
+  <!-- CASE FORM -->
+  <section id="v-fall" hidden>
+    <div class="formhead"><button class="btn sm" id="fBack">← Tillbaka</button><h2 id="fTitle">Nytt fall</h2></div>
+    <div class="card" id="fEditing" hidden><div class="row" style="align-items:center"><div><b>Redigerar</b> <span class="muted" id="fEditInfo"></span></div><div style="flex:0 0 auto;display:flex;gap:6px"><button class="btn sm" id="fCancel">Avbryt</button><button class="btn sm warn" id="fDel">Radera</button></div></div></div>
+
+    <div class="card">
+      <div class="lbl">Typ</div><div class="chips" data-k="kind"></div>
+      <div class="sect"><div class="lbl">Rubrik / arbetsdiagnos</div><input type="text" id="f-title" list="dl-title" placeholder="t.ex. NSTEMI, Distal radiusfraktur, Septisk chock"></div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">Datum</div><input type="date" id="f-date"></div>
+        <div><div class="lbl">Plats</div><select id="f-site"></select></div>
+      </div>
+      <div class="sect"><div class="lbl">Pass</div><div class="chips" data-k="shift"></div></div>
+      <div class="sect" data-show="fall larm prehosp"><div class="lbl">Prio (RETTS)</div><div class="chips" data-k="prio"></div></div>
+      <div class="sect" data-show="fall larm prehosp proc"><div class="lbl">Ålder</div><div class="chips" data-k="age"></div></div>
+    </div>
+
+    <div class="card" data-show="fall prehosp">
+      <div class="lbl">Sökorsak</div><div class="chips" data-k="sok"></div>
+      <div class="sect"><input type="text" id="f-sokx" list="dl-sok" placeholder="Annan sökorsak (SWESEM-listan)"></div>
+    </div>
+
+    <div class="card" data-show="larm">
+      <div class="lbl">Larm</div><div class="chips" data-k="larm"></div>
+      <div class="sect"><div class="lbl">Min roll</div><div class="chips" data-k="lroll"></div></div>
+    </div>
+
+    <div class="card" data-show="led">
+      <div class="lbl">Situation</div><div class="chips" data-k="led"></div>
+    </div>
+
+    <div class="card" data-show="teach">
+      <div class="lbl">Undervisning</div><div class="chips" data-k="teach"></div>
+      <div class="sect"><div class="lbl">Målgrupp</div><div class="chips" data-k="aud"></div></div>
+    </div>
+
+    <div class="card" data-show="fall larm prehosp proc">
+      <div class="lbl">Procedurer <span class="hint">– räknas mot SWESEM:s rekommenderade antal</span></div>
+      <div id="procGroups"></div>
+      <div class="details" data-for="procs"></div>
+    </div>
+
+    <div class="card" data-show="fall larm prehosp proc">
+      <div class="lbl">POCUS</div><div class="chips" data-k="pocus"></div>
+      <div class="details" data-for="pocus"></div>
+    </div>
+
+    <div class="card" data-show="fall larm prehosp">
+      <div class="lbl">Handläggning</div><div class="chips" data-k="disp"></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Handledning <span class="hint">– hur mycket stöd behövdes?</span></div><div class="chips" data-k="sup"></div>
+      <div class="sect"><div class="lbl">EPA <span class="hint">– förvalt efter typ och prio</span></div><div class="chips" data-k="epa"></div></div>
+      <div class="sect"><div class="lbl">Delmål <span class="hint">– streckade är förslag, tryck för att ändra</span></div><div class="chips" data-k="delmal"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Reflektion / lärdom <span class="hint">(valfritt, inga patientuppgifter)</span></div>
+      <textarea id="f-notes"></textarea>
+    </div>
+  </section>
+
+  <!-- WBA FORM -->
+  <section id="v-wba" hidden>
+    <div class="formhead"><button class="btn sm" id="wBack">← Tillbaka</button><h2 id="wTitle">Ny bedömning</h2></div>
+    <div class="card" id="wEditing" hidden><div class="row" style="align-items:center"><div><b>Redigerar bedömning</b> <span class="muted" id="wEditInfo"></span></div><div style="flex:0 0 auto;display:flex;gap:6px"><button class="btn sm" id="wCancel">Avbryt</button><button class="btn sm warn" id="wDel">Radera</button></div></div></div>
+
+    <div class="card">
+      <div class="lbl">Bedömningsinstrument</div><div class="chips" data-w="type"></div>
+      <p class="muted" id="wDesc" style="margin:8px 0 0"></p>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div><div class="lbl">Datum</div><input type="date" id="w-date"></div>
+        <div><div class="lbl">Bedömare</div><input type="text" id="w-assessor" list="dl-assessor" placeholder="Namn"></div>
+      </div>
+      <div class="sect"><div class="lbl">Bedömarens roll</div><div class="chips" data-w="arole"></div></div>
+      <div class="sect"><div class="lbl">Plats</div><div class="chips" data-w="place"></div></div>
+      <div class="sect"><div class="lbl">Svårighetsgrad</div><div class="chips" data-w="diff"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">EPA</div><div class="chips" data-w="epa"></div>
+      <div class="sect" id="wProcWrap"><div class="lbl">Ingrepp</div><select id="w-proc"></select></div>
+      <div class="sect" id="wFocusWrap"><div class="lbl">Fokus</div><div class="chips" data-w="focus"></div></div>
+      <div class="sect"><div class="lbl">Fall / sammanhang <span class="hint">(utan patientuppgifter)</span></div><input type="text" id="w-ctx" placeholder="t.ex. Bröstsmärta, 60-årig, låg risk – HEART 2"></div>
+      <div class="sect"><div class="lbl">Delmål</div><div class="chips" data-w="delmal"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Bedömning <span class="hint">1–2 otillfredsställande · 3–4 tillfredsställande · 5–6 utmärkt</span></div>
+      <div id="wItems"></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Nivå i kompetenstrappan <span class="hint">– bedömarens samlade intryck</span></div><div class="chips" data-w="level"></div>
+      <div class="sect"><div class="lbl">Hur mycket handledning behövs nu?</div><div class="chips" data-w="entr"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Något som gick speciellt bra?</div><textarea id="w-good"></textarea>
+      <div class="sect"><div class="lbl">Förslag till förbättring</div><textarea id="w-imp"></textarea></div>
+      <div class="sect"><div class="lbl">Överenskommen åtgärd</div><input type="text" id="w-act" placeholder="t.ex. Läsa ERC-riktlinje bradykardi, ny DOPS inom 1 mån"></div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Pappersblankett</div>
+      <div class="chips"><button type="button" class="chip" id="w-paper">Signerad blankett finns</button></div>
+      <div class="sect row" style="align-items:center">
+        <label class="btn" id="photoBtn" hidden style="flex:0 0 auto">Fota / bifoga blankett<input type="file" id="w-photo" accept="image/*,application/pdf" hidden></label>
+        <button class="btn" id="wPdf" style="flex:0 0 auto">PDF för signering</button>
+      </div>
+      <div class="photo" id="wPhoto"></div>
+    </div>
+  </section>
+
+  <!-- LOGG -->
+  <section id="v-logg" hidden>
+    <div class="card">
+      <div class="row">
+        <input type="search" id="q" placeholder="Sök (diagnos, procedur, bedömare…)">
+        <select id="qk" style="flex:0 0 160px"></select>
+      </div>
+    </div>
+    <div class="card" id="list"></div>
+  </section>
+
+  <!-- TRAPPA -->
+  <section id="v-trappa" hidden>
+    <h2>Kompetenstrappan</h2>
+    <p class="muted" style="margin-top:-4px">SWESEM:s nio EPA. Målet är nivå 4 i alla delar i slutet av ST. Sätt din egen nivå; bedömarens senaste nivå visas bredvid.</p>
+    <div class="card"><div class="lbl">Progression per ST-år (ST Akut Malmö)</div><div class="ladder" id="ladder"></div></div>
+    <div id="epaList"></div>
+    <div class="card"><div class="legend" id="supLegend"></div><p class="src" style="margin:8px 0 0">Stapeln visar handledningsbehov i dina senaste 20 fall per EPA. Riktmärke för bedömningar från ST Akut Malmö. EPA-definitioner: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-KompetenstrappanEPA-230801.pdf" target="_blank" rel="noopener">SWESEM Kompetenstrappa (2023)</a>.</p></div>
+  </section>
+
+  <!-- DELMÅL -->
+  <section id="v-delmal" hidden>
+    <h2>Delmål</h2>
+    <p class="muted" style="margin-top:-4px">HSLF-FS 2021:8. Siffrorna visar fall · bedömningar kopplade till delmålet. Sätt status och intygsdatum när det är klart.</p>
+    <div id="dmList"></div>
+  </section>
+
+  <!-- FÄRDIGHETER -->
+  <section id="v-fard" hidden>
+    <h2>Färdigheter</h2>
+    <p class="muted" style="margin-top:-4px">Utförda av dig mot SWESEM Core Curriculums rekommenderade minsta antal. Assisterade visas inom parentes. MT = modellträning räcker.</p>
+    <div id="fardList"></div>
+  </section>
+
+  <!-- EXPORT -->
+  <section id="v-export" hidden>
+    <div class="card">
+      <div class="lbl">Period</div>
+      <div class="row"><div><input type="date" id="e-from"></div><div><input type="date" id="e-to"></div></div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip sm" data-range="all">Allt</button>
+        <button class="chip sm" data-range="6m">Senaste 6 mån</button>
+        <button class="chip sm" data-range="12m">Senaste 12 mån</button>
+        <button class="chip sm" data-range="year">I år</button>
+      </div>
+      <p class="muted" id="e-n"></p>
+      <div class="row"><button class="btn pri" id="xlsx">Ladda ner Excel</button><button class="btn pri" id="pdf">Portfölj som PDF</button></div>
+      <p class="muted" style="margin-bottom:0">PDF:en är gjord för handledarsamtal och specialistkollegium: EPA-nivåer, delmål, färdigheter, bedömningar och fallförteckning med signaturrader.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Uppgifter</div>
+      <div class="row"><div><input type="text" id="set-name" placeholder="Namn"></div><div><input type="text" id="set-clinic" placeholder="Klinik / sjukhus"></div></div>
+      <div class="row" style="margin-top:8px"><div><input type="text" id="set-hl" placeholder="Huvudhandledare"></div><div><input type="text" id="set-start" placeholder="ST-start (ÅÅÅÅ-MM)"></div></div>
+      <div style="margin-top:10px"><button class="btn" id="saveSettings">Spara uppgifter</button></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Säkerhetskopia</div>
+      <p class="muted" style="margin-top:0">JSON med alla fall, bedömningar och delmålsstatus. Kan läsas in igen (samma id skrivs över, inga dubbletter).</p>
+      <div class="row"><button class="btn" id="json">Exportera JSON</button><label class="btn" style="text-align:center">Importera JSON<input type="file" id="imp" accept=".json,application/json" hidden></label></div>
+    </div>
+    <div class="card src">
+      <div class="lbl">Underlag</div>
+      Delmål: <a href="https://www.socialstyrelsen.se/contentassets/b52d4bf225c448fbb400d8ee4bf0c57c/2021-2-7194.pdf" target="_blank" rel="noopener">Socialstyrelsen, Målbeskrivningar 2021 (HSLF-FS 2021:8)</a> ·
+      EPA: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-KompetenstrappanEPA-230801.pdf" target="_blank" rel="noopener">SWESEM Kompetenstrappa</a> ·
+      Procedurer och POCUS: <a href="https://slf.se/swesem/app/uploads/2023/08/SWESEM-Core-curriculum-230802.pdf" target="_blank" rel="noopener">SWESEM Core Curriculum</a> ·
+      Handledningsskala efter RCEM:s entrustment-skala · Larmledning efter ACEM Team Lead in Resuscitation · Passobservation efter RCEM ESLE.
+      EPA→delmål-kopplingen till 2021 års numrering är en tolkning (SWESEM:s trappa är skriven mot 2015 års delmål) och kan ändras per fall.
+    </div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar" hidden><div class="wrap in">
+  <button class="btn" id="copyLast">Som senast</button>
+  <button class="btn" id="clearBtn">Rensa</button>
+  <button class="btn pri" id="saveBtn">Spara</button>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
+<datalist id="dl-title"></datalist>
+<datalist id="dl-sok"></datalist>
+<datalist id="dl-assessor"></datalist>
+
+<script>
+/* ================= Konfiguration ================= */
+const KIND=[["fall","Patient"],["larm","Larm"],["proc","Procedur / POCUS"],["prehosp","Prehospitalt"],["led","Ledning"],["teach","Undervisning"]];
+const KINDNAME=Object.fromEntries(KIND);
+const SITES=["Akutmottagning","Barnakut","Prehospitalt / ambulans","Transport","Avdelning / IVA","Simulering","Annan enhet"];
+const SHIFT=["Dag","Kväll","Natt / helg"];
+const PRIO=[["1","Röd","--r1"],["2","Orange","--r2"],["3","Gul","--r3"],["4","Grön","--r4"],["5","Blå","--r5"]];
+const AGE=["<1 år","1–5 år","6–17 år","18–64 år","65–79 år","≥80 år"];
+const SOK=["Bröstsmärta","Andningsbesvär","Buksmärta","Huvudvärk","Yrsel","Svimning / TLOC","Feber / infektion","Medvetandepåverkan","Kramper","Pares / talpåverkan","Ryggsmärta","Extremitetsskada","Trauma","Hjärtklappning","GI-blödning","Intoxikation","Psykiatri / suicidalitet","Allergisk reaktion","Allmän försämring","Sår / brännskada","Urinvägsbesvär","Gyn / graviditet","Ögon","ÖNH","Avvikande prover"];
+const SOK_ALL=["Bröstsmärta","Buksmärta","Extremitetssmärta och -svullnad","Huvudvärk","Ledsmärta och -svullnad","Pung-/testikelsmärta","Ryggsmärta","Analsmärta","Ögonsmärta","Öron-, näs- och halssmärta","Acidemi","Alkalemi","Hypoxi","Kolmonoxidförgiftning","Hyperkapni","Anemi","Trombocytopeni","Leukopeni","Leukocytos","Hyponatremi","Hypernatremi","Hypokalemi","Hyperkalemi","Hypokalcemi","Hyperkalcemi","Förhöjt PK-INR","Förhöjda leverenzymer","Förhöjt laktat","Förhöjt kreatinin","Förhöjt CRP","Förhöjt troponin","Förhöjd D-dimer","Epistaxis","Hematemes","Hemoptys","Hematochezi och melena","Hematuri","Vaginal blödning","Intraabdominell blödning","Postoperativ blödning","Låg saturation","Hypotoni","Hypertoni","Bradykardi","Takykardi","Hypotermi","Hypertermi","Andningsbesvär","Avvikande beteende","Crying baby","Feber","Hjärtklappning","Hörselnedsättning","Illamående","Klåda","Förstoppning","Hosta","Hudutslag","Ikterus","Kramper","Kräkning","Kognitiv svikt","Känselnedsättning","Nedstämdhet","Svaghet","Svimfärdighet","Sväljningssvårigheter","Synrubbning","Trötthet","Underlivsbesvär","Urinvägsbesvär","Yrsel","Ångest","Diarré","Balansbesvär","Medvetanderubbning","Misshandel","Intoxikation","Pares och talrubbning","Inhalationsskada","Suicidalitet","Tillfällig medvetandeförlust","Trauma","Röda ögat"];
+const LARM=["Traumalarm","HLR vuxen","HLR barn","Sepsislarm","Strokelarm","STEMI / bröstsmärta","Barnlarm","Obstetriskt larm","Luftväg / andning","Intoxikation","Katastrof / masskada"];
+const LROLL=["Teammedlem","Luftväg","Teamledare","Larmläkare / bakre","Observatör"];
+const LED=["Dagansvarig (DAL)","Samordnare / flöde","Överbeläggning","Särskild händelse","Katastrofövning"];
+const TEACH=["Bedside","Föreläsning","Simulering (instruktör)","Handledning","Journal club / M&M"];
+const AUD=["Läkarstudent","AT/BT","ST-läkare","Sjuksköterska","Ambulans","Blandat team"];
+const DISP=["Hem","Inläggning","IVA / IMA","Operation / PCI","Överflyttning","Avliden"];
+const SUP=[["1","1 · I rummet"],["2a","2a · På golvet"],["2b","2b · Nåbar"],["3","3 · Bakjour"],["4","4 · Självständigt"],["T","Handledde annan"]];
+const SUPLONG={"1":"Handledare i rummet","2a":"Handledare på golvet, löpande avstämning","2b":"Handledare nåbar vid behov","3":"Bakjour / på distans","4":"Självständigt","T":"Handledde annan"};
+const SUPCOL={"1":"--s1","2a":"--s2","2b":"--s3","3":"--s4","4":"--s5","T":"--r4"};
+
+const EPA=[
+ [1,"Okomplicerad stabil patient","prio 3–4"],
+ [2,"Komplicerad stabil patient","prio 3–4 med komplicerande faktorer"],
+ [3,"Stabil patient, potentiellt allvarlig åkomma","prio 2–3"],
+ [4,"Okomplicerat larm, tydlig presentation","prio 1 – trauma, sepsis, stroke, STEMI, HLR"],
+ [5,"Komplicerat larm, oklar presentation","prio 1"],
+ [6,"Prehospital handläggning",""],
+ [7,"Leda ett arbetslag","inkl. hög belastning och katastrofläge"],
+ [8,"Smärtlindring","inkl. palliation i livets slut"],
+ [9,"Undervisning och verksamhetsutveckling",""],
+];
+const LADDER={1:[1,2],2:[3],3:[4,8],4:[5],5:[7]};
+const LADROLE={1:"Arbetar i team",2:"Team med handledning",3:"Teamansvar",4:"Teamledare vid larm",5:"DAL och ledarskap"};
+const TARGET={1:{mc:4,dops:3},2:{mc:4,dops:3},3:{mc:4,dops:3},4:{mc:4,dops:3},5:{mc:4,dops:3},7:{mc:2},8:{mc:2,dops:3}};
+
+const DM=[
+ ["STa1","Hälso- och sjukvårdens förutsättningar"],["STa2","Systematiskt kvalitets- och patientsäkerhetsarbete"],["STa3","Medicinsk vetenskap"],["STa4","Etik"],["STa5","Ledarskap"],["STa6","Lärande"],["STa7","Vårdhygien och smittskydd"],
+ ["STb1","Kommunikation med patienter och närstående"],["STb2","Sjukdomsförebyggande och hälsofrämjande arbete"],["STb3","Försäkringsmedicin"],["STb4","Palliativ vård"],
+ ["STc1","Livshotande tillstånd i alla åldrar"],["STc2","Medicinsk prioritering"],["STc3","Symtom, differentialdiagnostik och sannolikhet"],["STc4","Akut smärta och smärtlindring"],["STc5","Akuta diagnostiska och terapeutiska färdigheter, medicinteknik"],["STc6","Initial behandling enligt aktuella riktlinjer"],["STc7","Risk–nyttavärdering av handläggning"],["STc8","Prehospital handläggning och teamarbete"],["STc9","Leda arbete på akutenhet, prehospitalt och vid katastrof"],["STc10","Patientsäkerhet till överlämning, transport, förlossning"],["STc11","Samverkan med samhällets resurser"],["STc12","Epidemiologi och prevention"],["STc13","Läkemedelsbehandling, helhetssyn"],["STc14","Lagar och författningar"],
+];
+const DMNAME=Object.fromEntries(DM);
+const DM_STATUS=["Ej påbörjat","Pågår","Klart för intyg","Intygat"];
+const EPA_DM={1:["STc2","STc3","STc6","STc13","STb1"],2:["STc2","STc3","STc6","STc7","STc13","STb1"],3:["STc1","STc2","STc3","STc5","STc6","STc7"],4:["STc1","STc5","STc6","STa5"],5:["STc1","STc3","STc7","STc9","STa5"],6:["STc8","STc9","STc10"],7:["STc9","STa5","STa2"],8:["STc4","STc13","STb4"],9:["STa6"]};
+
+/* Procedurer: [grupp, namn, SWESEM-min ("MT" = modellträning), detaljnyckel] */
+const PROCS=[
+ ["Luftväg","Maskventilation",25],["Luftväg","Larynxmask",20],["Luftväg","Intubation – direkt laryngoskopi",35,"ett"],["Luftväg","Intubation – videolaryngoskop",20,"vl"],["Luftväg","Fiberlaryngoskopi",10],["Luftväg","Extubation",10],["Luftväg","Kirurgisk luftväg","MT"],
+ ["Andning","NIV / CPAP",10],["Andning","Högflödesgrimma",10],["Andning","Nål-/fingerthorakostomi",5],["Andning","Pleuracentes",5],["Andning","Thoraxdrän",10,"drain"],
+ ["Cirkulation","HLR – kompressioner",10],["Cirkulation","Defibrillering",10],["Cirkulation","Elkonvertering",10],["Cirkulation","Extern pacing",5],["Cirkulation","CVK",10,"cvk"],["Cirkulation","Artärnål",10,"art"],["Cirkulation","Intraosseös nål",5],["Cirkulation","Artärblodgas",10],["Cirkulation","PVK med ultraljud",25],
+ ["Ortopedi","Frakturreposition",20,"frx"],["Ortopedi","Ledreposition",30,"lux"],["Ortopedi","Gipsskena",10],["Ortopedi","Artrocentes",30,"artro"],["Ortopedi","Bäckengördel",5],
+ ["Smärta och sedering","Procedursedering",25,"sed"],["Smärta och sedering","Fascia iliaca / femoralisblock",10,"blk"],["Smärta och sedering","Fingerblockad",20],["Smärta och sedering","Hematomblockad",15],["Smärta och sedering","Annan nervblockad",5,"blk"],
+ ["Sår och kirurgi","Sutur",25],["Sår och kirurgi","Abscessincision",20],["Sår och kirurgi","Främmande kropp, hud",10],["Sår och kirurgi","Nagelbädd / subungualt hematom",10],["Sår och kirurgi","Proktoskopi",10],
+ ["Neuro, ÖNH, ögon","Lumbalpunktion",15],["Neuro, ÖNH, ögon","Näsblödning, tamponad / kauterisering",5],["Neuro, ÖNH, ögon","Främmande kropp, näsa / öra",10],["Neuro, ÖNH, ögon","Peritonsillit, punktion / incision",2],["Neuro, ÖNH, ögon","Spaltlampa",5],["Neuro, ÖNH, ögon","Främmande kropp, kornea",2],
+ ["Övrigt","KAD",15],["Övrigt","V-sond",10],["Övrigt","Paracentes",5],["Övrigt","Gynekologisk spekulumundersökning",10],["Övrigt","Vaginal förlossning",5],
+];
+const PROCMIN=Object.fromEntries(PROCS.map(p=>[p[1],p[2]]));
+const PROCDET=Object.fromEntries(PROCS.map(p=>[p[1],p[3]||""]));
+const PROCGROUPS=[...new Set(PROCS.map(p=>p[0]))];
+const POCUS=[["eFAST",25],["Hjärta – vänsterkammarfunktion",50],["Hjärta – högerkammarbelastning",25],["Perikardvätska",25],["Hjärta under HLR",10],["Lunga – pneumothorax",50],["Lunga – B-linjer",50],["Pleuravätska",50],["DVT",50],["Aorta (AAA)",25],["Gallvägar",25],["Hydronefros",25],["Urinblåsa",25],["IVC / RUSH",25],["Mjukdel / abscess",10],["Främmande kropp",10]];
+const POCMIN=Object.fromEntries(POCUS);
+
+const ROLE=["Utförde","Assisterade","Handledde annan"];
+const OK=["Lyckad","Ej lyckad"], TRIES=["1 försök","2 försök","≥3 försök"];
+function procFields(name){
+  const base=[["role","Roll",ROLE],["res","Utfall",OK]];
+  const k=PROCDET[name];
+  const X={
+    ett:[["rsi","RSI",["RSI","Ej RSI"]],["tries","Försök",TRIES]],
+    vl:[["dev","Typ",["McGrath","C-MAC","GlideScope","Annat"]],["rsi","RSI",["RSI","Ej RSI"]],["tries","Försök",TRIES]],
+    drain:[["tech","Teknik",["Seldinger","Kirurgisk"]],["side","Sida",["Hö","Vä"]]],
+    cvk:[["site","Läge",["V. jug. int.","V. subclavia","V. femoralis"]],["us","Teknik",["Ultraljud","Landmärke"]]],
+    art:[["site","Läge",["A. radialis","A. femoralis","Annan"]],["us","Teknik",["Ultraljud","Palpation"]]],
+    frx:[["loc","Lokal",["Distal radius","Fotled","Finger / tå","Underarm, barn","Annan"]]],
+    lux:[["loc","Led",["Axel","Armbåge","Finger","Patella","Höftprotes","Fotled","Käke"]]],
+    artro:[["loc","Led",["Knä","Annan led"]],["us","Teknik",["Ultraljud","Landmärke"]]],
+    sed:[["drug","Läkemedel",["Propofol","Ketamin","Esketamin","Midazolam","Fentanyl","Lustgas"],1]],
+    blk:[["us","Teknik",["Ultraljud","Landmärke"]]],
+  };
+  return [...base,...(X[k]||[])];
+}
+const POCFIELDS=[["find","Fynd",["Normalt","Patologiskt","Oklart"]],["dec","Ändrade handläggning",["Ja","Nej"]],["ver","Verifierad",["Handledare granskade","Mot rtg / annan us.","Ej verifierad"]],["img","Bild sparad",["Ja","Nej"]]];
+
+/* Bedömningsinstrument */
+const WTYPES={
+ "Mini-CEX":{d:"Direkt observation av ett patientmöte. Bedömaren ser anamnes, status och bedömning och ger återkoppling direkt.",items:["Anamnes","Status","Bemötande / professionalism","Klinisk bedömningsförmåga","Rådgivning och information","Organisation / effektivitet"],g:"Sammanfattande klinisk förmåga",focus:["Anamnes & status","Diagnos","Behandling","Rådgivning"]},
+ "DOPS":{d:"Direkt observation av en praktisk färdighet mot en strukturerad checklista.",items:["Förstår indikation, anatomi och teknik","Informerat och fått samtycke","Förbereder adekvat inkl. hygien","Adekvat bedövning / sedering","Teknisk skicklighet","Arbetar sterilt","Ber om hjälp adekvat","Avslutar ingreppet adekvat","Kommunikation"],g:"Sammanfattande förmåga att genomföra ingreppet",proc:1},
+ "CbD":{d:"Fallbaserad diskussion utifrån din journalanteckning: resonemang, beslut och plan.",items:["Journalanteckning","Klinisk bedömning","Utredning / remittering","Behandling","Uppföljning / planering","Professionalism"],g:"Sammanfattande klinisk förmåga",focus:["Datainsamling","Klinisk bedömning","Behandling","Professionalism"]},
+ "Larmledning":{d:"Observation som teamledare vid larm. Bygger på ACEM:s Team Lead in Resuscitation och icke-tekniska färdigheter.",items:["Förberedelse och briefing","Rollfördelning","Situationsmedvetenhet","Beslutsfattande","Kommunikation, closed loop","Resurshantering","Debriefing"],g:"Sammanfattande förmåga som teamledare",focus:["Trauma","HLR","Medicinskt larm","Barn"]},
+ "Passobservation":{d:"Observation av ett helt arbetspass (ca 2 h observation, 1 h återkoppling), efter RCEM:s ESLE.",items:["Prioritering och flöde","Beslutsfattande","Ledarskap och teamarbete","Kommunikation och överrapportering","Patientsäkerhet"],g:"Sammanfattande förmåga att leda arbetet",focus:["Akutrum","Medicinflöde","Kirurgflöde","DAL"]},
+};
+const WOPT={type:Object.keys(WTYPES),arole:["Specialist akut","Annan specialist","Huvudhandledare","Sjuksköterska / annan"],place:["Akutrum","Akutmottagning","Barnakut","Prehospitalt","Simulering"],diff:["Enkelt","Medelsvårt","Svårt"],epa:EPA.map(e=>[String(e[0]),"EPA "+e[0]]),level:[["1","Nivå 1"],["2","Nivå 2"],["3","Nivå 3"],["4","Nivå 4"]],entr:SUP.filter(s=>s[0]!=="T")};
+
+/* ================= Hjälpfunktioner ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const clone=o=>JSON.parse(JSON.stringify(o));
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2000)}
+function setStatus(msg,ok){const s=$("#status");if(!msg){s.hidden=true;return}s.hidden=false;s.textContent=msg;s.classList.toggle("ok",!!ok)}
+const opts=a=>a.map(o=>Array.isArray(o)?o:[o,o]);
+function shiftNow(){const h=new Date().getHours();return h>=7&&h<16?"Dag":h>=16&&h<22?"Kväll":"Natt / helg"}
+
+/* ================= State ================= */
+let cases=[], wbas=[], settings={name:"",clinic:"",hl:"",start:""}, dmState={}, epaState={};
+let store=null, assets=null, sampleFn=null;
+let form, editingId=null, wform, wEditingId=null, view="home";
+
+function blankCase(kind,keep){
+  const f={kind:kind||"fall",title:"",date:today(),site:kind==="prehosp"?"Prehospitalt / ambulans":"Akutmottagning",shift:shiftNow(),prio:"",age:"",sok:[],sokx:"",larm:[],lroll:"",led:[],teach:[],aud:[],procs:[],pocus:[],details:{},disp:"",sup:"",epa:[],delmal:[],dmManual:false,epaManual:false,notes:""};
+  if(keep){["date","site","shift"].forEach(k=>f[k]=keep[k]);}
+  if(kind==="larm") f.prio="1";
+  autoEpa(f); autoDm(f);
+  return f;
+}
+function blankWba(type){
+  return {type:type||"Mini-CEX",date:today(),assessor:"",arole:"Specialist akut",place:"Akutmottagning",diff:"Medelsvårt",epa:"",proc:"",focus:[],ctx:"",delmal:[],items:{},global:0,level:"",entr:"",good:"",imp:"",act:"",paper:false,photo:"",caseId:""};
+}
+
+/* ---- Automatik: EPA och delmål ---- */
+function autoEpa(f){
+  if(f.epaManual) return;
+  let e=[];
+  if(f.kind==="fall"){ e=["1","2"].includes(f.prio)?["3"]:["1"]; }
+  if(f.kind==="larm") e=["4"];
+  if(f.kind==="prehosp") e=["6"];
+  if(f.kind==="led") e=["7"];
+  if(f.kind==="teach") e=["9"];
+  if(f.procs.some(p=>/sedering|block/i.test(p))) e.push("8");
+  if(f.sup==="T" && !e.includes("9")) e.push("9");
+  f.epa=[...new Set(e)];
+}
+function suggestDm(f){
+  const s=new Set();
+  f.epa.forEach(e=>(EPA_DM[e]||[]).forEach(d=>s.add(d)));
+  if(f.procs.length||f.pocus.length) s.add("STc5");
+  if(/Prehospitalt|Transport/.test(f.site)) {s.add("STc8");s.add("STc10");}
+  if(f.disp==="Överflyttning") s.add("STc10");
+  if(f.sok.some(x=>/Intoxikation|Psykiatri/.test(x))||f.larm.includes("Intoxikation")) s.add("STc11");
+  if(f.sok.includes("Gyn / graviditet")||f.larm.includes("Obstetriskt larm")) s.add("STc10");
+  if(f.disp==="Avliden") s.add("STb4");
+  if(f.kind==="teach"||f.sup==="T") s.add("STa6");
+  if(f.kind==="led") {s.add("STa5");s.add("STc9");}
+  return [...s];
+}
+function autoDm(f){ if(!f.dmManual) f.delmal=suggestDm(f); }
+
+/* ================= Rendering av chips ================= */
+function caseOpts(k){
+  if(k==="kind") return KIND; if(k==="shift") return opts(SHIFT); if(k==="age") return opts(AGE);
+  if(k==="sok") return opts(SOK); if(k==="larm") return opts(LARM); if(k==="lroll") return opts(LROLL);
+  if(k==="led") return opts(LED); if(k==="teach") return opts(TEACH); if(k==="aud") return opts(AUD);
+  if(k==="disp") return opts(DISP); if(k==="sup") return SUP; if(k==="pocus") return opts(POCUS.map(p=>p[0]));
+  if(k==="epa") return EPA.map(e=>[String(e[0]),"EPA "+e[0]]);
+  if(k==="delmal") return DM.map(d=>[d[0],d[0]]);
+  return [];
+}
+const CMULTI=new Set(["sok","larm","led","teach","aud","pocus","epa","delmal"]);
+function renderCaseChips(){ renderChipsOnly(); renderProcGroups(); renderDetails("procs"); renderDetails("pocus"); }
+function renderProcGroups(){
+  $("#procGroups").innerHTML=PROCGROUPS.map(g=>{
+    const items=PROCS.filter(p=>p[0]===g); const n=items.filter(p=>form.procs.includes(p[1])).length;
+    const open=n>0||g==="Luftväg"&&form.kind==="larm";
+    return `<details class="grp" data-g="${esc(g)}"${open?" open":""}><summary>${esc(g)}${n?`<span class="n">${n} vald${n>1?"a":""}</span>`:""}</summary><div class="chips">${items.map(p=>`<button type="button" class="chip sm${form.procs.includes(p[1])?" on":""}" data-proc="${esc(p[1])}">${esc(p[1])}</button>`).join("")}</div></details>`;
+  }).join("");
+}
+function renderDetails(group){
+  const box=$(`.details[data-for="${group}"]`); if(!box) return;
+  const sel=group==="procs"?form.procs:form.pocus;
+  box.innerHTML=sel.map(v=>{
+    const fs=group==="procs"?procFields(v):POCFIELDS; const key=group+":"+v; const d=form.details[key]||{};
+    return `<div class="dbox"><div class="dt">${esc(v)}</div>${fs.map(([f,l,o,multi])=>`<div class="dfield"><span class="dl">${esc(l)}</span>${o.map(x=>{const on=multi?(d[f]||[]).includes(x):d[f]===x;return `<button type="button" class="dchip${on?" on":""}" data-dk="${esc(key)}" data-df="${f}" data-dm="${multi?1:""}" data-v="${esc(x)}">${esc(x)}</button>`}).join("")}</div>`).join("")}</div>`;
+  }).join("");
+}
+function updateVisibility(){
+  $$("#v-fall [data-show]").forEach(el=>el.hidden=!el.dataset.show.split(" ").includes(form.kind));
+  $("#fTitle").textContent=(editingId?"":"Nytt: ")+(KINDNAME[form.kind]||"Fall");
+}
+function fillCase(){
+  $("#f-site").innerHTML=SITES.map(s=>`<option${form.site===s?" selected":""}>${esc(s)}</option>`).join("");
+  $("#f-date").value=form.date; $("#f-title").value=form.title; $("#f-sokx").value=form.sokx||""; $("#f-notes").value=form.notes;
+  $("#fEditing").hidden=!editingId; $("#copyLast").hidden=!!editingId;
+  $("#saveBtn").textContent=editingId?"Spara ändringar":"Spara fall";
+  renderCaseChips(); updateVisibility();
+}
+function readCase(){
+  form.date=$("#f-date").value||today(); form.site=$("#f-site").value; form.title=$("#f-title").value.trim();
+  form.sokx=$("#f-sokx").value.trim(); form.notes=$("#f-notes").value.trim();
+}
+
+/* klick i fallformuläret */
+$("#v-fall").addEventListener("click",e=>{
+  const pb=e.target.closest("[data-proc]");
+  if(pb){ const v=pb.dataset.proc,i=form.procs.indexOf(v); i<0?form.procs.push(v):form.procs.splice(i,1);
+    if(i<0){form.details["procs:"+v]=Object.assign({role:"Utförde",res:"Lyckad"},form.details["procs:"+v]||{});}
+    autoEpa(form); autoDm(form); pb.classList.toggle("on"); const g=pb.closest("details"); const n=PROCS.filter(p=>p[0]===g.dataset.g&&form.procs.includes(p[1])).length; const s=g.querySelector("summary"); s.innerHTML=esc(g.dataset.g)+(n?`<span class="n">${n} vald${n>1?"a":""}</span>`:""); renderDetails("procs"); rerender(["epa","delmal"]); draftChanged(); return; }
+  const dc=e.target.closest(".dchip");
+  if(dc){ const {dk,df,dm,v}=dc.dataset; const d=form.details[dk]=form.details[dk]||{};
+    if(dm){const a=d[df]=Array.isArray(d[df])?d[df]:[];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);} else d[df]=d[df]===v?undefined:v;
+    renderDetails(dk.split(":")[0]); draftChanged(); return; }
+  if(e.target.id==="dmAll"){ const box=$('#v-fall .chips[data-k="delmal"]'); box.innerHTML=DM.map(([v])=>`<button type="button" class="chip sm${form.delmal.includes(v)?" on":""}" data-v="${v}" title="${esc(DMNAME[v])}">${v}</button>`).join(""); return; }
+  const c=e.target.closest(".chips[data-k] .chip"); if(!c) return;
+  const k=c.parentElement.dataset.k, v=c.dataset.v;
+  if(CMULTI.has(k)){const a=form[k];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);}
+  else form[k]=(form[k]===v&&k!=="kind"&&k!=="shift")?"":v;
+  if(k==="epa") form.epaManual=true;
+  if(k==="delmal") form.dmManual=true;
+  if(["kind","prio","sup","pocus"].includes(k)) autoEpa(form);
+  if(["kind","prio","sup","pocus","sok","larm","disp","epa"].includes(k)) autoDm(form);
+  if(k==="kind"){ if(form.kind==="larm"&&!form.prio) form.prio="1"; if(form.kind==="prehosp") form.site="Prehospitalt / ambulans"; autoEpa(form); autoDm(form); fillCase(); draftChanged(); return; }
+  if(k==="pocus"){ if(form.pocus.includes(v)) form.details["pocus:"+v]=form.details["pocus:"+v]||{}; renderDetails("pocus"); }
+  if(k==="delmal"){ c.classList.toggle("on"); draftChanged(); return; }
+  rerender([k,"epa","delmal"]); draftChanged();
+});
+$("#f-site").addEventListener("change",()=>{form.site=$("#f-site").value;autoDm(form);rerender(["delmal"]);draftChanged()});
+function rerender(){ const y=window.scrollY; renderChipsOnly(); window.scrollTo(0,y); }
+function renderChipsOnly(){
+  $$("#v-fall .chips[data-k]").forEach(box=>{
+    const k=box.dataset.k;
+    if(k==="prio"){ box.innerHTML=PRIO.map(([v,l,c])=>`<button type="button" class="chip p${form.prio===v?" on":""}" data-v="${v}"><i style="background:var(${c})"></i>${v} ${l}</button>`).join(""); return; }
+    if(k==="delmal"){ const sug=new Set(suggestDm(form)); const shown=new Set([...form.delmal,...sug]);
+      box.innerHTML=DM.filter(([v])=>shown.has(v)).map(([v])=>`<button type="button" class="chip sm${form.delmal.includes(v)?" on":""}${sug.has(v)?" sug":""}" data-v="${v}" title="${esc(DMNAME[v])}">${v}</button>`).join("")+`<button type="button" class="chip sm" id="dmAll">+ fler</button>`; return; }
+    box.innerHTML=caseOpts(k).map(([v,l])=>{const on=CMULTI.has(k)?form[k].includes(v):form[k]===v;return `<button type="button" class="chip${k==="epa"?" sm":""}${on?" on":""}" data-v="${esc(v)}">${esc(l)}</button>`}).join("");
+  });
+}
+
+/* ================= Spara fall ================= */
+function cleanCase(f){
+  const c=clone(f);
+  if(!["fall","prehosp"].includes(c.kind)){c.sok=[];c.sokx="";}
+  if(c.kind!=="larm"){c.larm=[];c.lroll="";}
+  if(c.kind!=="led") c.led=[];
+  if(c.kind!=="teach"){c.teach=[];c.aud=[];}
+  if(["led","teach"].includes(c.kind)){c.procs=[];c.pocus=[];c.disp="";c.prio="";c.age="";}
+  if(c.kind==="proc"){c.disp="";c.prio="";}
+  const keep=new Set([...c.procs.map(v=>"procs:"+v),...c.pocus.map(v=>"pocus:"+v)]);
+  const det={}; Object.entries(c.details||{}).forEach(([k,o])=>{if(!keep.has(k))return;const x={};Object.entries(o||{}).forEach(([f,v])=>{if(v!=null&&!(Array.isArray(v)&&!v.length))x[f]=v});det[k]=x});
+  c.details=det; return c;
+}
+async function saveCase(){
+  readCase();
+  if(!store){toast("Lagringen är inte redo än");return}
+  if(form.kind==="proc"&&!form.procs.length&&!form.pocus.length){toast("Välj minst en procedur eller POCUS");return}
+  if(!form.sup){toast("Välj handledningsnivå");$('[data-k="sup"]').scrollIntoView({behavior:"smooth",block:"center"});return}
+  const c=cleanCase(form), now=new Date().toISOString();
+  if(editingId){const old=cases.find(x=>x.id===editingId)||{};c.id=editingId;c.createdAt=old.createdAt||now}else{c.id=uid();c.createdAt=now}
+  c.updatedAt=now;
+  const b=$("#saveBtn"); b.disabled=true;
+  try{ await store.save("cases",c); toast(editingId?"Ändringar sparade":"Fall sparat"); clearDraft(); markSaved("Sparat");
+    const keep=editingId?null:form; editingId=null; form=blankCase(keep?keep.kind:"fall",keep); fillCase(); window.scrollTo({top:0,behavior:"smooth"}); }
+  catch(err){toast(errMsg(err))} finally{b.disabled=false}
+}
+function errMsg(e){ if(e&&e.code==="quota_exceeded")return "Lagringen är full – exportera och rensa gamla poster"; if(e&&(e.code==="invalid_argument"||e.code==="permission_denied"))return "Du har inte skrivbehörighet till den här loggboken"; return "Kunde inte spara – försök igen"; }
+function editCase(id){ const c=cases.find(x=>x.id===id); if(!c)return; editingId=id; form=Object.assign(blankCase(c.kind),clone(c),{epaManual:true,dmManual:true}); $("#fEditInfo").textContent=`${c.date} · ${KINDNAME[c.kind]||""}`; show("fall"); fillCase(); window.scrollTo({top:0}); }
+$("#fCancel").onclick=()=>{editingId=null;form=blankCase();clearDraft();show("logg")};
+$("#fBack").onclick=()=>{ if(editingId){editingId=null;form=blankCase();} show("home") };
+armDelete($("#fDel"),async()=>{await store.remove("cases",editingId);clearDraft();toast("Fall raderat");editingId=null;form=blankCase();show("logg")});
+function armDelete(b,fn){ b.onclick=async()=>{ if(!b.dataset.arm){b.dataset.arm=1;b.textContent="Bekräfta radera";setTimeout(()=>{delete b.dataset.arm;b.textContent="Radera"},3000);return} delete b.dataset.arm;b.textContent="Radera"; try{await fn()}catch(e){toast(errMsg(e))} }; }
+
+/* ================= Bedömning (WBA) ================= */
+function renderWba(){
+  const T=WTYPES[wform.type];
+  $$("#v-wba .chips[data-w]").forEach(box=>{
+    const k=box.dataset.w;
+    if(k==="focus"){ box.innerHTML=(T.focus||[]).map(v=>`<button type="button" class="chip sm${wform.focus.includes(v)?" on":""}" data-v="${esc(v)}">${esc(v)}</button>`).join(""); return; }
+    if(k==="delmal"){ const sug=new Set(EPA_DM[wform.epa]||[]); const shown=new Set([...wform.delmal,...sug]);
+      box.innerHTML=DM.filter(([v])=>shown.has(v)).map(([v])=>`<button type="button" class="chip sm${wform.delmal.includes(v)?" on":""}${sug.has(v)?" sug":""}" data-v="${v}" title="${esc(DMNAME[v])}">${v}</button>`).join("")+`<button type="button" class="chip sm" data-all="1">+ fler</button>`; return; }
+    box.innerHTML=opts(WOPT[k]).map(([v,l])=>`<button type="button" class="chip${["epa","level"].includes(k)?" sm":""}${wform[k]===v?" on":""}" data-v="${esc(v)}">${esc(l)}</button>`).join("");
+  });
+  $("#wDesc").textContent=T.d;
+  $("#wProcWrap").hidden=!T.proc; $("#wFocusWrap").hidden=!T.focus;
+  $("#w-proc").innerHTML=`<option value="">Välj ingrepp…</option>`+PROCGROUPS.map(g=>`<optgroup label="${esc(g)}">${PROCS.filter(p=>p[0]===g).map(p=>`<option${wform.proc===p[1]?" selected":""}>${esc(p[1])}</option>`).join("")}</optgroup>`).join("")+`<optgroup label="POCUS">${POCUS.map(p=>`<option${wform.proc===p[0]?" selected":""}>${esc(p[0])}</option>`).join("")}</optgroup>`;
+  const all=[...T.items.map((q,i)=>["i"+i,q,false]),["g",T.g,true]];
+  $("#wItems").innerHTML=all.map(([k,q,g])=>{const v=k==="g"?wform.global:wform.items[k];return `<div class="rate"><div class="q${g?" g":""}">${esc(q)}</div><div class="scale" data-r="${k}">${[1,2,3,4,5,6].map(n=>`<button type="button" class="${v===n?"on":""}${n<=2&&v===n?" lo":""}" data-n="${n}" aria-label="${n}">${n}</button>`).join("")}${g?"":`<button type="button" class="na${v===0&&k in wform.items?" on":""}" data-n="0">Ej obs</button>`}</div></div>`}).join("")+`<div class="scalekey"><span>1–2 Otillfredsställande</span><span>3–4 Tillfredsställande</span><span>5–6 Utmärkt</span></div>`;
+  $("#w-paper").classList.toggle("on",!!wform.paper);
+  $("#photoBtn").hidden=!assets;
+  $("#wPhoto").innerHTML=wform.photo?(/\.pdf$|pdf/i.test(wform.photoType||"")?`<p class="muted">Bifogad PDF: <a href="/_blob/${esc(wform.photo)}" target="_blank" rel="noopener">öppna</a></p>`:`<img src="/_blob/${esc(wform.photo)}" alt="Signerad bedömningsblankett">`):"";
+}
+function fillWba(){
+  $("#w-date").value=wform.date; $("#w-assessor").value=wform.assessor; $("#w-ctx").value=wform.ctx;
+  $("#w-good").value=wform.good; $("#w-imp").value=wform.imp; $("#w-act").value=wform.act;
+  $("#wEditing").hidden=!wEditingId; $("#copyLast").hidden=true;
+  $("#wTitle").textContent=wEditingId?"Bedömning":"Ny bedömning";
+  $("#saveBtn").textContent=wEditingId?"Spara ändringar":"Spara bedömning";
+  renderWba();
+}
+function readWba(){
+  wform.date=$("#w-date").value||today(); wform.assessor=$("#w-assessor").value.trim(); wform.ctx=$("#w-ctx").value.trim();
+  wform.good=$("#w-good").value.trim(); wform.imp=$("#w-imp").value.trim(); wform.act=$("#w-act").value.trim(); wform.proc=$("#w-proc").value;
+}
+$("#v-wba").addEventListener("click",e=>{
+  const sb=e.target.closest(".scale button");
+  if(sb){ const k=sb.parentElement.dataset.r, n=+sb.dataset.n; readWba();
+    if(k==="g") wform.global=wform.global===n?0:n; else { if(wform.items[k]===n) delete wform.items[k]; else wform.items[k]=n; }
+    renderWba(); draftChanged(); return; }
+  if(e.target.id==="w-paper"){ wform.paper=!wform.paper; e.target.classList.toggle("on",wform.paper); draftChanged(); return; }
+  const c=e.target.closest(".chips[data-w] .chip"); if(!c) return;
+  const k=c.parentElement.dataset.w; readWba();
+  if(c.dataset.all){ c.parentElement.innerHTML=DM.map(([v])=>`<button type="button" class="chip sm${wform.delmal.includes(v)?" on":""}" data-v="${v}">${v}</button>`).join(""); return; }
+  const v=c.dataset.v;
+  if(k==="focus"||k==="delmal"){ const a=wform[k],i=a.indexOf(v); i<0?a.push(v):a.splice(i,1); }
+  else wform[k]=(wform[k]===v&&k!=="type")?"":v;
+  if(k==="type"){ wform.items={}; wform.global=0; wform.focus=[]; }
+  if(k==="epa"&&!wform._dmManual) wform.delmal=[...(EPA_DM[wform.epa]||[])];
+  if(k==="delmal") wform._dmManual=true;
+  renderWba(); draftChanged();
+});
+$("#w-photo").onchange=async e=>{
+  const f=e.target.files[0]; e.target.value=""; if(!f||!assets) return;
+  toast("Laddar upp…");
+  try{ const r=await assets.upload(f,f.type?undefined:{type:"image/jpeg"}); wform.photo=r.id; wform.photoType=r.contentType; wform.paper=true; renderWba(); toast("Blankett bifogad – spara bedömningen"); }
+  catch(err){ toast(err&&err.code==="too_large"?"Filen är för stor (max 20 MB)":err&&err.code==="unsupported_type"?"Filtypen stöds inte – använd JPG, PNG eller PDF":"Kunde inte ladda upp – försök igen"); }
+};
+async function saveWba(){
+  readWba();
+  if(!store){toast("Lagringen är inte redo än");return}
+  if(!wform.assessor){toast("Skriv bedömarens namn");$("#w-assessor").focus();return}
+  const w=clone(wform); delete w._dmManual; const now=new Date().toISOString();
+  if(wEditingId){const old=wbas.find(x=>x.id===wEditingId)||{};w.id=wEditingId;w.createdAt=old.createdAt||now}else{w.id=uid();w.createdAt=now}
+  w.updatedAt=now;
+  const b=$("#saveBtn"); b.disabled=true;
+  try{ await store.save("wba",w); toast(wEditingId?"Ändringar sparade":"Bedömning sparad"); clearDraft(); markSaved("Sparat"); wEditingId=null; show("home"); }
+  catch(err){toast(errMsg(err))} finally{b.disabled=false}
+}
+function editWba(id){ const w=wbas.find(x=>x.id===id); if(!w)return; wEditingId=id; wform=Object.assign(blankWba(w.type),clone(w),{_dmManual:true}); $("#wEditInfo").textContent=`${w.date} · ${w.type}`; show("wba"); fillWba(); window.scrollTo({top:0}); }
+$("#wBack").onclick=()=>{wEditingId=null;show("home")};
+$("#wCancel").onclick=()=>{wEditingId=null;clearDraft();show("logg")};
+armDelete($("#wDel"),async()=>{await store.remove("wba",wEditingId);clearDraft();toast("Bedömning raderad");wEditingId=null;show("logg")});
+$("#wPdf").onclick=async()=>{ readWba(); if(!window.jspdf){toast("PDF-biblioteket laddas fortfarande…");return} await offer(`${wform.type}_${wform.date}.pdf`,wbaPdf(wform)); };
+
+/* ================= Vyer ================= */
+function show(v){
+  view=v;
+  ["home","fall","wba","logg","trappa","delmal","fard","export"].forEach(x=>$("#v-"+x).hidden=x!==v);
+  const navv=["fall","wba"].includes(v)?"home":v;
+  $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===navv));
+  $("#savebar").hidden=!["fall","wba"].includes(v);
+  if(v==="home") renderHome(); if(v==="logg") renderList(); if(v==="trappa") renderTrappa();
+  if(v==="delmal") renderDelmal(); if(v==="fard") renderFard(); if(v==="export") renderExport();
+}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return; if(b.dataset.v==="home"){editingId=null;wEditingId=null} show(b.dataset.v); window.scrollTo({top:0})};
+$("#tiles").onclick=e=>{const t=e.target.closest(".tile");if(!t)return;
+  if(t.dataset.wba){ wEditingId=null; wform=blankWba(); show("wba"); fillWba(); }
+  else { editingId=null; form=blankCase(t.dataset.new); show("fall"); fillCase(); }
+  window.scrollTo({top:0});
+};
+$("#saveBtn").onclick=()=>view==="wba"?saveWba():saveCase();
+$("#clearBtn").onclick=()=>{ if(view==="wba"){wform=blankWba(wform.type);fillWba()} else {form=blankCase(form.kind,form);fillCase()} clearDraft(); };
+$("#copyLast").onclick=()=>{
+  const last=[...cases].filter(c=>c.kind===form.kind).sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||""))[0];
+  if(!last){toast("Inget tidigare fall av den typen");return}
+  form=Object.assign(blankCase(last.kind),clone(last),{date:today(),title:"",notes:"",epaManual:true,dmManual:true}); delete form.id;delete form.createdAt;delete form.updatedAt;
+  fillCase(); toast("Ifyllt som senaste fallet");
+};
+
+/* ---- Hem ---- */
+function prioDot(p){const x=PRIO.find(q=>q[0]===p);return x?`<span class="pr" style="background:var(${x[2]})"></span>`:""}
+function caseLine(c){
+  const head=c.title||(c.kind==="larm"?c.larm.join(", "):c.kind==="proc"?[...c.procs,...c.pocus][0]:c.kind==="led"?c.led.join(", "):c.kind==="teach"?c.teach.join(", "):c.sok[0])||KINDNAME[c.kind];
+  const bits=[c.age,(c.sok||[]).filter(s=>s!==head).slice(0,2).join(", "),c.kind==="larm"?c.lroll:"",c.procs.length?c.procs.length+" proc":"",c.pocus.length?"POCUS: "+c.pocus.join(", "):"",c.disp].filter(Boolean);
+  const sub=[c.sup?SUP.find(s=>s[0]===c.sup)?.[1]:"",(c.epa||[]).map(e=>"EPA "+e).join(" "),c.site!=="Akutmottagning"?c.site:""].filter(Boolean);
+  return `<div class="item" data-case="${esc(c.id)}"><div class="d">${esc(c.date)}<br>${esc(c.shift||"")}</div><div class="b"><div class="t"><span class="tag">${esc(KINDNAME[c.kind]||c.kind)}</span>${prioDot(c.prio)}${esc(head)}</div><div class="s">${esc(bits.join(" · "))}</div><div class="s">${esc(sub.join(" · "))}</div></div></div>`;
+}
+function wbaLine(w){
+  const T=WTYPES[w.type]; const g=w.global?`global ${w.global}/6`:"";
+  return `<div class="item" data-wba="${esc(w.id)}"><div class="d">${esc(w.date)}</div><div class="b"><div class="t"><span class="tag w">${esc(w.type)}</span>${esc(w.proc||w.ctx||(w.focus||[]).join(", ")||"Bedömning")}</div><div class="s">${esc([w.assessor,w.epa?"EPA "+w.epa:"",g,w.level?"nivå "+w.level:"",w.paper?"✓ signerad":""].filter(Boolean).join(" · "))}</div></div></div>`;
+}
+function allItems(){return [...cases.map(c=>({t:"c",d:c.date,k:c.createdAt,o:c})),...wbas.map(w=>({t:"w",d:w.date,k:w.createdAt,o:w}))].sort((a,b)=>b.d.localeCompare(a.d)||(b.k||"").localeCompare(a.k||""))}
+function renderHome(){
+  const procN=cases.reduce((n,c)=>n+c.procs.length,0), pocN=cases.reduce((n,c)=>n+c.pocus.length,0);
+  const month=today().slice(0,7);
+  $("#kpis").innerHTML=[["Fall",cases.length],["Denna månad",cases.filter(c=>c.date.startsWith(month)).length],["Bedömningar",wbas.length],["Procedurer",procN],["POCUS",pocN]].map(([a,b])=>`<div class="kpi"><b>${b}</b><span>${a}</span></div>`).join("");
+  const it=allItems().slice(0,6);
+  $("#recent").innerHTML=it.length?it.map(x=>x.t==="c"?caseLine(x.o):wbaLine(x.o)).join(""):`<div class="empty">Inget loggat ännu. Välj typ ovan, eller skriv fritt så fyller Claude i åt dig.</div>`;
+}
+document.addEventListener("click",e=>{const r=e.target.closest(".item");if(!r)return; if(r.dataset.case)editCase(r.dataset.case); else if(r.dataset.wba)editWba(r.dataset.wba);});
+
+/* ---- Logg ---- */
+$("#qk").innerHTML=[["","Allt"],["fall","Patienter"],["larm","Larm"],["proc","Procedurer"],["pocus","POCUS"],["prehosp","Prehospitalt"],["led","Ledning"],["teach","Undervisning"],["wba","Bedömningar"]].map(([v,l])=>`<option value="${v}">${l}</option>`).join("");
+function renderList(){
+  const q=$("#q").value.toLowerCase().trim(), k=$("#qk").value;
+  const rows=allItems().filter(x=>{
+    if(k==="wba"&&x.t!=="w") return false;
+    if(k&&k!=="wba"){ if(x.t!=="c")return false; if(k==="proc"){if(!x.o.procs.length)return false} else if(k==="pocus"){if(!x.o.pocus.length)return false} else if(x.o.kind!==k)return false; }
+    return !q||JSON.stringify(x.o).toLowerCase().includes(q);
+  });
+  $("#list").innerHTML=rows.length?rows.map(x=>x.t==="c"?caseLine(x.o):wbaLine(x.o)).join(""):`<div class="empty">${cases.length+wbas.length?"Inga träffar":"Inget loggat ännu"}</div>`;
+}
+$("#q").oninput=renderList; $("#qk").onchange=renderList;
+
+/* ---- Kompetenstrappa ---- */
+function renderTrappa(){
+  $("#ladder").innerHTML=Object.entries(LADDER).map(([y,es])=>`<div><b>ST-år ${y}</b><span>EPA ${es.join(", ")} · ${esc(LADROLE[y])}</span></div>`).join("");
+  $("#epaList").innerHTML=EPA.map(([n,t,s])=>{
+    const ep=String(n), cs=cases.filter(c=>(c.epa||[]).includes(ep)), ws=wbas.filter(w=>w.epa===ep);
+    const mc=ws.filter(w=>["Mini-CEX","Larmledning","Passobservation"].includes(w.type)).length, dops=ws.filter(w=>w.type==="DOPS").length, cbd=ws.filter(w=>w.type==="CbD").length;
+    const tg=TARGET[n]||{};
+    const lastLvl=[...ws].filter(w=>w.level).sort((a,b)=>b.date.localeCompare(a.date))[0];
+    const self=(epaState[ep]||{}).self||"";
+    const recent=[...cs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,20);
+    const dist=SUP.map(([k])=>[k,recent.filter(c=>c.sup===k).length]).filter(x=>x[1]);
+    const tot=dist.reduce((a,b)=>a+b[1],0);
+    const ev=[`<span>${cs.length} fall</span>`,
+      `<span class="${tg.mc&&mc>=tg.mc?"done":""}">Medsittning ${mc}${tg.mc?"/"+tg.mc:""}</span>`,
+      tg.dops||dops?`<span class="${tg.dops&&dops>=tg.dops?"done":""}">DOPS ${dops}${tg.dops?"/"+tg.dops:""}</span>`:"",
+      `<span>CbD ${cbd}</span>`].join("");
+    return `<div class="card epa"><div class="no">${n}<small>EPA</small></div><div class="tt">${esc(t)}</div><div class="muted">${esc(s)}</div>
+      <div><div class="lvl" data-epa="${ep}">${[1,2,3,4].map(l=>`<button type="button" class="${String(l)===self?"on":(+self>l?"fill":"")}" data-l="${l}" aria-label="Nivå ${l}">N${l}</button>`).join("")}<span class="ax">${lastLvl?`Bedömare: nivå ${esc(lastLvl.level)} (${esc(lastLvl.date)})`:"Ingen bedömd nivå än"}</span></div>
+      <div class="ev">${ev}</div>
+      ${tot?`<div class="supbar" title="Handledning i senaste ${tot} fall">${dist.map(([k,v])=>`<i style="width:${v/tot*100}%;background:var(${SUPCOL[k]})"></i>`).join("")}</div>`:""}</div></div>`;
+  }).join("");
+  $("#supLegend").innerHTML=SUP.map(([k,l])=>`<span><i style="background:var(${SUPCOL[k]})"></i>${esc(l)}</span>`).join("");
+}
+$("#epaList").addEventListener("click",async e=>{
+  const b=e.target.closest(".lvl button"); if(!b) return;
+  const ep=b.parentElement.dataset.epa, l=b.dataset.l; const cur=(epaState[ep]||{}).self;
+  epaState[ep]=Object.assign({},epaState[ep],{self:cur===l?"":l});
+  renderTrappa();
+  try{await store.saveMeta("epa",epaState); markSaved("Sparat")}catch(err){toast(errMsg(err))}
+});
+
+/* ---- Delmål ---- */
+function renderDelmal(){
+  const groups=[["STa","Delmål STa – gemensamma"],["STb","Delmål STb – gemensamma"],["STc","Delmål STc – akutsjukvård"]];
+  $("#dmList").innerHTML=groups.map(([p,h])=>`<div class="card"><div class="lbl">${h}</div>${DM.filter(d=>d[0].startsWith(p)).map(([code,name])=>{
+    const nc=cases.filter(c=>(c.delmal||[]).includes(code)).length, nw=wbas.filter(w=>(w.delmal||[]).includes(code)).length;
+    const st=dmState[code]||{}; const s=st.status||"Ej påbörjat";
+    return `<div class="dm" data-dm="${code}"><span class="c">${code}</span><span class="n">${esc(name)}</span><span class="x">${nc} · ${nw}</span>
+      <div class="st">${DM_STATUS.map(x=>`<button type="button" class="stc${x===s&&x!=="Ej påbörjat"?" on":""}${x==="Intygat"?" k":""}" data-s="${x}">${x}</button>`).join("")}<input type="text" placeholder="Intyg / kurs / datum" value="${esc(st.note||"")}" data-note="${code}" id="dmn-${code}"></div></div>`;
+  }).join("")}</div>`).join("");
+}
+$("#dmList").addEventListener("click",async e=>{
+  const b=e.target.closest(".stc"); if(!b) return; const code=b.closest(".dm").dataset.dm;
+  dmState[code]=Object.assign({},dmState[code],{status:b.dataset.s}); renderDelmal();
+  try{await store.saveMeta("delmal",dmState);markSaved("Sparat")}catch(err){toast(errMsg(err))}
+});
+$("#dmList").addEventListener("change",async e=>{
+  const i=e.target.closest("[data-note]"); if(!i) return; const code=i.dataset.note;
+  dmState[code]=Object.assign({},dmState[code],{note:i.value.trim()});
+  try{await store.saveMeta("delmal",dmState);markSaved("Sparat")}catch(err){toast(errMsg(err))}
+});
+
+/* ---- Färdigheter ---- */
+function skillCounts(){
+  const done={}, asst={};
+  cases.forEach(c=>{
+    (c.procs||[]).forEach(p=>{const r=((c.details||{})["procs:"+p]||{}).role||"Utförde"; if(r==="Assisterade")asst[p]=(asst[p]||0)+1; else done[p]=(done[p]||0)+1;});
+    (c.pocus||[]).forEach(p=>{done["US:"+p]=(done["US:"+p]||0)+1});
+  });
+  return {done,asst};
+}
+function skRow(name,n,a,min){
+  const mt=min==="MT"; const m=mt?1:min; const pct=Math.min(100,n/m*100); const ok=n>=m;
+  return `<div class="sk${ok?" done":""}"><span class="nm">${esc(name)}${a?` <small>(+${a} ass.)</small>`:""}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="num">${n}/${mt?"MT":min}</span></div>`;
+}
+function renderFard(){
+  const {done,asst}=skillCounts();
+  $("#fardList").innerHTML=PROCGROUPS.map(g=>`<div class="card"><div class="lbl">${esc(g)}</div>${PROCS.filter(p=>p[0]===g).map(p=>skRow(p[1],done[p[1]]||0,asst[p[1]]||0,p[2])).join("")}</div>`).join("")
+   +`<div class="card"><div class="lbl">POCUS</div>${POCUS.map(([p,m])=>skRow(p,done["US:"+p]||0,0,m)).join("")}</div>`;
+}
+
+/* ================= Claude fyller i ================= */
+async function aiFill(){
+  const txt=$("#aiText").value.trim(); if(!txt){toast("Skriv något först");return}
+  const go=$("#aiGo"), st=$("#aiSt"), stop=$("#aiStop"); const ctl=new AbortController(); stop.onclick=()=>ctl.abort();
+  go.disabled=true; stop.hidden=false; st.textContent="Claude läser…";
+  const prompt=`Du hjälper en ST-läkare i akutsjukvård i Sverige att logga ett fall i sin loggbok. Tolka anteckningen nedan och svara ENDAST med ett JSON-objekt med fälten nedan. Använd bara värden exakt ur listorna. Utelämna fält du inte kan avgöra. Kopiera aldrig namn, personnummer eller exakt ålder – använd åldersgrupp.
+
+Fält:
+kind: ${JSON.stringify(KIND.map(k=>k[0]))} (fall=patient, larm, proc=bara procedur, prehosp, led=ledning/DAL, teach=undervisning)
+title: kort arbetsdiagnos eller rubrik (fritext, svenska)
+prio: ${JSON.stringify(PRIO.map(p=>p[0]))} (RETTS 1=röd 2=orange 3=gul 4=grön 5=blå)
+age: ${JSON.stringify(AGE)}
+shift: ${JSON.stringify(SHIFT)}
+site: ${JSON.stringify(SITES)}
+sok: lista ur ${JSON.stringify(SOK)}
+larm: lista ur ${JSON.stringify(LARM)}
+lroll: ${JSON.stringify(LROLL)}
+procs: lista av {"name": ett av ${JSON.stringify(PROCS.map(p=>p[1]))}, "role": ${JSON.stringify(ROLE)}, "res": ${JSON.stringify(OK)}, "tries": ${JSON.stringify(TRIES)}, "rsi": ["RSI","Ej RSI"], "us": ["Ultraljud","Landmärke"], "drug": lista ur ["Propofol","Ketamin","Esketamin","Midazolam","Fentanyl","Lustgas"]}
+pocus: lista av {"name": ett av ${JSON.stringify(POCUS.map(p=>p[0]))}, "find": ["Normalt","Patologiskt","Oklart"], "dec": ["Ja","Nej"]}
+disp: ${JSON.stringify(DISP)}
+sup: ${JSON.stringify(SUP.map(s=>s[0]))} där 1=handledare i rummet, 2a=handledare på golvet, 2b=handledare nåbar, 3=bakjour/distans, 4=självständigt, T=jag handledde någon annan
+notes: kort lärdom om användaren skrev en, annars utelämna
+
+Exempel: {"kind":"fall","title":"Höftfraktur","prio":"2","age":"≥80 år","sok":["Extremitetsskada"],"procs":[{"name":"Fascia iliaca / femoralisblock","role":"Utförde","us":"Ultraljud"}],"disp":"Inläggning","sup":"2b"}
+
+Anteckning:
+${txt.slice(0,4000)}`;
+  try{
+    const j=await sampleFn.json(prompt,{modelTier:"quick",signal:ctl.signal});
+    applyAi(j); st.textContent="Klart – kontrollera och tryck Spara."; $("#aiText").value="";
+  }catch(e){
+    st.textContent=e&&e.code==="cancelled"?"Avbrutet.":e&&e.code==="not_granted"?"Claude är inte tillåtet för den här sidan.":e&&e.code==="rate_limited"?"För många förfrågningar – vänta en stund.":e&&e.code==="invalid_json"?"Kunde inte tolka svaret – försök igen eller fyll i manuellt.":"Något gick fel – försök igen.";
+    if(e&&["not_granted","sampling_disabled","not_declared","capability_disabled"].includes(e.code)) $("#aiCard").hidden=true;
+  }finally{ go.disabled=false; stop.hidden=true; }
+}
+function pick(v,list){return list.includes(v)?v:""}
+function applyAi(j){
+  if(!j||typeof j!=="object") throw {code:"invalid_json"};
+  const kinds=KIND.map(k=>k[0]); const kind=pick(j.kind,kinds)||"fall";
+  editingId=null; form=blankCase(kind);
+  form.title=String(j.title||"").slice(0,120);
+  form.prio=pick(String(j.prio||""),PRIO.map(p=>p[0]))||form.prio;
+  form.age=pick(j.age,AGE); form.shift=pick(j.shift,SHIFT)||form.shift; form.site=pick(j.site,SITES)||form.site;
+  form.sok=(Array.isArray(j.sok)?j.sok:[]).filter(x=>SOK.includes(x));
+  form.larm=(Array.isArray(j.larm)?j.larm:[]).filter(x=>LARM.includes(x)); form.lroll=pick(j.lroll,LROLL);
+  form.disp=pick(j.disp,DISP); form.sup=pick(String(j.sup||""),SUP.map(s=>s[0]));
+  (Array.isArray(j.procs)?j.procs:[]).forEach(p=>{const n=p&&p.name; if(!(n in PROCMIN)||form.procs.includes(n)) return; form.procs.push(n);
+    const d={role:pick(p.role,ROLE)||"Utförde",res:pick(p.res,OK)||"Lyckad"}; const fs=procFields(n).map(f=>f[0]);
+    if(fs.includes("tries")&&TRIES.includes(p.tries))d.tries=p.tries; if(fs.includes("rsi")&&["RSI","Ej RSI"].includes(p.rsi))d.rsi=p.rsi; if(fs.includes("us")&&["Ultraljud","Landmärke","Palpation"].includes(p.us))d.us=p.us;
+    if(fs.includes("drug")&&Array.isArray(p.drug))d.drug=p.drug.filter(x=>["Propofol","Ketamin","Esketamin","Midazolam","Fentanyl","Lustgas"].includes(x));
+    form.details["procs:"+n]=d;});
+  (Array.isArray(j.pocus)?j.pocus:[]).forEach(p=>{const n=p&&p.name; if(!(n in POCMIN)||form.pocus.includes(n))return; form.pocus.push(n); const d={}; if(["Normalt","Patologiskt","Oklart"].includes(p.find))d.find=p.find; if(["Ja","Nej"].includes(p.dec))d.dec=p.dec; form.details["pocus:"+n]=d;});
+  if(j.notes) form.notes=String(j.notes).slice(0,1000);
+  autoEpa(form); autoDm(form);
+  show("fall"); fillCase(); window.scrollTo({top:0});
+  toast("Ifyllt av Claude – granska och spara");
+}
+$("#aiGo").onclick=aiFill;
+
+/* ================= Export ================= */
+function inRange(d,f,t){return (!f||d>=f)&&(!t||d<=t)}
+function period(){return [$("#e-from").value,$("#e-to").value]}
+function exportCases(){const [f,t]=period();return cases.filter(c=>inRange(c.date,f,t)).sort((a,b)=>a.date.localeCompare(b.date))}
+function exportWbas(){const [f,t]=period();return wbas.filter(w=>inRange(w.date,f,t)).sort((a,b)=>a.date.localeCompare(b.date))}
+function periodText(){const [f,t]=period();return f||t?`${f||"start"} – ${t||today()}`:"Hela perioden"}
+function renderExport(){
+  $("#set-name").value=settings.name||""; $("#set-clinic").value=settings.clinic||""; $("#set-hl").value=settings.hl||""; $("#set-start").value=settings.start||"";
+  $("#e-n").textContent=`${exportCases().length} fall och ${exportWbas().length} bedömningar i vald period.`;
+}
+["#e-from","#e-to"].forEach(s=>$(s).onchange=renderExport);
+$$("[data-range]").forEach(b=>b.onclick=()=>{const r=b.dataset.range,d=new Date(),iso=x=>x.toISOString().slice(0,10);let f="";
+  if(r==="6m"){d.setMonth(d.getMonth()-6);f=iso(d)} if(r==="12m"){d.setFullYear(d.getFullYear()-1);f=iso(d)} if(r==="year")f=new Date().getFullYear()+"-01-01";
+  $("#e-from").value=f;$("#e-to").value=r==="all"?"":today();renderExport();});
+function fname(ext){const n=(settings.name||"").trim().replace(/[^\wåäöÅÄÖ-]+/g,"_");return `Akutloggen${n?"_"+n:""}_${today()}.${ext}`}
+async function offer(filename,data){
+  const dl=await claude_use("downloads");
+  if(dl){ try{await dl.save({filename,data});toast("Fil sparad")}catch(e){ if(e&&e.code==="declined")return; toast("Nedladdningen misslyckades"); } return; }
+  try{const blob=data instanceof Blob?data:new Blob([data]);const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=filename;a.click()}catch(e){toast("Nedladdning stöds inte här")}
+}
+const detTxt=(c,g,v)=>{const d=(c.details||{})[g+":"+v];if(!d)return "";const x=Object.values(d).flat().filter(Boolean);return x.length?` (${x.join(", ")})`:""};
+const fmtList=(c,g)=>(c[g]||[]).map(v=>v+detTxt(c,g,v)).join("; ");
+$("#xlsx").onclick=async()=>{
+  if(!window.XLSX){toast("Excel-biblioteket laddas fortfarande…");return}
+  const cs=exportCases(), ws=exportWbas(); if(!cs.length&&!ws.length){toast("Inget i perioden");return}
+  const wb=XLSX.utils.book_new();
+  const H=["Datum","Pass","Typ","Plats","Prio","Ålder","Rubrik","Sökorsak","Larm","Roll","Procedurer","POCUS","Handläggning","Handledning","EPA","Delmål","Reflektion"];
+  const rows=cs.map(c=>[c.date,c.shift,KINDNAME[c.kind],c.site,c.prio,c.age,c.title,[...c.sok,c.sokx].filter(Boolean).join(", "),c.larm.join(", "),c.lroll,fmtList(c,"procs"),fmtList(c,"pocus"),c.disp,SUPLONG[c.sup]||"",(c.epa||[]).join(", "),(c.delmal||[]).join(", "),c.notes]);
+  const s1=XLSX.utils.aoa_to_sheet([H,...rows]); s1["!autofilter"]={ref:s1["!ref"]}; s1["!cols"]=H.map(h=>({wch:["Procedurer","POCUS","Reflektion","Rubrik"].includes(h)?34:13})); XLSX.utils.book_append_sheet(wb,s1,"Fall");
+  const WH=["Datum","Instrument","Bedömare","Roll","EPA","Ingrepp / fokus","Sammanhang","Svårighet","Global (1–6)","Nivå i trappan","Handledningsbehov","Bra","Förbättring","Åtgärd","Signerad blankett","Delmål"];
+  const s2=XLSX.utils.aoa_to_sheet([WH,...ws.map(w=>[w.date,w.type,w.assessor,w.arole,w.epa,w.proc||(w.focus||[]).join(", "),w.ctx,w.diff,w.global||"",w.level,SUPLONG[w.entr]||"",w.good,w.imp,w.act,w.paper?"Ja":"Nej",(w.delmal||[]).join(", ")])]); XLSX.utils.book_append_sheet(wb,s2,"Bedömningar");
+  const {done,asst}=skillCounts();
+  const s3=XLSX.utils.aoa_to_sheet([["Grupp","Färdighet","Utförda","Assisterade","SWESEM rek."],...PROCS.map(p=>[p[0],p[1],done[p[1]]||0,asst[p[1]]||0,p[2]]),...POCUS.map(([p,m])=>["POCUS",p,done["US:"+p]||0,"",m])]); XLSX.utils.book_append_sheet(wb,s3,"Färdigheter");
+  const s4=XLSX.utils.aoa_to_sheet([["Delmål","Namn","Fall","Bedömningar","Status","Intyg / notering"],...DM.map(([c,n])=>[c,n,cases.filter(x=>(x.delmal||[]).includes(c)).length,wbas.filter(x=>(x.delmal||[]).includes(c)).length,(dmState[c]||{}).status||"Ej påbörjat",(dmState[c]||{}).note||""])]); XLSX.utils.book_append_sheet(wb,s4,"Delmål");
+  await offer(fname("xlsx"),new Uint8Array(XLSX.write(wb,{type:"array",bookType:"xlsx"})));
+};
+const P=s=>String(s??"").replace(/≥/g,">=").replace(/≤/g,"<=").replace(/→/g,"->").replace(/✓/g,"x").replace(/[“”]/g,'"');
+function pdfHead(doc,title){
+  doc.setFontSize(16);doc.text(P(title),14,16);doc.setFontSize(9.5);doc.setTextColor(90);
+  doc.text([P(`Namn: ${settings.name||"–"}`),P(`Klinik: ${settings.clinic||"–"}`),P(`Huvudhandledare: ${settings.hl||"–"}`)],14,23);
+  doc.text([P(`Period: ${periodText()}`),P(`ST-start: ${settings.start||"–"}`),`Utskrivet: ${today()}`],doc.internal.pageSize.getWidth()/2,23);doc.setTextColor(0);
+}
+const ACC=[27,92,158];
+$("#pdf").onclick=async()=>{
+  if(!window.jspdf){toast("PDF-biblioteket laddas fortfarande…");return}
+  const cs=exportCases(), ws=exportWbas(); if(!cs.length&&!ws.length){toast("Inget i perioden");return}
+  const {jsPDF}=window.jspdf; const doc=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"}); const W=doc.internal.pageSize.getWidth();
+  pdfHead(doc,"Akutloggen – ST-portfölj, akutsjukvård");
+  const at=(o)=>doc.autoTable(Object.assign({theme:"grid",styles:{fontSize:7.5,cellPadding:1.3,overflow:"linebreak"},headStyles:{fillColor:ACC}},o));
+  const epaRows=EPA.map(([n,t])=>{const ep=String(n),c=cs.filter(x=>(x.epa||[]).includes(ep)).length,w=ws.filter(x=>x.epa===ep);const lv=[...w].filter(x=>x.level).sort((a,b)=>b.date.localeCompare(a.date))[0];return [n,P(t),c,w.filter(x=>x.type!=="DOPS"&&x.type!=="CbD").length,w.filter(x=>x.type==="DOPS").length,w.filter(x=>x.type==="CbD").length,(epaState[ep]||{}).self||"",lv?lv.level:""]});
+  at({startY:36,head:[["EPA","Aktivitet","Fall","Medsittn.","DOPS","CbD","Egen nivå","Bedömd nivå"]],body:epaRows,tableWidth:W/2-18,margin:{left:14}});
+  const y1=doc.lastAutoTable.finalY;
+  const dmRows=DM.map(([c,n])=>[c,P(n),cs.filter(x=>(x.delmal||[]).includes(c)).length,ws.filter(x=>(x.delmal||[]).includes(c)).length,(dmState[c]||{}).status||"",P((dmState[c]||{}).note||"")]);
+  at({startY:36,head:[["Delmål","","Fall","Bed.","Status","Intyg"]],body:dmRows,tableWidth:W/2-10,margin:{left:W/2+2},styles:{fontSize:6.8,cellPadding:1}});
+  doc.addPage(); doc.setFontSize(13);doc.text("Färdigheter (utförda / SWESEM rekommendation)",14,14);
+  const {done,asst}=skillCounts(); const sk=[...PROCS.map(p=>[P(p[0]),P(p[1]),done[p[1]]||0,asst[p[1]]||0,p[2]]),...POCUS.map(([p,m])=>["POCUS",P(p),done["US:"+p]||0,"",m])].filter(r=>r[2]||r[3]);
+  at({startY:18,head:[["Grupp","Färdighet","Utförda","Ass.","Rek."]],body:sk.length?sk:[["–","Inga loggade färdigheter","","",""]],tableWidth:W/2-18});
+  doc.addPage(); doc.setFontSize(13);doc.text("Bedömningar",14,14);
+  at({startY:18,head:[["Datum","Instrument","Bedömare","EPA","Ingrepp / fokus","Global","Nivå","Bra","Förbättring","Sign."]],body:ws.length?ws.map(w=>[w.date,w.type,P(w.assessor),w.epa,P(w.proc||(w.focus||[]).join(", ")||w.ctx),w.global||"",w.level,P(w.good),P(w.imp),w.paper?"Ja":""]):[["","Inga bedömningar","","","","","","","",""]],columnStyles:{7:{cellWidth:50},8:{cellWidth:50}}});
+  doc.addPage(); doc.setFontSize(13);doc.text("Fallförteckning",14,14);
+  at({startY:18,theme:"striped",head:[["#","Datum","Typ","Prio","Ålder","Rubrik / sökorsak","Procedurer / POCUS","Handläggning","Handledning","EPA","Delmål"]],body:cs.map((c,i)=>[i+1,c.date,KINDNAME[c.kind],c.prio,P(c.age),P([c.title,...c.sok,...c.larm].filter(Boolean).join(", ")),P([fmtList(c,"procs"),c.pocus.join(", ")].filter(Boolean).join(" | ")),c.disp,(SUP.find(s=>s[0]===c.sup)||[,""])[1],(c.epa||[]).join(","),(c.delmal||[]).join(" ")]),styles:{fontSize:6.5,cellPadding:1.1,overflow:"linebreak"},columnStyles:{0:{cellWidth:8},1:{cellWidth:19},3:{cellWidth:9},6:{cellWidth:60}}});
+  let y=doc.lastAutoTable.finalY+16; if(y>185){doc.addPage();y=30}
+  doc.setFontSize(9);doc.line(14,y,95,y);doc.line(115,y,196,y);doc.text("Underskrift ST-läkare",14,y+4);doc.text("Underskrift huvudhandledare",115,y+4);
+  const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){doc.setPage(p);doc.setFontSize(8);doc.setTextColor(120);doc.text(`Akutloggen · sida ${p} av ${n}`,W-14,doc.internal.pageSize.getHeight()-8,{align:"right"});doc.setTextColor(0)}
+  await offer(fname("pdf"),doc.output("arraybuffer"));
+};
+function wbaPdf(w){
+  const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:"mm",format:"a4"}); const T=WTYPES[w.type];
+  doc.setFontSize(16);doc.text(P(`${w.type} – ST akutsjukvård`),14,16);doc.setFontSize(10);
+  const head=[["ST-läkare",settings.name||""],["Bedömare",w.assessor],["Bedömarens roll",w.arole],["Datum",w.date],["EPA",w.epa?`EPA ${w.epa} – ${(EPA.find(e=>String(e[0])===w.epa)||[,""])[1]}`:""],["Ingrepp / fokus",w.proc||(w.focus||[]).join(", ")],["Sammanhang",w.ctx],["Plats",w.place],["Svårighetsgrad",w.diff],["Delmål",(w.delmal||[]).join(", ")]];
+  doc.autoTable({startY:22,body:head.map(r=>r.map(P)),theme:"plain",styles:{fontSize:9.5,cellPadding:1.2},columnStyles:{0:{fontStyle:"bold",cellWidth:42}}});
+  const items=[...T.items.map((q,i)=>[P(q),w.items["i"+i]===0?"Ej obs.":(w.items["i"+i]||"")]),[P(T.g),w.global||""]];
+  doc.autoTable({startY:doc.lastAutoTable.finalY+4,head:[["Bedömningsområde","1–6"]],body:items,theme:"grid",headStyles:{fillColor:ACC},styles:{fontSize:9.5},columnStyles:{1:{cellWidth:22,halign:"center"}}});
+  doc.setFontSize(8.5);doc.setTextColor(90);doc.text("1–2 otillfredsställande · 3–4 tillfredsställande · 5–6 utmärkt",14,doc.lastAutoTable.finalY+5);doc.setTextColor(0);
+  doc.autoTable({startY:doc.lastAutoTable.finalY+9,body:[["Nivå i kompetenstrappan",w.level||""],["Handledningsbehov",SUPLONG[w.entr]||""],["Något som gick speciellt bra",w.good],["Förslag till förbättring",w.imp],["Överenskommen åtgärd",w.act]].map(r=>r.map(P)),theme:"grid",styles:{fontSize:9.5,cellPadding:2,minCellHeight:10},columnStyles:{0:{fontStyle:"bold",cellWidth:52}}});
+  const y=Math.min(doc.lastAutoTable.finalY+22,280); doc.setFontSize(9);doc.line(14,y,90,y);doc.line(110,y,196,y);doc.text("Underskrift ST-läkare",14,y+4);doc.text("Underskrift bedömare",110,y+4);
+  return doc.output("arraybuffer");
+}
+$("#json").onclick=()=>offer(fname("json"),JSON.stringify({app:"Akutloggen",version:1,exported:new Date().toISOString(),settings,dmState,epaState,cases,wbas},null,1));
+$("#imp").onchange=async e=>{
+  const f=e.target.files[0]; e.target.value=""; if(!f)return;
+  try{ const j=JSON.parse(await f.text()); let n=0;
+    for(const c of (j.cases||[])){ if(c&&c.date&&c.kind){c.id=c.id||uid();await store.save("cases",Object.assign(blankCase(c.kind),c));n++} }
+    for(const w of (j.wbas||[])){ if(w&&w.date&&w.type){w.id=w.id||uid();await store.save("wba",Object.assign(blankWba(w.type),w));n++} }
+    if(j.dmState){dmState=Object.assign(dmState,j.dmState);await store.saveMeta("delmal",dmState)}
+    if(j.epaState){epaState=Object.assign(epaState,j.epaState);await store.saveMeta("epa",epaState)}
+    toast(`${n} poster importerade`);
+  }catch(err){toast("Kunde inte läsa filen")}
+};
+$("#saveSettings").onclick=async()=>{ settings={name:$("#set-name").value.trim(),clinic:$("#set-clinic").value.trim(),hl:$("#set-hl").value.trim(),start:$("#set-start").value.trim()};
+  try{await store.saveMeta("settings",settings);toast("Uppgifter sparade")}catch(e){toast(errMsg(e))} };
+
+/* ================= Data uppdaterad ================= */
+function onData(){
+  cases=cases.map(c=>Object.assign(blankCase(c.kind),c));
+  $("#savestate").textContent=$("#savestate").textContent||`${cases.length} fall`;
+  $("#dl-title").innerHTML=[...new Set(cases.map(c=>c.title).filter(Boolean))].slice(-300).map(o=>`<option value="${esc(o)}">`).join("");
+  $("#dl-assessor").innerHTML=[...new Set(wbas.map(w=>w.assessor).filter(Boolean))].map(o=>`<option value="${esc(o)}">`).join("");
+  if(view==="home")renderHome(); if(view==="logg")renderList(); if(view==="trappa")renderTrappa(); if(view==="delmal")renderDelmal(); if(view==="fard")renderFard(); if(view==="export")renderExport();
+}
+$("#dl-sok").innerHTML=SOK_ALL.map(o=>`<option value="${esc(o)}">`).join("");
+
+/* ================= Lagring ================= */
+function claude_use(name){ try{ return (window.claude&&window.claude.use)?window.claude.use(name).catch(()=>null):Promise.resolve(null) }catch(e){ return Promise.resolve(null) } }
+function waitForClaude(ms){return new Promise(res=>{const t0=Date.now();(function poll(){if(window.claude&&window.claude.use)return res(true);if(Date.now()-t0>ms)return res(false);setTimeout(poll,100)})()})}
+async function initStore(){
+  const has=window.parent!==window&&await waitForClaude(4000);
+  const db=has?await claude_use("db"):null;
+  if(db){
+    let got=0; const timer=setTimeout(()=>setStatus("Kan inte nå lagringen just nu – data kan vara inaktuell.",false),10000);
+    const ready=()=>{ if(++got>=2){clearTimeout(timer);setStatus("")} };
+    db.collection("cases").onSnapshot(s=>{cases=s.docs.map(d=>d.data()).filter(Boolean);if(!s.metadata.fromCache)ready();onData()},err=>{clearTimeout(timer);setStatus("Lagringen är inte tillgänglig.",false)});
+    db.collection("wba").onSnapshot(s=>{wbas=s.docs.map(d=>d.data()).filter(Boolean).map(w=>Object.assign(blankWba(w.type),w));if(!s.metadata.fromCache)ready();onData()},()=>{});
+    db.doc("meta/settings").onSnapshot(s=>{if(s.exists)settings=Object.assign(settings,s.data());if(view==="export")renderExport()},()=>{});
+    db.doc("meta/delmal").onSnapshot(s=>{if(s.exists)dmState=s.data()||{};if(view==="delmal")renderDelmal()},()=>{});
+    db.doc("meta/epa").onSnapshot(s=>{if(s.exists)epaState=s.data()||{};if(view==="trappa")renderTrappa()},()=>{});
+    store={ save:(col,o)=>db.collection(col).doc(o.id).set(o), remove:(col,id)=>db.collection(col).doc(id).delete(), saveMeta:(k,o)=>db.doc("meta/"+k).set(o),
+      saveDraft:d=>db.doc("meta/draft").set(d), loadDraft:async()=>{const s=await db.doc("meta/draft").get();return s.exists?s.data():null}, clearDraft:()=>db.doc("meta/draft").delete() };
+    assets=await claude_use("assets");
+    sampleFn=await claude_use("sample"); $("#aiCard").hidden=!sampleFn;
+    return;
+  }
+  setStatus("Dina fall sparas bara i den här webbläsaren på den här enheten, aldrig på någon server. Exportera JSON regelbundet som säkerhetskopia.",true);
+  const KEY="akutloggen-v1";
+  const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
+  let d=load(); cases=d.cases||[]; wbas=(d.wba||[]).map(w=>Object.assign(blankWba(w.type),w)); settings=Object.assign(settings,(d.meta||{}).settings||{}); dmState=(d.meta||{}).delmal||{}; epaState=(d.meta||{}).epa||{};
+  const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({cases,wba:wbas,meta:{settings,delmal:dmState,epa:epaState}}))}catch(e){toast("Kunde inte spara lokalt")}};
+  const arr=col=>col==="cases"?cases:wbas;
+  store={ save:async(col,o)=>{const a=arr(col);const i=a.findIndex(x=>x.id===o.id);i<0?a.push(o):a[i]=o;persist();onData()},
+    remove:async(col,id)=>{if(col==="cases")cases=cases.filter(x=>x.id!==id);else wbas=wbas.filter(x=>x.id!==id);persist();onData()},
+    saveMeta:async()=>persist(), saveDraft:async x=>{try{localStorage.setItem(KEY+"-draft",JSON.stringify(x))}catch(e){}},
+    loadDraft:async()=>{try{return JSON.parse(localStorage.getItem(KEY+"-draft"))}catch(e){return null}}, clearDraft:async()=>{try{localStorage.removeItem(KEY+"-draft")}catch(e){}} };
+  onData();
+}
+
+/* ================= Utkast ================= */
+let draftTimer=null, dirty=false;
+function hhmm(){return new Date().toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"})}
+function markSaved(w){const el=$("#savestate");el.classList.remove("busy");el.textContent=`${w} ${hhmm()}`}
+function markBusy(t){const el=$("#savestate");el.classList.add("busy");el.textContent=t}
+function draftChanged(){ if(!["fall","wba"].includes(view))return; dirty=true; markBusy("Osparat utkast…"); clearTimeout(draftTimer); draftTimer=setTimeout(saveDraft,3000); }
+async function saveDraft(){
+  if(!store||!dirty)return;
+  if(view==="fall")readCase(); if(view==="wba")readWba();
+  const d={view,form:view==="fall"?clone(form):null,wform:view==="wba"?clone(wform):null,editingId,wEditingId,savedAt:new Date().toISOString()};
+  try{await store.saveDraft(d);dirty=false;markSaved("Utkast sparat")}catch(e){markBusy("Utkast ej sparat");draftTimer=setTimeout(saveDraft,15000)}
+}
+function clearDraft(){clearTimeout(draftTimer);dirty=false;if(store)store.clearDraft().catch(()=>{})}
+async function restoreDraft(){
+  try{ const d=await store.loadDraft(); if(!d||(!d.form&&!d.wform))return;
+    if(d.view==="fall"&&d.form){editingId=d.editingId||null;form=Object.assign(blankCase(d.form.kind),d.form);show("fall");fillCase()}
+    else if(d.view==="wba"&&d.wform){wEditingId=d.wEditingId||null;wform=Object.assign(blankWba(d.wform.type),d.wform);show("wba");fillWba()}
+    else return;
+    const t=new Date(d.savedAt).toLocaleString("sv-SE",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+    setStatus(`Osparat utkast från ${t} återställt. Tryck Spara när du är klar, eller Rensa.`,true); setTimeout(()=>setStatus(""),12000);
+  }catch(e){}
+}
+$("#v-fall").addEventListener("input",draftChanged); $("#v-wba").addEventListener("input",draftChanged);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&dirty){clearTimeout(draftTimer);saveDraft()}});
+
+/* ================= Start ================= */
+form=blankCase(); wform=blankWba();
+show("home");
+initStore().then(restoreDraft);
+</script>
+
+</body>
+</html>
