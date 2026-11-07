@@ -27,7 +27,7 @@ function searchEngine(withBodies = false) {
 }
 
 const queries = [
-  ['SFAI luftvägshantering', 'GL116'], ['ESICM ARDS', 'GL119'], ['ERS NIV', 'GL120'], ['ERS HFNC', 'GL121'], ['Löf transfusion', 'GL122'], ['SCCM RSI', 'GL123'], ['PADIS uppdatering', 'GL124'], ['ANZCOR medications', 'GL126'],
+  ['SFAI luftvägshantering', 'GL116'], ['ESICM ARDS', 'GL119'], ['ERS HFNC', 'GL121'], ['Löf transfusion', 'GL122'], ['SCCM RSI', 'GL123'], ['PADIS uppdatering', 'GL124'],
   ['lungemboli AHA', 'GL111'], ['SILF UVI', 'GL112'], ['SILF pneumoni', 'GL113'], ['EAU njursten', 'GL114'], ['ACC bröstsmärta', 'GL115'], ['GINA astma', 'GL56'], ['GOLD KOL', 'GL57'],
   ['DAS svår luftväg', 'GL54'], ['endokardit SILF', 'GL89'], ['hyperosmolärt JBDS', 'GL94'], ['agitation ACEP', 'GL95'],
   ['högt kalium', 'GL82'], ['hyperkalaemia', 'GL82'], ['"högt kalium"', 'GL82'],
@@ -59,7 +59,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 251);
+  assert.equal(data.docs.length, 273);  // 16 removed 22 okt 2026 (ak-v10s52-rensning); 38 added 7 nov 2026 (ST-kompassen)
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);

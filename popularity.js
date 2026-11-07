@@ -55,8 +55,8 @@
    // No search text, URL, persistent visitor ID or user profile is sent.
    fetch(endpoint+'/click',{method:'POST',credentials:'omit',referrerPolicy:'no-referrer',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({document,event:crypto.randomUUID()})}).catch(()=>{});
   }
-  // Silent unless the order really is by popularity; an unreachable counter (e.g. a hospital network) just means A–Ö.
-  function status(){return endpoint&&ready&&Object.keys(counts).some(k=>k.startsWith(section+':')&&count(counts,k))?'Mest öppnade först · POPULÄR! = mest öppnad i området':'';}
+  // The status line ("Mest öppnade först · POPULÄR! …") is no longer shown; status() stays so callers keep working.
+  function status(){return '';}
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load();});
   return {compare,badge,record,load,whenReady,status,excluded,MIN_OPENS};
  }

@@ -26,7 +26,7 @@ test('New and popular badges coexist, independent of tracking exclusion',async()
  const {p}=setup({excluded:true,counts:{'adult:a':25}});await p.load();
  const badge=p.badge({...docs[0],publishedOn:'2026-09-25'});
  assert.match(badge,/>NY!</);assert.match(badge,/>POPULÄR!</);
- assert.match(p.status(),/POPULÄR!/);assert.doesNotMatch(p.status(),/gul cirkel/);
+ assert.equal(p.status(),'');
 });
 
 test('Arriving counts never re-sort a rendered list; cached snapshot orders the first render',async()=>{

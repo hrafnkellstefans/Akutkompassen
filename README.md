@@ -153,7 +153,7 @@ Från granskningen 5 okt 2026. Inga PM-texter eller länkar är ändrade.
 - **Sökmotorer:** `noindex` är borttagen, i linje med robots.txt (vanliga sökmotorer får indexera, AI-träning blockeras).
 - **Pekskärm:** alla knappar är minst 44 px på pekskärmar (`@media (pointer:coarse)`); snabbsökningarna ligger på en svepbar rad på mobil.
 - **Kontrast:** årtalstaggar är neutrala, äldre-varningar mörkare bärnsten (#8a3c0c), alla minst 4,5:1.
-- **Popularitet:** färre än 20 öppningar (`MIN_OPENS` i `popularity.js`) ger varken omsortering eller POPULÄR!. Utan tillräcklig statistik sorteras lokala PM först, sedan nationella och internationella, A–Ö inom varje grupp. Statusraden visas bara när ordningen faktiskt bygger på popularitet; en otillgänglig räknare (t.ex. sjukhusnät) ger ingen felrad.
+- **Popularitet:** färre än 20 öppningar (`MIN_OPENS` i `popularity.js`) ger varken omsortering eller POPULÄR!. Utan tillräcklig statistik sorteras lokala PM först, sedan nationella och internationella, A–Ö inom varje grupp. Ingen statusrad om popularitet visas (raden ”Mest öppnade först · POPULÄR! …” togs bort i ak-v10s53).
 - **Logotyp:** `logo-v2.png` är 144×144 px (17 KB, tidigare 508 KB).
 - **Övrigt:** "3 s" heter nu "3 sid.", sökikonen har fast storlek även om CSS laddas sent, Barns sökfält har kortare platshållartext.
 
@@ -295,3 +295,16 @@ Alla sju **Snabbguider** i `akutversioner/` (bröstsmärta, diabetes, divertikul
 - Versionen är höjd så att telefoner hämtar de nya PDF:erna, och `node tools/build-seo.mjs` är körd (nytt `lastmod` för PDF:erna i `sitemap.xml`). Alla tester passerar.
 
 När en guide har granskats av PM:ets författare: återställ guiden utan märkning (versionen från committen före ak-v10s51-testdokument, eller ombyggd med snabbguide-generatorn) och höj versionen.
+
+## Rensning – 22 oktober 2026 (ak-v10s52-rensning)
+
+Sexton dokument är borttagna helt ur vuxenbiblioteket (251 → 235):
+
+- **Lokala PM:** Esofagus-EKG (DocPlusSTYR-4622, 2019) och Priapism (DocPlusSTYR-10807, 2018) – kortet, PM-texten i `ak_KAR.json` och `ak_URO.json` och PM-sidorna `/pm/4622/` och `/pm/10807/`.
+- **Internationella riktlinjer:** NICE NG39 Major Trauma 2016 (GL42), ERS/ATS NIV vid akut respiratorisk svikt 2017 (GL120), SCCM PADIS grundriktlinje 2018 (GL125) och samtliga elva ANZCOR-riktlinjer under HLR & hjärtstopp (GL98–GL107, GL126).
+
+De är även borttagna ur `sitemap.xml`, PM-sidornas länklistor, popularitetsräknarens lista (`tracking/documents.json`) och sökningstesterna. Kvar under HLR & hjärtstopp: ERC 2025, HLR-rådet och WMS. Noten för PADIS-uppdateringen 2025 (GL124) hänvisar inte längre till den borttagna grundriktlinjen. Barnbiblioteket påverkas inte; där fanns inga av dokumenten. PM som själva nämner esofagus-EKG eller priapism i sin text är oförändrade. Cloudflare-workern behöver inte driftsättas om – de borttagna dokumenten kan inte längre öppnas.
+
+## Statusrad borttagen – 5 november 2026 (ak-v10s53-utan-statusrad)
+
+Raden ”Mest öppnade först · POPULÄR! = mest öppnad i området” visas inte längre, varken för vuxna eller barn. `status()` i `popularity.js` returnerar alltid tom text. Sorteringen och POPULÄR!-etiketten på korten är oförändrade.
