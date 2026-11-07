@@ -59,7 +59,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 273);  // 16 removed 22 okt 2026 (ak-v10s52-rensning); 38 added 7 nov 2026 (ST-kompassen)
+  assert.equal(data.docs.length, 384);  // 16 removed 22 okt 2026 (ak-v10s52-rensning); 149 added 7 nov 2026 (ST-kompassen)
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);
