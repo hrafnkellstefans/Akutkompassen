@@ -1,0 +1,15 @@
+{
+  "name": "akutkompassen",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.cjs tracking/worker.test.mjs",
+    "test:akutloggen": "node --test tests/akutloggen.test.cjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "jsdom": "26.1.0",
+    "jspdf": "4.2.1",
+    "jspdf-autotable": "5.0.9",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
