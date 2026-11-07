@@ -247,7 +247,7 @@ ${siteFoot()}`;
 // ---------- every document on one page ----------
 function listPage() {
   const url = `${SITE}/pm/`;
-  const n = {local: DOCS.filter(d => d.kind !== 'gl').length, pages: PAGES.length, nat: DOCS.filter(d => d.kind === 'gl' && d.lvl === 'nationell').length, int: DOCS.filter(d => d.kind === 'gl' && d.lvl !== 'nationell').length, barn: BARN.docs.length};
+  const n = {local: DOCS.filter(d => d.kind !== 'gl').length, pages: PAGES.length, nat: DOCS.filter(d => d.kind === 'gl' && d.lvl === 'nationell').length, int: DOCS.filter(d => d.kind === 'gl' && d.lvl !== 'nationell' && d.lvl !== 'regional').length, regional: DOCS.filter(d => d.kind === 'gl' && d.lvl === 'regional').length, barn: BARN.docs.length};
   const title = 'Alla PM och riktlinjer för akutsjukvård | Akutkompassen';
   const desc = 'Alla dokument i Akutkompassen på en sida: lokala PM från Region Uppsala med fulltext och svenska och internationella riktlinjer för akutsjukvård, för vuxna och barn.';
   const ld = {'@context': 'https://schema.org', '@graph': [
@@ -262,7 +262,7 @@ function listPage() {
     const link = page ? `<a href="/pm/${esc(d.id)}/">${esc(d.t)}</a>` : `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.t)} ${ext}</a>`;
     return `<li>${link}<span class="m">${yearTag(d.yr, isOld(d))}Lokalt PM · Region Uppsala${page ? '' : ' · i DocPlus'}${isOld(d) ? ' · Äldre dokument' : ''}</span></li>`;
   };
-  const guide = d => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.t)} ${ext}</a><span class="m">${yearTag(d.yr, false)}${esc([d.soc, d.lvl === 'nationell' ? 'Nationell riktlinje' : 'Internationell riktlinje'].filter(Boolean).join(' · '))}${d.note ? ` – ${esc(d.note)}` : ''}</span></li>`;
+  const guide = d => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.t)} ${ext}</a><span class="m">${yearTag(d.yr, false)}${esc([d.soc, d.lvl === 'regional' ? 'Regional blankett' : d.lvl === 'nationell' ? 'Nationell riktlinje' : 'Internationell riktlinje'].filter(Boolean).join(' · '))}${d.note ? ` – ${esc(d.note)}` : ''}</span></li>`;
   const barn = d => {
     const yr = barnYear(d), old = yr && yr <= 2021;
     const notes = [d.publisher, old && 'Äldre dokument · kontrollera giltighet', d.archive && 'Bibliotekskopia · giltighet ej verifierad'].filter(Boolean).join(' · ');
@@ -287,7 +287,7 @@ ${siteHead('')}
 <main class="page-wrap">
 <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Akutkompassen</a><span aria-hidden="true">›</span>PM och riktlinjer</nav>
 <h1>Alla PM och riktlinjer</h1>
-<p class="lead">Alla dokument i Akutkompassen på en sida: ${n.local} lokala PM från Region Uppsala (${n.pages === n.local ? 'alla' : n.pages} med en egen sida med hela texten), ${n.nat} svenska nationella och ${n.int} internationella riktlinjer samt ${n.barn} dokument för barn. Riktlinjerna länkar till utgivaren. <a href="/">Sök i Akutkompassen</a> för att söka i PM-texterna och läsa även offline.</p>
+<p class="lead">Alla dokument i Akutkompassen på en sida: ${n.local} lokala PM från Region Uppsala (${n.pages === n.local ? 'alla' : n.pages} med en egen sida med hela texten), ${n.nat} svenska nationella och ${n.int} internationella riktlinjer, ${n.regional} regionala blanketter samt ${n.barn} dokument för barn. Riktlinjerna länkar till utgivaren. <a href="/">Sök i Akutkompassen</a> för att söka i PM-texterna och läsa även offline.</p>
 <p class="source-note updated">Biblioteket uppdaterat ${esc(INDEX.updated)}.</p>
 <p class="source-note updated"><a href="/om/">Om Akutkompassen och källorna</a></p>
 <nav aria-label="Områden"><ul class="toc" id="omraden">${toc}</ul></nav>
