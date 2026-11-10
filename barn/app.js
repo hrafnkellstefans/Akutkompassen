@@ -5,7 +5,7 @@ const normal=s=>String(s).toLocaleLowerCase('sv').normalize('NFD').replace(/[̀-
 const STOP=new Set('och i att det som en pa ar av for med till den har de inte om ett vid kan eller sa ska fran man men efter sig vara alla nar dar samt aven dessa detta denna hos under over mot ut in upp ner per'.split(' '));
 const colors={lung:'#178b9a',akut:'#b6532f',luft:'#178b9a',inf:'#c28012',neuro:'#7963b6',buk:'#4d8772',vatska:'#2289b6',met:'#a35c91',trauma:'#cc7850',smarta:'#96679b',hjarta:'#b55669',tox:'#738643',neo:'#388782',trygg:'#6181b4'};
 const labels={uppsala:'Lokalt PM · Akademiska',karolinska:'Externt PM · Karolinska',nationellt:'Nationellt & övrigt'};
-let popularity;let data,source='all',area='all',onlySaved=false,saved=new Set();
+let popularity;let data,source='all',area='all',onlySaved=false,advanced=false,saved=new Set();
 try{const v=JSON.parse(localStorage.getItem('ak.barn.saved')||'[]');if(Array.isArray(v))saved=new Set(v.filter(x=>typeof x==='string'));}catch{}
 
 // ---------- search (no DOM; tests load this part) ----------
@@ -62,14 +62,14 @@ function ranked(res,compare){
 
 // ---------- page ----------
 const HOME_LIMIT=24;let visibleLimit=HOME_LIMIT,pendingPush=false,applying=false;
-function reset(){visibleLimit=HOME_LIMIT;const was=location.hash;source='all';area='all';onlySaved=false;$('q').value='';pendingPush=!!was;render();}
+function reset(){visibleLimit=HOME_LIMIT;const was=location.hash;source='all';area='all';onlySaved=false;advanced=false;$('q').value='';pendingPush=!!was;render();}
 function applyQuery(query){source='all';area='all';onlySaved=false;$('q').value=query;pendingPush={search:1};render();window.scrollTo(0,0);if(!matchMedia('(pointer:coarse)').matches)$('q').focus();}
 function dateLabel(d){return d.date?`Dokumentdatum ${esc(d.date)}`:d.year?`År ${esc(d.year)}`:'Datum: se original';}
 function render(){
  $('popularity-status').textContent=popularity.status();
  const q=$('q').value.trim();const stopOnly=!!q&&!termsOf(q).length;
  document.body.classList.toggle('searching',!!q);
- const pool=data.docs.filter(d=>(source==='all'||d.source===source)&&(!onlySaved||saved.has(d.id)));
+ const pool=data.docs.filter(d=>(!d.parentId||onlySaved)&&(!d.advanced||advanced||onlySaved)&&(source==='all'||d.source===source)&&(!onlySaved||saved.has(d.id)));
  const res=q&&!stopOnly?searchDocs(pool,q):{terms:[],fixed:[],partial:false,docs:stopOnly?[]:pool};
  const base=res.docs;
  const shown=ranked(res,popularity.compare).filter(d=>area==='all'||d.area===area);
@@ -77,7 +77,7 @@ function render(){
  const nSaved=data.docs.filter(d=>saved.has(d.id)).length;$('saved-count').textContent=nSaved||'';
  $('areas').innerHTML=[['all','Alla områden'],...Object.entries(data.areas)].map(([id,t])=>{const n=id==='all'?base.length:base.filter(d=>d.area===id).length;return `<button class="area ${area===id?'active':''}" data-area="${id}" aria-pressed="${area===id}" style="--accent:${colors[id]||'#163c53'}"><span class="area-dot" aria-hidden="true"></span><span>${esc(t)}</span><span class="n">${n}</span></button>`;}).join('');
  document.querySelectorAll('[data-source]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',source===b.dataset.source);});
- $('saved').setAttribute('aria-pressed',onlySaved);
+ $('saved').setAttribute('aria-pressed',onlySaved);$('advanced').setAttribute('aria-pressed',advanced);
  $('context').textContent=onlySaved?'DINA SPARADE':q?'SÖKRESULTAT':area==='all'?'HELA BIBLIOTEKET':'KLINISKT OMRÅDE';
  $('results-heading').textContent=area==='all'?(q?'Sök i biblioteket':'PM & riktlinjer'):data.areas[area];
  $('count').textContent=`${shown.length} dokument${q?' för ”'+q+'”':''} · ${source==='all'?'alla källor':source==='uppsala'?'Akademiska':source==='karolinska'?'Karolinska':'nationellt & övrigt'}`;
@@ -85,26 +85,26 @@ function render(){
  const fixedMsg=res.fixed.length?`Inga träffar för ${res.fixed.map(([w])=>`<b>${esc(w)}</b>`).join(', ')} – visar ${res.fixed.map(([,f])=>`<b>${esc(f)}</b>`).join(', ')}.`:'';
  const partialMsg=res.partial?'Inget dokument innehåller alla orden – visar dokument med något av dem.':'';
  hint.innerHTML=[fixedMsg,partialMsg].filter(Boolean).join(' ');hint.hidden=!hint.innerHTML;
- $('results').innerHTML=shown.length?visible.map(d=>{const yr=Number((d.date||'').slice(0,4)||d.year||0);const old=yr&&yr<=2021;const format=d.format||'';return `<article class="card" data-doc="${esc(d.id)}" data-source="${d.source}" style="--accent:${d.source==='uppsala'?'#007c78':d.source==='karolinska'?'#67486e':'#165bab'}"><div class="card-top"><div class="card-labels"><span class="source-badge">${labels[d.source]||'Källa'}</span>${popularity.badge(d)}</div><button class="save" data-save="${esc(d.id)}" aria-pressed="${saved.has(d.id)}" aria-label="${saved.has(d.id)?'Ta bort sparad':'Spara'}: ${esc(d.title)}">${saved.has(d.id)?'★':'☆'}</button></div><h3><a data-count-open="${esc(d.id)}" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${esc(d.title)}</a></h3><p class="publisher">${esc(d.publisher)}</p>${d.scope?`<p class="scope">${esc(d.scope)}</p>`:''}<div class="card-meta"><span class="topic">${esc(data.areas[d.area]||d.area)}</span><span>${dateLabel(d)}</span>${d.checked?`<span>Länk kontrollerad ${esc(d.checked)}</span>`:''}${old?'<span class="old">Äldre dokument · kontrollera giltighet</span>':''}${d.archive?'<span class="old">Bibliotekskopia · giltighet ej verifierad</span>':''}</div><div class="card-bottom"><a data-count-open="${esc(d.id)}" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer" aria-label="Öppna ${esc(d.title)} i ny flik">${format==='Dokumentsamling'?'Öppna samlingen':d.archive?'Sparad PDF':format.includes('PDF')?'Öppna PDF':format.includes('Dokument')?'Öppna dokument':'Till riktlinjen'} ↗</a></div></article>`;}).join('')+(limited?`<button class="show-all" id="show-all">Visa ${Math.min(HOME_LIMIT,shown.length-visibleLimit)} fler · ${visibleLimit} av ${shown.length}</button>`:''):`<div class="empty"><h3>${stopOnly?'Inga sökbara ord':onlySaved?'Inga sparade dokument i detta urval':'Inga träffar'}</h3><p>${stopOnly?'Småord som “och”, “vid” och “för” ignoreras. Prova ett mer specifikt ord.':onlySaved?'Spara ett dokument med stjärnan på kortet.':'Prova ett annat sökord, eller ta bort käll- och områdesfilter.'}</p><button id="empty-reset">Visa hela biblioteket</button></div>`;
+ $('results').innerHTML=shown.length?visible.map(d=>{const yr=Number((d.date||'').slice(0,4)||d.year||0);const old=yr&&yr<=2021;const format=d.format||'';return `<article class="card" data-doc="${esc(d.id)}" data-source="${d.source}" style="--accent:${d.source==='uppsala'?'#007c78':d.source==='karolinska'?'#67486e':'#165bab'}"><div class="card-top"><div class="card-labels"><span class="source-badge">${labels[d.source]||'Källa'}</span>${popularity.badge(d)}</div><button class="save" data-save="${esc(d.id)}" aria-pressed="${saved.has(d.id)}" aria-label="${saved.has(d.id)?'Ta bort sparad':'Spara'}: ${esc(d.title)}">${saved.has(d.id)?'★':'☆'}</button></div><h3><a data-count-open="${esc(d.id)}" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${esc(d.title)}</a></h3><p class="publisher">${esc(d.publisher)}</p>${d.scope?`<p class="scope">${esc(d.scope)}</p>`:''}<div class="card-meta"><span class="topic">${esc(data.areas[d.area]||d.area)}</span><span>${dateLabel(d)}</span>${d.checked?`<span>Länk kontrollerad ${esc(d.checked)}</span>`:''}${old?'<span class="old">Äldre dokument · kontrollera giltighet</span>':''}${d.advanced?'<span class="topic">Fördjupning</span>':''}${d.archive?'<span class="old">Bibliotekskopia · giltighet ej verifierad</span>':''}</div>${d.related?`<details class="related"><summary>Vårdprogram, checklista och Phoenix-score</summary><ul>${d.related.map(r=>`<li><a data-count-open="${esc(r.id)}" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.label)} ↗</a></li>`).join('')}</ul></details>`:''}<div class="card-bottom"><a data-count-open="${esc(d.id)}" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer" aria-label="Öppna ${esc(d.title)} i ny flik">${format==='Dokumentsamling'?'Öppna samlingen':d.archive?'Sparad PDF':format.includes('PDF')?'Öppna PDF':format.includes('Dokument')?'Öppna dokument':'Till riktlinjen'} ↗</a></div></article>`;}).join('')+(limited?`<button class="show-all" id="show-all">Visa ${Math.min(HOME_LIMIT,shown.length-visibleLimit)} fler · ${visibleLimit} av ${shown.length}</button>`:''):`<div class="empty"><h3>${stopOnly?'Inga sökbara ord':onlySaved?'Inga sparade dokument i detta urval':'Inga träffar'}</h3><p>${stopOnly?'Småord som “och”, “vid” och “för” ignoreras. Prova ett mer specifikt ord.':onlySaved?'Spara ett dokument med stjärnan på kortet.':'Prova ett annat sökord, eller ta bort käll- och områdesfilter.'}</p><button id="empty-reset">Visa hela biblioteket</button></div>`;
  document.querySelectorAll('[data-area]').forEach(b=>b.onclick=()=>{area=b.dataset.area;pendingPush=true;render();const f=document.querySelector(`[data-area="${CSS.escape(area)}"]`);if(f)f.focus();});
  document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>{const id=b.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);try{localStorage.setItem('ak.barn.saved',JSON.stringify([...saved]));}catch{}render();const target=document.querySelector(`[data-save="${CSS.escape(id)}"]`);if(target)target.focus();else $('saved').focus();});
  if($('empty-reset'))$('empty-reset').onclick=reset;if($('show-all'))$('show-all').onclick=()=>{visibleLimit+=HOME_LIMIT;render();};
  if(!applying)writeUrl(pendingPush);pendingPush=false;
 }
 // ---------- address bar: Back works and searches can be shared as links ----------
-function stateHash(){const p=new URLSearchParams();const q=$('q').value.trim();if(q)p.set('q',q);if(area!=='all')p.set('omrade',area);if(source!=='all')p.set('kalla',source);if(onlySaved)p.set('sparade','1');const s=p.toString();return s?'#'+s:'';}
+function stateHash(){const p=new URLSearchParams();const q=$('q').value.trim();if(q)p.set('q',q);if(area!=='all')p.set('omrade',area);if(source!=='all')p.set('kalla',source);if(onlySaved)p.set('sparade','1');if(advanced)p.set('fordjupning','1');const s=p.toString();return s?'#'+s:'';}
 function writeUrl(push){
  const url=location.pathname+location.search+stateHash();
  try{if(push)history.pushState(Object.assign({ak:1},typeof push==='object'?push:{}),'',url);else if(url!==location.pathname+location.search+location.hash)history.replaceState(Object.assign({},history.state||{ak:1}),'',url);}catch{}
 }
 function applyUrl(){
  const p=new URLSearchParams(location.hash.slice(1));
- $('q').value=p.get('q')||'';area=data.areas[p.get('omrade')]?p.get('omrade'):'all';source=['uppsala','karolinska','nationellt'].includes(p.get('kalla'))?p.get('kalla'):'all';onlySaved=p.get('sparade')==='1';
+ $('q').value=p.get('q')||'';area=data.areas[p.get('omrade')]?p.get('omrade'):'all';source=['uppsala','karolinska','nationellt'].includes(p.get('kalla'))?p.get('kalla'):'all';onlySaved=p.get('sparade')==='1';advanced=p.get('fordjupning')==='1';
  applying=true;render();applying=false;
 }
-(async()=>{try{const r=await fetch('./data.json?v=ak-v10s59-remove-gavleborg');if(!r.ok)throw new Error('data');data=await r.json();if(!Array.isArray(data.docs))throw new Error('format');{const ids=new Set(data.docs.map(d=>d.id));const keep=[...saved].filter(id=>ids.has(id));if(keep.length!==saved.size){saved=new Set(keep);try{localStorage.setItem('ak.barn.saved',JSON.stringify(keep));}catch{}}}popularity=AkPopularity.create('barn',data.docs,render);
+(async()=>{try{const r=await fetch('./data.json?v=ak-v10s60-focused-library');if(!r.ok)throw new Error('data');data=await r.json();if(!Array.isArray(data.docs))throw new Error('format');{const ids=new Set(data.docs.map(d=>d.id));const keep=[...saved].filter(id=>ids.has(id));if(keep.length!==saved.size){saved=new Set(keep);try{localStorage.setItem('ak.barn.saved',JSON.stringify(keep));}catch{}}}popularity=AkPopularity.create('barn',data.docs,render);
  let timer;$('q').oninput=()=>{clearTimeout(timer);timer=setTimeout(()=>{const v=$('q').value.trim();if(!v&&history.state&&history.state.search){history.back();return;}if(!location.hash.includes('q=')&&v)pendingPush={search:1};render();},120);};
- $('reset').onclick=reset;$('saved').onclick=()=>{onlySaved=!onlySaved;render();};document.querySelectorAll('button[data-source]').forEach(b=>b.onclick=()=>{source=b.dataset.source;render();});document.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>applyQuery(b.dataset.query));
+ $('advanced').onclick=()=>{advanced=!advanced;render();};$('reset').onclick=reset;$('saved').onclick=()=>{onlySaved=!onlySaved;render();};document.querySelectorAll('button[data-source]').forEach(b=>b.onclick=()=>{source=b.dataset.source;render();});document.querySelectorAll('[data-query]').forEach(b=>b.onclick=()=>applyQuery(b.dataset.query));
  document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('q').focus();}if(e.key==='Escape'&&document.activeElement===$('q')){$('q').value='';render();}});
  window.addEventListener('popstate',applyUrl);
  try{history.replaceState(Object.assign({ak:1},history.state||{}),'',location.href);}catch{}
