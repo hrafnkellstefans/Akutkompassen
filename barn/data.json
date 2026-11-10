@@ -780,22 +780,6 @@
       ]
     },
     {
-      "id": "swepem-14",
-      "title": "Sepsis hos barn",
-      "source": "nationellt",
-      "publisher": "SWEPEM · Svenska Barnläkarföreningen",
-      "area": "inf",
-      "url": "https://swepem.barnlakarforeningen.se/riktlinjer/sepsis-hos-barn/",
-      "date": "",
-      "scope": "Riktlinjesida hos specialistföreningen",
-      "format": "Hos utgivaren",
-      "checked": "2026-10-01",
-      "keywords": [
-        "feber",
-        "infektion"
-      ]
-    },
-    {
       "id": "swepem-15",
       "title": "Skallskador hos barn – skandinaviska riktlinjer (SNC)",
       "source": "nationellt",
@@ -959,23 +943,53 @@
         "septisk chock",
         "antibiotika",
         "vätska"
-      ]
+      ],
+      "parentId": "blf-inf-23"
     },
     {
       "id": "blf-inf-23",
-      "title": "Sepsis hos barn, initialt omhändertagande – flödesschema",
+      "title": "Sepsis hos barn – flödesschema och samlat handläggningsstöd",
       "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/03/Flodesschema.-Misstanke-om-sepsis-hos-barn-med-eller-utan-chock-2.1.pdf",
       "area": "inf",
       "date": "",
       "publisher": "Svensk Barninfektionsförening · BLF",
       "source": "nationellt",
-      "scope": "",
+      "scope": "Öppna flödesschemat direkt. Vårdprogram, checklista och Phoenix-score finns samlade nedan.",
       "format": "PDF hos utgivaren",
       "checked": "2026-10-01",
       "keywords": [
         "sepsis",
         "septisk chock",
-        "flödesschema"
+        "flödesschema",
+        "antibiotika",
+        "vätska",
+        "checklista",
+        "Phoenix",
+        "sepsisscore",
+        "organsvikt",
+        "räkneexempel"
+      ],
+      "related": [
+        {
+          "id": "blf-inf-22",
+          "label": "Vårdprogram",
+          "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Pediatrisk-sepsis-Svenska-riktlinjer-VER-2.pdf"
+        },
+        {
+          "id": "blf-inf-24",
+          "label": "Checklista",
+          "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/03/Checklista.-Initial-handlaggning-Sepsis-hos-barn-med-eller-utan-chock-ver-2.1.pdf"
+        },
+        {
+          "id": "blf-inf-25",
+          "label": "Phoenix-score",
+          "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Phoenix-sepsis-score-Svenska.pdf"
+        },
+        {
+          "id": "blf-inf-26",
+          "label": "Phoenix – räkneexempel",
+          "url": "https://inf.barnlakarforeningen.se/wp-content/uploads/sites/22/2025/01/Rakneexempel-for-Phoenix-sepsis-score.pdf"
+        }
       ]
     },
     {
@@ -993,7 +1007,8 @@
         "sepsis",
         "septisk chock",
         "checklista"
-      ]
+      ],
+      "parentId": "blf-inf-23"
     },
     {
       "id": "blf-inf-25",
@@ -1011,7 +1026,8 @@
         "Phoenix",
         "sepsisscore",
         "organsvikt"
-      ]
+      ],
+      "parentId": "blf-inf-23"
     },
     {
       "id": "blf-inf-26",
@@ -1029,7 +1045,8 @@
         "Phoenix",
         "sepsisscore",
         "räkneexempel"
-      ]
+      ],
+      "parentId": "blf-inf-23"
     },
     {
       "id": "blf-inf-28",
@@ -1291,7 +1308,8 @@
         "periodisk feber",
         "feber",
         "tonsillit"
-      ]
+      ],
+      "advanced": true
     },
     {
       "id": "blf-reuma-kawasaki",
@@ -1744,31 +1762,6 @@
       ]
     },
     {
-      "id": "swepem-akutrumsblad-samling",
-      "title": "Akutrumsblad efter ålder och vikt – samlad PDF",
-      "source": "karolinska",
-      "publisher": "Karolinska · Astrid Lindgrens barnsjukhus · via SWEPEM",
-      "area": "akut",
-      "url": "../documents/swepem-akutrumsblad-samling.pdf",
-      "date": "",
-      "scope": "16 äldre källblad: 3 månader / 5 kg till vuxen över 50 kg. Omsatt text från Word-original; doser och källversioner är inte uppdaterade. Kontrollera aktuellt original hos utgivaren.",
-      "format": "PDF – bibliotekssammanställning",
-      "checked": "2026-10-01",
-      "keywords": [
-        "akutrumsblad",
-        "WETFLAG",
-        "vikt",
-        "ålder",
-        "barn",
-        "återupplivning",
-        "akutrum",
-        "läkemedel"
-      ],
-      "library": true,
-      "archive": true,
-      "sourceUrl": "https://swepem.barnlakarforeningen.se/riktlinjer/pm/"
-    },
-    {
       "id": "GL02",
       "title": "ERC 2025 – Paediatric Life Support",
       "source": "nationellt",
@@ -1857,7 +1850,8 @@
         "barn"
       ],
       "year": "2022",
-      "checked": "2026-10-01"
+      "checked": "2026-10-01",
+      "advanced": true
     },
     {
       "id": "GL71",
@@ -1936,7 +1930,8 @@
         "kramper",
         "sinustrombos",
         "neonatal"
-      ]
+      ],
+      "advanced": true
     },
     {
       "id": "blf-aol-bigeting",
