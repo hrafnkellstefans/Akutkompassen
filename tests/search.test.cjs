@@ -59,7 +59,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 270);  // SWESEM training materials use one collection link.
+  assert.equal(data.docs.length, 273);  // SWESEM training materials use one collection link; 3 Akademiska ST forms added 10 nov 2026.
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);
