@@ -75,7 +75,7 @@
   ['hypoglykemi','hypoglycaemia','hypoglycemia','insulinkänning'],
   ['hyperkalemi','hyperkalaemia','hyperkalemia'],
   ['hyponatremi','hyponatraemia','hyponatremia'],
-  ['binjurebarksvikt','binjurebarkssvikt','binjuresvikt','addison','addisonkris','kortisolbrist','adrenal'],
+  ['binjurebarksvikt','binjurebarkssvikt','binjuresvikt','addison','addisonkris','kortisolbrist','kortisolsvikt'],
   ['dehydrering','uttorkning','dehydration','rehydrering'],
   // Toxicology, environment
   ['förgiftning','förgiftningar','intoxikation','intoxikationer','poisoning','toxicity','överdos'],

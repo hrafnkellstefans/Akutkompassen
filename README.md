@@ -324,3 +324,35 @@ De två läkemedels-PM:en finns inte i DocPlus. De är de första lokala PM som 
 Ett lokalt PM utanför DocPlus har fältet `src` i `ak_index.json` (vem som gett ut det). Appen och `tools/build-seo.mjs` visar då `Lokalt PM · <src>` och knappen ”Original (PDF)”, och utelämnar STYR-nummer, ”Original i DocPlus” och ”Texten kontrollerad mot DocPlus”. PM utan `src` visas som förut. Länkkontrollen (`tools/check-links.mjs`) jämför bara godkännandedatum för DocPlus-PM, så dessa två revideras för hand.
 
 `tracking/documents.json` har fått de tre nya ID:na. Popularitetsräknaren räknar dem först när Cloudflare-workern har driftsatts på nytt.
+
+## Höststädning 17 november 2026 (ak-v10s63-hoststadning)
+
+Länk- och versionskontroll (`tools/check-links.mjs`), genomgång av riktlinjerna och felsökning i appen.
+
+**PM uppdaterade till aktuell version i DocPlus** (ny text, datum och sidantal):
+
+| ID | PM | Var | Nu |
+|---|---|---|---|
+| 30285 | Rekommenderade läkemedel vuxna | 2026-07-10 | 2026-11-06 |
+| 28778 | Metformin vid jodkontrastmedel, röntgen | 2025-12-15 | 2026-11-07 |
+| 24822 | Näsblödning – kunskapsunderlag och standardiserad vårdplan | 2021-01-25 | 2026-10-12 |
+| 43321 | Perianalabscess – handläggning | 2024-11-01 | 2026-11-03 |
+| 15283 | Hypertonisjukdomar under graviditet och efter förlossning | 2024-12-30 | 2026-10-26 |
+
+Texten är hämtad ur dagens PDF med ett nytt skript, `tools/pm-text.py` (pdftohtml → rubriker, punktlistor, tabellrader, innehållsförteckning). Sidfoten (dokumentnamn, DocPlus-ID, version, sidnummer) tas inte längre med. Barn: nya datum på korten för Hypoglykemi vid diabetes typ 1 (2026-10-13) och Akut scrotum (2026-10-20). `pmChecked` är 2026-11-17.
+
+**Borttaget:** 6564 Suturering AKM AS (finns inte längre i DocPlus). GL38 WSES Appendicitis 2020 och GL39 WSES Cholecystitis 2020 (svenska nationella vårdprogram finns: GL298 och GL134). GL78 ESMO Febrile Neutropenia 2016 (täcks av RCC Akut onkologi 2026, GL83).
+
+**Rättade länkar och etiketter:** LÖF Akut stopp i trakealkanyl (vuxna och barn) pekar på `wp.lof.se`; UKKA hyperkalemi på den nya adressen. STRAMA, LÖF traumalarmskriterier, SFAI hyponatremi och GIC antidotlista är nu märkta Nationell riktlinje (stod som internationell). NICE NG133 visar att den uppdaterades 2023.
+
+**Nya riktlinjer (GL293–GL315), länkar till utgivaren, kontrollerade 2026-11-17:** NPO akut vård – tidskritiskt sjuk eller skadad patient 2025; SFFA Anafylaxi i fickformat 2024; SSTH Hemostas vid allvarlig blödning 2026; SILF Sepsis och septisk chock; SILF Bakteriella CNS-infektioner; Akut appendicit – nationellt vårdprogram 2024; SGF övre och nedre GI-blödning samt akut pankreatit; NAG Stroke reperfusionsbehandling 2024; AHA/ASA akut ischemisk stroke 2026; ESC Myocarditis and Pericarditis 2025; LÖF Suicidriskscreening 2025; LÖF DT-trauma 2024; LÖF spinal rörelsebegränsning 2022; HLR-rådet hypotermi 2023; SEF ökad kortisondos 2024; SWESEM Vasoaktiva infusioner via sprutpump 2025; RAF doseringstabell antibiotika 2026; SSDV STI på akutmottagning 2023; Höftfraktur – nationellt vårdprogram 2024; NCK Guide efter sexuella övergrepp 2025; SRF Jättecellsarterit 2026. De svenska kommer från listan `Svenska riktlinjer – nya 2026-09-17` i ED Consultant. Akut appendicit finns i både Vuxna och Barn (samma dokument).
+
+**Fel som rättats:**
+
+- Sökning på ”binjurebarksvikt” gav adrenalin-PM:en överst. Synonymen `adrenal` matchade början av ordet adrenalin. Synonymen är borttagen; NICE NG243 och SEF-riktlinjen har svenska sökord i stället.
+- ”adrenalin anafylaxi dos” gav adrenalinsprutan vid chock före anafylaxi-PM:et. Anafylaxi-PM:et (60791) har fått sökord för adrenalin.
+- Offline: `/st-kompassen/` och `/akutloggen/` visade startsidan utan stilmall och data, eftersom startsidans filer söktes i den mappen. ST-kompassens kortlänk sparas nu för offline, och andra sidor i egen mapp går till startsidan.
+- Antalet dokument per område i områdeslistan hade för svag kontrast (75 % genomskinlig text i 11 px). Siffrorna visas nu med full styrka, och i det valda området med samma färg som områdesnamnet.
+- `tracking/documents.json` saknade 55 dokument och innehöll 11 borttagna. Listan byggs nu ur båda katalogerna. Popularitetsräknaren räknar de nya först när Cloudflare-workern har driftsatts på nytt.
+
+Sökfrågorna i `tests/search-queries.json` är justerade för borttagna och nya dokument (fortfarande 142).

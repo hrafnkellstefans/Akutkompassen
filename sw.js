@@ -3,8 +3,8 @@
 // and switches by itself at the next start. All files of one release come from one cache, so a page
 // never mixes old and new files.
 // Bump VERSION on every release (the same string as data-v in index.html and barn/index.html).
-const VERSION = 'ak-v10s62-vasopressor-snc';
-const SHELL = ['./', './index.html', './om/', './om/index.html', './pm/pm.css', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './akutversioner/akut-divertikulit.pdf', './akutversioner/septisk-chock.pdf', './akutversioner/inlaggning-kirurgpatient.pdf', './akutversioner/akut-brostsmarta.pdf', './akutversioner/meningit-encefalit.pdf', './akutversioner/akut-vestibulart-syndrom.pdf', './akutversioner/akut-diabetes.pdf', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest',];
+const VERSION = 'ak-v10s63-hoststadning';
+const SHELL = ['./', './index.html', './om/', './om/index.html', './pm/pm.css', './shared.css', './usability.js', './search-terms.js', './popularity.js', './visitor-analytics.js', './popularity-config.js', './statistik.html', './manifest.webmanifest', './logo-v2.png', './favicon.png', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ak_index.json', './akutversioner/akut-divertikulit.pdf', './akutversioner/septisk-chock.pdf', './akutversioner/inlaggning-kirurgpatient.pdf', './akutversioner/akut-brostsmarta.pdf', './akutversioner/meningit-encefalit.pdf', './akutversioner/akut-vestibulart-syndrom.pdf', './akutversioner/akut-diabetes.pdf', './barn/', './barn/index.html', './barn/app.js', './barn/data.json', './barn/manifest.webmanifest', './st-kompassen/', './st-kompassen/index.html',];
 // cache:'reload' skips the browser's HTTP cache (GitHub Pages: max-age=600), so a new release never
 // stores a ten-minute-old copy of a file from the previous one.
 const fresh = url => new Request(url, {cache: 'reload'});
@@ -45,8 +45,13 @@ self.addEventListener('fetch', e => {
         // text is saved on the device; the list of all documents (pm/) opens the start page.
         const pm = /^\/pm(?:\/([^/]+))?\/?$/.exec(url.pathname.replace(/\/index\.html$/, '/'));
         if (pm) return Response.redirect(new URL(pm[1] ? './#pm=' + pm[1] : './', location).href, 302);
-        // Any other page address opens the start page of its library.
-        const page = await c.match(url.pathname.includes('/barn') ? './barn/index.html' : './index.html');
+        // Any other page address opens the start page of its library. A page in a folder of its own
+        // (akutloggen/) would look for the start page's files in that folder, so it goes to the start
+        // page's own address instead.
+        const barn = url.pathname.includes('/barn');
+        const rest = url.pathname.replace(/\/index\.html$/, '/').slice(barn ? '/barn/'.length : 1);
+        if (rest.includes('/')) return Response.redirect(new URL(barn ? './barn/' : './', location).href, 302);
+        const page = await c.match(barn ? './barn/index.html' : './index.html');
         if (page) return page;
       }
       return new Response('', {status: 503, statusText: 'Offline'});

@@ -1,18 +1,18 @@
 {
   "https://akutkompassen.se/": {
-    "sha": "5cf2e68503b9c630",
+    "sha": "f82dadf9161316a5",
     "date": "2026-11-17"
   },
   "https://akutkompassen.se/barn/": {
-    "sha": "12476e1f58d84e44",
-    "date": "2026-11-10"
+    "sha": "8ab61a38797f3036",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/om/": {
     "sha": "98e8abd560a94ac2",
     "date": "2026-10-17"
   },
   "https://akutkompassen.se/pm/": {
-    "sha": "8829648ce04f636b",
+    "sha": "f19474da5bde0e1c",
     "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/89/": {
@@ -60,8 +60,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/1983/": {
-    "sha": "81cbdb2ac0585cb1",
-    "date": "2026-10-15"
+    "sha": "814d2437a3777e66",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/2465/": {
     "sha": "cd80ade8bc3635ea",
@@ -141,10 +141,6 @@
   },
   "https://akutkompassen.se/pm/6535/": {
     "sha": "f45aa2f5fd1e5a73",
-    "date": "2026-10-15"
-  },
-  "https://akutkompassen.se/pm/6564/": {
-    "sha": "c9e8ded67eaed7cf",
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/6646/": {
@@ -280,8 +276,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/15283/": {
-    "sha": "6926d8b6def18843",
-    "date": "2026-10-15"
+    "sha": "65953e4ad0b21cac",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/15982/": {
     "sha": "67478a8ef2aacc36",
@@ -380,8 +376,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/24822/": {
-    "sha": "208bfc10954a7e74",
-    "date": "2026-10-15"
+    "sha": "6ae3c930238184c9",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/25324/": {
     "sha": "52cd73142b550d34",
@@ -408,8 +404,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/28778/": {
-    "sha": "374dcbfccdcbcbc8",
-    "date": "2026-10-15"
+    "sha": "0390d2b86ecc0b61",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/29001/": {
     "sha": "5e85a9807be3730f",
@@ -432,7 +428,7 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/30285/": {
-    "sha": "b931a7f3e327aa27",
+    "sha": "cf397b90238397b2",
     "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/30667/": {
@@ -480,8 +476,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/43321/": {
-    "sha": "6778bf517053b2c0",
-    "date": "2026-10-15"
+    "sha": "c3a4e3ebb9a1baae",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/44223/": {
     "sha": "d394e610670e63dd",

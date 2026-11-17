@@ -244,3 +244,6 @@ footer>a{margin-right:22px}
 .related ul{margin:0;padding-left:20px}
 .related a{display:inline-block;padding:12px 0;min-height:44px}
 .results-head{flex-wrap:wrap;gap:12px}
+/* The document counts in the area list: full strength (they were 75 % see-through: under 4.5:1 at 11px), and in the chosen area the same colour as its label. */
+.adult .areas button .n,.areas button .n,.area .n{opacity:1}
+.adult .areas button.on .n,.areas button.on .n,.area.active .n{color:inherit}

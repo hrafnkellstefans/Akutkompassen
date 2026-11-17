@@ -132,6 +132,12 @@ test('Saved files are used before the network; offline, page addresses open the 
   w.setOnline(false);
   assert.equal((await w.get('/okand-sida', 'navigate')).body, 'ADULT');
   assert.equal((await w.get('/barn/okand', 'navigate')).body, 'BARN');
+  // A page in a folder of its own would load the start page's files from that folder: go to the start page.
+  for (const [address, target] of [['/akutloggen/', '/'], ['/akutloggen/index.html', '/'], ['/barn/okand/', '/barn/']]) {
+    const res = await w.get(address, 'navigate');
+    assert.equal(res.status, 302, address);
+    assert.equal(res.location, ORIGIN + target, address);
+  }
   assert.equal((await w.get('/okand.js')).status, 503);
   // Other sites (DocPlus, publishers, counters) are left to the browser.
   assert.equal(await w.run('fetch', {request: {method: 'GET', url: 'https://publikdocplus.regionuppsala.se/x', mode: 'navigate'}}), undefined);

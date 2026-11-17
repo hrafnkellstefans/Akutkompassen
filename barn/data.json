@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01",
+  "updated": "2026-11-17",
   "areas": {
     "akut": "Akut omhändertagande",
     "luft": "Andning & luftväg",
@@ -80,10 +80,10 @@
       "publisher": "Region Uppsala · Akademiska",
       "area": "met",
       "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-103",
-      "date": "2026-04-27",
+      "date": "2026-10-13",
       "scope": "Specialiserad pediatrik; Akut",
       "format": "PDF hos utgivaren",
-      "checked": "2026-10-01",
+      "checked": "2026-11-17",
       "keywords": [
         "hypoglykemi",
         "lågt blodsocker",
@@ -382,10 +382,10 @@
       "publisher": "Region Uppsala · Akademiska",
       "area": "buk",
       "url": "https://publikdocplus.regionuppsala.se/Home/GetDocument?containerName=e0c73411-be4b-4fee-ac09-640f9e2c5d83&reference=DocPlusSTYR-21146",
-      "date": "2019-10-02",
+      "date": "2026-10-20",
       "scope": "Barnkirurgi",
       "format": "PDF hos utgivaren",
-      "checked": "2026-10-01",
+      "checked": "2026-11-17",
       "keywords": [
         "testistorsion",
         "testis",
@@ -1148,11 +1148,11 @@
       "source": "nationellt",
       "publisher": "Löf",
       "area": "luft",
-      "url": "https://lof.se/filer/akut-stopp-kort-2021.pdf",
+      "url": "https://wp.lof.se/wp-content/uploads/akut-stopp-kort-2021.pdf",
       "date": "2021-01-01",
       "scope": "Fickkort barn och vuxna",
       "format": "PDF hos utgivaren",
-      "checked": "2026-10-01",
+      "checked": "2026-11-17",
       "keywords": [
         "trakeostomi",
         "trakealkanyl",
