@@ -141,12 +141,13 @@ function excerpt(d) {
   }
   return heads.length ? 'Innehåll: ' + heads.slice(0, 8).join(', ') + '.' : '';
 }
-const description = d => clip(`Lokalt PM, Region Uppsala${d.yr ? ` ${d.yr}` : ''}. ${excerpt(d) || `Läs ${d.t} och öppna originalet i DocPlus.`}`, 155).normalize('NFC');
+// A local PM that is not in DocPlus (issued by a department, hosted here) carries "src": who issued it.
+const description = d => clip(`Lokalt PM, ${d.src || 'Region Uppsala'}${d.yr ? ` ${d.yr}` : ''}. ${excerpt(d) || `Läs ${d.t} och öppna originalet${d.src ? '' : ' i DocPlus'}.`}`, 155).normalize('NFC');
 // Search results show about 60–70 characters of a title: the PM title comes first, and
 // "PM, Region Uppsala" is added only when it fits.
 function pageTitle(d) {
   const t = d.t.normalize('NFC');
-  const long = `${t} – ${/region uppsala/i.test(t) ? 'PM' : 'PM, Region Uppsala'} | Akutkompassen`;
+  const long = `${t} – ${d.src || /region uppsala/i.test(t) ? 'PM' : 'PM, Region Uppsala'} | Akutkompassen`;
   return long.length <= 70 ? long : `${t} | Akutkompassen`;
 }
 
@@ -206,7 +207,7 @@ function pmPage(d) {
     {'@type': 'MedicalWebPage', '@id': url, url, name: d.t.normalize('NFC'), description: desc, inLanguage: 'sv',
       isPartOf: {'@type': 'WebSite', '@id': `${SITE}/#website`, name: 'Akutkompassen', url: `${SITE}/`},
       audience: {'@type': 'MedicalAudience', audienceType: 'Clinician'},
-      isBasedOn: {'@type': 'DigitalDocument', name: d.t.normalize('NFC'), url: d.url, publisher: {'@type': 'Organization', name: 'Region Uppsala'}, ...(d.publishedOn ? {datePublished: d.publishedOn} : {})},
+      isBasedOn: {'@type': 'DigitalDocument', name: d.t.normalize('NFC'), url: d.url, publisher: {'@type': 'Organization', name: d.src ? `${d.src} sjukhuset` : 'Region Uppsala'}, ...(d.publishedOn ? {datePublished: d.publishedOn} : {})},
       breadcrumb: {'@id': `${url}#brodsmulor`}},
     {'@type': 'BreadcrumbList', '@id': `${url}#brodsmulor`, itemListElement: [
       {'@type': 'ListItem', position: 1, name: 'Akutkompassen', item: `${SITE}/`},
@@ -215,13 +216,13 @@ function pmPage(d) {
   const pages = new Map();
   for (const c of TEXT[d.id]) {if (!pages.has(c[0])) pages.set(c[0], []); pages.get(c[0]).push(c[1]);}
   const text = [...pages].map(([pg, texts]) => `<section class="pg" id="sida-${pg}"><p class="pglabel">Sida ${pg} av ${d.np}</p>${texts.map(textHtml).join('')}</section>`).join('\n');
-  const facts = [d.publishedOn && `Godkänt ${svDate(d.publishedOn)}`, d.np && `${d.np} ${d.np === 1 ? 'sida' : 'sidor'}`, `DocPlus ${esc(d.id)}`].filter(Boolean).join(' · ');
+  const facts = [d.publishedOn && `Godkänt ${svDate(d.publishedOn)}`, d.np && `${d.np} ${d.np === 1 ? 'sida' : 'sidor'}`, !d.src && `DocPlus ${esc(d.id)}`].filter(Boolean).join(' · ');
   const meta = [
     area && `<a class="tag" href="/pm/#${esc(d.a)}">${esc(area)}</a>`,
     d.yr && `<span class="tag${isOld(d) ? ' warn' : ''}">${esc(d.yr)}</span>`,
     d.note && `<span class="tag ${noteClass(d.note)}">${esc(d.note)}</span>`,
     `<span>${facts}</span>`].filter(Boolean).join('');
-  const checked = INDEX.pmChecked ? ` <span class="checked">PM-texterna kontrollerades senast mot DocPlus ${svDate(INDEX.pmChecked)}.</span>` : '';
+  const checked = INDEX.pmChecked && !d.src ? ` <span class="checked">PM-texterna kontrollerades senast mot DocPlus ${svDate(INDEX.pmChecked)}.</span>` : '';
   const related = PAGES.filter(x => x.a === d.a && x !== d).sort(byTitle);
   return `${head({title, desc, url, type: 'article', ld})}
 <a class="skip" href="#text">Till PM-texten</a>
@@ -230,11 +231,11 @@ ${siteHead('vuxna')}
 <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Akutkompassen</a><span aria-hidden="true">›</span><a href="/pm/">PM och riktlinjer</a></nav>
 <article class="doc">
 <div class="doc-head">
-<p class="badge">Lokalt PM · Region Uppsala</p>
+<p class="badge">Lokalt PM · ${esc(d.src || 'Region Uppsala')}</p>
 <h1>${esc(d.t)}</h1>
 <p class="meta">${meta}</p>
-${isOld(d) ? `<p class="old"><b>Äldre dokument.</b> Kontrollera i DocPlus om det finns en nyare version.</p>\n` : ''}<p class="actions"><a class="btn primary" href="/#pm=${esc(d.id)}">Öppna i Akutkompassen</a><a class="btn" href="${esc(d.url)}" target="_blank" rel="noopener">Original i DocPlus ${ext}</a>${d.summaryUrl ? `<a class="btn guide" href="/${esc(d.summaryUrl)}" target="_blank" rel="noopener">Snabbguide (PDF) ${ext}</a>` : ''}</p>
-<p class="source-note">Textvy från PDF-originalet i Region Uppsalas dokumentarkiv DocPlus. Radbrytningar och tabeller kan avvika${TEXT[d.id].some(c => redact(c[1]) !== c[1].normalize('NFC')) ? ', och e-postadresser och mobilnummer visas bara i originalet' : ''}. Kontrollera alltid aktuell version och layout i DocPlus.${checked}</p>
+${isOld(d) ? `<p class="old"><b>Äldre dokument.</b> Kontrollera i DocPlus om det finns en nyare version.</p>\n` : ''}<p class="actions"><a class="btn primary" href="/#pm=${esc(d.id)}">Öppna i Akutkompassen</a><a class="btn" href="${esc(d.url)}" target="_blank" rel="noopener">${d.src ? 'Original (PDF)' : 'Original i DocPlus'} ${ext}</a>${d.summaryUrl ? `<a class="btn guide" href="/${esc(d.summaryUrl)}" target="_blank" rel="noopener">Snabbguide (PDF) ${ext}</a>` : ''}</p>
+<p class="source-note">${d.src ? `Textvy från originaldokumentet från ${esc(d.src)} sjukhuset, som inte finns i DocPlus. Radbrytningar och tabeller kan avvika. Kontrollera alltid att du har aktuell version.` : `Textvy från PDF-originalet i Region Uppsalas dokumentarkiv DocPlus. Radbrytningar och tabeller kan avvika${TEXT[d.id].some(c => redact(c[1]) !== c[1].normalize('NFC')) ? ', och e-postadresser och mobilnummer visas bara i originalet' : ''}. Kontrollera alltid aktuell version och layout i DocPlus.${checked}`}</p>
 </div>
 <div class="text" id="text">
 ${text}
@@ -260,7 +261,7 @@ function listPage() {
   const local = d => {
     const page = PAGES.includes(d);
     const link = page ? `<a href="/pm/${esc(d.id)}/">${esc(d.t)}</a>` : `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.t)} ${ext}</a>`;
-    return `<li>${link}<span class="m">${yearTag(d.yr, isOld(d))}Lokalt PM · Region Uppsala${page ? '' : ' · i DocPlus'}${isOld(d) ? ' · Äldre dokument' : ''}</span></li>`;
+    return `<li>${link}<span class="m">${yearTag(d.yr, isOld(d))}Lokalt PM · ${esc(d.src || 'Region Uppsala')}${page ? '' : ' · i DocPlus'}${isOld(d) ? ' · Äldre dokument' : ''}</span></li>`;
   };
   const guide = d => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.t)} ${ext}</a><span class="m">${yearTag(d.yr, false)}${esc([d.soc, d.lvl === 'regional' ? 'Regional blankett' : d.lvl === 'nationell' ? 'Nationell riktlinje' : 'Internationell riktlinje'].filter(Boolean).join(' · '))}${d.note ? ` – ${esc(d.note)}` : ''}</span></li>`;
   const barn = d => {

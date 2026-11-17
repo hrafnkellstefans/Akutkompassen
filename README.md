@@ -308,3 +308,19 @@ De är även borttagna ur `sitemap.xml`, PM-sidornas länklistor, popularitetsr�
 ## Statusrad borttagen – 5 november 2026 (ak-v10s53-utan-statusrad)
 
 Raden ”Mest öppnade först · POPULÄR! = mest öppnad i området” visas inte längre, varken för vuxna eller barn. `status()` i `popularity.js` returnerar alltid tom text. Sorteringen och POPULÄR!-etiketten på korten är oförändrade.
+
+## 17 november 2026 – vasopressor-PM och SNC 2026 (ak-v10s62-vasopressor-snc)
+
+Tre nya dokument:
+
+| ID | Dokument | Källa |
+|---|---|---|
+| akm-adrenalin | Adrenalin 0,01 mg/ml vid chock - AKM AS | Akutmottagningen, Akademiska. Skriven av Stanislava Zabarovskaja, godkänd av Anna Söderberg Amlert. Word-original 2026-11-05 |
+| akm-noradrenalin | Noradrenalin i perifer infart 0,02 mg/ml - AKM AS | Samma som ovan |
+| GL292 | SNC 2026 – skallskador hos vuxna (minimal, lätt och medelsvår) | Lancet Regional Health – Europe, DOI 10.1016/j.lanepe.2026.101911, CC BY. Länk till utgivaren, kontrollerad 2026-11-17 |
+
+De två läkemedels-PM:en finns inte i DocPlus. De är de första lokala PM som ligger på Akutkompassen själv: PDF i `documents/akm/` och texten i `ak_LM.json`. Texten är dokumentens egen, ordagrant, även stavningen ("Nordrenalin", "helts", "perifier", "Arrytmi"). Rättas originalet ska både PDF och text bytas.
+
+Ett lokalt PM utanför DocPlus har fältet `src` i `ak_index.json` (vem som gett ut det). Appen och `tools/build-seo.mjs` visar då `Lokalt PM · <src>` och knappen ”Original (PDF)”, och utelämnar STYR-nummer, ”Original i DocPlus” och ”Texten kontrollerad mot DocPlus”. PM utan `src` visas som förut. Länkkontrollen (`tools/check-links.mjs`) jämför bara godkännandedatum för DocPlus-PM, så dessa två revideras för hand.
+
+`tracking/documents.json` har fått de tre nya ID:na. Popularitetsräknaren räknar dem först när Cloudflare-workern har driftsatts på nytt.

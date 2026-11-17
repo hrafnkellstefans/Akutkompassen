@@ -1,7 +1,7 @@
 {
   "https://akutkompassen.se/": {
-    "sha": "be3fd292fa16c6ca",
-    "date": "2026-11-12"
+    "sha": "5cf2e68503b9c630",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/barn/": {
     "sha": "12476e1f58d84e44",
@@ -12,8 +12,8 @@
     "date": "2026-10-17"
   },
   "https://akutkompassen.se/pm/": {
-    "sha": "79c4b34c24c77411",
-    "date": "2026-11-12"
+    "sha": "8829648ce04f636b",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/89/": {
     "sha": "8140dd211f3ed652",
@@ -244,8 +244,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/11203/": {
-    "sha": "36f30da09938d7ee",
-    "date": "2026-10-15"
+    "sha": "01e5e126fd3e6161",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/11265/": {
     "sha": "e5b92ef9ef924c60",
@@ -432,8 +432,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/30285/": {
-    "sha": "03f2cb02f82e9045",
-    "date": "2026-10-15"
+    "sha": "b931a7f3e327aa27",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/30667/": {
     "sha": "e9dea07a34dac85c",
@@ -444,8 +444,8 @@
     "date": "2026-10-15"
   },
   "https://akutkompassen.se/pm/33518/": {
-    "sha": "e523378be1afce35",
-    "date": "2026-10-15"
+    "sha": "71458c38cf824344",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/pm/33594/": {
     "sha": "7ea3b61022341a03",
@@ -514,6 +514,14 @@
   "https://akutkompassen.se/pm/61262/": {
     "sha": "7cfd7a1137e58cc9",
     "date": "2026-10-15"
+  },
+  "https://akutkompassen.se/pm/akm-adrenalin/": {
+    "sha": "02321f63b02c4bfe",
+    "date": "2026-11-17"
+  },
+  "https://akutkompassen.se/pm/akm-noradrenalin/": {
+    "sha": "64d05c6f3ce88a26",
+    "date": "2026-11-17"
   },
   "https://akutkompassen.se/akutversioner/akut-brostsmarta.pdf": {
     "sha": "f31db202aa7c903b",

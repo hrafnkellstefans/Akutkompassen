@@ -59,7 +59,7 @@ for (const withBodies of [false, true]) {
 }
 
 test('Registry, source types and release versions are consistent', () => {
-  assert.equal(data.docs.length, 264);  // SWESEM training materials use one collection link; 3 Akademiska ST forms added 10 nov 2026.
+  assert.equal(data.docs.length, 267);  // 17 nov 2026: two AKM vasopressor PM (not in DocPlus, "src") and SNC 2026 head injury (GL292).
   assert.equal(new Set(data.docs.map(d => d.id)).size, data.docs.length);
   const newDocs = data.docs.filter(d => /^GL8[2-7]$/.test(d.id));
   assert.equal(newDocs.length, 6);
